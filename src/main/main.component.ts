@@ -30,7 +30,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    layui.use('admin');
   }
 
 }

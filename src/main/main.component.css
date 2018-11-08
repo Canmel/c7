@@ -1,0 +1,15 @@
+
+body{
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+.content{
+  height: 300px;
+  padding-bottom: 50px; /*当窗口高度很小时，可以使content和footer保持一定的距离*/
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+}
