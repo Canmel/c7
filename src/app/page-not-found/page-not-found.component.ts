@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {Urls} from '../../public/url';
+
+declare var StarField: any;
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
+    new StarField('fullScreen').render(333, 3);
+  }
+
+  returnToHome() {
+    this.router.navigate([Urls.SESSION.APP]);
   }
 
 }

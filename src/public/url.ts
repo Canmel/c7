@@ -58,10 +58,11 @@ export const Urls = {
     }
   },
   SESSION: {
-    LOGIN: `/auth/login`,
+    LOGIN: `/login`,
     QRCODE: `/code/verify`,
     LOGOUT: `/signOut`,
-    REJECTED: `/anth/require`
+    REJECTED: `/auth/require`,
+    APP: '/app'
   },
   BUSINESS: {
     USERS: {

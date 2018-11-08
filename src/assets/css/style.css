@@ -98,7 +98,7 @@ canvas{
 	}
 }
 
-.login{z-index: 2;position:absolute;width: 350px;border-radius: 5px;height: 500px;background: white;box-shadow: 0px 0px 5px #333333;top: 50%;left: 50%;margin-top: -250px;margin-left: -175px;transition: all 1s;-moz-transition: all 1s;	/* Firefox 4 */-webkit-transition: all 1s;	/* Safari 和 Chrome */-o-transition: all 1s;	/* Opera */}
+.login{z-index: 2;position:absolute;width: 350px;border-radius: 5px;height: 500px;background: #ffffff82;box-shadow: 0px 0px 5px #333333;top: 50%;left: 50%;margin-top: -250px;margin-left: -175px;transition: all 1s;-moz-transition: all 1s;	/* Firefox 4 */-webkit-transition: all 1s;	/* Safari 和 Chrome */-o-transition: all 1s;	/* Opera */}
 .login-top{font-size: 24px;margin-top: 100px;padding-left: 40px;box-sizing: border-box;color: #333333;margin-bottom: 50px;}
 .login-center{width: 100%;box-sizing: border-box;padding: 0 40px;margin-bottom: 30px;}
 .login-center-img{width: 20px;height: 20px;float: left;margin-top: 5px;}

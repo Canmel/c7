@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import * as $ from 'jquery';
+import {Properties} from '../public/properties';
+import {Router} from '@angular/router';
+import {Urls} from '../public/url';
 
-declare var particlesJS: any;   // 已经导入了   不需要再次声明， 这里是为了防止 编译报错
+declare var particlesInit: any;   // 已经导入了   不需要再次声明， 这里是为了防止 编译报错
 
 @Component({
   selector: 'app-login',
@@ -9,123 +13,61 @@ declare var particlesJS: any;   // 已经导入了   不需要再次声明， �
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  constructor(public router: Router) {
+    this.isLogin();
   }
 
   ngOnInit() {
-    particlesJS('particles-js',
+    particlesInit();  // 登陆页面动画效果
+  }
 
-      {
-        'particles': {
-          'number': {
-            'value': 40,
-            'density': {
-              'enable': true,
-              'value_area': 800
-            }
-          },
-          'color': {
-            'value': '#ffffff'
-          },
-          'shape': {
-            'type': 'circle',
-            'stroke': {
-              'width': 0,
-              'color': '#000000'
-            },
-            'polygon': {
-              'nb_sides': 5
-            },
-            'image': {
-              'src': 'img/github.svg',
-              'width': 100,
-              'height': 100
-            }
-          },
-          'opacity': {
-            'value': 0.7,
-            'random': false,
-            'anim': {
-              'enable': false,
-              'speed': 1,
-              'opacity_min': 0.1,
-              'sync': false
-            }
-          },
-          'size': {
-            'value': 3,
-            'random': true,
-            'anim': {
-              'enable': false,
-              'speed': 40,
-              'size_min': 0.1,
-              'sync': false
-            }
-          },
-          'line_linked': {
-            'enable': true,
-            'distance': 150,
-            'color': '#ffffff',
-            'opacity': 0.6,
-            'width': 1
-          },
-          'move': {
-            'enable': true,
-            'speed': 6,
-            'direction': 'none',
-            'random': false,
-            'straight': false,
-            'out_mode': 'out',
-            'bounce': false,
-            'attract': {
-              'enable': false,
-              'rotateX': 600,
-              'rotateY': 1200
-            }
-          }
-        },
-        'interactivity': {
-          'detect_on': 'canvas',
-          'events': {
-            'onhover': {
-              'enable': true,
-              'mode': 'grab'
-            },
-            'onclick': {
-              'enable': true,
-              'mode': 'push'
-            },
-            'resize': true
-          },
-          'modes': {
-            'grab': {
-              'distance': 200,
-              'line_linked': {
-                'opacity': 1
-              }
-            },
-            'bubble': {
-              'distance': 400,
-              'size': 40,
-              'duration': 2,
-              'opacity': 8,
-              'speed': 3
-            },
-            'repulse': {
-              'distance': 200,
-              'duration': 0.4
-            },
-            'push': {
-              'particles_nb': 4
-            },
-            'remove': {
-              'particles_nb': 2
-            }
-          }
-        },
-        'retina_detect': false
-      }
-    );
+  /**
+   * 方法用途: 判断当前是否登录，已经登录直接前往首页，未登录直接前往登录页
+   * 参数：无
+   **/
+  isLogin() {
+    if (sessionStorage.getItem(Properties.SESSION.CURRENT) !== null) {
+      return this.router.navigate([Urls.SESSION.APP]);
+    }
+    if (sessionStorage.getItem(Properties.SESSION.CURRENT) === null) {
+      return this.router.navigate([Urls.SESSION.LOGIN]);
+    }
+  }
+
+  /**
+   * 方法用途: 登录点击事件
+   * 参数：无
+   **/
+  login() {
+    const _this = this;
+    $('.login').addClass('active');
+    setTimeout(function () {
+      $('.sk-rotating-plane').addClass('active');
+      $('.login').css('display', 'none');
+    }, 800);
+    setTimeout(function () {
+      $('.login').removeClass('active');
+      $('.sk-rotating-plane').removeClass('active');
+      $('.login').css('display', 'block');
+      _this.loginSuccessCallBack();
+    }, 3000);
+  }
+
+  /**
+   * 方法用途: 登录点击事件成功回调
+   * 参数：无
+   **/
+  loginSuccessCallBack() {
+    sessionStorage.setItem(Properties.SESSION.CURRENT, 'user');
+    this.router.navigate([Urls.SESSION.APP]);
+  }
+
+  /**
+   * 方法用途: 登录点击事件失败回调
+   * 参数：无
+   **/
+  loginFaildCallBack() {
+    alert('登录失败');
   }
 
 }

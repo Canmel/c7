@@ -12,12 +12,7 @@ particlesJS.load('particles-js', 'particles.json', function() {
 /* Otherwise just put the config content (json): */
 
 
-var initEcharts = {
-  main: init()
-};
-
-
-var init = function () {
+var particlesInit = function () {
   particlesJS('particles-js',
 
     {

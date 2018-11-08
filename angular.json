@@ -32,7 +32,8 @@
               "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/particles.js/particles.js",
               "src/assets/js/particles.min.js",
-              "src/assets/js/app.js"
+              "src/assets/js/app.js",
+              "src/assets/js/jq22.js"
             ]
           },
           "configurations": {
