@@ -1,12 +1,14 @@
 html {
   background-color: #f2f4f8;
   overflow-x: hidden;
+  height: 100%;
 }
 
 body {
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #788188;
+  height: 100%;
   background-color: transparent;
   -webkit-font-smoothing: antialiased;
   line-height: 1.40;
@@ -741,7 +743,7 @@ a.list-group-item:focus {
   border: none;
   margin-bottom: 0;
   padding: 0;
-  position: absolute;
+  position: relative;
   z-index: 1000;
 }
 

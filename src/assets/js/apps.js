@@ -83,12 +83,12 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
 
   Bjax.prototype.start = function () {
     var that = this;
-    this.backdrop();
+    // this.backdrop();
     $.ajax(this.options.url).done(function(r){
       that.$content = r;
       that.complete();
     });
-  }
+  };
 
   Bjax.prototype.complete = function (){
     var that = this;
