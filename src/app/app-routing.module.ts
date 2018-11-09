@@ -1,19 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {LoginModule} from '../login/login.module';
+import {MainModule} from '../main/main.module';
 
-const routes: Routes = [{
-  path: '',
-  redirectTo: '/app',
-  pathMatch: 'full'
-},
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/app',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
-    loadChildren: 'src/login/login.module#LoginModule'
+    loadChildren: () => LoginModule
   },
   {
     path: 'app',
-    loadChildren: 'src/main/main.module#MainModule'
+    loadChildren: () => MainModule
   },
   {
     path: '**',

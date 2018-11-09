@@ -2,6 +2,10 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './main.component';
 import {HomeComponent} from '../app/sys/home/home.component';
+import {UsersComponent} from '../app/sys/users/users.component';
+import {UsersModule} from '../app/sys/users/users.module';
+import {RolesModule} from '../app/sys/roles/roles.module';
+import {MenusModule} from '../app/sys/menus/menus.module';
 
 const routes: Routes = [
   {
@@ -9,14 +13,19 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
         path: 'users',
-        loadChildren: 'src/app/sys/users/users.module#UsersModule'
+        loadChildren: () => UsersModule
       }, {
         path: 'roles',
-        loadChildren: 'src/app/sys/roles/roles.module#RolesModule'
+        loadChildren: () => RolesModule
       }, {
         path: 'menus',
-        loadChildren: 'src/app/sys/menus/menus.module#MenusModule'
+        loadChildren: () => MenusModule
       }, {
         path: 'home',
         component: HomeComponent

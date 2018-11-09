@@ -13,7 +13,7 @@ declare var layui: any;
 export class MainComponent implements OnInit {
 
   constructor(public router: Router) {
-    this.isLogin();
+    // this.isLogin();
   }
 
   /**

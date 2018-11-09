@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { MainRoutingModule } from './main-routing.module';
-import { MainComponent } from './main.component';
+import {MainRoutingModule} from './main-routing.module';
+import {MainComponent} from './main.component';
 import {HeaderComponent} from '../app/layout/header/header.component';
 import {LefterComponent} from '../app/layout/lefter/lefter.component';
 import {FooterComponent} from '../app/layout/footer/footer.component';
@@ -23,4 +23,5 @@ import {HomeComponent} from '../app/sys/home/home.component';
     MainRoutingModule
   ]
 })
-export class MainModule { }
+export class MainModule {
+}
