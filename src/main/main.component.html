@@ -7,11 +7,11 @@
 <link rel="stylesheet" href="/assets/css/apps.css" type="text/css"/>
 
 <section class="vbox">
-  <header class="bg-white-only header header-md navbar navbar-fixed-top-xs" style="width: 100%;">
+  <header class="bg-white-only header navbar navbar-fixed-top-xs" style="height: 4%;width: 100%;">
     <app-header></app-header>
   </header>
-  <section style="position: absolute;">
-    <section class="hbox stretch" style="height: 100%;">
+  <div class="main-layout-content" style="height: 100%">
+    <section class="hbox stretch section">
       <!-- .aside -->
       <aside class="bg-black dk aside hidden-print" id="nav">
         <section class="vbox">
@@ -22,14 +22,14 @@
         </section>
       </aside>
       <!-- /.aside -->
-      <section id="content">
-        <section class="vbox stretch">
-          <section style="height: 100%;">
-            <section class="vbox">
-              <section class="scrollable padder-lg w-f-md" id="bjax-target" style="position:absolute;">
+      <section id="content" class="section">
+        <section class="vbox stretch section">
+          <section style="height: 100%;" class="section">
+            <section class="vbox" class="section">
+              <section class="scrollable padder-lg w-f-md section" id="bjax-target" style="position:absolute; padding: 15px;">
                 <router-outlet></router-outlet>
               </section>
-              <footer class="footer bg-dark" style="position: absolute;">
+              <footer class="footer bg-dark" style="position: absolute;bottom: 0px;">
                 <app-content-footer></app-content-footer>
               </footer>
             </section>
@@ -39,5 +39,5 @@
            data-target="#nav,html"></a>
       </section>
     </section>
-  </section>
+  </div>
 </section>

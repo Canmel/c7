@@ -765,6 +765,13 @@ body.container {
     border-right: 1px solid #cbd5dd;
   }
 
+  .main-layout-content {
+    position: absolute;
+    bottom: 0px;
+    /*top: 60px;*/
+    width: 100%;
+  }
+
   .app,
   .app body {
     height: 100%;
@@ -4444,6 +4451,13 @@ fieldset[disabled] .i-checks input + i:before {
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  .main-layout-content {
+    position: inherit;
+    bottom: 0px;
+    top: 50px;
+    width: 100%;
+  }
 }
 
 .musicbar {
@@ -4780,4 +4794,8 @@ fieldset[disabled] .i-checks input + i:before {
   100% {
     height: 65%;
   }
+}
+
+.point-hand{
+  cursor: pointer;
 }

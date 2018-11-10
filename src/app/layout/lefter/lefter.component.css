@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+  /*.skip-header{*/
+    /*padding-top: 50px;*/
+  /*}*/
+}
+
+@media (min-width: 768px) {
+  .skip-header{
+    padding-top: 50px;
+  }
+}
