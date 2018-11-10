@@ -8,6 +8,7 @@ import {LefterComponent} from '../app/layout/lefter/lefter.component';
 import {FooterComponent} from '../app/layout/footer/footer.component';
 import {ContentFooterComponent} from '../app/layout/content-footer/content-footer.component';
 import {HomeComponent} from '../app/sys/home/home.component';
+import {BailyTableComponent} from '../public/baily-table/baily-table.component';
 
 @NgModule({
   declarations: [
