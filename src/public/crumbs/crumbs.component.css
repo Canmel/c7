@@ -1,0 +1,15 @@
+
+@media (min-width: 768px) {
+  .crumb-col-12 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .crumb-col-12 {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0
+  }
+}
