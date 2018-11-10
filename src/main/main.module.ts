@@ -16,8 +16,7 @@ import {BailyTableComponent} from '../public/baily-table/baily-table.component';
     HeaderComponent,
     LefterComponent,
     FooterComponent,
-    ContentFooterComponent,
-    HomeComponent
+    ContentFooterComponent
   ],
   imports: [
     CommonModule,

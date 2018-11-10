@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MenusRoutingModule } from './menus-routing.module';
 import {MenusComponent} from './menus.component';
+import {CrumbsModule} from '../../../public/crumbs/crumbs.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import {MenusComponent} from './menus.component';
   ],
   imports: [
     CommonModule,
+    CrumbsModule,
     MenusRoutingModule
   ]
 })

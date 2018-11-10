@@ -6,6 +6,7 @@ import {UsersComponent} from '../app/sys/users/users.component';
 import {UsersModule} from '../app/sys/users/users.module';
 import {RolesModule} from '../app/sys/roles/roles.module';
 import {MenusModule} from '../app/sys/menus/menus.module';
+import {HomeModule} from '../app/sys/home/home.module';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
         loadChildren: () => MenusModule
       }, {
         path: 'home',
-        component: HomeComponent
+        loadChildren: () => HomeModule
       }
     ]
   }

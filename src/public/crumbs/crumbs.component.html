@@ -1,0 +1,7 @@
+<div class="col-lg-12" style="padding-top: 10px;">
+  <ul class="breadcrumb">
+    <li><a routerLinkActive="active" routerLink="/app/home"><i class="fa fa-home"></i> 首页</a></li>
+    <li *ngIf="title"><a routerLinkActive="active" routerLink="/app/home"><i class="fa fa-list-ul"></i> {{title}}</a></li>
+    <li class="active" *ngIf="subTitle">{{subTitle}}</li>
+  </ul>
+</div>

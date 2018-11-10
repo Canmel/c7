@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenusComponent implements OnInit {
 
+  crumbs = {
+    title: '菜单管理',
+    subTitle: '菜单列表'
+  };
+
   constructor() { }
 
   ngOnInit() {
