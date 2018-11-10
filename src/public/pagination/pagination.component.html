@@ -1,0 +1,48 @@
+<ul id="pagination_nm" class="pagination-nm pagination">
+  <li class="first" [class.disabled]="curPage == 1" (click)="changePage(1)">
+    <a>首页</a>
+  </li>
+  <!--{{totalNum}}， {{pageSize}}， {{totalPage}}， {{curPage}}-->
+  <li class="prev" *ngIf="curPage > 1" (click)="changePage(curPage-1)">
+    <a>
+      <div class="fa fa-angle-left"></div>
+      上一页
+    </a>
+  </li>
+  <li class="page" *ngIf="curPage + 1 > totalPage && curPage - 4 > 0" (click)="changePage(curPage - 4)">
+    <a>{{curPage - 4}}</a>
+  </li>
+  <li class="page" *ngIf="curPage + 2 > totalPage && curPage - 3 > 0" (click)="changePage(curPage - 3)">
+    <a>{{curPage - 3}}</a>
+  </li>
+  <li class="page" *ngIf="curPage - 2 > 0" (click)="changePage(curPage - 2)">
+    <a>{{curPage - 2}}</a>
+  </li>
+  <li class="page" *ngIf="curPage - 1 > 0" (click)="changePage(curPage - 1)">
+    <a>{{curPage - 1}}</a>
+  </li>
+  <li class="page active" (click)="changePage(curPage)">
+    <a>{{curPage}}</a>
+  </li>
+  <li class="page" *ngIf="curPage + 1 <= totalPage" (click)="changePage(curPage + 1)">
+    <a>{{curPage + 1}}</a>
+  </li>
+  <li class="page" *ngIf="curPage + 2 <= totalPage" (click)="changePage(curPage + 2)">
+    <a>{{curPage + 2}}</a>
+  </li>
+  <li class="page" *ngIf="curPage - 2 <= 0 && curPage + 3 <= totalPage" (click)="changePage(curPage + 3)">
+    <a>{{curPage + 3}}</a>
+  </li>
+  <li class="page" *ngIf="curPage - 1 <= 0 && curPage + 4 <= totalPage" (click)="changePage(curPage + 4)">
+    <a>{{curPage + 4}}</a>
+  </li>
+  <li class="next" *ngIf="curPage < totalPage" (click)="changePage(curPage + 1)">
+    <a>
+      下一页
+      <div class="fa fa-angle-right"></div>
+    </a>
+  </li>
+  <li class="last" [class.disabled]="curPage == totalPage" (click)="changePage(totalPage)">
+    <a>末页</a>
+  </li>
+</ul>
