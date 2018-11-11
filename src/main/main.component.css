@@ -1,5 +1,5 @@
 
-.section{
+.section {
   height: 100%;
   width: 100%;
 }
@@ -8,10 +8,19 @@
   /*.skip-header{*/
   /*padding-top: 50px;*/
   /*}*/
+  .skip-content {
+    position: absolute;
+    padding: 0px 15px 60px 15px;
+  }
 }
 
 @media (min-width: 768px) {
   .skip-header {
     padding-top: 50px;
+  }
+
+  .skip-content {
+    position: absolute;
+    padding: 60px 15px 75px 15px;
   }
 }

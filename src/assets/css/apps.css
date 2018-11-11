@@ -4453,9 +4453,8 @@ fieldset[disabled] .i-checks input + i:before {
   }
 
   .main-layout-content {
-    position: inherit;
+    position: absolute;
     bottom: 0px;
-    top: 50px;
     width: 100%;
   }
 }
