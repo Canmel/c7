@@ -28,10 +28,10 @@ export class MenuTreeComponent implements OnInit {
     return result;
   }
 
-  level2() {
+  level2(id) {
     const result = [];
     $.each(this.menuTree, function (i, item) {
-      if (item.level === 2) {
+      if (item.level === 2 && id === item.pid) {
         result.push(item);
       }
     });
