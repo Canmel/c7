@@ -7,6 +7,7 @@ import {HeaderComponent} from '../app/layout/header/header.component';
 import {LefterComponent} from '../app/layout/lefter/lefter.component';
 import {FooterComponent} from '../app/layout/footer/footer.component';
 import {ContentFooterComponent} from '../app/layout/content-footer/content-footer.component';
+import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {ContentFooterComponent} from '../app/layout/content-footer/content-foote
     HeaderComponent,
     LefterComponent,
     FooterComponent,
+    MenuTreeComponent,
     ContentFooterComponent
   ],
   imports: [
