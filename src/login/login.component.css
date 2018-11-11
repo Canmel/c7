@@ -939,11 +939,6 @@ body.container {
     -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
-  .nav-xs .nav-primary li:hover > ul,
-  .nav-xs .nav-primary li:focus > ul,
-  .nav-xs .nav-primary li:active > ul {
-    display: block !important;
-  }
   .nav-xs.nav-xs-right .nav-primary > ul ul {
     left: auto;
     right: 100%;
