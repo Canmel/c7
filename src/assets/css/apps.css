@@ -487,6 +487,7 @@ a.list-group-item:focus {
 .dropdown-submenu:hover > .dropdown-menu,
 .dropdown-submenu:focus > .dropdown-menu {
   display: block;
+  background-color: red;
 }
 
 .dropdown-submenu.pull-left {
@@ -946,7 +947,7 @@ body.container {
 
 .scrollable {
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .no-touch .scrollable.hover {

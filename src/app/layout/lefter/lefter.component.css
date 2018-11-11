@@ -9,3 +9,10 @@
     padding-top: 50px;
   }
 }
+
+.nav-xs .nav-primary li:hover > ul,
+.nav-xs .nav-primary li:focus > ul,
+.nav-xs .nav-primary li:active > ul {
+  display: block !important;
+  background-color: red;
+}
