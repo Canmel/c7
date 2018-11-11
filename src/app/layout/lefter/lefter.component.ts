@@ -16,7 +16,10 @@ export class LefterComponent implements OnInit {
       {href: '/app/menus', active: null, menuname: 'Video', icon: 'icon-social-youtube icon  text-primary'}
     ],
     menuTree: [
-
+      {href: null, active: 'active', menuname: '系统管理', icon: 'icon-disc icon text-success', level: 1},
+      {href: '/app/users', active: null, menuname: '用户管理', icon: 'fa fa-angle-right text-xs', level: 2},
+      {href: '/app/roles', active: null, menuname: '角色管理', icon: 'fa fa-angle-right text-xs', level: 2},
+      {href: '/app/menus', active: null, menuname: '菜单管理', icon: 'fa fa-angle-right text-xs', level: 2}
     ]
   };
 

@@ -1,7 +1,7 @@
 <nav class="nav-primary hidden-xs">
   <ul class="nav bg clearfix">
   </ul>
-  <ul class="nav bg clearfix">
+  <ul class="nav bg clearfix" *ngIf="menuList">
     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
       Discover
     </li>
@@ -9,15 +9,16 @@
       <a routerLinkActive="active" routerLink="{{item.href}}">
         <i class="{{item.icon}}"></i>
         <span class="font-bold">{{item.menuname}}</span>
+        <b class="badge bg-danger dker pull-right">999+</b>
       </a>
     </li>
     <li class="m-b hidden-nav-xs"></li>
   </ul>
-  <ul class="nav" data-ride="collapse">
+  <ul class="nav" data-ride="collapse" *ngIf="menuTree">
     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
       Interface
     </li>
-    <li>
+    <li *ngFor="let item of level1()">
       <a class="auto">
                         <span class="pull-right text-muted">
                           <i class="fa fa-angle-left text"></i>
@@ -25,27 +26,13 @@
                         </span>
         <i class="icon-screen-desktop icon">
         </i>
-        <span>系統管理</span>
+        <span>{{item.menuname}}</span>
       </a>
       <ul class="nav dk text-sm">
-        <li>
-          <a class="auto" routerLinkActive="active" routerLink="/app/users">
-            <i class="fa fa-angle-right text-xs"></i>
-            <span>用户管理</span>
-          </a>
-        </li>
-        <li>
-          <a class="auto" routerLinkActive="active" routerLink="/app/roles">
-            <i class="fa fa-angle-right text-xs"></i>
-
-            <span>角色管理</span>
-          </a>
-        </li>
-        <li>
-          <a class="auto" class="auto" routerLinkActive="active" routerLink="/app/menus">
-            <i class="fa fa-angle-right text-xs"></i>
-
-            <span>菜单管理</span>
+        <li *ngFor="let m of level2()">
+          <a class="auto" routerLinkActive="active" routerLink="{{m.href}}">
+            <i class="{{m.icon}}"></i>
+            <span>{{m.menuname}}</span>
           </a>
         </li>
       </ul>
@@ -204,25 +191,6 @@
           </a>
         </li>
       </ul>
-    </li>
-  </ul>
-  <ul class="nav text-sm">
-    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-      <span class="pull-right"><a><i class="icon-plus i-lg"></i></a></span>
-      Playlist
-    </li>
-    <li>
-      <a>
-        <i class="icon-music-tone icon"></i>
-        <span>Hip-Pop</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="icon-playlist icon text-success-lter"></i>
-        <b class="badge bg-success dker pull-right">9</b>
-        <span>Jazz</span>
-      </a>
     </li>
   </ul>
 </nav>
