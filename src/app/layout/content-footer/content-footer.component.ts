@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-content-footer',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentFooterComponent implements OnInit {
 
-  constructor() { }
+  visible = false;
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
 
 }

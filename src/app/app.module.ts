@@ -9,7 +9,6 @@ import {FormsModule} from '@angular/forms';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
-
 registerLocaleData(zh);
 
 @NgModule({

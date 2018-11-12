@@ -33,15 +33,16 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/bootstrap/js/dist/collapse.js",
               "node_modules/particles.js/particles.js",
               "src/assets/js/particles.min.js",
-              "src/assets/js/app.js",
-              "src/assets/js/jq22.js",
-              "src/assets/js/apps.js",
               "src/assets/js/slimscroll/jquery.slimscroll.min.js",
               "src/assets/js/app.plugin.js",
               "src/assets/js/jPlayer/jquery.jplayer.min.js",
-              "src/assets/js/jPlayer/add-on/jplayer.playlist.min.js"
+              "src/assets/js/jPlayer/add-on/jplayer.playlist.min.js",
+              "src/assets/js/app.js",
+              "src/assets/js/jq22.js",
+              "src/assets/js/apps.js"
             ]
           },
           "configurations": {

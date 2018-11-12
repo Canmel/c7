@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Properties} from '../public/properties';
 import {Urls} from '../public/url';
+import * as $ from 'jquery';
 
 declare var layui: any;
 
@@ -13,7 +14,8 @@ declare var layui: any;
 export class MainComponent implements OnInit {
 
   userInfo = {
-    username: '张三'
+    username: '张三',
+    rolename: '系统管理员'
   };
 
   constructor(public router: Router) {
@@ -31,6 +33,15 @@ export class MainComponent implements OnInit {
     if (sessionStorage.getItem(Properties.SESSION.CURRENT) === null) {
       return this.router.navigate([Urls.SESSION.LOGIN]);
     }
+  }
+
+  slideFooter() {
+    if ($('#content-footer').css('display') === 'none') {
+      $('#content-footer').slideDown('slow');
+    } else {
+      $('#content-footer').slideUp('slow');
+    }
+
   }
 
   ngOnInit() {

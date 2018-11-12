@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MainComponent} from '../../../main/main.component';
 import {Router} from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-footer',
@@ -16,5 +17,7 @@ export class FooterComponent extends MainComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
 }
