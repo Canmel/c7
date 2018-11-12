@@ -12,6 +12,10 @@ declare var layui: any;
 })
 export class MainComponent implements OnInit {
 
+  userInfo = {
+    username: '张三'
+  };
+
   constructor(public router: Router) {
     this.isLogin();
   }
