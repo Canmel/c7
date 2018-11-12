@@ -4797,6 +4797,16 @@ fieldset[disabled] .i-checks input + i:before {
   }
 }
 
-.point-hand{
+.point-hand {
   cursor: pointer;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-left {
+  display: flex;
+  justify-content: flex-start;
 }
