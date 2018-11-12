@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './main.component';
-import {HomeComponent} from '../app/sys/home/home.component';
-import {UsersComponent} from '../app/sys/users/users.component';
 import {UsersModule} from '../app/sys/users/users.module';
 import {RolesModule} from '../app/sys/roles/roles.module';
 import {MenusModule} from '../app/sys/menus/menus.module';
 import {HomeModule} from '../app/sys/home/home.module';
+import {ProfileModule} from '../app/sys/profile/profile.module';
+import {LogsModule} from '../app/sys/logs/logs.module';
 
 const routes: Routes = [
   {
@@ -30,6 +30,12 @@ const routes: Routes = [
       }, {
         path: 'home',
         loadChildren: () => HomeModule
+      }, {
+        path: 'profile',
+        loadChildren: () => ProfileModule
+      }, {
+        path: 'logs',
+        loadChildren: () => LogsModule
       }
     ]
   }

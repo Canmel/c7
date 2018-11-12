@@ -4442,6 +4442,7 @@ fieldset[disabled] .i-checks input + i:before {
 
   .hidden-xs.show {
     display: inherit !important;
+    background-color: white;
   }
 
   .wrapper-lg {

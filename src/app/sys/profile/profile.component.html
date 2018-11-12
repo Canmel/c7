@@ -1,0 +1,118 @@
+<section class="hbox stretch" style="height: 100%;">
+  <aside class="aside-lg bg-light lter b-r">
+    <section class="vbox">
+      <section class="scrollable">
+        <div class="wrapper">
+          <div class="text-center m-b m-t">
+            <a href="#" class="thumb-lg">
+              <nz-avatar [nzText]="userDetails.username || '未登录'" [nzSize]="'large'" style="background-color: #234e2b;"></nz-avatar>
+            </a>
+            <div>
+              <div class="h3 m-t-xs m-b-xs">{{userDetails.username || '未登录'}}</div>
+              <small class="text-muted"><i class="fa fa-map-marker"></i>{{userDetails.address || '未登录'}}</small>
+            </div>
+          </div>
+          <div class="panel wrapper">
+            <div class="row text-center">
+              <div class="col-xs-6">
+                <a href="#">
+                  <span class="m-b-xs h4 block">245</span>
+                  <small class="text-muted">Followers</small>
+                </a>
+              </div>
+              <div class="col-xs-6">
+                <a href="#">
+                  <span class="m-b-xs h4 block">55</span>
+                  <small class="text-muted">Following</small>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group btn-group-justified m-b">
+            <a class="btn btn-success btn-rounded" data-toggle="button">
+                            <span class="text">
+                              <i class="fa fa-eye"></i> Follow
+                            </span>
+              <span class="text-active">
+                              <i class="fa fa-eye"></i> Following
+                            </span>
+            </a>
+            <a class="btn btn-dark btn-rounded">
+              <i class="fa fa-comment-o"></i> Chat
+            </a>
+          </div>
+          <div>
+            <a class="list-group-item">
+              <i class="fa fa-fw fa-envelope"></i> Email
+              <i style="float: right;">{{userDetails.email || '邮箱'}}</i>
+            </a>
+            <a class="list-group-item">
+              <i class="fa fa-fw fa-phone"></i>Phone
+              <i style="float: right;">{{userDetails.phone || '还没有电话？'}}</i>
+            </a>
+            <small class="text-uc text-xs text-muted">简介</small>
+            <p>{{userDetails.desc || '这个家伙很懒,什么也没留下！'}}</p>
+            <div class="line"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </aside>
+  <aside class="bg-white">
+    <nz-tabset>
+      <nz-tab nzTitle="操作日志">
+        <li class="list-group-item" *ngFor="let item of userLogs">
+          <a href="#" class="thumb-sm pull-left m-r-sm">
+            <nz-avatar [nzText]="userDetails.username || '未登录'" style="background-color: #234e2b;"></nz-avatar>
+          </a>
+          <a href="#" class="clear">
+            <small class="pull-right">{{item.date}}</small>
+            <strong class="block">{{item.title}}</strong>
+            <small>{{item.desc}} </small>
+          </a>
+        </li>
+      </nz-tab>
+      <nz-tab nzTitle="事件">
+        开发哥哥狂撸代码中...
+      </nz-tab>
+      <nz-tab nzTitle="消息">
+        开发哥哥狂撸代码中...
+      </nz-tab>
+    </nz-tabset>`
+  </aside>
+  <aside class="col-lg-3 b-l">
+    <section class="vbox">
+      <section class="scrollable padder-v">
+        <div class="panel">
+          <h4 class="font-thin padder">Latest Tweets</h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <p>Wellcome <a href="#" class="text-info">@Drew Wllon</a> and play this web application template, have fun1 </p>
+              <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+            </li>
+            <li class="list-group-item">
+              <p>Morbi nec <a href="#" class="text-info">@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
+              <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
+            </li>
+            <li class="list-group-item">
+              <p><a href="#" class="text-info">@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
+              <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
+            </li>
+          </ul>
+        </div>
+        <div class="panel clearfix">
+          <div class="panel-body">
+            <a href="#" class="thumb pull-left m-r">
+              <img class="img-circle">
+            </a>
+            <div class="clear">
+              <a href="#" class="text-info">@Mike Mcalidek <i class="fa fa-twitter"></i></a>
+              <small class="block text-muted">2,415 followers / 225 tweets</small>
+              <a href="#" class="btn btn-xs btn-success m-t-xs">Follow</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </aside>
+</section>
