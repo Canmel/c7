@@ -8,6 +8,7 @@ import {LefterComponent} from '../app/layout/lefter/lefter.component';
 import {FooterComponent} from '../app/layout/footer/footer.component';
 import {ContentFooterComponent} from '../app/layout/content-footer/content-footer.component';
 import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
   ],
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    NgZorroAntdModule
   ]
 })
 export class MainModule {
