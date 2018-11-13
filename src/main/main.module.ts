@@ -9,6 +9,7 @@ import {FooterComponent} from '../app/layout/footer/footer.component';
 import {ContentFooterComponent} from '../app/layout/content-footer/content-footer.component';
 import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {ListModule} from '../public/list/list.module';
 
 @NgModule({
   declarations: [

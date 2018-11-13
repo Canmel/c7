@@ -4810,3 +4810,7 @@ fieldset[disabled] .i-checks input + i:before {
   display: flex;
   justify-content: flex-start;
 }
+
+.btn-list > a {
+  margin-right: 5px;
+}

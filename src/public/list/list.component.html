@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-striped b-t b-light">
+    <thead>
+    <tr>
+      <th style="width: 50px;"></th>
+      <th *ngFor="let item of listHead" [ngStyle]="{'width': item.width}">{{item.title}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listBody; let i = index">
+      <td><b>{{indexNum + i + 1}}</b></td>
+      <td *ngFor="let head of listHead">
+        <span ngClass="{{head.class}}">{{item[head.field]}}</span>
+        <div class="btn-group btn-list" *ngIf="head.field === 'option'">
+          <a data-toggle="class" *ngFor="let e of  head.events" (click)="optionClickEvent(e, i, item)"><i
+            class="fa {{e.icon}} text-success text-active"></i><i
+            class="fa {{e.icon}} text-success text"></i></a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
