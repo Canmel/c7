@@ -1,3 +1,109 @@
-<p>
-  user-add works!
-</p>
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="userName" placeholder="请输入用户名...">
+          <nz-form-explain
+            *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors || validateForm.get('userName').pending ">
+            <ng-container *ngIf="validateForm.get('userName').hasError('required')">
+              用户名不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('userName').hasError('duplicated')">
+              该用户名已经被使用！请修改
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('userName').pending">
+              正在验证中
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>邮箱</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="email" placeholder="请输入邮箱..." type="email">
+          <nz-form-explain *ngIf="validateForm.get('email').dirty&&validateForm.get('email').errors">
+            <ng-container *ngIf="validateForm.get('email').hasError('email')">
+              请输入正确格式的邮箱账号！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('email').hasError('required')">
+              邮箱账号不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>密码</nz-form-label>
+        <div>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()"
+                   placeholder="请输入密码...">
+            <nz-form-explain
+              *ngIf="validateForm.get('password').dirty&&validateForm.get('password').hasError('required')">
+              密码不能为空！
+            </nz-form-explain>
+          </nz-form-control>
+        </div>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>确认密码</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input type="password" formControlName="confirm" placeholder="请再次输入密码...">
+          <nz-form-explain *ngIf="validateForm.get('confirm').dirty&&validateForm.get('confirm').errors">
+            <ng-container *ngIf="validateForm.get('confirm').hasError('required')">
+              确认密码不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('confirm').hasError('confirm')">
+              确认密码不正确！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>坐标地址</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input type="text" formControlName="address" placeholder="请输入坐标地址...">
+          <nz-form-explain *ngIf="validateForm.get('address').dirty&&validateForm.get('confirm').errors">
+            <ng-container *ngIf="validateForm.get('address').hasError('required')">
+              Please confirm your address!
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>手机号码</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input type="text" formControlName="phone" placeholder="请输入手机号码...">
+          <nz-form-explain *ngIf="validateForm.get('phone').dirty&&validateForm.get('phone').errors">
+            <ng-container *ngIf="validateForm.get('phone').hasError('required')">
+              手机号码不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('phone').hasError('pattern')">
+              手机号码格式不正确！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>个人信息</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <textarea formControlName="comment" nz-input rows="2" placeholder="简短介绍..."></textarea>
+          <nz-form-explain
+            *ngIf="validateForm.get('comment').dirty&&validateForm.get('comment').hasError('required')">
+            简介不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/users">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>

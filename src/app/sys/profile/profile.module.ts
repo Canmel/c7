@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ProfileRoutingModule} from './profile-routing.module';
 import {ProfileComponent} from './profile.component';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {CrumbsModule} from '../../../public/crumbs/crumbs.module';
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -11,7 +12,8 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    CrumbsModule
   ]
 })
 export class ProfileModule {

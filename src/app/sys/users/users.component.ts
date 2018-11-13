@@ -54,9 +54,9 @@ export class UsersComponent extends ListDirective implements OnInit {
     {
       title: '操作', field: 'option', type: 'opt', width: '10%',
       events: [{
-        icon: 'fa-edit', url: '/app/users/edit'
+        icon: 'fa-edit', url: '/app/users/edit', tips: '修改'
       }, {
-        icon: 'fa-trash-o', cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
+        icon: 'fa-trash-o', tips: '删除', cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
           console.log(http);
           console.log('我接收到了' + index + '--  并且开始发射了', row);
           service.confirm({
