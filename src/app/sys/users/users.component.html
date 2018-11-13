@@ -21,7 +21,7 @@
     </div>
     <app-list [listBody]="users"
               (optinEvent)="priceQuoteHandler($event)"
-              [listHead]="listHeader" [indexNum]="(pageination.curPage - 1) * pageination.pageSize" ></app-list>
+              [listHead]="listHeader" [indexNum]="(pageination.curPage - 1) * pageination.pageSize"></app-list>
     <footer class="panel-footer">
       <div class="row">
         <app-pagination [curPage]="pageination.curPage" [pageSize]="pageination.pageSize"

@@ -10,7 +10,8 @@
     <tr *ngFor="let item of listBody; let i = index">
       <td><b>{{indexNum + i + 1}}</b></td>
       <td *ngFor="let head of listHead">
-        <span ngClass="{{head.class}}">{{item[head.field]}}</span>
+        <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+              (click)="optionClickEvent(head, i, item)">{{item[head.field]}}</span>
         <div class="btn-group btn-list" *ngIf="head.field === 'option'">
           <a data-toggle="class" *ngFor="let e of  head.events" (click)="optionClickEvent(e, i, item)"><i
             class="fa {{e.icon}} text-success text-active"></i><i

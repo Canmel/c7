@@ -7,8 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  @Input() listHead: Array;
-  @Input() listBody: Array;
+  @Input() listHead: Array<any>;
+  @Input() listBody: Array<any>;
   @Input() indexNum: number;
   @Output() optinEvent: EventEmitter<any> = new EventEmitter();
 
@@ -23,10 +23,7 @@ export class ListComponent implements OnInit {
    * 参数：url: 即将发射的参数
    **/
   optionClickEvent(data, index, item) {
-    if (data.cback) {
-      data.cback(index, item);
-    }
-    this.optinEvent.emit(data);
+    this.optinEvent.emit({data: data, index: index, row: item});
   }
 
 }

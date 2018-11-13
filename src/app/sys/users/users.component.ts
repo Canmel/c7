@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ListDirective} from '../../../public/list/list.directive';
 import {Router} from '@angular/router';
+import {NzModalService} from 'ng-zorro-antd';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -41,7 +43,12 @@ export class UsersComponent extends ListDirective implements OnInit {
    *
    **/
   listHeader = [
-    {title: '用户名', field: 'username', type: 'text', class: 'text-success'},
+    {
+      title: '用户名', field: 'username', type: 'text', class: 'text-success',
+      cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
+        console.log('执行用户名点击回调 ： ' + index, row);
+      }
+    },
     {title: '邮箱', field: 'email', type: 'number'},
     {title: '电话', field: 'phone', type: 'phone'},
     {
@@ -49,9 +56,18 @@ export class UsersComponent extends ListDirective implements OnInit {
       events: [{
         icon: 'fa-edit', url: '/app/users/edit'
       }, {
-        icon: 'fa-trash-o', cback: function (index, row) {
-          console.log(index, row);
+        icon: 'fa-trash-o', cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
+          console.log(http);
           console.log('我接收到了' + index + '--  并且开始发射了', row);
+          service.confirm({
+            nzTitle: '你确定要删除 ' + row.username + '?',
+            nzContent: '<b style="color: red;">该操作不可撤销</b>',
+            nzOkText: '是',
+            nzOkType: 'danger',
+            nzOnOk: () => console.log(http),
+            nzCancelText: '否',
+            nzOnCancel: () => console.log('Cancel')
+          });
         }
       }]
     }
@@ -64,18 +80,13 @@ export class UsersComponent extends ListDirective implements OnInit {
   ];
 
 
-  /**
-   * 方法用途: 父子组件通讯方法用来接收子组件（用户列表listComponent）发出的事件
-   * 参数：event: 事件
-   **/
-  priceQuoteHandler(event: any) {
-    if (event['url']) {
-      this.router.navigate([event.url]);
-    }
-  }
+  // constructor(public router: Router, public modalService: NzModalService, public http: HttpClient) {
+  //   super(router, modalService, http);
+  // }
 
-  constructor(private router: Router) {
-    super();
+
+  constructor(router: Router, modalService: NzModalService, hc: HttpClient) {
+    super(router, modalService, hc);
   }
 
   ngOnInit() {
