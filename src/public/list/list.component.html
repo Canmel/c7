@@ -13,7 +13,8 @@
         <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
               (click)="optionClickEvent(head, i, item)">{{item[head.field]}}</span>
         <div class="btn-group btn-list" *ngIf="head.field === 'option'">
-          <a data-toggle="class" *ngFor="let e of  head.events" (click)="optionClickEvent(e, i, item)"><i
+          <a *ngFor="let e of  head.events" (click)="optionClickEvent(e, i, item)"
+             nz-button nz-popover nzContent="{{e.tips}}"><i
             class="fa {{e.icon}} text-success text-active"></i><i
             class="fa {{e.icon}} text-success text"></i></a>
         </div>

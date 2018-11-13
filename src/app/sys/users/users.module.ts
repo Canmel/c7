@@ -10,6 +10,11 @@ import {UserEditComponent} from './user-edit/user-edit.component';
 import {UserAddComponent} from './user-add/user-add.component';
 import {ListDirective} from '../../../public/list/list.directive';
 import {ListModule} from '../../../public/list/list.module';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
+import {ReactiveFormsModule} from '@angular/forms';
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
@@ -24,8 +29,12 @@ import {ListModule} from '../../../public/list/list.module';
     BailyTableModule,
     CrumbsModule,
     PaginationModule,
-    ListModule
-  ]
+    ListModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule
+  ],
+  bootstrap: [ UsersComponent ],
+  providers   : [ { provide: NZ_I18N, useValue: zh_CN } ]
 })
 export class UsersModule {
 }
