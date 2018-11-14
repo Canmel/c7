@@ -2,7 +2,7 @@ export const Urls = {
   GetBillTypes: `/return/thumbnail`,
   PROJECTS: `/project`,
   USERS: {
-    ME: `/api/users/me`,
+    ME: `/api/users/current`,
     PAGEQUERY: `/api/users`,
     CURRENT: `/api/users/current`,
     SAVE: `/api/users`,

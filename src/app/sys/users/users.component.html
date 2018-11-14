@@ -19,13 +19,34 @@
         </div>
       </div>
     </div>
-    <app-list [listBody]="users"
-              (optinEvent)="priceQuoteHandler($event)"
-              [listHead]="listHeader" [indexNum]="(pageination.curPage - 1) * pageination.pageSize"></app-list>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+          <th *ngFor="let item of listHeader" [ngStyle]="{'width': item.width}">{{item.title}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of users; let i = index">
+          <td *ngFor="let head of listHeader">
+        <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+            <div class="" *ngIf="head.field === 'option'">
+              <a nz-button nz-popover nzContent="'编辑'" (click)="edit({id: item.id})"><i
+                class="fa fa-edit text-success text-active"></i><i
+                class="fa fa-edit text-success text"></i></a>
+
+              <a nz-button nz-popover nzContent="'删除'" (click)="remove({id: item.id}, item.username)"><i
+                class="fa fa-trash-o text-success text-active"></i><i
+                class="fa fa-trash-o text-success text"></i></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
     <footer class="panel-footer">
       <div class="row">
-        <app-pagination [curPage]="pageination.curPage" [pageSize]="pageination.pageSize"
-                        [totalNum]="pageination.totalNum"></app-pagination>
+        <nz-pagination [nzPageIndex]="pageination.curPage" [nzTotal]="pageination.totalNum"></nz-pagination>
       </div>
     </footer>
   </section>

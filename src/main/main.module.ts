@@ -10,6 +10,7 @@ import {ContentFooterComponent} from '../app/layout/content-footer/content-foote
 import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ListModule} from '../public/list/list.module';
+import {HttpsUtils} from '../app/utils/HttpsUtils.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ListModule} from '../public/list/list.module';
     CommonModule,
     MainRoutingModule,
     NgZorroAntdModule
-  ]
+  ],
+  providers: [HttpsUtils]
 })
 export class MainModule {
 }

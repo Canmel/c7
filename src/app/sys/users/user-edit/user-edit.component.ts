@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Observer} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {HttpsUtils} from '../../../utils/HttpsUtils.service';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-user-edit',
@@ -17,6 +20,8 @@ export class UserEditComponent implements OnInit {
     title: '用户管理',
     subTitle: '新建用户'
   };
+
+  formData = {};
 
   validateForm: FormGroup;
 
@@ -67,7 +72,7 @@ export class UserEditComponent implements OnInit {
       }
       observer.complete();
     }, 1000);
-  })
+  });
 
   /**
    * 方法用途: 确认密码验证
@@ -85,7 +90,7 @@ export class UserEditComponent implements OnInit {
    * 方法用途: 构造器构造验证对象
    * 参数:
    **/
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public activatedRoute: ActivatedRoute, public https: HttpsUtils) {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email]],
@@ -98,6 +103,19 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      this.validateForm.value['id'] = queryParams['id'];
+    });
+    this.loadEntityById();
+  }
+
+  loadEntityById() {
+    if (this.validateForm.value['id']) {
+      this.https.get(Urls.USERS.EDIT + this.validateForm.value['id']).then(resp => {
+        this.formData = resp['data'];
+      });
+    }
+
   }
 
 }
