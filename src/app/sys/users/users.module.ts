@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
 registerLocaleData(zh);
 
 @NgModule({
@@ -34,7 +35,7 @@ registerLocaleData(zh);
     NgZorroAntdModule
   ],
   bootstrap: [ UsersComponent ],
-  providers   : [ { provide: NZ_I18N, useValue: zh_CN } ]
+  providers   : [ { provide: NZ_I18N, useValue: zh_CN }, HttpsUtils ]
 })
 export class UsersModule {
 }

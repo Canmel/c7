@@ -6,7 +6,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="userName" placeholder="请输入用户名...">
+          <input nz-input formControlName="userName" placeholder="请输入用户名..." [ngModel]="formData.username">
           <nz-form-explain
             *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors || validateForm.get('userName').pending ">
             <ng-container *ngIf="validateForm.get('userName').hasError('required')">
@@ -24,7 +24,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>邮箱</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="email" placeholder="请输入邮箱..." type="email">
+          <input nz-input formControlName="email" placeholder="请输入邮箱..." type="email" [ngModel]="formData.email">
           <nz-form-explain *ngIf="validateForm.get('email').dirty&&validateForm.get('email').errors">
             <ng-container *ngIf="validateForm.get('email').hasError('email')">
               请输入正确格式的邮箱账号！
@@ -76,7 +76,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>手机号码</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input type="text" formControlName="phone" placeholder="请输入手机号码...">
+          <input nz-input type="text" formControlName="phone" placeholder="请输入手机号码..." [ngModel]="formData.mobile">
           <nz-form-explain *ngIf="validateForm.get('phone').dirty&&validateForm.get('phone').errors">
             <ng-container *ngIf="validateForm.get('phone').hasError('required')">
               手机号码不能为空！
@@ -90,7 +90,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>个人信息</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <textarea formControlName="comment" nz-input rows="2" placeholder="简短介绍..."></textarea>
+          <textarea formControlName="comment" nz-input rows="2" placeholder="简短介绍..." [ngModel]="formData.remarke"></textarea>
           <nz-form-explain
             *ngIf="validateForm.get('comment').dirty&&validateForm.get('comment').hasError('required')">
             简介不能为空！

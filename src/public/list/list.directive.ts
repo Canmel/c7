@@ -2,6 +2,7 @@ import {Directive} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService} from 'ng-zorro-antd';
 import {HttpClient} from '@angular/common/http';
+import {HttpsUtils} from '../../app/utils/HttpsUtils.service';
 
 @Directive({
   selector: '[appList]'
@@ -12,7 +13,7 @@ import {HttpClient} from '@angular/common/http';
  **/
 export class ListDirective {
 
-  constructor(public router: Router, public modalService: NzModalService, public hc: HttpClient) {
+  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils) {
   }
 
   /**
@@ -24,7 +25,7 @@ export class ListDirective {
       this.router.navigate([event.data.url]);
     }
     if (event.data && event.data.cback) {
-      event.data.cback(event.index, event.row, this.modalService, this.hc);
+      event.data.cback(event.index, event.row, this.modalService, this.https);
     }
   }
 }

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Properties} from '../public/properties';
 import {Urls} from '../public/url';
 import * as $ from 'jquery';
+import {HttpsUtils} from '../app/utils/HttpsUtils.service';
 
 declare var layui: any;
 
@@ -14,12 +15,12 @@ declare var layui: any;
 export class MainComponent implements OnInit {
 
   userInfo = {
-    username: '张三',
-    rolename: '系统管理员'
+    username: sessionStorage.getItem('CURRENT_USER_NAME'),
+    sysRoles: '未知'
   };
 
-  constructor(public router: Router) {
-    this.isLogin();
+  constructor(public router: Router, public http: HttpsUtils) {
+    // this.loadCurrentUser();
   }
 
   /**
@@ -35,6 +36,10 @@ export class MainComponent implements OnInit {
     }
   }
 
+  /**
+  * 方法用途: 滚动底部组件动作
+  * 参数：
+  **/
   slideFooter() {
     if ($('#content-footer').css('display') === 'none') {
       $('#content-footer').slideDown('slow');
@@ -45,6 +50,18 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  /**
+  * 方法用途: 加载当前用户
+  * 参数：
+  **/
+  loadCurrentUser() {
+    const _this = this;
+    this.http.get(Urls.USERS.ME).then(resp => {
+      if (resp['data']) { _this.userInfo.username = '张晓文'; }
+      console.log(resp['data']);
+    });
   }
 
 }

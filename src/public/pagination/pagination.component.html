@@ -6,7 +6,7 @@
   <li class="prev" *ngIf="curPage > 1" (click)="changePage(curPage-1)">
     <a>
       <div class="fa fa-angle-left"></div>
-      上一页
+      上一页{{curPage}}{{totalNum}}
     </a>
   </li>
   <li class="page" *ngIf="curPage + 1 > totalPage && curPage - 4 > 0" (click)="changePage(curPage - 4)">

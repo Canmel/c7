@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ListDirective} from '../../../public/list/list.directive';
 import {Router} from '@angular/router';
 import {NzModalService} from 'ng-zorro-antd';
-import {HttpClient} from '@angular/common/http';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {Urls} from '../../../public/url';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent extends ListDirective implements OnInit {
+export class UsersComponent implements OnInit {
   /**
    * 属性描述: 面包屑菜单路径
    * 参数：
@@ -26,70 +26,60 @@ export class UsersComponent extends ListDirective implements OnInit {
   pageination: any = {
     totalNum: 21,
     pageSize: 10,
-    curPage: 2
+    curPage: 1
   };
 
   /**
-   * 属性描述: 列表表头
-   * 参数：title: 显示的表头名称
-   *       field: 表头属性名称, (option： 参数列)
-   *       width: 表格宽度
-   *       event: (自定义图表事件)
-   *          [
-   *              icon: 图标
-   *              url: 如果存在，直接打开url
-   *              cback: 点击回调
-   *          ]
-   *
-   **/
+   * 表头
+   */
   listHeader = [
-    {
-      title: '用户名', field: 'username', type: 'text', class: 'text-success',
-      cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
-        console.log('执行用户名点击回调 ： ' + index, row);
-      }
-    },
+    {title: '用户名', field: 'username', type: 'text', class: 'text-success'},
     {title: '邮箱', field: 'email', type: 'number'},
-    {title: '电话', field: 'phone', type: 'phone'},
-    {
-      title: '操作', field: 'option', type: 'opt', width: '10%',
-      events: [{
-        icon: 'fa-edit', url: '/app/users/edit', tips: '修改'
-      }, {
-        icon: 'fa-trash-o', tips: '删除', cback: function (index: number, row: any, service: NzModalService, http: HttpClient) {
-          console.log(http);
-          console.log('我接收到了' + index + '--  并且开始发射了', row);
-          service.confirm({
-            nzTitle: '你确定要删除 ' + row.username + '?',
-            nzContent: '<b style="color: red;">该操作不可撤销</b>',
-            nzOkText: '是',
-            nzOkType: 'danger',
-            nzOnOk: () => console.log(http),
-            nzCancelText: '否',
-            nzOnCancel: () => console.log('Cancel')
-          });
-        }
-      }]
-    }
+    {title: '电话', field: 'mobile', type: 'phone'},
+    {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
-  users = [
-    {phone: '18357162602', username: '大欢', email: '892379244@qq.com', id: 1},
-    {phone: '13555488765', username: '小于', email: '778922711@qq.com', id: 2},
-    {phone: '17798982221', username: '黎明', email: '812322244@qq.com', id: 3}
-  ];
+  users: Array<any> = [];
 
 
-  // constructor(public router: Router, public modalService: NzModalService, public http: HttpClient) {
-  //   super(router, modalService, http);
-  // }
-
-
-  constructor(router: Router, modalService: NzModalService, hc: HttpClient) {
-    super(router, modalService, hc);
+  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils) {
   }
 
   ngOnInit() {
+    this.loadUsers();
   }
 
+  loadUsers() {
+    this.https.get(Urls.USERS.PAGEQUERY, this.pageination).then(resp => {
+      this.users = resp['data']['records'];
+      this.pageination.curPage = resp['data']['current'];
+      this.pageination.totalNum = resp['data']['total'];
+      console.log(this.pageination);
+    });
+  }
+
+  /**
+   * 方法用途: 修改
+   * 参数：
+   **/
+  edit(param) {
+    this.router.navigate([Urls.BUSINESS.USERS.EDIT], {queryParams: param});
+  }
+
+  /**
+   * 方法用途: 删除
+   * 参数：
+   **/
+  remove(param, username) {
+    this.modalService.confirm({
+      nzTitle: '你确定要删除 ' + username + '?',
+      nzContent: '<b style="color: red;">该操作不可撤销</b>',
+      nzOkText: '是',
+      nzOkType: 'danger',
+      nzOnOk: () => console.log(param),
+      nzCancelText: '否',
+      nzOnCancel: () => console.log('Cancel')
+    });
+    console.log(param);
+  }
 }

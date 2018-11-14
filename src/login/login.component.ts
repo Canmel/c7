@@ -3,6 +3,7 @@ import * as $ from 'jquery';
 import {Properties} from '../public/properties';
 import {Router} from '@angular/router';
 import {Urls} from '../public/url';
+import {HttpsUtils} from '../app/utils/HttpsUtils.service';
 
 declare var particlesInit: any;   // 已经导入了   不需要再次声明， 这里是为了防止 编译报错
 
@@ -13,25 +14,16 @@ declare var particlesInit: any;   // 已经导入了   不需要再次声明， 
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public router: Router) {
-    this.isLogin();
+  contentData = {rqcode: '0000', username: '', password: ''};
+
+  constructor(public router: Router, public http: HttpsUtils) {
   }
 
   ngOnInit() {
     particlesInit();  // 登陆页面动画效果
-  }
-
-  /**
-   * 方法用途: 判断当前是否登录，已经登录直接前往首页，未登录直接前往登录页
-   * 参数：无
-   **/
-  isLogin() {
-    if (sessionStorage.getItem(Properties.SESSION.CURRENT) !== null) {
-      return this.router.navigate([Urls.SESSION.APP]);
-    }
-    if (sessionStorage.getItem(Properties.SESSION.CURRENT) === null) {
-      return this.router.navigate([Urls.SESSION.LOGIN]);
-    }
+    this.http.get(Urls.SESSION.QRCODE).then(resp => {
+      this.contentData['qrcode'] = resp['data']['verify'];
+    });
   }
 
   /**
@@ -40,17 +32,38 @@ export class LoginComponent implements OnInit {
    **/
   login() {
     const _this = this;
-    $('.login').addClass('active');
-    setTimeout(function () {
-      $('.sk-rotating-plane').addClass('active');
-      $('.login').css('display', 'none');
-    }, 800);
-    setTimeout(function () {
-      $('.login').removeClass('active');
-      $('.sk-rotating-plane').removeClass('active');
-      $('.login').css('display', 'block');
-      _this.loginSuccessCallBack();
-    }, 3000);
+    $.ajax({
+      url: '/auth/login',
+      data: {
+        username: $('input[name="username"]').val(),
+        password: $('input[name="password"]').val(),
+        imageCode: $('input[name="qrcode"]').val()
+      },
+      method: 'POST',
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function (resp) {
+        sessionStorage.setItem(Properties.STRING.SESSION.ACCESS_TOKEN, resp['access_token']);
+        sessionStorage.setItem('CURRENT_USER_NAME', resp['data']['username']);
+        $('.login').addClass('active');
+        setTimeout(function () {
+          $('.sk-rotating-plane').addClass('active');
+          $('.login').css('display', 'none');
+        }, 800);
+        setTimeout(function () {
+          $('.login').removeClass('active');
+          $('.sk-rotating-plane').removeClass('active');
+          $('.login').css('display', 'block');
+          _this.loginSuccessCallBack();
+        }, 3000);
+      },
+      error: function (e, s, m) {
+        _this.loginFaildCallBack();
+      }
+    });
+
+
   }
 
   /**
