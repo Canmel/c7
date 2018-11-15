@@ -10,7 +10,7 @@
             </a>
             <div>
               <div class="h3 m-t-xs m-b-xs">{{userDetails.username || '未登录'}}</div>
-              <small class="text-muted"><i class="fa fa-map-marker"></i>{{userDetails.address || '未登录'}}</small>
+              <small class="text-muted"><i class="fa fa-map-marker"></i>{{userDetails.address || '未知'}}</small>
             </div>
           </div>
           <div class="panel wrapper">
@@ -49,10 +49,10 @@
             </a>
             <a class="list-group-item">
               <i class="fa fa-fw fa-phone"></i>Phone
-              <i style="float: right;">{{userDetails.phone || '还没有电话？'}}</i>
+              <i style="float: right;">{{userDetails.mobile || '还没有电话？'}}</i>
             </a>
             <small class="text-uc text-xs text-muted">简介</small>
-            <p>{{userDetails.desc || '这个家伙很懒,什么也没留下！'}}</p>
+            <p>{{userDetails.remarke || '这个家伙很懒,什么也没留下！'}}</p>
             <div class="line"></div>
           </div>
         </div>

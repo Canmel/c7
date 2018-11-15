@@ -1,6 +1,8 @@
 export const Properties = {
   SESSION: {
-    CURRENT: 'current_user'
+    CURRENT: 'current_user',
+    CURRENT_USER_NAME: 'CURRENT_USER_NAME',
+    CURRENT_NICKNAME: 'CURRENT_USER_NICKNAME'
   },
   STRING: {
     SESSION: {

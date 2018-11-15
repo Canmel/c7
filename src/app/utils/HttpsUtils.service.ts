@@ -54,7 +54,7 @@ export class HttpsUtils {
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+    headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
     if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
       url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
@@ -149,7 +149,6 @@ export class HttpsUtils {
   }
 
   private objAppendToUrl(url: string, obj: Object): string {
-    console.log('将map转化为Url', obj);
     url = url + '?';
     Object.keys(obj).forEach(function (key) {
       const param = key + '=' + obj[key];

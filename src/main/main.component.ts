@@ -15,7 +15,7 @@ declare var layui: any;
 export class MainComponent implements OnInit {
 
   userInfo = {
-    username: sessionStorage.getItem('CURRENT_USER_NAME'),
+    username: sessionStorage.getItem(Properties.SESSION.CURRENT_NICKNAME),
     sysRoles: '未知'
   };
 

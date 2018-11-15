@@ -6,17 +6,31 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="userName" placeholder="请输入用户名...">
+          <input nz-input formControlName="username" placeholder="请输入用户名...">
           <nz-form-explain
-            *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors || validateForm.get('userName').pending ">
-            <ng-container *ngIf="validateForm.get('userName').hasError('required')">
+            *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors || validateForm.get('username').pending ">
+            <ng-container *ngIf="validateForm.get('username').hasError('required')">
               用户名不能为空！
             </ng-container>
-            <ng-container *ngIf="validateForm.get('userName').hasError('duplicated')">
+            <ng-container *ngIf="validateForm.get('username').hasError('duplicated')">
               该用户名已经被使用！请修改
             </ng-container>
-            <ng-container *ngIf="validateForm.get('userName').pending">
+            <ng-container *ngIf="validateForm.get('username').pending">
               正在验证中
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>昵称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input type="text" formControlName="nickname" placeholder="请输入昵称...">
+          <nz-form-explain *ngIf="validateForm.get('nickname').dirty&&validateForm.get('nickname').errors">
+            <ng-container *ngIf="validateForm.get('nickname').hasError('required')">
+              昵称不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('nickname').hasError('maxlength')">
+              昵称长度不超过6个！
             </ng-container>
           </nz-form-explain>
         </nz-form-control>
@@ -76,12 +90,12 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>手机号码</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input type="text" formControlName="phone" placeholder="请输入手机号码...">
-          <nz-form-explain *ngIf="validateForm.get('phone').dirty&&validateForm.get('phone').errors">
-            <ng-container *ngIf="validateForm.get('phone').hasError('required')">
+          <input nz-input type="text" formControlName="mobile" placeholder="请输入手机号码...">
+          <nz-form-explain *ngIf="validateForm.get('mobile').dirty&&validateForm.get('mobile').errors">
+            <ng-container *ngIf="validateForm.get('mobile').hasError('required')">
               手机号码不能为空！
             </ng-container>
-            <ng-container *ngIf="validateForm.get('phone').hasError('pattern')">
+            <ng-container *ngIf="validateForm.get('mobile').hasError('pattern')">
               手机号码格式不正确！
             </ng-container>
           </nz-form-explain>
@@ -90,9 +104,9 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>个人信息</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <textarea formControlName="comment" nz-input rows="2" placeholder="简短介绍..."></textarea>
+          <textarea formControlName="remarke" nz-input rows="2" placeholder="简短介绍..."></textarea>
           <nz-form-explain
-            *ngIf="validateForm.get('comment').dirty&&validateForm.get('comment').hasError('required')">
+            *ngIf="validateForm.get('remarke').dirty&&validateForm.get('remarke').hasError('required')">
             简介不能为空！
           </nz-form-explain>
         </nz-form-control>

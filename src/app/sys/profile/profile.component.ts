@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Properties} from '../../../public/properties';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {Urls} from '../../../public/url';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +15,11 @@ export class ProfileComponent implements OnInit {
   };
 
   userDetails = {
-    username: '张三',
+    username: sessionStorage.getItem(Properties.SESSION.CURRENT_USER_NAME),
     address: '浙江省杭州市西湖区',
-    phone: '18357162602',
+    mobile: '18357162602',
     email: '892379244@qq.com',
-    desc: '我爱北京天安门，天安门外很冷啊，早上早点去，晚上早点回， 晚上风大，不能一直在户外的，如果一直在户外会让人心碎，毕竟这是北京...'
+    remarke: '我爱北京天安门，天安门外很冷啊，早上早点去，晚上早点回， 晚上风大，不能一直在户外的，如果一直在户外会让人心碎，毕竟这是北京...'
   };
 
   userLogs = [
@@ -33,10 +36,17 @@ export class ProfileComponent implements OnInit {
 
   ];
 
-  constructor() {
+  constructor(public http: HttpsUtils) {
   }
 
   ngOnInit() {
+    this.loadMe();
+  }
+
+  loadMe() {
+    this.http.get(Urls.USERS.ME).then(resp => {
+      this.userDetails = resp['data'];
+    });
   }
 
 }
