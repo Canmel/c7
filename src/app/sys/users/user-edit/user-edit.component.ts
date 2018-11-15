@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Observer} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {Urls} from '../../../../public/url';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-user-edit',
@@ -21,7 +22,7 @@ export class UserEditComponent implements OnInit {
     subTitle: '新建用户'
   };
 
-  formData = {};
+  receiveId = 0;
 
   validateForm: FormGroup;
 
@@ -35,8 +36,18 @@ export class UserEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    console.log(value);
-  };
+    this.https.put(Urls.USERS.EDIT + this.receiveId, value).then(resp => {
+        if (resp['httpStatus'] === 200) {
+          this.router.navigate([Urls.BUSINESS.USERS.LIST]);
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      },
+      resp => {
+        console.log(resp);
+      });
+  }
 
   /**
    * 方法用途: 重置表单
@@ -52,69 +63,59 @@ export class UserEditComponent implements OnInit {
   }
 
   /**
-   * 方法用途: 验证确认密码
-   * 参数: 无
-   **/
-  validateConfirmPassword(): void {
-    setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
-  }
-
-  /**
    * 方法用途: 用户名称异步验证
    * 参数:
    **/
   userNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
-    setTimeout(() => {
-      if (control.value === 'JasonWood') {
-        observer.next({error: true, duplicated: true});
-      } else {
+    this.https.post(Urls.USERS.VALIDUSERNAME, {username: control.value, id: this.receiveId}).then(resp => {
+      console.log(resp);
+      if (resp['httpStatus'] === 200) {
         observer.next(null);
       }
       observer.complete();
-    }, 1000);
+    }, resp => {
+      observer.next({error: true, duplicated: true});
+      observer.complete();
+    });
   });
-
-  /**
-   * 方法用途: 确认密码验证
-   * 参数:
-   **/
-  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return {required: true};
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return {confirm: true, error: true};
-    }
-  }
 
   /**
    * 方法用途: 构造器构造验证对象
    * 参数:
    **/
-  constructor(private fb: FormBuilder, public activatedRoute: ActivatedRoute, public https: HttpsUtils) {
+  constructor(private fb: FormBuilder, public router: Router, public activatedRoute: ActivatedRoute,
+              public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      username: ['', [Validators.required], [this.userNameAsyncValidator]],
+      nickname: ['', [Validators.required, Validators.maxLength(6)]],
       email: ['', [Validators.email]],
-      password: ['', [Validators.required]],
-      confirm: ['', [this.confirmValidator]],
       address: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('^1[34578]\\d{9}$')]],
-      comment: ['', [Validators.required]]
+      mobile: ['', [Validators.required, Validators.pattern('^1[34578]\\d{9}$')]],
+      remarke: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    const _this = this;
     this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.validateForm.value['id'] = queryParams['id'];
+      this.receiveId = queryParams['id'];
+      this.loadEntityById(queryParams['id']);
     });
-    this.loadEntityById();
+
   }
 
-  loadEntityById() {
-    if (this.validateForm.value['id']) {
-      this.https.get(Urls.USERS.EDIT + this.validateForm.value['id']).then(resp => {
-        this.formData = resp['data'];
+  loadEntityById(id) {
+    this.https.get(Urls.USERS.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        username: entity['username'],
+        nickname: entity['nickname'],
+        email: entity['email'],
+        address: entity['address'],
+        mobile: entity['mobile'],
+        remarke: entity['remarke']
       });
-    }
+    });
 
   }
 

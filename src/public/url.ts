@@ -9,7 +9,8 @@ export const Urls = {
     DETAILS: `/api/users/`,
     EDIT: `/api/users/`,
     DELETE: `/api/users/`,
-    UPDATEROLES: `/api/users/roles`
+    UPDATEROLES: `/api/users/roles`,
+    VALIDUSERNAME: `/api/users/name/valid`
   },
   ROLES: {
     PAGEQUERY: `/api/roles`,
@@ -18,7 +19,8 @@ export const Urls = {
     EDIT: `/api/roles/`,
     DELETE: `/api/roles/`,
     UPDATEMENUS: `/api/roles/menus`,
-    ALL: `/api/roles/all`
+    ALL: `/api/roles/all`,
+    VALIDROLENAME: `/api/roles/name/valid`
   },
   REIMBURSEMENT: {
     PAGEQUERY: `/api/reimbursement`,

@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {Observable, Observer} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Observable, Observer} from 'rxjs';
 import {Urls} from '../../../../public/url';
 
 @Component({
-  selector: 'app-user-add',
-  templateUrl: './user-add.component.html',
-  styleUrls: ['./user-add.component.css']
+  selector: 'app-role-add',
+  templateUrl: './role-add.component.html',
+  styleUrls: ['./role-add.component.css']
 })
-export class UserAddComponent implements OnInit {
+export class RoleAddComponent implements OnInit {
 
   /**
    * 属性描述: 面包屑菜单路径
@@ -34,9 +34,9 @@ export class UserAddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.USERS.SAVE, value).then(resp => {
+    this.https.post(Urls.ROLES.SAVE, value).then(resp => {
       if (resp['httpStatus'] === 200) {
-        this.router.navigate([Urls.BUSINESS.USERS.LIST]);
+        this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
         this.notification.error('失败', resp['msg']);
@@ -60,20 +60,11 @@ export class UserAddComponent implements OnInit {
   }
 
   /**
-   * 方法用途: 验证确认密码
-   * 参数: 无
-   **/
-  validateConfirmPassword(): void {
-    setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
-  }
-
-  /**
    * 方法用途: 用户名称异步验证
    * 参数:
    **/
   userNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
-    this.https.post(Urls.USERS.VALIDUSERNAME, {username: control.value}).then(resp => {
-      console.log(resp);
+    this.https.post(Urls.ROLES.VALIDROLENAME, {rolename: control.value}).then(resp => {
       if (resp['httpStatus'] === 200) {
         observer.next(null);
       }
@@ -85,31 +76,13 @@ export class UserAddComponent implements OnInit {
   });
 
   /**
-   * 方法用途: 确认密码验证
-   * 参数:
-   **/
-  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return {required: true};
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return {confirm: true, error: true};
-    }
-  };
-
-  /**
    * 方法用途: 构造器构造验证对象
    * 参数:
    **/
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      username: ['', [Validators.required], [this.userNameAsyncValidator]],
-      email: ['', [Validators.email]],
-      password: ['', [Validators.required]],
-      confirm: ['', [this.confirmValidator]],
-      address: ['', [Validators.required]],
-      mobile: ['', [Validators.required, Validators.pattern('^1[34578]\\d{9}$')]],
-      nickname: ['', [Validators.required, Validators.maxLength(6)]],
-      remarke: ['', [Validators.required]]
+      rolename: ['', [Validators.required], [this.userNameAsyncValidator]],
+      description: ['', [Validators.required]]
     });
   }
 

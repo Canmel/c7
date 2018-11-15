@@ -24,9 +24,9 @@ export class UsersComponent implements OnInit {
    * 参数：
    **/
   pageination: any = {
-    totalNum: 21,
+    totalNum: null,
     pageSize: 10,
-    curPage: 1
+    currentPage: 1
   };
 
   /**
@@ -49,12 +49,15 @@ export class UsersComponent implements OnInit {
     this.loadUsers();
   }
 
+  /**
+   * 方法用途: 加载列表信息
+   * 参数：
+   **/
   loadUsers() {
     this.https.get(Urls.USERS.PAGEQUERY, this.pageination).then(resp => {
       this.users = resp['data']['records'];
       this.pageination.curPage = resp['data']['current'];
       this.pageination.totalNum = resp['data']['total'];
-      console.log(this.pageination);
     });
   }
 
