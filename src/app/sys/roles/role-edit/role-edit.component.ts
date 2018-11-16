@@ -26,6 +26,8 @@ export class RoleEditComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  validTimeOutEvent: any;
+
   /**
    * 方法用途: 提交表单
    * 参数: 事件， 表单值
@@ -67,16 +69,22 @@ export class RoleEditComponent implements OnInit {
    * 参数:
    **/
   userNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
-    this.https.post(Urls.ROLES.VALIDROLENAME, {rolename: control.value, id: this.receiveId}).then(resp => {
-      console.log(resp);
-      if (resp['httpStatus'] === 200) {
-        observer.next(null);
-      }
-      observer.complete();
-    }, resp => {
-      observer.next({error: true, duplicated: true});
-      observer.complete();
-    });
+    const _this = this;
+    if (this.validTimeOutEvent) {
+      clearTimeout(this.validTimeOutEvent);
+    }
+    this.validTimeOutEvent = setTimeout(function () {
+      _this.https.post(Urls.ROLES.VALIDROLENAME, {rolename: control.value, id: _this.receiveId}).then(resp => {
+        console.log(resp);
+        if (resp['httpStatus'] === 200) {
+          observer.next(null);
+        }
+        observer.complete();
+      }, resp => {
+        observer.next({error: true, duplicated: true});
+        observer.complete();
+      });
+    }, 1000);
   });
 
   /**
