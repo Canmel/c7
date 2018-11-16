@@ -26,7 +26,8 @@ export class UsersComponent implements OnInit {
   formData: any = {
     totalNum: null,
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    username: ''
   };
 
   /**
@@ -85,4 +86,6 @@ export class UsersComponent implements OnInit {
     });
     console.log(param);
   }
+
+  
 }

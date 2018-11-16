@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 
 import {UsersRoutingModule} from './users-routing.module';
 import {UsersComponent} from './users.component';
@@ -10,11 +10,11 @@ import {UserEditComponent} from './user-edit/user-edit.component';
 import {UserAddComponent} from './user-add/user-add.component';
 import {ListDirective} from '../../../public/list/list.directive';
 import {ListModule} from '../../../public/list/list.module';
-import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
+
 registerLocaleData(zh);
 
 @NgModule({
@@ -26,6 +26,7 @@ registerLocaleData(zh);
   ],
   imports: [
     CommonModule,
+    FormsModule,
     UsersRoutingModule,
     BailyTableModule,
     CrumbsModule,

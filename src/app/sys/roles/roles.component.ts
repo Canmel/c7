@@ -24,7 +24,8 @@ export class RolesComponent implements OnInit {
   formData: any = {
     totalNum: 21,
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    rolename: ''
   };
 
   /**
