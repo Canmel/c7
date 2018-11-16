@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
    * 属性描述: 分页组建参数
    * 参数：
    **/
-  pageination: any = {
+  formData: any = {
     totalNum: null,
     pageSize: 10,
     currentPage: 1
@@ -54,10 +54,10 @@ export class UsersComponent implements OnInit {
    * 参数：
    **/
   loadUsers() {
-    this.https.get(Urls.USERS.PAGEQUERY, this.pageination).then(resp => {
+    this.https.get(Urls.USERS.PAGEQUERY, this.formData).then(resp => {
       this.users = resp['data']['records'];
-      this.pageination.curPage = resp['data']['current'];
-      this.pageination.totalNum = resp['data']['total'];
+      this.formData.curPage = resp['data']['current'];
+      this.formData.totalNum = resp['data']['total'];
     });
   }
 

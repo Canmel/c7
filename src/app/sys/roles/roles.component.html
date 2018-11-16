@@ -14,7 +14,7 @@
         <div class="input-group">
           <input type="text" class="input-sm form-control" placeholder="Search">
           <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
+                        <button class="btn btn-sm btn-default" type="button">搜索</button>
                       </span>
         </div>
       </div>
@@ -46,7 +46,7 @@
     </div>
     <footer class="panel-footer">
       <div class="row">
-        <nz-pagination [(nzPageIndex)]="pageination.currentPage" [nzTotal]="pageination.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+        <nz-pagination [(nzPageIndex)]="formData.currentPage" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
       </div>
     </footer>
   </section>
