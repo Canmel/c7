@@ -9,7 +9,7 @@ import {RoleEditComponent} from './role-edit/role-edit.component';
 import {RoleAddComponent} from './role-add/role-add.component';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 
@@ -21,6 +21,7 @@ import {HttpsUtils} from '../../utils/HttpsUtils.service';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RolesRoutingModule,
     BailyTableModule,
     CrumbsModule,

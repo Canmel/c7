@@ -21,10 +21,11 @@ export class RolesComponent implements OnInit {
    * 属性描述: 分页组建参数
    * 参数：
    **/
-  pageination: any = {
+  formData: any = {
     totalNum: 21,
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    rolename: ''
   };
 
   /**
@@ -52,11 +53,10 @@ export class RolesComponent implements OnInit {
    * 参数：
    **/
   loadEntities() {
-    console.log(this.pageination);
-    this.https.get(Urls.ROLES.PAGEQUERY, this.pageination).then(resp => {
+    this.https.get(Urls.ROLES.PAGEQUERY, this.formData).then(resp => {
       this.roles = resp['data']['records'];
-      this.pageination.currentPage = resp['data']['current'];
-      this.pageination.totalNum = resp['data']['total'];
+      this.formData.currentPage = resp['data']['current'];
+      this.formData.totalNum = resp['data']['total'];
     });
   }
 

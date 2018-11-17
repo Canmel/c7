@@ -36,7 +36,8 @@ export const Urls = {
     DELETE: `/api/menus/`,
     EDIT: `/api/menus/`,
     TOPMENUS: `/api/menus/tops`,
-    SUBS: `/api/menus/subs`
+    SUBS: `/api/menus/subs`,
+    VALIDMENUNAME: `/api/menus/name/valid`
   },
   WORKFLOW: {
     PAGEQUERY: `/api/workflow`,

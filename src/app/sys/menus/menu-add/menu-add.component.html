@@ -1,0 +1,77 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>菜单名称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="menuname" placeholder="请输入菜单名称...">
+          <nz-form-explain
+            *ngIf="validateForm.get('menuname').dirty && validateForm.get('menuname').errors || validateForm.get('menuname').pending ">
+            <ng-container *ngIf="validateForm.get('menuname').hasError('required')">
+              菜单名不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('menuname').hasError('duplicated')">
+              该菜单名已经被使用！请修改
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('menuname').pending">
+              正在验证中
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>菜单等级</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select formControlName="level" [nzPlaceHolder]="'请选择菜单等级...'" (ngModelChange)="nzListOfSelectedValueChange()" [(ngModel)]="formData.level">
+            <nz-option
+              *ngFor="let option of menuLevels"
+              [nzLabel]="option.name"
+              [nzValue]="option.value">
+            </nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('level').dirty&&validateForm.get('level').hasError('required')">
+            菜单等级不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item *ngIf="formData.level === 2">
+        <nz-form-label [nzSpan]="7" nzRequired>上级菜单</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select formControlName="parentId" [nzPlaceHolder]="'请选择上级菜单...'">
+            <nz-option
+              *ngFor="let option of topMenus"
+              [nzLabel]="option.name"
+              [nzValue]="option.value">
+            </nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('parentId').dirty&&validateForm.get('parentId').hasError('duplicated')">
+            上级菜单不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>菜单信息</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <textarea formControlName="description" nz-input rows="2" placeholder="简短介绍..."></textarea>
+          <nz-form-explain
+            *ngIf="validateForm.get('description').dirty&&validateForm.get('description').hasError('required')">
+            简介不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/menus">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>
