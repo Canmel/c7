@@ -45,7 +45,7 @@ export class MenuAddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.ROLES.SAVE, value).then(resp => {
+    this.https.post(Urls.MENUS.SAVE, value).then(resp => {
       if (resp['httpStatus'] === 200) {
         this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
         this.notification.success('成功', resp['msg']);
@@ -101,7 +101,7 @@ export class MenuAddComponent implements OnInit {
       menuname: ['', [Validators.required], [this.userNameAsyncValidator]],
       description: ['', [Validators.required]],
       level: ['', Validators.required],
-      parentId: ['', [], [this.subMenuValidator]]
+      pid: ['', [], [this.subMenuValidator]]
     });
     this.https.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
       this.menuLevels = data['data'];
@@ -125,8 +125,8 @@ export class MenuAddComponent implements OnInit {
   });
 
   nzListOfSelectedValueChange() {
-      this.validateForm.controls['parentId'].markAsPristine();
-      this.validateForm.controls['parentId'].updateValueAndValidity();
+      this.validateForm.controls['pid'].markAsPristine();
+      this.validateForm.controls['pid'].updateValueAndValidity();
   }
 
   ngOnInit() {
