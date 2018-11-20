@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     particlesInit();  // 登陆页面动画效果
-    this.http.get(Urls.SESSION.QRCODE).then(resp => {
+    this.http.get(Urls.SESSION.QRCODE, {}, "").then(resp => {
       this.contentData['qrcode'] = resp['data']['verify'];
     });
   }

@@ -18,7 +18,7 @@ export class HttpsUtils {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
-    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
+    if (token != "" && sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
       if (!params) {
         params = {};
       }
