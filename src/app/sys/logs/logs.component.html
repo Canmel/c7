@@ -1,1 +1,39 @@
-帮助文档
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+<section class="scrollable">
+  <section class="panel panel-default">
+    <div class="row wrapper">
+      <div class="col-sm-5 m-b-xs flex-left">
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input type="text" class="input-sm form-control" placeholder="请输入日志名称..." [(ngModel)]="formData.menuname" (keyup.enter)="loadEntities()">
+          <span class="input-group-btn">
+                        <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
+                      </span>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+          <th *ngFor="let item of listHeader" [ngStyle]="{'width': item.width}">{{item.title}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of entities; let i = index">
+          <td *ngFor="let head of listHeader">
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <nz-pagination [(nzPageIndex)]="formData.currentPage" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+      </div>
+    </footer>
+  </section>
+</section>

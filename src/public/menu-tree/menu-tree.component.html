@@ -6,7 +6,7 @@
       Discover
     </li>
     <li *ngFor="let item of menuList" class="{{item.active}}">
-      <a routerLinkActive="active" routerLink="{{item.href}}">
+      <a routerLinkActive="active" routerLink="{{item.address}}">
         <i class="{{item.icon}}"></i>
         <span class="font-bold">{{item.menuname}}</span>
         <b class="badge bg-danger dker pull-right">999+</b>
@@ -30,7 +30,7 @@
       </a>
       <ul class="nav dk text-sm">
         <li *ngFor="let m of level2(item.id)">
-          <a class="auto" routerLinkActive="active" routerLink="{{m.href}}">
+          <a class="auto" routerLinkActive="active" routerLink="{{m.address}}">
             <i class="{{m.icon}}"></i>
             <span>{{m.menuname}}</span>
           </a>

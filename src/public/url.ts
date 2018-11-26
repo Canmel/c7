@@ -12,6 +12,9 @@ export const Urls = {
     UPDATEROLES: `/api/users/roles`,
     VALIDUSERNAME: `/api/users/name/valid`
   },
+  LOGS:{
+    PAGEQUERY: `/api/logs`
+  },
   ROLES: {
     PAGEQUERY: `/api/roles`,
     SAVE: `/api/roles`,

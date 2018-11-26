@@ -31,11 +31,11 @@
           <td *ngFor="let head of listHeader">
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="'编辑'" (click)="edit({id: item.id})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
-              <a nz-button nz-popover nzContent="'删除'" (click)="remove(item)"><i
+              <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
             </div>
