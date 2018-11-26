@@ -47,7 +47,7 @@ export class MenuAddComponent implements OnInit {
     }
     this.https.post(Urls.MENUS.SAVE, value).then(resp => {
       if (resp['httpStatus'] === 200) {
-        this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
+        this.router.navigate([Urls.BUSINESS.MENUS.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
         this.notification.error('失败', resp['msg']);

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MainComponent} from '../../../main/main.component';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
-import {Urls} from '../../../public/url';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +25,4 @@ export class HeaderComponent extends MainComponent implements OnInit {
     sessionStorage.removeItem('current_user');
     this.router.navigate(['/login']);
   }
-
-
 }

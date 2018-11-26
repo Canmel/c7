@@ -21,7 +21,7 @@ export class LefterComponent implements OnInit {
   };
 
   constructor(private http: HttpsUtils) {
-    var _this = this;
+    const _this = this;
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);

@@ -47,15 +47,15 @@ export class MenuEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.ROLES.SAVE, value).then(resp => {
+    this.https.put(Urls.MENUS.EDIT + this.receiveId, value).then(resp => {
       if (resp['httpStatus'] === 200) {
-        this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
+        this.router.navigate([Urls.BUSINESS.MENUS.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
         this.notification.error('失败', resp['msg']);
       }
     }, resp => {
-      console.log(resp);
+      this.notification.error('失败', resp['msg']);
     });
   };
 

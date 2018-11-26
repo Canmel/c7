@@ -23,16 +23,16 @@ export class ProfileComponent implements OnInit {
   };
 
   userLogs = [
-    {title: '删除用户', date: '208-10-12 09:21:22', desc: '用户 张三 删除用户 "祝覅是" '},
-    {title: '删除用户', date: '208-10-13 01:21:44', desc: '用户 张三 删除用户 "张筱雨" '},
-    {title: '新建用户', date: '208-10-15 13:21:s2', desc: '用户 张三 新建用户 "材料管理员" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', desc: '用户 张三 新建角色 "admin" '}
+    {title: '删除用户', date: '208-10-12 09:21:22', description: '用户 张三 删除用户 "祝覅是" '},
+    {title: '删除用户', date: '208-10-13 01:21:44', description: '用户 张三 删除用户 "张筱雨" '},
+    {title: '新建用户', date: '208-10-15 13:21:s2', description: '用户 张三 新建用户 "材料管理员" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
+    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '}
 
   ];
 
@@ -45,7 +45,12 @@ export class ProfileComponent implements OnInit {
 
   loadMe() {
     this.http.get(Urls.USERS.ME).then(resp => {
-      this.userDetails = resp['data'];
+      if (resp['data']) {
+        this.userDetails = resp['data'];
+        this.http.get(Urls.LOGS.PAGEQUERY, {operator: this.userDetails['id']}).then(r => {
+          this.userLogs = r['data']['records'];
+        });
+      }
     });
   }
 
