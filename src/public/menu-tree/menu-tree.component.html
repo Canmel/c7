@@ -3,7 +3,7 @@
   </ul>
   <ul class="nav bg clearfix" *ngIf="menuList">
     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-      Discover
+      快捷
     </li>
     <li *ngFor="let item of menuList" class="{{item.active}}">
       <a routerLinkActive="active" routerLink="{{item.address}}">
@@ -16,7 +16,7 @@
   </ul>
   <ul class="nav" data-ride="collapse" *ngIf="menuTree">
     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-      Interface
+      全部
     </li>
     <li *ngFor="let item of level1()">
       <a class="auto">
@@ -24,7 +24,7 @@
                           <i class="fa fa-angle-left text"></i>
                           <i class="fa fa-angle-down text-active"></i>
                         </span>
-        <i class="icon-screen-desktop icon">
+        <i class="{{item.icon}}">
         </i>
         <span>{{item.menuname}}</span>
       </a>

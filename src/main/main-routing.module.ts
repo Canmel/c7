@@ -7,6 +7,7 @@ import {MenusModule} from '../app/sys/menus/menus.module';
 import {HomeModule} from '../app/sys/home/home.module';
 import {ProfileModule} from '../app/sys/profile/profile.module';
 import {LogsModule} from '../app/sys/logs/logs.module';
+import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 
 const routes: Routes = [
   {
@@ -36,6 +37,9 @@ const routes: Routes = [
       }, {
         path: 'logs',
         loadChildren: () => LogsModule
+      }, {
+      path: 'workflow',
+        loadChildren: () => WorkFlowModule
       }
     ]
   }
