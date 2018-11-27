@@ -25,4 +25,10 @@ export class HeaderComponent extends MainComponent implements OnInit {
     sessionStorage.removeItem('current_user');
     this.router.navigate(['/login']);
   }
+
+  test() {
+    this.http.get('/api/workflow/test').then(resp => {
+      console.log(resp);
+    });
+  }
 }
