@@ -435,7 +435,7 @@ a.list-group-item:focus {
 
 .open {
   z-index: 1050;
-  position: relative;
+  /*position: relative;*/
 }
 
 .dropdown-menu {
