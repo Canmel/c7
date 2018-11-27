@@ -41,7 +41,7 @@
       <nz-form-item *ngIf="formData.level === 2">
         <nz-form-label [nzSpan]="7" nzRequired>上级菜单</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <nz-select formControlName="parentId" [nzPlaceHolder]="'请选择上级菜单...'">
+          <nz-select formControlName="pid" [nzPlaceHolder]="'请选择上级菜单...'">
             <nz-option
               *ngFor="let option of topMenus"
               [nzLabel]="option.name"
@@ -49,7 +49,7 @@
             </nz-option>
           </nz-select>
           <nz-form-explain
-            *ngIf="validateForm.get('parentId').dirty&&validateForm.get('parentId').hasError('duplicated')">
+            *ngIf="validateForm.get('pid').dirty&&validateForm.get('pid').hasError('duplicated')">
             上级菜单不能为空！
           </nz-form-explain>
         </nz-form-control>

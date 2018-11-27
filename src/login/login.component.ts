@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
       success: function (resp) {
         sessionStorage.setItem(Properties.STRING.SESSION.ACCESS_TOKEN, resp['access_token']);
         sessionStorage.setItem(Properties.SESSION.CURRENT_USER_NAME, resp['data']['username']);
-        sessionStorage.setItem(Properties.SESSION.CURRENT_NICKNAME, resp['data']['nickname'])
+        sessionStorage.setItem(Properties.SESSION.CURRENT_NICKNAME, resp['data']['nickname']);
+        sessionStorage.setItem(Properties.SESSION.CURRENT_USER_ID, resp['data']['id']);
         $('.login').addClass('active');
         setTimeout(function () {
           $('.sk-rotating-plane').addClass('active');

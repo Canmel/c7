@@ -79,7 +79,7 @@ export class MenusComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         const _this = this;
-        this.https.delete(Urls.ROLES.DELETE, param['id']).then(resp => {
+        this.https.delete(Urls.MENUS.DELETE, param['id']).then(resp => {
           if (resp['httpStatus'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {

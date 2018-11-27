@@ -47,15 +47,15 @@ export class MenuEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.ROLES.SAVE, value).then(resp => {
+    this.https.put(Urls.MENUS.EDIT + this.receiveId, value).then(resp => {
       if (resp['httpStatus'] === 200) {
-        this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
+        this.router.navigate([Urls.BUSINESS.MENUS.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
         this.notification.error('失败', resp['msg']);
       }
     }, resp => {
-      console.log(resp);
+      this.notification.error('失败', resp['msg']);
     });
   };
 
@@ -104,7 +104,7 @@ export class MenuEditComponent implements OnInit {
       menuname: ['', [Validators.required], [this.userNameAsyncValidator]],
       description: ['', [Validators.required]],
       level: ['', Validators.required],
-      parentId: ['', [], [this.subMenuValidator]]
+      pid: ['', [], [this.subMenuValidator]]
     });
     this.https.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
       this.menuLevels = data['data'];
@@ -128,8 +128,8 @@ export class MenuEditComponent implements OnInit {
   });
 
   nzListOfSelectedValueChange() {
-    this.validateForm.controls['parentId'].markAsPristine();
-    this.validateForm.controls['parentId'].updateValueAndValidity();
+    this.validateForm.controls['pid'].markAsPristine();
+    this.validateForm.controls['pid'].updateValueAndValidity();
   }
 
   ngOnInit() {
@@ -147,9 +147,14 @@ export class MenuEditComponent implements OnInit {
         menuname: entity['menuname'],
         description: entity['description'],
         level: entity['level'],
-        parentId: entity['pid']
+        pid: entity['pid']
       });
     });
+
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
   }
 
 }

@@ -24,7 +24,7 @@ export class LogsComponent implements OnInit {
     totalNum: 21,
     pageSize: 10,
     currentPage: 1,
-    menuname: ''
+    title: ''
   };
 
   /**
@@ -35,7 +35,7 @@ export class LogsComponent implements OnInit {
     {title: '方法', field: 'method', type: 'text'},
     {title: '参数', field: 'params', type: 'text'},
     {title: '描述', field: 'description', type: 'text'},
-    {title: '用户', field: 'operator', type: 'text'}
+    {title: '用户', field: 'optor.username', type: 'text'}
   ];
 
   entities: Array<any> = [];
