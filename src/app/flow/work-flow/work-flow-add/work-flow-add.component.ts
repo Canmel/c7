@@ -6,6 +6,10 @@ import {DomSanitizer} from '@angular/platform-browser';
 import propertiesProvider from 'bpmn-js-properties-panel/lib/provider/camunda';
 import {CamundaModdleDescriptor} from '../../../../public/config/camunda_moddle_descriptor';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HttpsUtils} from '../../../utils/HttpsUtils.service';
+import {Urls} from '../../../../public/url';
+import {NzNotificationService} from 'ng-zorro-antd';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-work-flow-add',
@@ -14,33 +18,58 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class WorkFlowAddComponent implements OnInit {
 
+  /**
+   * 属性描述: 面包屑菜单路径
+   * 参数：
+   **/
+  crumbs: any = {
+    title: '流程管理',
+    subTitle: '新建工作流'
+  };
+
+  /** 属性用途: bpmn-js 模型创建对象 **/
   private modeler;
 
+  /** 属性用途: modal框 状态 **/
   public isVisible = false;
 
+  /** 属性用途: 表单验证模型 **/
   public validateForm: FormGroup;
 
+  /** 属性用途: bpmn-js 初始模型 地址 **/
   private readonly newDiagram = 'assets/bpmn/newDiagram.bpmn';
 
+  /** 属性用途: 保存SVG请求url **/
   public saveHref;
 
+  /** 属性用途: 保存SVG名称 **/
   public saveName = '';
 
+  /** 属性用途: 表单数据 **/
   public formData = {};
 
+  /** 属性用途: 新建图形初始xml内容 **/
   public newDiagramText = null;
 
-  constructor(private fb: FormBuilder, private http: Http, private sanitizer: DomSanitizer) {
+  /** 属性用途: 工作流类型 **/
+  public workFlowTypies = [];
+
+  constructor(private router: Router, private notification: NzNotificationService, private fb: FormBuilder, private http: Http, private https: HttpsUtils, private sanitizer: DomSanitizer) {
     this.validateForm = this.fb.group({
-      flowname: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       flowType: [null, [Validators.required]]
     });
+    this.initWorkFlowType();
   }
 
   ngOnInit() {
     this.initBpmn();
   }
 
+  /**
+   * 方法用途: 初始化BPMN-js
+   * 参数:
+   **/
   initBpmn() {
     this.modeler = new BpmnModeler({
       container: '#js-canvas',
@@ -58,10 +87,18 @@ export class WorkFlowAddComponent implements OnInit {
     this.createDiagram();
   }
 
+  /**
+   * 方法用途: 创建BPMN页面 --画图
+   * 参数:
+   **/
   createDiagram() {
     this.importDiagram(this.newDiagram);
   }
 
+  /**
+   * 方法用途: 请求xml并导入 画出BPMN页面
+   * 参数:
+   **/
   importDiagram(xml) {
     this.http.get(xml).subscribe(rep => {
       const xmlContent = rep.text();
@@ -73,6 +110,10 @@ export class WorkFlowAddComponent implements OnInit {
     });
   }
 
+  /**
+   * 方法用途: 保存流程 按钮 回调
+   * 参数:
+   **/
   saveDiagram(e) {
     this.modeler.saveXML({format: true}, (err, xml) => {
       if (err) {
@@ -80,8 +121,6 @@ export class WorkFlowAddComponent implements OnInit {
       } else {
         this.setEncoded(xml, 'bpmn.xml');
         console.log(xml);
-        // this.newDiagram = xml;
-        // this.newDiagram = xml;
         this.newDiagramText = xml;
         this.isVisible = true;
       }
@@ -90,6 +129,10 @@ export class WorkFlowAddComponent implements OnInit {
     e.stopPropagation();
   }
 
+  /**
+   * 方法用途: 保存SVG图片
+   * 参数:
+   **/
   saveSVG(e) {
     this.modeler.saveSVG((err, svg) => {
       if (err) {
@@ -102,6 +145,10 @@ export class WorkFlowAddComponent implements OnInit {
     e.stopPropagation();
   }
 
+  /**
+   * 方法用途: 设置SVG编码集
+   * 参数:
+   **/
   setEncoded(data, name) {
     const encodedData = encodeURIComponent(data);
     if (data) {
@@ -110,21 +157,39 @@ export class WorkFlowAddComponent implements OnInit {
     }
   }
 
+  /**
+   * 方法用途: modal 成功回调
+   * 参数:
+   **/
   handleOk(): void {
     console.log('Button ok clicked!');
 
     for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
     }
 
     if (this.validateForm.valid) {
-      this.isVisible = false;
+      this.validateForm.value['flow'] = this.newDiagramText;
+      console.log(this.validateForm.value);
+      this.https.post(Urls.WORKFLOW.SAVE, this.validateForm.value).then(resp => {
+        this.isVisible = false;
+        this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      }, resp => {
+        console.log(resp);
+      });
     }
-    this.validateForm.value['flow'] = this.newDiagramText;
-    console.log(this.validateForm.value);
   }
 
+  /**
+   * 方法用途: modal 失败回调
+   * 参数:
+   **/
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
@@ -141,5 +206,15 @@ export class WorkFlowAddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+  }
+
+  /**
+   * 方法用途: 初始化工作流类型
+   * 参数:
+   **/
+  initWorkFlowType() {
+    this.https.get(Urls.OPTIONS.WORKFLOW.TYPES).then(resp => {
+      this.workFlowTypies = resp['data'];
+    });
   }
 }

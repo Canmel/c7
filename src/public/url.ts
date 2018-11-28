@@ -43,6 +43,7 @@ export const Urls = {
     VALIDMENUNAME: `/api/menus/name/valid`
   },
   WORKFLOW: {
+    DEPLOYEDPAGEQUERY: `/api/workflow/deployed`,
     PAGEQUERY: `/api/workflow`,
     SAVE: `/api/workflow`,
     DELETE: `/api/workflow/`,
@@ -95,9 +96,9 @@ export const Urls = {
       HOME: `/app/home`
     },
     WORKFLOW: {
-      LIST: `/app/flows`,
-      ADD: `/app/flows/add`,
-      EDIT: `/app/flows/edit`
+      LIST: `/app/workflows`,
+      ADD: `/app/workflows/add`,
+      EDIT: `/app/workflows/edit`
     },
     REIMBURSEMENT: {
       LIST: `/app/reimbursement`,
