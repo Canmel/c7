@@ -25,7 +25,7 @@
     <div class="login-center clearfix">
       <div class="login-center-img" style="width: 15%;">验证码</div>
       <div class="login-center-input" style="width: 77%;">
-        <input type="text" name="qrcode" value="" placeholder="请输入验证码" onfocus="this.placeholder=''"
+        <input type="text" name="qrcode" value="" placeholder="请输入验证码" onfocus="this.placeholder=''" (keyup.enter)="login($event)"
                onblur="this.placeholder='验证码'" style="width: 50%;"/>
         <div style="width: 50%; display: inline-block;text-align: center;"><span>{{contentData.qrcode || '0000'}}</span></div>
       </div>

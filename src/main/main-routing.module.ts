@@ -38,7 +38,7 @@ const routes: Routes = [
         path: 'logs',
         loadChildren: () => LogsModule
       }, {
-      path: 'workflow',
+      path: 'workflows',
         loadChildren: () => WorkFlowModule
       }
     ]

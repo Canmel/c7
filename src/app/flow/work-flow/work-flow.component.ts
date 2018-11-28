@@ -16,6 +16,8 @@ export class WorkFlowComponent implements OnInit {
     subTitle: '工作流'
   };
 
+  urls = Urls;
+
   formData: any = {
     totalNum: 21,
     pageSize: 10,
@@ -23,7 +25,9 @@ export class WorkFlowComponent implements OnInit {
     menuname: ''
   };
 
-  listHeader = [
+  listHeader = [];
+
+  deployedListHeader = [
     {title: '流程ID', field: 'id', type: 'text'},
     {title: '流程名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '发布时间', field: 'deploymentTime', type: 'timeStamp'},
@@ -34,8 +38,11 @@ export class WorkFlowComponent implements OnInit {
 
   deployedEntities: Array<any> = [];
 
+  public workFlowTypies = [];
+
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
+    this.initWorkFlowType();
   }
 
   ngOnInit() {
@@ -62,7 +69,7 @@ export class WorkFlowComponent implements OnInit {
    * 参数：
    **/
   loadDeployedEntities() {
-    this.https.get(Urls.WORKFLOW.PAGEQUERY, this.formData).then(resp => {
+    this.https.get(Urls.WORKFLOW.DEPLOYEDPAGEQUERY, this.formData).then(resp => {
       this.deployedEntities = resp['data']['records'];
       this.formData.currentPage = resp['data']['current'];
       this.formData.totalNum = resp['data']['total'];
@@ -77,4 +84,17 @@ export class WorkFlowComponent implements OnInit {
       + (d.getHours()) + ':' + (d.getMinutes()) + ':' + (d.getSeconds());
   }
 
+  initWorkFlowType() {
+    this.https.get(Urls.OPTIONS.WORKFLOW.TYPES).then(resp => {
+      this.workFlowTypies = resp['data'];
+      this.listHeader = [{title: '流程ID', field: 'id', type: 'text'},
+        {title: '流程名称', field: 'name', type: 'text', class: 'text-success'},
+        {title: '类型', field: 'flowType', type: 'enum', options: this.workFlowTypies},
+        {title: '操作', field: 'option', type: 'opt', width: '20%'}];
+    });
+  }
+
+  edit(param){
+    this.router.navigate([Urls.BUSINESS.WORKFLOW.EDIT], {queryParams: param});
+  }
 }

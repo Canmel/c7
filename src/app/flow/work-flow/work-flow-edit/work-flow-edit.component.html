@@ -1,3 +1,57 @@
-<p>
-  work-flow-edit works!
-</p>
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+<div class="content with-diagram" id="js-drop-zone">
+  <div class="canvas" id="js-canvas"></div>
+  <div class="properties-panel-parent" id="js-properties-panel"
+       style="position: absolute;top: 5%;right: 1%;width: 20%;height: auto;"></div>
+</div>
+
+
+<ul class="buttons">
+  <li>
+    download
+  </li>
+  <li>
+    <button nz-button [nzType]="'primary'" (click)="saveDiagram($event)"><span>保存流程</span></button>
+  </li>
+  <li>
+    <a id="js-download-svg" href title="download as SVG image" class="active" (click)="saveSVG($event)">
+      保存SVG图片
+    </a>
+  </li>
+  <li *ngIf="saveHref">
+    <a id="download" [href]="saveHref" [download]="saveName" class="active ">下载</a>
+  </li>
+</ul>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="保存工作流" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+    <section class="panel panel-default">
+      <div class="panel-body">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>流程名称</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input formControlName="name" placeholder="请输入流程名称...">
+            <nz-form-explain
+              *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+              <ng-container *ngIf="validateForm.get('name').hasError('required')">
+                流程名称不能为空！
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>流程类型</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <nz-select nzAllowClear nzPlaceHolder="Choose" formControlName="flowType">
+              <nz-option *ngFor="let i of workFlowTypies" nzValue="{{i.value}}" nzLabel="{{i.name}}"></nz-option>
+            </nz-select>
+            <nz-form-explain
+              *ngIf="validateForm.get('flowType').dirty&&validateForm.get('flowType').hasError('required')">
+              流程类型不能为空！
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </section>
+  </form>
+</nz-modal>

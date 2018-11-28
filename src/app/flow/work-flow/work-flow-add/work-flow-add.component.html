@@ -1,3 +1,4 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
 <div class="content with-diagram" id="js-drop-zone">
   <div class="canvas" id="js-canvas"></div>
   <div class="properties-panel-parent" id="js-properties-panel"
@@ -29,10 +30,10 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="7" nzRequired>流程名称</nz-form-label>
           <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <input nz-input formControlName="flowname" placeholder="请输入流程名称...">
+            <input nz-input formControlName="name" placeholder="请输入流程名称...">
             <nz-form-explain
-              *ngIf="validateForm.get('flowname').dirty && validateForm.get('flowname').errors">
-              <ng-container *ngIf="validateForm.get('flowname').hasError('required')">
+              *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+              <ng-container *ngIf="validateForm.get('name').hasError('required')">
                 流程名称不能为空！
               </ng-container>
             </nz-form-explain>
@@ -42,9 +43,7 @@
           <nz-form-label [nzSpan]="7" nzRequired>流程类型</nz-form-label>
           <nz-form-control [nzSpan]="12" nzHasFeedback>
             <nz-select nzAllowClear nzPlaceHolder="Choose" formControlName="flowType">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+              <nz-option *ngFor="let i of workFlowTypies" nzValue="{{i.value}}" nzLabel="{{i.name}}"></nz-option>
             </nz-select>
             <nz-form-explain
               *ngIf="validateForm.get('flowType').dirty&&validateForm.get('flowType').hasError('required')">
