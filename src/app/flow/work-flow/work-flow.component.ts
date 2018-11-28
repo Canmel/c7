@@ -73,7 +73,6 @@ export class WorkFlowComponent implements OnInit {
 
   formateDate(timeStamp) {
     const d = new Date(timeStamp);
-    console.log(d);
     return (d.getFullYear()) + '-' + (d.getMonth() + 1) + '-' + (d.getDate()) + ' '
       + (d.getHours()) + ':' + (d.getMinutes()) + ':' + (d.getSeconds());
   }

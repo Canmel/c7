@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
+import propertiesPanelModule from 'bpmn-js-properties-panel';
 import { Http } from '@angular/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import propertiesProvider from 'bpmn-js-properties-panel/lib/provider/camunda';
+import {CamundaModdleDescriptor} from '../../../../public/config/camunda_moddle_descriptor';
 
 @Component({
   selector: 'app-work-flow-add',
@@ -12,7 +15,7 @@ export class WorkFlowAddComponent implements OnInit {
 
   private modeler;
 
-  private readonly newDiagram = 'assets/demo1.bpmn';
+  private readonly newDiagram = 'assets/bpmn/newDiagram.bpmn';
 
   public saveHref;
 
@@ -27,7 +30,18 @@ export class WorkFlowAddComponent implements OnInit {
 
   initBpmn() {
     this.modeler = new BpmnModeler({
-      container: '#js-canvas'
+      container: '#js-canvas',
+      propertiesPanel: {
+        parent: '#js-properties-panel'
+      },
+      additionalModules: [
+        propertiesProvider,
+        propertiesPanelModule
+      ],
+      moddleExtensions: {
+        camunda: CamundaModdleDescriptor
+      }
+
     });
     this.createDiagram();
   }
