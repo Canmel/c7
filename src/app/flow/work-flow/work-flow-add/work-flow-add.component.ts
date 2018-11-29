@@ -217,4 +217,8 @@ export class WorkFlowAddComponent implements OnInit {
       this.workFlowTypies = resp['data'];
     });
   }
+
+  backToList(event) {
+    this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
+  }
 }

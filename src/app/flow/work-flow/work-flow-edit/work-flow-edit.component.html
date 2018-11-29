@@ -8,7 +8,7 @@
 
 <ul class="buttons">
   <li>
-    download
+    <button nz-button [nzType]="'primary'" (click)="backToList(event)"><span>返回</span></button>
   </li>
   <li>
     <button nz-button [nzType]="'primary'" (click)="saveDiagram($event)"><span>保存流程</span></button>
@@ -42,8 +42,12 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="7" nzRequired>流程类型</nz-form-label>
           <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <nz-select nzAllowClear nzPlaceHolder="Choose" formControlName="flowType">
-              <nz-option *ngFor="let i of workFlowTypies" nzValue="{{i.value}}" nzLabel="{{i.name}}"></nz-option>
+            <nz-select formControlName="flowType" [nzPlaceHolder]="'请选择流程类型...'" (ngModelChange)="nzListOfSelectedValueChange()">
+              <nz-option
+                *ngFor="let option of workFlowTypies"
+                [nzLabel]="option.name"
+                [nzValue]="option.value">
+              </nz-option>
             </nz-select>
             <nz-form-explain
               *ngIf="validateForm.get('flowType').dirty&&validateForm.get('flowType').hasError('required')">

@@ -8,7 +8,7 @@
 
 <ul class="buttons">
   <li>
-    download
+    <button nz-button [nzType]="'primary'" (click)="backToList(event)"><span>返回</span></button>
   </li>
   <li>
     <button nz-button [nzType]="'primary'" (click)="saveDiagram($event)"><span>保存流程</span></button>
