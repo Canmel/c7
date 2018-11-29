@@ -45,10 +45,7 @@ export class WorkFlowEditComponent implements OnInit {
 
   /** 属性用途: 保存SVG名称 **/
   public saveName = '';
-
-  /** 属性用途: 表单数据 **/
-  public formData = {};
-
+  
   /** 属性用途: 新建图形初始xml内容 **/
   public newDiagramText = null;
 
@@ -62,7 +59,7 @@ export class WorkFlowEditComponent implements OnInit {
               private fb: FormBuilder, private http: Http, private https: HttpsUtils, private sanitizer: DomSanitizer) {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
-      flowType: [null, [Validators.required]],
+      flowType: ['', [Validators.required]],
       flow: [''],
     });
     this.initWorkFlowType();
@@ -72,7 +69,6 @@ export class WorkFlowEditComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       this.loadEntityById(queryParams['id']);
-
     });
   }
 
@@ -186,7 +182,6 @@ export class WorkFlowEditComponent implements OnInit {
 
     if (this.validateForm.valid) {
       this.validateForm.value['flow'] = this.newDiagramText;
-      console.log(this.validateForm.value);
       this.https.put(Urls.WORKFLOW.EDIT + this.receiveId, this.validateForm.value).then(resp => {
         this.isVisible = false;
         this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
@@ -206,7 +201,6 @@ export class WorkFlowEditComponent implements OnInit {
    * 参数:
    **/
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
@@ -239,5 +233,14 @@ export class WorkFlowEditComponent implements OnInit {
    **/
   backToList(event) {
     this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
+  }
+
+  /**
+   * 方法用途: 下拉栏选择回调
+   * 参数：
+   **/
+  nzListOfSelectedValueChange() {
+    this.validateForm.controls['flowType'].markAsPristine();
+    this.validateForm.controls['flowType'].updateValueAndValidity();
   }
 }
