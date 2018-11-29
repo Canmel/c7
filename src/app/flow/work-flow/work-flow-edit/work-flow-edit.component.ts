@@ -30,7 +30,8 @@ export class WorkFlowEditComponent implements OnInit {
   /** 属性用途: bpmn-js 模型创建对象 **/
   private modeler;
 
-  /** 属性用途: modal框 状态 **//** 属性用途: modal框 状态 **/
+  /** 属性用途: modal框 状态 **/
+  /** 属性用途: modal框 状态 **/
   public isVisible = false;
 
   /** 属性用途: 表单验证模型 **/
@@ -57,7 +58,8 @@ export class WorkFlowEditComponent implements OnInit {
   /** 属性用途: 编辑对象接受参数ID使用 **/
   public receiveId = 0;
 
-  constructor(public activatedRoute: ActivatedRoute, private router: Router, private notification: NzNotificationService, private fb: FormBuilder, private http: Http, private https: HttpsUtils, private sanitizer: DomSanitizer) {
+  constructor(public activatedRoute: ActivatedRoute, private router: Router, private notification: NzNotificationService,
+              private fb: FormBuilder, private http: Http, private https: HttpsUtils, private sanitizer: DomSanitizer) {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
       flowType: [null, [Validators.required]],
@@ -75,9 +77,9 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: 根据ID获取实体类型详情
-  * 参数: 
-  **/
+   * 方法用途: 根据ID获取实体类型详情
+   * 参数:
+   **/
   loadEntityById(id) {
     this.https.get(Urls.WORKFLOW.EDIT + id).then(resp => {
       const entity = resp['data'];
@@ -123,11 +125,11 @@ export class WorkFlowEditComponent implements OnInit {
       }
     });
   }
-  
+
   /**
-  * 方法用途: 保存流程点击回调 -- 打开modal窗口，保存数据
-  * 参数: 
-  **/
+   * 方法用途: 保存流程点击回调 -- 打开modal窗口，保存数据
+   * 参数:
+   **/
   saveDiagram(e) {
     this.modeler.saveXML({format: true}, (err, xml) => {
       if (err) {
@@ -143,9 +145,9 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: 保存SVG
-  * 参数: 
-  **/
+   * 方法用途: 保存SVG
+   * 参数:
+   **/
   saveSVG(e) {
     this.modeler.saveSVG((err, svg) => {
       if (err) {
@@ -159,9 +161,9 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: SVG下载设置编码集
-  * 参数: 
-  **/
+   * 方法用途: SVG下载设置编码集
+   * 参数:
+   **/
   setEncoded(data, name) {
     const encodedData = encodeURIComponent(data);
     if (data) {
@@ -171,9 +173,9 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: modal 确定回调
-  * 参数: 
-  **/
+   * 方法用途: modal 确定回调
+   * 参数:
+   **/
   handleOk(): void {
     console.log('Button ok clicked!');
 
@@ -185,7 +187,7 @@ export class WorkFlowEditComponent implements OnInit {
     if (this.validateForm.valid) {
       this.validateForm.value['flow'] = this.newDiagramText;
       console.log(this.validateForm.value);
-      this.https.post(Urls.WORKFLOW.SAVE, this.validateForm.value).then(resp => {
+      this.https.put(Urls.WORKFLOW.EDIT + this.receiveId, this.validateForm.value).then(resp => {
         this.isVisible = false;
         this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
         if (resp['httpStatus'] === 200) {
@@ -200,9 +202,9 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: modal 取消事件回调
-  * 参数: 
-  **/
+   * 方法用途: modal 取消事件回调
+   * 参数:
+   **/
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
@@ -222,12 +224,20 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   /**
-  * 方法用途: 获取工作流类型枚举类型
-  * 参数: 
-  **/
+   * 方法用途: 获取工作流类型枚举类型
+   * 参数:
+   **/
   initWorkFlowType() {
     this.https.get(Urls.OPTIONS.WORKFLOW.TYPES).then(resp => {
       this.workFlowTypies = resp['data'];
     });
+  }
+
+  /**
+   * 方法用途: 返回列表页面
+   * 参数：
+   **/
+  backToList(event) {
+    this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
   }
 }
