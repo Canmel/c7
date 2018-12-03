@@ -1,6 +1,10 @@
 export const Urls = {
   GetBillTypes: `/return/thumbnail`,
   PROJECTS: `/project`,
+  DEPLOYEDWORKFLOW: {
+    PAGEQUERY: `/api/deployedWorkflows`,
+    DELETE: `/api/deployedWorkflows/`
+  },
   USERS: {
     ME: `/api/users/current`,
     PAGEQUERY: `/api/users`,
@@ -43,7 +47,6 @@ export const Urls = {
     VALIDMENUNAME: `/api/menus/name/valid`
   },
   WORKFLOW: {
-    DEPLOYEDPAGEQUERY: `/api/workflow/deployed`,
     PAGEQUERY: `/api/workflow`,
     SAVE: `/api/workflow`,
     DELETE: `/api/workflow/`,

@@ -84,7 +84,6 @@ export class UsersComponent implements OnInit {
       nzCancelText: '否',
       nzOnCancel: () => console.log('Cancel')
     });
-    console.log(param);
   }
 
   
