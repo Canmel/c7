@@ -8,6 +8,7 @@ import {HomeModule} from '../app/sys/home/home.module';
 import {ProfileModule} from '../app/sys/profile/profile.module';
 import {LogsModule} from '../app/sys/logs/logs.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
+import {ReimbursementModule} from '../app/business/reimbursement/reimbursement.module';
 
 const routes: Routes = [
   {
@@ -38,8 +39,11 @@ const routes: Routes = [
         path: 'logs',
         loadChildren: () => LogsModule
       }, {
-      path: 'workflows',
+        path: 'workflows',
         loadChildren: () => WorkFlowModule
+      }, {
+        path: 'reimbursement',
+        loadChildren: () => ReimbursementModule
       }
     ]
   }
