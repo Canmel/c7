@@ -34,6 +34,7 @@ export const Urls = {
     SAVE: `/api/reimbursement`,
     DETAILS: `/api/reimbursement/`,
     DELETE: `/api/reimbursement/`,
+    APPLY: `/api/reimbursement/apply/`,
     EDIT: `/api/reimbursement/`
   },
   MENUS: {

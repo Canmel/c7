@@ -138,7 +138,7 @@ export class WorkFlowComponent implements OnInit {
    **/
   publish(item) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + item.name + '?',
+      nzTitle: '你确定要发布 ' + item.name + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
@@ -183,10 +183,10 @@ export class WorkFlowComponent implements OnInit {
   }
 
   /**
-  * 方法用途: 删除流程部署 ok 回调
-  * 参数: 
-  **/
-  removeDeployedOkHandler(id){
+   * 方法用途: 删除流程部署 ok 回调
+   * 参数:
+   **/
+  removeDeployedOkHandler(id) {
     this.https.delete(Urls.DEPLOYEDWORKFLOW.DELETE, id).then(
       resp => {
         console.log(resp);
@@ -199,6 +199,6 @@ export class WorkFlowComponent implements OnInit {
       }, resp => {
         console.log(resp);
       }
-    )
+    );
   }
 }
