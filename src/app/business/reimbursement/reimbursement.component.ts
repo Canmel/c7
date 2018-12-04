@@ -32,6 +32,7 @@ export class ReimbursementComponent implements OnInit {
   listHeader = [
     {title: '名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '描述', field: 'description', type: 'number'},
+    {title: '状态', field: 'status', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -104,22 +105,20 @@ export class ReimbursementComponent implements OnInit {
       nzTitle: '你确定要发起申请 ' + name + '?',
       nzOkText: '是',
       nzOkType: 'danger',
-      nzOnOk: () => {
-        const _this = this;
-        this.https.get(Urls.REIMBURSEMENT.APPLY + param['id']).then(resp => {
-          if (resp['httpStatus'] === 200) {
-            _this.notification.success('成功', resp['msg']);
-          } else {
-            _this.notification.error('失败', resp['msg']);
-          }
-          _this.loadEntities();
-        }, resp => {
-          console.log(resp);
-        });
-      },
+      nzOnOk: () =>  this.applyOkHandler(param),
       nzCancelText: '否',
       nzOnCancel: () => console.log('Cancel')
     });
+  }
+
+  /**
+  * 方法用途: 申请OK回调
+  * 参数:
+  **/
+  applyOkHandler(param){
+    this.https.get(Urls.REIMBURSEMENT.APPLY + param['id']).then(resp => {
+      console.log(resp);
+    })
   }
 
 }

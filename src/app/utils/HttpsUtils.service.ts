@@ -35,6 +35,10 @@ export class HttpsUtils {
         if (errorResp.status === 200) {
           return Promise.resolve({text: errorResp.error.text, httpStatus: 200});
         }
+        if (errorResp['status'] === 401) {
+          sessionStorage.clear();
+          this.router.navigate([Urls.SESSION.LOGIN]);
+        }
         return Promise.reject(errorResp.error);
       })
       .then(onfulfilled => {
@@ -63,7 +67,8 @@ export class HttpsUtils {
       headers: headers
     }).toPromise().catch(error => {
       if (error['status'] === 401) {
-        this.router.navigate(['login']);
+        sessionStorage.clear();
+        this.router.navigate([Urls.SESSION.LOGIN]);
       }
       return Promise.reject(error['error']);
     }).then(onfulfilled => {
