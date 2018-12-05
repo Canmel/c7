@@ -29,7 +29,8 @@
         <tbody>
         <tr *ngFor="let item of reimbursements; let i = index">
           <td *ngFor="let head of listHeader">
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+            <span *ngIf="head.type == 'text'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+            <span *ngIf="head.type == 'union'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
             <div class="" *ngIf="head.field === 'option'">
               <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
@@ -39,7 +40,7 @@
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="提交申请" (click)="apply({id: item.id}, item.name)"><i
+              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)"><i
                 class="fa fa-sitemap text-info-dk text-active"></i><i
                 class="fa fa-sitemap text-info-dk text"></i></a>
             </div>
@@ -55,3 +56,15 @@
     </footer>
   </section>
 </section>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="提交申请" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;" >
+    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.name}}" ></nz-option>
+  </nz-select>
+</nz-modal>
+
+
+<nz-modal [(nzVisible)]="isVisibleFlow" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()" (nzOnOk)="handleFlowOk()">
+  <img src="{{taskImageUrl}}">
+</nz-modal>
