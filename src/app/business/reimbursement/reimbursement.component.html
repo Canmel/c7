@@ -32,17 +32,21 @@
             <span *ngIf="head.type == 'text'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})" *ngIf="! item['task']"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
-              <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.name)"><i
+              <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.name)" *ngIf="! item['task']"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)"><i
+              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)" *ngIf="! item['task']"><i
                 class="fa fa-sitemap text-info-dk text-active"></i><i
                 class="fa fa-sitemap text-info-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="审核" (click)="showExamModal(item)" *ngIf="item['task']"><i
+                class="fa fa-gavel text-info-dk text-active"></i><i
+                class="fa fa-gavel text-info-dk text"></i></a>
             </div>
           </td>
         </tr>
@@ -65,6 +69,29 @@
 </nz-modal>
 
 
-<nz-modal [(nzVisible)]="isVisibleFlow" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()" (nzOnOk)="handleFlowOk()">
-  <img src="{{taskImageUrl}}">
+<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()" (nzOnOk)="handleFlowOk()">
+  <div style="overflow: auto;">
+    <img src="{{taskImageUrl}}">
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleExam" [nzOkText]="'通过'" [nzCancelText]="'驳回'" nzTitle="流程信息" (nzOnCancel)="handleExamCancel()" (nzOnOk)="handleExamOk()">
+  <div style="overflow: auto;">
+    <img src="{{taskImageUrl}}">
+    <div class="show-details">
+      <label>申请名称: </label>
+      <span>{{selectItem.name}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请金额: </label>
+      <span>{{selectItem.amount}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请备注: </label>
+      <span>{{selectItem.description}}</span>
+    </div>
+    <textarea rows="4" nz-input [(ngModel)]="commitForm.commontValue" placeholder="请输入审核备注..."></textarea>
+  </div>
 </nz-modal>
