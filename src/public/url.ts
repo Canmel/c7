@@ -16,7 +16,7 @@ export const Urls = {
     UPDATEROLES: `/api/users/roles`,
     VALIDUSERNAME: `/api/users/name/valid`
   },
-  LOGS:{
+  LOGS: {
     PAGEQUERY: `/api/logs`
   },
   ROLES: {
@@ -54,6 +54,8 @@ export const Urls = {
     EDIT: `/api/workflow/`,
     DETAILS: `/api/workflow/`,
     PUBLISH: `/api/workflow/publish/`,
+    DEPLOYED: `/api/workflow/deployed`,
+    TASKIMAGE: `/api/workflow/task/image/`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     }

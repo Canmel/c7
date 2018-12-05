@@ -35,9 +35,9 @@ export class ReimbursementEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.put(Urls.ROLES.EDIT + this.receiveId, value).then(resp => {
+    this.https.put(Urls.REIMBURSEMENT.EDIT + this.receiveId, value).then(resp => {
         if (resp['httpStatus'] === 200) {
-          this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
+          this.router.navigate([Urls.BUSINESS.REIMBURSEMENT.LIST]);
           this.notification.success('成功', resp['msg']);
         } else {
           this.notification.error('失败', resp['msg']);

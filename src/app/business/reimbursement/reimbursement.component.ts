@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-reimbursement',
@@ -27,17 +28,37 @@ export class ReimbursementComponent implements OnInit {
   };
 
   /**
+   * 属性描述: 模态框显示状态
+   * 参数：
+   **/
+  isVisible = false;
+
+  /**
+   * 属性描述: 流程显示状态
+   * 参数：
+   **/
+  isVisibleFlow = false;
+
+  selectedValue;
+
+  /**
    * 表头
    */
   listHeader = [
     {title: '名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '描述', field: 'description', type: 'number'},
+    {title: '描述', field: 'description', type: 'text'},
     {title: '状态', field: 'status', type: 'text'},
+    {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
   reimbursements: Array<any> = [];
 
+  deployedProcess: Array<any> = [];
+
+  selectedItemId;
+
+  taskImageUrl = '';
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
@@ -45,6 +66,13 @@ export class ReimbursementComponent implements OnInit {
 
   ngOnInit() {
     this.loadEntities();
+    this.loadDepolyedProcess();
+  }
+
+  loadDepolyedProcess() {
+    this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3}).then(resp => {
+      this.deployedProcess = resp['data'];
+    });
   }
 
   /**
@@ -97,28 +125,116 @@ export class ReimbursementComponent implements OnInit {
   }
 
   /**
-  * 方法用途: 发起申请
-  * 参数：
-  **/
-  apply(param, name){
+   * 方法用途: 发起申请
+   * 参数：
+   **/
+  apply(param, name) {
     this.modalService.confirm({
       nzTitle: '你确定要发起申请 ' + name + '?',
       nzOkText: '是',
       nzOkType: 'danger',
-      nzOnOk: () =>  this.applyOkHandler(param),
+      nzOnOk: () => this.applyOkHandler(param),
       nzCancelText: '否',
       nzOnCancel: () => console.log('Cancel')
     });
   }
 
   /**
-  * 方法用途: 申请OK回调
-  * 参数:
-  **/
-  applyOkHandler(param){
+   * 方法用途: 申请OK回调
+   * 参数:
+   **/
+  applyOkHandler(param) {
     this.https.get(Urls.REIMBURSEMENT.APPLY + param['id']).then(resp => {
       console.log(resp);
-    })
+    });
   }
 
+  /**
+   * 方法用途: 模态框取消回调
+   * 参数：
+   **/
+  handleCancel() {
+    console.log(12);
+    this.isVisible = false;
+  }
+
+  /**
+   * 方法用途: 模态框取消回调
+   * 参数：
+   **/
+  handleFlowCancel() {
+    console.log(12);
+    this.isVisibleFlow = false;
+  }
+
+  /**
+   * 方法用途: 模态框确认回调
+   * 参数：
+   **/
+  handleOk() {
+    console.log(1);
+    this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
+      resp => {
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      },
+      resp => {
+      }
+    );
+
+
+    this.isVisible = false;
+  }
+
+
+  /**
+   * 方法用途: 模态框确认回调
+   * 参数：
+   **/
+  handleFlowOk() {
+    console.log(1);
+    this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
+      resp => {
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      },
+      resp => {
+      }
+    );
+
+
+    this.isVisibleFlow = false;
+  }
+
+  /**
+   * 方法用途: 显示模态框
+   * 参数：
+   **/
+  showModal(id): void {
+    this.selectedItemId = id;
+    this.isVisible = true;
+  }
+
+  unionHead(item, head) {
+    const h = head.field.split('.');
+    if (item[h[0]]) {
+      return item[h[0]][h[1]];
+    }
+    return '';
+  }
+
+
+  clickFnFlow(item): void {
+    if (item['task']) {
+      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
+        sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
+    this.isVisibleFlow = true;
+  }
 }
