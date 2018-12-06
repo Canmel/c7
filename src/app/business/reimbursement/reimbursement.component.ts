@@ -39,7 +39,21 @@ export class ReimbursementComponent implements OnInit {
    **/
   isVisibleFlow = false;
 
+  isVisibleExam = false;
+
   selectedValue;
+
+  selectItem = {
+    name: '',
+    amount: 0,
+    description: ''
+  };
+
+  commitForm = {
+    commontValue: ''
+  };
+
+
 
   /**
    * 表头
@@ -48,7 +62,7 @@ export class ReimbursementComponent implements OnInit {
     {title: '名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '描述', field: 'description', type: 'text'},
     {title: '状态', field: 'status', type: 'text'},
-    {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow},
+    {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow, class: 'text-success'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -121,7 +135,6 @@ export class ReimbursementComponent implements OnInit {
       nzCancelText: '否',
       nzOnCancel: () => console.log('Cancel')
     });
-    console.log(param);
   }
 
   /**
@@ -145,7 +158,7 @@ export class ReimbursementComponent implements OnInit {
    **/
   applyOkHandler(param) {
     this.https.get(Urls.REIMBURSEMENT.APPLY + param['id']).then(resp => {
-      console.log(resp);
+      this.notification.success('成功', resp['msg']);
     });
   }
 
@@ -162,8 +175,17 @@ export class ReimbursementComponent implements OnInit {
    * 方法用途: 模态框取消回调
    * 参数：
    **/
+  handleExamCancel() {
+    // TODO 审核 驳回 通过回调 只是做出打印，未实际操作
+    console.log("审核 驳回");
+    this.isVisibleExam = false;
+  }
+
+  /**
+   * 方法用途: 模态框取消回调
+   * 参数：
+   **/
   handleFlowCancel() {
-    console.log(12);
     this.isVisibleFlow = false;
   }
 
@@ -213,6 +235,14 @@ export class ReimbursementComponent implements OnInit {
   }
 
   /**
+   * 方法用途: 模态框确认回调
+   * 参数：
+   **/
+  handleExamOk() {
+    console.log("审核通过");
+  }
+
+  /**
    * 方法用途: 显示模态框
    * 参数：
    **/
@@ -220,6 +250,22 @@ export class ReimbursementComponent implements OnInit {
     this.selectedItemId = id;
     this.isVisible = true;
   }
+
+  /**
+   * 方法用途: 显示审核模态框
+   * 参数：
+   **/
+  showExamModal(item): void {
+    this.selectItem = item;
+    this.selectedItemId = item['id'];
+    this.isVisibleExam = true;
+    if (item['task']) {
+      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
+        sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
+
+  }
+
 
   unionHead(item, head) {
     const h = head.field.split('.');
