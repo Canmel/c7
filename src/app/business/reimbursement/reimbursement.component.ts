@@ -43,6 +43,8 @@ export class ReimbursementComponent implements OnInit {
 
   selectedValue;
 
+  selectTask;
+
   selectItem = {
     name: '',
     amount: 0,
@@ -52,7 +54,6 @@ export class ReimbursementComponent implements OnInit {
   commitForm = {
     commontValue: ''
   };
-
 
 
   /**
@@ -177,7 +178,7 @@ export class ReimbursementComponent implements OnInit {
    **/
   handleExamCancel() {
     // TODO 审核 驳回 通过回调 只是做出打印，未实际操作
-    console.log("审核 驳回");
+    console.log('审核 驳回');
     this.isVisibleExam = false;
   }
 
@@ -206,9 +207,8 @@ export class ReimbursementComponent implements OnInit {
       resp => {
       }
     );
-
-
     this.isVisible = false;
+    this.loadEntities();
   }
 
 
@@ -217,7 +217,6 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   handleFlowOk() {
-    console.log(1);
     this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
       resp => {
         if (resp['httpStatus'] === 200) {
@@ -235,11 +234,25 @@ export class ReimbursementComponent implements OnInit {
   }
 
   /**
-   * 方法用途: 模态框确认回调
+   * 方法用途: 审核模态框确认回调
    * 参数：
    **/
   handleExamOk() {
-    console.log("审核通过");
+    if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
+      return this.notification.error('失败', '未找到任务信息');
+    }
+    this.https.get(Urls.WORKFLOW.TASKPASS + this.selectItem['task']['id'], {comment: this.commitForm.commontValue}).then(
+      resp => {
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+          this.isVisibleExam = false;
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+        this.loadEntities();
+      },
+      resp => {}
+    );
   }
 
   /**
