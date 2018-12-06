@@ -75,9 +75,11 @@
   </div>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="isVisibleExam" [nzOkText]="'通过'" [nzCancelText]="'驳回'" nzTitle="流程信息" (nzOnCancel)="handleExamCancel()" (nzOnOk)="handleExamOk()">
-  <div style="overflow: auto;">
-    <img src="{{taskImageUrl}}">
+<nz-modal [(nzVisible)]="isVisibleExam" [nzOkText]="'通过'" [nzCancelText]="'驳回'" nzTitle="审核" (nzOnCancel)="handleExamCancel()" (nzOnOk)="handleExamOk()">
+  <div>
+    <div style="overflow: auto;">
+      <img src="{{taskImageUrl}}">
+    </div>
     <div class="show-details">
       <label>申请名称: </label>
       <span>{{selectItem.name}}</span>

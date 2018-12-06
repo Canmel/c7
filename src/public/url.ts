@@ -56,6 +56,8 @@ export const Urls = {
     PUBLISH: `/api/workflow/publish/`,
     DEPLOYED: `/api/workflow/deployed`,
     TASKIMAGE: `/api/workflow/task/image/`,
+    TASKPASS: `/api/workflow/task/pass/`,
+    TASKBACK: `/api/workflow/task/back/`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     }
