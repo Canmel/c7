@@ -246,10 +246,10 @@ export class ReimbursementComponent implements OnInit {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
           this.isVisibleExam = false;
-          this.loadEntities();
         } else {
           this.notification.error('失败', resp['msg']);
         }
+        this.loadEntities();
       },
       resp => {}
     );
