@@ -35,6 +35,8 @@ export const Urls = {
     DETAILS: `/api/reimbursement/`,
     DELETE: `/api/reimbursement/`,
     APPLY: `/api/reimbursement/apply/`,
+    TASKPASS: `/api/reimbursement/task/pass/`,
+    TASKBACK: `/api/reimbursement/task/back/`,
     EDIT: `/api/reimbursement/`
   },
   MENUS: {
@@ -71,6 +73,9 @@ export const Urls = {
     WORKFLOW: {
       TYPES: `/api/options/workflow/typies`,
       TYPE: `/api/options/workflow`
+    },
+    REIMBURSEMENT: {
+      STATUS: `/api/options/reimbursement/status`
     }
   },
   SESSION: {

@@ -34,6 +34,11 @@
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type === 'enum'">
+                  <p *ngFor="let obj of head.options">
+                    {{obj.value == item[head.field] ? obj.name: ''}}
+                  </p>
+                </span>
             <div class="" *ngIf="head.field === 'option'">
               <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})" *ngIf="! item['task']"><i
                 class="fa fa-edit text-success text-active"></i><i
