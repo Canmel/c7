@@ -4,6 +4,7 @@ import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
 import {Properties} from '../../../public/properties';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-reimbursement',
@@ -75,17 +76,17 @@ export class ReimbursementComponent implements OnInit {
 
   taskImageUrl = '';
 
+  comments = [
+    {taskname: '', message: ''}
+  ];
+
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
   }
 
   ngOnInit() {
     this.loadEntities();
-    this.loadDepolyedProcess();
-  }
-
-  loadComments(){
-
+    // this.loadDepolyedProcess();
   }
 
   loadDepolyedProcess() {
@@ -164,6 +165,7 @@ export class ReimbursementComponent implements OnInit {
   applyOkHandler(param) {
     this.https.get(Urls.REIMBURSEMENT.APPLY + param['id']).then(resp => {
       this.notification.success('成功', resp['msg']);
+      this.loadEntities();
     });
   }
 
@@ -181,8 +183,22 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   handleExamCancel() {
-    // TODO 审核 驳回 通过回调 只是做出打印，未实际操作
-    console.log('审核 驳回');
+    if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
+      return this.notification.error('失败', '未找到任务信息');
+    }
+    this.https.get(Urls.WORKFLOW.TASKBACK + this.selectItem['task']['id'], {comment: this.commitForm.commontValue}).then(
+      resp => {
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+          this.isVisibleExam = false;
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+        this.loadEntities();
+      },
+      resp => {
+      }
+    );
     this.isVisibleExam = false;
   }
 
@@ -192,6 +208,27 @@ export class ReimbursementComponent implements OnInit {
    **/
   handleFlowCancel() {
     this.isVisibleFlow = false;
+  }
+
+  /**
+   * 方法用途: 审核关闭回调
+   * 参数：
+   **/
+  handleExamClose() {
+    this.isVisibleExam = false;
+  }
+
+  permissions(reimbursement) {
+    return true;
+  }
+
+  /**
+   * 方法用途: 是否显示审核按钮
+   * 参数：
+   **/
+  isShowExamButton(reimbursement) {
+    const flag = reimbursement['task'] && !reimbursement['task']['isEnd'] && this.permissions(reimbursement);
+    return flag;
   }
 
   /**
@@ -232,8 +269,6 @@ export class ReimbursementComponent implements OnInit {
       resp => {
       }
     );
-
-
     this.isVisibleFlow = false;
   }
 
@@ -255,7 +290,8 @@ export class ReimbursementComponent implements OnInit {
         }
         this.loadEntities();
       },
-      resp => {}
+      resp => {
+      }
     );
   }
 
@@ -266,6 +302,7 @@ export class ReimbursementComponent implements OnInit {
   showModal(id): void {
     this.selectedItemId = id;
     this.isVisible = true;
+
   }
 
   /**
@@ -281,12 +318,19 @@ export class ReimbursementComponent implements OnInit {
         sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     }
 
+    const _this = this;
     if (item['task']) {
       this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
-        console.log(resp);
+        this.selectTask = resp['data'];
+        _this.comments = [];
+        $.each(this.selectTask, function (index, task) {
+          $.each(task['comment'], function (i, c) {
+            _this.comments.push({taskname: task['name'], message: c['message']});
+          });
+        });
       }, resp => {
 
-      })
+      });
     }
 
   }
@@ -302,10 +346,25 @@ export class ReimbursementComponent implements OnInit {
 
 
   clickFnFlow(item): void {
+    this.selectItem = item;
     if (item['task']) {
       this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
         sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     }
     this.isVisibleFlow = true;
+    const _this = this;
+    if (item['task']) {
+      this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
+        this.selectTask = resp['data'];
+        _this.comments = [];
+        $.each(this.selectTask, function (index, task) {
+          $.each(task['comment'], function (i, c) {
+            _this.comments.push({taskname: task['name'], message: c['message']});
+          });
+        });
+      }, resp => {
+
+      });
+    }
   }
 }
