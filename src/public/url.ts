@@ -58,6 +58,7 @@ export const Urls = {
     TASKIMAGE: `/api/workflow/task/image/`,
     TASKPASS: `/api/workflow/task/pass/`,
     TASKBACK: `/api/workflow/task/back/`,
+    COMMENTS: `/api/workflow/comments`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     }

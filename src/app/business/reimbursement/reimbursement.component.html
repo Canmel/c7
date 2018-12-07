@@ -12,7 +12,8 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入报销名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
+          <input type="text" class="input-sm form-control" placeholder="请输入报销名称..." [(ngModel)]="formData.name"
+                 (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
                       </span>
@@ -29,14 +30,17 @@
         <tbody>
         <tr *ngFor="let item of reimbursements; let i = index">
           <td *ngFor="let head of listHeader">
-            <span *ngIf="head.type == 'text'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
-            <span *ngIf="head.type == 'union'" ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
+            <span *ngIf="head.type == 'text'" ngClass="{{head.class}}"
+                  [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+            <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
+                  [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
             <div class="" *ngIf="head.field === 'option'">
               <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})" *ngIf="! item['task']"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
-              <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.name)" *ngIf="! item['task']"><i
+              <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.name)"
+                 *ngIf="! item['task']"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
 
@@ -55,7 +59,8 @@
     </div>
     <footer class="panel-footer">
       <div class="row">
-        <nz-pagination [(nzPageIndex)]="formData.currentPage" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+        <nz-pagination [(nzPageIndex)]="formData.currentPage" [nzTotal]="formData.totalNum"
+                       (nzPageIndexChange)="loadEntities()"></nz-pagination>
       </div>
     </footer>
   </section>
@@ -63,19 +68,21 @@
 
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="提交申请" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;" >
-    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.name}}" ></nz-option>
+  <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;">
+    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.name}}"></nz-option>
   </nz-select>
 </nz-modal>
 
 
-<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()" (nzOnOk)="handleFlowOk()">
+<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()"
+          (nzOnOk)="handleFlowOk()">
   <div style="overflow: auto;">
     <img src="{{taskImageUrl}}">
   </div>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="isVisibleExam" [nzOkText]="'通过'" [nzCancelText]="'驳回'" nzTitle="审核" (nzOnCancel)="handleExamCancel()" (nzOnOk)="handleExamOk()">
+<nz-modal [(nzVisible)]="isVisibleExam" [nzOkText]="'通过'" [nzCancelText]="'驳回'" nzTitle="审核"
+          (nzOnCancel)="handleExamCancel()" (nzOnOk)="handleExamOk()">
   <div>
     <div style="overflow: auto;">
       <img src="{{taskImageUrl}}">
@@ -94,6 +101,24 @@
       <label>申请备注: </label>
       <span>{{selectItem.description}}</span>
     </div>
-    <textarea rows="4" nz-input [(ngModel)]="commitForm.commontValue" placeholder="请输入审核备注..."></textarea>
+    <textarea rows="2" nz-input [(ngModel)]="commitForm.commontValue" placeholder="请输入审核备注..."></textarea>
+
+    <div>
+      <label>审核过程</label>
+      <table>
+        <thead>
+        <tr>
+          <th width="40%;">步骤</th>
+          <th width="40%;">审批意见</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>步骤1</td>
+          <td>爱仕达多</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </nz-modal>

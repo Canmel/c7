@@ -84,6 +84,10 @@ export class ReimbursementComponent implements OnInit {
     this.loadDepolyedProcess();
   }
 
+  loadComments(){
+
+  }
+
   loadDepolyedProcess() {
     this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3}).then(resp => {
       this.deployedProcess = resp['data'];
@@ -275,6 +279,14 @@ export class ReimbursementComponent implements OnInit {
     if (item['task']) {
       this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
         sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
+
+    if (item['task']) {
+      this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
+        console.log(resp);
+      }, resp => {
+
+      })
     }
 
   }

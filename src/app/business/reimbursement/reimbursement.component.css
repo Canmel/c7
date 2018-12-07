@@ -1,3 +1,9 @@
 .show-details > span {
   margin-left: 20px;
 }
+
+.show-details {
+  display: inline-block;
+  float: left;
+  margin-right: 5%;
+}
