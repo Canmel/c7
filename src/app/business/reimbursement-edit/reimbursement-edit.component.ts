@@ -17,8 +17,8 @@ export class ReimbursementEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '用户管理',
-    subTitle: '新建用户'
+    title: '财务管理',
+    subTitle: '新建报销'
   };
 
   receiveId = 0;

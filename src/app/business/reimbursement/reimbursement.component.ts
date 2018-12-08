@@ -14,7 +14,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class ReimbursementComponent implements OnInit {
   crumbs = {
     title: '财务管理',
-    subTitle: '财务管理'
+    subTitle: '报销管理'
   };
 
   /**
@@ -44,6 +44,8 @@ export class ReimbursementComponent implements OnInit {
 
   selectedValue;
 
+  deployedProcess = [];
+
   selectTask;
 
   selectItem = {
@@ -60,17 +62,11 @@ export class ReimbursementComponent implements OnInit {
   /**
    * 表头
    */
-  listHeader = [
-    {title: '名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '描述', field: 'description', type: 'text'},
-    {title: '状态', field: 'status', type: 'text'},
-    {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow, class: 'text-success'},
-    {title: '操作', field: 'option', type: 'opt', width: '20%'}
-  ];
+  listHeader = [];
 
   reimbursements: Array<any> = [];
 
-  deployedProcess: Array<any> = [];
+  // reimburesementStatus: Array<any> = [];
 
   selectedItemId;
 
@@ -82,11 +78,24 @@ export class ReimbursementComponent implements OnInit {
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
+    this.loadEntityStatus();
   }
 
   ngOnInit() {
     this.loadEntities();
-    // this.loadDepolyedProcess();
+    this.loadDepolyedProcess();
+  }
+
+  loadEntityStatus() {
+    this.https.get(Urls.OPTIONS.REIMBURSEMENT.STATUS).then(resp => {
+      this.listHeader = [
+        {title: '名称', field: 'name', type: 'text', class: 'text-success'},
+        {title: '描述', field: 'description', type: 'text'},
+        {title: '状态', field: 'status', type: 'enum', options: resp['data']},
+        {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow, class: 'text-success', cursor: 'pointer'},
+        {title: '操作', field: 'option', type: 'opt', width: '20%'}
+      ];
+    });
   }
 
   loadDepolyedProcess() {
@@ -186,7 +195,10 @@ export class ReimbursementComponent implements OnInit {
     if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
       return this.notification.error('失败', '未找到任务信息');
     }
-    this.https.get(Urls.WORKFLOW.TASKBACK + this.selectItem['task']['id'], {comment: this.commitForm.commontValue}).then(
+    this.https.get(Urls.REIMBURSEMENT.TASKBACK + this.selectItem['task']['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
@@ -236,11 +248,11 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   handleOk() {
-    console.log(1);
     this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
+          this.loadEntities();
         } else {
           this.notification.error('失败', resp['msg']);
         }
@@ -249,7 +261,6 @@ export class ReimbursementComponent implements OnInit {
       }
     );
     this.isVisible = false;
-    this.loadEntities();
   }
 
 
@@ -280,7 +291,10 @@ export class ReimbursementComponent implements OnInit {
     if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
       return this.notification.error('失败', '未找到任务信息');
     }
-    this.https.get(Urls.WORKFLOW.TASKPASS + this.selectItem['task']['id'], {comment: this.commitForm.commontValue}).then(
+    this.https.get(Urls.REIMBURSEMENT.TASKPASS + this.selectItem['task']['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
@@ -352,6 +366,7 @@ export class ReimbursementComponent implements OnInit {
         sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     }
     this.isVisibleFlow = true;
+    this.loadEntities();
     const _this = this;
     if (item['task']) {
       this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {

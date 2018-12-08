@@ -10,10 +10,10 @@
           <nz-form-explain
             *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
             <ng-container *ngIf="validateForm.get('name').hasError('required')">
-              用户名不能为空！
+              报销名称不能为空！
             </ng-container>
             <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
-              该用户名已经被使用！请修改
+              报销名称已经被使用！请修改
             </ng-container>
             <ng-container *ngIf="validateForm.get('name').pending">
               正在验证中
@@ -23,18 +23,18 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>报销数额</nz-form-label>
-        <nz-form-control [nzSpan]="12">
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
           <nz-input-number formControlName="amount" nz-input rows="2" [nzPlaceHolder]="'报销数额...'" [nzMin]="1"
                            style="width: 100%;"></nz-input-number>
           <nz-form-explain
             *ngIf="validateForm.get('amount').dirty&&validateForm.get('amount').hasError('required')">
-            简介不能为空！
+            数额不能为空！
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>描述介绍</nz-form-label>
-        <nz-form-control [nzSpan]="12">
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
           <textarea formControlName="description" nz-input rows="2" placeholder="描述介绍..."></textarea>
           <nz-form-explain
             *ngIf="validateForm.get('description').dirty&&validateForm.get('description').hasError('required')">

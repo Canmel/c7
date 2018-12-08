@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Urls} from '../../../public/url';
-import {Observable, Observer} from 'rxjs';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
@@ -18,8 +17,8 @@ export class ReimbursementAddComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '用户管理',
-    subTitle: '新建用户'
+    title: '财务管理',
+    subTitle: '新建报销'
   };
 
   validateForm: FormGroup;
