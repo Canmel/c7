@@ -14,7 +14,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class ReimbursementComponent implements OnInit {
   crumbs = {
     title: '财务管理',
-    subTitle: '财务管理'
+    subTitle: '报销管理'
   };
 
   /**
@@ -78,7 +78,7 @@ export class ReimbursementComponent implements OnInit {
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
-    this.loadEntityStatus()
+    this.loadEntityStatus();
   }
 
   ngOnInit() {
@@ -94,7 +94,7 @@ export class ReimbursementComponent implements OnInit {
         {title: '状态', field: 'status', type: 'enum', options: resp['data']},
         {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow, class: 'text-success', cursor: 'pointer'},
         {title: '操作', field: 'option', type: 'opt', width: '20%'}
-      ]
+      ];
     });
   }
 
@@ -195,7 +195,10 @@ export class ReimbursementComponent implements OnInit {
     if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
       return this.notification.error('失败', '未找到任务信息');
     }
-    this.https.get(Urls.REIMBURSEMENT.TASKBACK + this.selectItem['task']['id'], {comment: this.commitForm.commontValue, businessId: this.selectItem['id']}).then(
+    this.https.get(Urls.REIMBURSEMENT.TASKBACK + this.selectItem['task']['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
@@ -245,11 +248,11 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   handleOk() {
-    console.log(1);
     this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);
+          this.loadEntities();
         } else {
           this.notification.error('失败', resp['msg']);
         }
@@ -258,7 +261,6 @@ export class ReimbursementComponent implements OnInit {
       }
     );
     this.isVisible = false;
-    this.loadEntities();
   }
 
 
@@ -289,7 +291,10 @@ export class ReimbursementComponent implements OnInit {
     if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
       return this.notification.error('失败', '未找到任务信息');
     }
-    this.https.get(Urls.WORKFLOW.TASKPASS + this.selectItem['task']['id'], {comment: this.commitForm.commontValue}).then(
+    this.https.get(Urls.REIMBURSEMENT.TASKPASS + this.selectItem['task']['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
       resp => {
         if (resp['httpStatus'] === 200) {
           this.notification.success('成功', resp['msg']);

@@ -31,10 +31,10 @@
         <tr *ngFor="let item of reimbursements; let i = index">
           <td *ngFor="let head of listHeader">
             <span *ngIf="head.type == 'text'" ngClass="{{head.class}}"
-                  [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
+                  [ngStyle]="{'width': item.width}">{{item[head.field]}}</span>
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type === 'enum'">
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width}" *ngIf="head.type === 'enum'">
                   <p *ngFor="let obj of head.options">
                     {{obj.value == item[head.field] ? obj.name: ''}}
                   </p>
