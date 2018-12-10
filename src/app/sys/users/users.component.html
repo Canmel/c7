@@ -38,6 +38,10 @@
               <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.username)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="编辑角色" (click)="editRoles({id: item.id}, item.username)"><i
+                class="fa fa-key text-info-dk text-active"></i><i
+                class="fa fa-key text-info-dk text"></i></a>
             </div>
           </td>
         </tr>
@@ -51,3 +55,14 @@
     </footer>
   </section>
 </section>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="用户角色" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+  <nz-tree-select [nzNodes]="nodes" style="width: 100%;"
+                  nzCheckable
+                  nzPlaceHolder="Please select"
+                  [nzMultiple]="true"
+                  [(ngModel)]="userRole.roleIds"
+                  >
+  </nz-tree-select>
+</nz-modal>

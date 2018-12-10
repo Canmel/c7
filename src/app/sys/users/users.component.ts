@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
 
@@ -18,6 +18,8 @@ export class UsersComponent implements OnInit {
     title: '用户管理',
     subTitle: '用户列表'
   };
+
+  isVisible = false;
 
   /**
    * 属性描述: 分页组建参数
@@ -42,8 +44,15 @@ export class UsersComponent implements OnInit {
 
   users: Array<any> = [];
 
+  nodes = [];
 
-  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils) {
+  userRole = {
+    id: 0,
+    roleIds: []
+  };
+
+
+  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils, private notification: NzNotificationService) {
   }
 
   ngOnInit() {
@@ -86,5 +95,49 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  
+  editRoles(param, username) {
+    this.loadRoleEntities();
+    this.loadEntityById(param['id']);
+    this.userRole.id = param['id'];
+    this.isVisible = true;
+  }
+
+  loadRoleEntities() {
+    const _this = this;
+    this.https.get(Urls.ROLES.ALL).then(resp => {
+      _this.nodes = [];
+      $.each(resp['data'], function (index, item) {
+        _this.nodes.push({
+          title: item['rolename'],
+          key: item['id']
+        });
+      });
+    });
+
+  }
+
+  handleOk() {
+    this.isVisible = false;
+    this.https.post(Urls.USERS.ROLES, this.userRole).then(
+      resp => {
+        if (resp['httpStatus'] === 200) {
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      }
+    );
+  }
+
+  handleCancel() {
+    this.isVisible = false;
+  }
+
+  loadEntityById(id) {
+    this.https.get(Urls.USERS.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.userRole.roleIds = entity['roleIds'];
+      console.log(this.userRole);
+    });
+  }
 }
