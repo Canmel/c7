@@ -1,0 +1,11 @@
+web:
+  image: 172.17.32.114:1180/canmel/ioauth2:latest
+  ports:
+  - '22'
+  - '4200:4200'
+  privileged: true
+  restart: always
+  tty: true
+
+#  volumes:
+#  - /apps/fbms/rails_log:/rails_app/log

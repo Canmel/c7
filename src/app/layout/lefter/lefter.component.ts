@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {NzNotificationService} from 'ng-zorro-antd';
+import {Properties} from '../../../public/properties';
+import {_i18n} from '../../../public/i18n/i18n';
 
 @Component({
   selector: 'app-lefter',
@@ -20,25 +23,41 @@ export class LefterComponent implements OnInit {
     menuTree: []
   };
 
-  constructor(private http: HttpsUtils) {
+  constructor(private http: HttpsUtils, public notificationService: NzNotificationService) {
     const _this = this;
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);
       });
     }, resp => {
-      alert('获取一级目录失败');
+      console.log(resp);
+      this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['msg']);
     });
     this.http.get(Urls.MENUS.SUBS).then(resp => {
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);
       });
     }, resp => {
-      alert('获取二级目录失败');
+      if ( resp.indexOf(Properties.STRING.SYSTEM.PROXY_ERROR) > -1) {
+        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, _i18n.NET.PROXY_ERROR);
+      } else {
+        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['msg']);
+      }
     });
   }
 
   ngOnInit() {
+    this.todos();
   }
 
+  todos () {
+    this.http.get(Urls.WORKFLOW.TODO).then(
+      resp => {
+        console.log(resp);
+      },
+      resp => {
+        console.log(resp);
+      }
+    );
+  }
 }

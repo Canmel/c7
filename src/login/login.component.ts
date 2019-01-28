@@ -4,6 +4,8 @@ import {Properties} from '../public/properties';
 import {Router} from '@angular/router';
 import {Urls} from '../public/url';
 import {HttpsUtils} from '../app/utils/HttpsUtils.service';
+import {NzNotificationService} from 'ng-zorro-antd';
+import {_i18n} from '../public/i18n/i18n';
 
 declare var particlesInit: any;   // 已经导入了   不需要再次声明， 这里是为了防止 编译报错
 
@@ -14,15 +16,22 @@ declare var particlesInit: any;   // 已经导入了   不需要再次声明， 
 })
 export class LoginComponent implements OnInit {
 
+  _i18n = _i18n;
+
+
   contentData = {rqcode: '0000', username: '', password: ''};
 
-  constructor(public router: Router, public http: HttpsUtils) {
+  constructor(public router: Router, public http: HttpsUtils, public notificationService: NzNotificationService) {
   }
 
   ngOnInit() {
     particlesInit();  // 登陆页面动画效果
-    this.http.get(Urls.SESSION.QRCODE, {}, "").then(resp => {
+    this.http.get(Urls.SESSION.QRCODE, {}, '').then(resp => {
       this.contentData['qrcode'] = resp['data']['verify'];
+    }, resp => {
+      if ( resp.indexOf(Properties.STRING.SYSTEM.PROXY_ERROR) > -1) {
+        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, _i18n.NET.PROXY_ERROR);
+      }
     });
   }
 
@@ -82,7 +91,7 @@ export class LoginComponent implements OnInit {
    * 参数：无
    **/
   loginFaildCallBack() {
-    alert('登录失败');
+    this.notificationService.warning(_i18n.TOOLS.NOTIFICATION.ERROR, _i18n.SESSION.LOGIN.FAILD);
   }
 
 }

@@ -63,7 +63,8 @@ export const Urls = {
     COMMENTS: `/api/workflow/comments`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
-    }
+    },
+    TODO: `/api/workflow/todo`
   },
   OPTIONS: {
     MENUS: {

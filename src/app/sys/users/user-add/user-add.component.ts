@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {Urls} from '../../../../public/url';
+import {_i18n} from '../../../../public/i18n/i18n';
 
 @Component({
   selector: 'app-user-add',
@@ -12,6 +13,9 @@ import {Urls} from '../../../../public/url';
   styleUrls: ['./user-add.component.css']
 })
 export class UserAddComponent implements OnInit {
+  /** 属性用途: i18n **/
+  _i18n = _i18n;
+
 
   /**
    * 属性描述: 面包屑菜单路径

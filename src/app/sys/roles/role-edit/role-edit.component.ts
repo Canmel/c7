@@ -5,6 +5,7 @@ import {Observable, Observer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {Urls} from '../../../../public/url';
+import {_i18n} from '../../../../public/i18n/i18n';
 
 @Component({
   selector: 'app-role-edit',
@@ -13,6 +14,7 @@ import {Urls} from '../../../../public/url';
 })
 export class RoleEditComponent implements OnInit {
 
+  _i18n = _i18n;
   /**
    * 属性描述: 面包屑菜单路径
    * 参数：

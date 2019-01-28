@@ -5,7 +5,7 @@
       <div class="col-sm-5 m-b-xs flex-left">
         <div class="btn-group" data-toggle="buttons">
           <a routerLinkActive="active" routerLink="/app/roles/add" class="btn btn-sm btn-success">
-            <i class="fa fa-plus fa-fw m-r-xs"></i>新建
+            <i class="fa fa-plus fa-fw m-r-xs"></i>{{_i18n.BUTTON.NEW || '新建'}}
           </a>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div class="input-group">
           <input type="text" class="input-sm form-control" placeholder="请输入角色名称..." [(ngModel)]="formData.rolename" (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
+                        <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">{{_i18n.BUTTON.SEARCH || '搜索'}}</button>
                       </span>
         </div>
       </div>
@@ -31,11 +31,11 @@
           <td *ngFor="let head of listHeader">
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
+              <a nz-button nz-popover nzContent="{{_i18n.BUTTON.EDIT || '编辑'}}" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
-              <a nz-button nz-popover nzContent="删除" (click)="remove({id: item.id}, item.rolename)"><i
+              <a nz-button nz-popover nzContent="{{_i18n.BUTTON.DELETE || '删除'}}" (click)="remove({id: item.id}, item.rolename)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
             </div>

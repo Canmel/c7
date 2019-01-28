@@ -25,6 +25,9 @@ export const Properties = {
         FINANCE: `FINANCE`,
         REIMBURSEMENT: `REIMBURSEMENT`
       }
+    },
+    SYSTEM: {
+      PROXY_ERROR: `Error occured while trying to proxy`
     }
   },
   ENUM: {

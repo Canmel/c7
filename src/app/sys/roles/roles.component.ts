@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {_i18n} from '../../../public/i18n/i18n';
 
 @Component({
   selector: 'app-roles',
@@ -10,6 +11,9 @@ import {Urls} from '../../../public/url';
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
+
+  _i18n = _i18n;
+
   crumbs = {
     title: '角色管理',
     subTitle: '角色列表'

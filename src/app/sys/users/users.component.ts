@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {_i18n} from '../../../public/i18n/i18n';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +11,10 @@ import {Urls} from '../../../public/url';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+
+  /** 属性用途: i18n **/
+  _i18n = _i18n;
+
   /**
    * 属性描述: 面包屑菜单路径
    * 参数：
@@ -85,6 +90,4 @@ export class UsersComponent implements OnInit {
       nzOnCancel: () => console.log('Cancel')
     });
   }
-
-  
 }
