@@ -11,7 +11,7 @@ import {UserAddComponent} from './user-add/user-add.component';
 import {ListDirective} from '../../../public/list/list.directive';
 import {ListModule} from '../../../public/list/list.module';
 import zh from '@angular/common/locales/zh';
-import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NZ_I18N, NzTreeSelectModule, zh_CN} from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 
@@ -33,7 +33,8 @@ registerLocaleData(zh);
     PaginationModule,
     ListModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    NzTreeSelectModule
   ],
   bootstrap: [ UsersComponent ],
   providers   : [ { provide: NZ_I18N, useValue: zh_CN }, HttpsUtils ]

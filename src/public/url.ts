@@ -12,6 +12,7 @@ export const Urls = {
     SAVE: `/api/users`,
     DETAILS: `/api/users/`,
     EDIT: `/api/users/`,
+    ROLES: `/api/users/roles`,
     DELETE: `/api/users/`,
     UPDATEROLES: `/api/users/roles`,
     VALIDUSERNAME: `/api/users/name/valid`
