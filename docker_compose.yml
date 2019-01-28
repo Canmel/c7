@@ -1,5 +1,5 @@
 web:
-  image: 172.17.32.114:1180/canmel/ioauth2:latest
+  image: 172.17.32.114:1180/library/angular-cli:1.7.4
   ports:
   - '22'
   - '4200:4200'
