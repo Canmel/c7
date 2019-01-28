@@ -27,7 +27,7 @@ if [ "$RUN_CONTEXT" = "dev" ]; then
     #echo `bundle exec rails s -b 0.0.0.0 -p 3000`
     #passenger start --environment development --port 3000
     echo pwd
-    npm run start
+    nohup npm run start &
     /bin/bash
 #预发布环境
 elif [ "$RUN_CONTEXT" = "pre_prod" ]; then
