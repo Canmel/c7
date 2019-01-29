@@ -12,20 +12,7 @@ source ~/.bashrc
 
 #开发环境
 if [ "$RUN_CONTEXT" = "dev" ]; then
-    pwd
-    #设置ssh密码
-#    echo "root:123456" | chpasswd
-    #启动sshd
-#    /usr/sbin/sshd
-    #启动cron
-#    /etc/init.d/cron start
-    #执行rake任务
-#    bundle exec rake db:migrate
-    #开启rails定时任务
-    #whenever -w
-    #启动rails
-    #echo `bundle exec rails s -b 0.0.0.0 -p 3000`
-    #passenger start --environment development --port 3000
+    npm install
     echo pwd
     nohup npm run start &
     /bin/bash
