@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: "weihanli/homepage"
+    image: "172.17.32.114:1180/canmel/c7:latest"
     container_name: "weihanli-homepage-demo"
     ports:
     - "5200:80"
