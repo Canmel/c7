@@ -49,7 +49,7 @@
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)" *ngIf="! item['task']"><i
+              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)" *ngIf="isShowApplyButton(item)"><i
                 class="fa fa-sitemap text-info-dk text-active"></i><i
                 class="fa fa-sitemap text-info-dk text"></i></a>
 

@@ -234,13 +234,17 @@ export class ReimbursementComponent implements OnInit {
     return true;
   }
 
-  /**
+  /**Assignable
    * 方法用途: 是否显示审核按钮
    * 参数：
    **/
   isShowExamButton(reimbursement) {
     const flag = reimbursement['task'] && !reimbursement['task']['isEnd'] && this.permissions(reimbursement);
     return flag;
+  }
+
+  isShowApplyButton(item) {
+    return ! item['task'];
   }
 
   /**
