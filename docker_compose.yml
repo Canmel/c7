@@ -6,6 +6,5 @@ web:
   privileged: true
   restart: always
   tty: true
-
-#  volumes:
-#  - /apps/fbms/rails_log:/rails_app/log
+  volumes:
+  - /tmp/node_modules:/usr/src/node_modules
