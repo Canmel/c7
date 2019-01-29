@@ -1,10 +1,7 @@
-web:
-  image: 172.17.32.114:1180/canmel/c7:latest
-  ports:
-  - '22'
-  - '4200:4200'
-  privileged: true
-  restart: always
-  tty: true
-  volumes:
-  - /tmp/node_modules:/usr/src/node_modules
+version: "3"
+services:
+  web:
+    image: "weihanli/homepage"
+    container_name: "weihanli-homepage-demo"
+    ports:
+    - "5200:80"
