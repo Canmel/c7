@@ -12,7 +12,6 @@ source ~/.bashrc
 
 #开发环境
 if [ "$RUN_CONTEXT" = "dev" ]; then
-    npm install
     echo pwd
     nohup npm run start &
     /bin/bash
