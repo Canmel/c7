@@ -1,5 +1,5 @@
 web:
-  image: 172.17.32.114:1180/canmel/c7:7.2.1
+  image: 172.17.32.114:1180/canmel/c7:latest
   ports:
   - '22'
   - '4200:4200'
