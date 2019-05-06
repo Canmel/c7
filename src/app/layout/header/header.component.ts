@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MainComponent} from '../../../main/main.component';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +14,8 @@ export class HeaderComponent extends MainComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(router: Router, http: HttpsUtils) {
-    super(router, http);
+  constructor(router: Router, http: HttpsUtils, cookies: CookieService) {
+    super(router, http, cookies);
   }
 
   /**

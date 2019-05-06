@@ -6,29 +6,29 @@ export const Urls = {
     DELETE: `/api/deployedWorkflows/`
   },
   USERS: {
-    ME: `/api/users/current`,
-    PAGEQUERY: `/api/users`,
-    CURRENT: `/api/users/current`,
-    SAVE: `/api/users`,
-    DETAILS: `/api/users/`,
-    EDIT: `/api/users/`,
-    ROLES: `/api/users/roles`,
-    DELETE: `/api/users/`,
-    UPDATEROLES: `/api/users/roles`,
-    VALIDUSERNAME: `/api/users/name/valid`
+    ME: `/system/user`,
+    PAGEQUERY: `/system/users`,
+    CURRENT: `/system/users/current`,
+    SAVE: `/system/users`,
+    DETAILS: `/system/users/`,
+    EDIT: `/system/users/`,
+    ROLES: `/system/users/roles`,
+    DELETE: `/system/users/`,
+    UPDATEROLES: `/system/users/roles`,
+    VALIDUSERNAME: `/system/users/name/valid`
   },
   LOGS: {
-    PAGEQUERY: `/api/logs`
+    PAGEQUERY: `/system/logs`
   },
   ROLES: {
-    PAGEQUERY: `/api/roles`,
-    SAVE: `/api/roles`,
-    DETAILS: `/api/roles/`,
-    EDIT: `/api/roles/`,
-    DELETE: `/api/roles/`,
-    UPDATEMENUS: `/api/roles/menus`,
-    ALL: `/api/roles/all`,
-    VALIDROLENAME: `/api/roles/name/valid`
+    PAGEQUERY: `/system/roles`,
+    SAVE: `/system/roles`,
+    DETAILS: `/system/roles/`,
+    EDIT: `/system/roles/`,
+    DELETE: `/system/roles/`,
+    UPDATEMENUS: `/system/roles/menus`,
+    ALL: `/system/roles/all`,
+    VALIDROLENAME: `/system/roles/name/valid`
   },
   REIMBURSEMENT: {
     PAGEQUERY: `/api/reimbursement`,
@@ -41,14 +41,14 @@ export const Urls = {
     EDIT: `/api/reimbursement/`
   },
   MENUS: {
-    PAGEQUERY: `/api/menus`,
-    SAVE: `/api/menus`,
-    DETAILS: `/api/menus/`,
-    DELETE: `/api/menus/`,
-    EDIT: `/api/menus/`,
-    TOPMENUS: `/api/menus/tops`,
-    SUBS: `/api/menus/subs`,
-    VALIDMENUNAME: `/api/menus/name/valid`
+    PAGEQUERY: `/system/sysMenu`,
+    SAVE: `/system/sysMenu`,
+    DETAILS: `/system/sysMenu/`,
+    DELETE: `/system/sysMenu/`,
+    EDIT: `/system/sysMenu/`,
+    TOPMENUS: `/system/sysMenu/tops`,
+    SUBS: `/system/sysMenu/subs`,
+    VALIDMENUNAME: `/system/sysMenu/name/valid`
   },
   WORKFLOW: {
     PAGEQUERY: `/api/workflow`,

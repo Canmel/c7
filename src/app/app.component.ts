@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /**
+  /**`
    * 方法用途: 判断当前是否登录，已经登录直接前往首页，未登录直接前往登录页
    * 参数：无
    **/
@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
     console.log(this.cookieValue);
     if (this.cookieValue !== 'true') {
       this.https.get(Urls.SESSION.USERINFO, {}).then(resp => {
-        console.log(resp);
         this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
+        console.log(resp);
       });
     }
   }

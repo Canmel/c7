@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MainComponent} from '../../../main/main.component';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
-import {Urls} from '../../../public/url';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-footer',
@@ -12,8 +11,8 @@ import {Urls} from '../../../public/url';
 })
 export class FooterComponent extends MainComponent implements OnInit {
 
-  constructor(router: Router, http: HttpsUtils) {
-    super(router, http);
+  constructor(router: Router, http: HttpsUtils, cookies: CookieService) {
+    super(router, http, cookies);
   }
 
   ngOnInit() {

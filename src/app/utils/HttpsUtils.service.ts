@@ -1,8 +1,9 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Properties} from '../../public/properties';
 import {Urls} from '../../public/url';
+import {throwError} from 'rxjs';
 
 @Injectable()
 export class HttpsUtils {
@@ -30,26 +31,10 @@ export class HttpsUtils {
 
     return this.http.get<T>(url, {
       headers: headers
-    }).toPromise()
-      .catch(errorResp => {
-        if (errorResp.status === 200) {
-          return Promise.resolve({text: errorResp.error.text, httpStatus: 200});
-        }
-        if (errorResp['status'] === 401) {
-          sessionStorage.clear();
-          this.router.navigate([Urls.SESSION.LOGIN]);
-        }
-        return Promise.reject(errorResp.error);
-      })
-      .then(onfulfilled => {
-        if (200 === onfulfilled['httpStatus']) {
-          return Promise.resolve(onfulfilled);
-        }
-        if (404 === onfulfilled['httpStatus']) {
-          alert('未找到请求页面');
-        }
-        alert('请求出错');
-      });
+    }).toPromise().catch(errorResp => {
+      console.log(url);
+      this.handleError(errorResp);
+    });
   }
 
   /**
@@ -163,5 +148,16 @@ export class HttpsUtils {
       url.substr(0, url.length - 1);
     }
     return url;
+  }
+
+  /**
+   * 错误消息类
+   * @param error
+   */
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      this.router.navigate(['/unauthentication']);
+    }
+    return throwError('Something bad happened; please try again later.');
   }
 }

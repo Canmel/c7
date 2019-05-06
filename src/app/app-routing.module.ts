@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {LoginModule} from '../login/login.module';
 import {MainModule} from '../main/main.module';
+import {UnAuthenticationModule} from './layout/un-authentication/un-authentication.module';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => MainModule
+  },
+  {
+    path: 'unauthentication',
+    loadChildren: () => UnAuthenticationModule
   },
   {
     path: '**',

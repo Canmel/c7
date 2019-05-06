@@ -25,7 +25,6 @@ export class LefterComponent implements OnInit {
 
   constructor(private http: HttpsUtils, public notificationService: NzNotificationService) {
     const _this = this;
-    alert(123);
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);

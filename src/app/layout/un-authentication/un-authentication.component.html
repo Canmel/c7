@@ -1,0 +1,25 @@
+<div style="background-color: steelblue; height: 100%;">
+
+  <p type="warning" style="text-align: center;">
+    <strong>登陆错误</strong> 未找到当前用户，即将前往统一登陆平台！
+    <br/>
+    {{jumpTime}}秒后自动<a style="cursor: pointer; color: #00a0df;" [href]="urlCollection.SESSION.LOGIN"><span>跳转</span></a>
+
+  </p>
+  <div class="mianBox">
+    <img src="assets/images/yun0.png" alt="" class="yun yun0" />
+    <img src="assets/images/yun1.png" alt="" class="yun yun1" />
+    <img src="assets/images/yun2.png" alt="" class="yun yun2" />
+    <img src="assets/images/bird.png" alt="" class="bird" />
+    <img src="assets/images/san.png" alt="" class="san" />
+    <div class="tipInfo">
+      <div class="in">
+        <div class="textThis">
+          <h2>出错啦！</h2>
+          <p><span>页面自动<a style="cursor: pointer; color: #00a0df;" [href]="urlCollection.SESSION.LOGIN"><span>跳转</span></a></span><span>等待<b id="wait">{{jumpTime}}</b>秒</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
