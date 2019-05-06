@@ -26,13 +26,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     particlesInit();  // 登陆页面动画效果
-    this.http.get(Urls.SESSION.QRCODE, {}, '').then(resp => {
-      this.contentData['qrcode'] = resp['data']['verify'];
-    }, resp => {
-      if ( resp.indexOf(Properties.STRING.SYSTEM.PROXY_ERROR) > -1) {
-        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, _i18n.NET.PROXY_ERROR);
-      }
-    });
   }
 
   /**

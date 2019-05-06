@@ -87,6 +87,7 @@ export class UserAddComponent implements OnInit {
         console.log(resp);
         if (resp['httpStatus'] === 200) {
           observer.next(null);
+          observer.next({error: true, duplicated: true});
         }
         observer.complete();
       }, resp => {
@@ -94,7 +95,7 @@ export class UserAddComponent implements OnInit {
         observer.complete();
       });
     }, 1000);
-  });
+  })
 
   /**
    * 方法用途: 确认密码验证

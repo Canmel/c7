@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
 
   constructor(public router: Router, public http: HttpsUtils) {
     // this.loadCurrentUser();
+    alert(123123);
   }
 
   /**

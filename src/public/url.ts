@@ -85,7 +85,8 @@ export const Urls = {
     QRCODE: `/code/verify`,
     LOGOUT: `/signOut`,
     REJECTED: `/auth/require`,
-    APP: '/app'
+    APP: '/app',
+    USERINFO: '/api/user'
   },
   BUSINESS: {
     USERS: {

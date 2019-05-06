@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';
-import {Properties} from '../public/properties';
 import {Urls} from '../public/url';
+import {CookieService} from 'ngx-cookie-service';
+import {SystemProperties} from './utils/system-properties';
+import {HttpsUtils} from './utils/HttpsUtils.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import {Urls} from '../public/url';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router, private location: PlatformLocation) {
+  cookieValue = 'UNKNOWN';
+
+  constructor(public https: HttpsUtils, private router: Router, private location: PlatformLocation, private cookieService: CookieService) {
     this.isLogin();
   }
   ngOnInit(): void {
@@ -22,12 +25,13 @@ export class AppComponent implements OnInit {
    * 参数：无
    **/
   isLogin() {
-    if (sessionStorage.getItem(Properties.SESSION.CURRENT) !== null) {
-      return this.router.navigate([Urls.SESSION.APP]);
+    this.cookieValue = this.cookieService.get(SystemProperties.session.authenticated);
+    console.log(this.cookieValue);
+    if (this.cookieValue !== 'true') {
+      this.https.get(Urls.SESSION.USERINFO, {}).then(resp => {
+        console.log(resp);
+        this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
+      });
     }
-    if (sessionStorage.getItem(Properties.SESSION.CURRENT) === null) {
-      return this.router.navigate([Urls.SESSION.LOGIN]);
-    }
-    alert(21221);
   }
 }

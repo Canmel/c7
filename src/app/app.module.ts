@@ -9,6 +9,8 @@ import {FormsModule} from '@angular/forms';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import {HttpsUtils} from './utils/HttpsUtils.service';
+import {CookieService} from 'ngx-cookie-service';
 
 registerLocaleData(zh);
 
@@ -24,7 +26,7 @@ registerLocaleData(zh);
     FormsModule,
     NgZorroAntdModule
   ],
-  providers: [{provide: NZ_I18N, useValue: zh_CN}],
+  providers: [{provide: NZ_I18N, useValue: zh_CN}, HttpsUtils, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

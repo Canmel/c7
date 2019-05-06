@@ -6,7 +6,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="username" placeholder="请输入用户名...">
+          <input nz-input formControlName="username" placeholder="请输入用户名..."  greatAsync>
           <nz-form-explain
             *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors || validateForm.get('username').pending ">
             <ng-container *ngIf="validateForm.get('username').hasError('required')">
