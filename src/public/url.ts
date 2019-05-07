@@ -7,21 +7,21 @@ export const Urls = {
   },
   USERS: {
     ME: `/system/user`,
-    PAGEQUERY: `/system/users`,
-    CURRENT: `/system/users/current`,
-    SAVE: `/system/users`,
-    DETAILS: `/system/users/`,
-    EDIT: `/system/users/`,
-    ROLES: `/system/users/roles`,
-    DELETE: `/system/users/`,
-    UPDATEROLES: `/system/users/roles`,
-    VALIDUSERNAME: `/system/users/name/valid`
+    PAGEQUERY: `/system/sysUser`,
+    CURRENT: `/system/sysUser/current`,
+    SAVE: `/system/sysUser`,
+    DETAILS: `/system/sysUser/`,
+    EDIT: `/system/sysUser/`,
+    ROLES: `/system/sysUser/roles`,
+    DELETE: `/system/sysUser/`,
+    UPDATEROLES: `/system/sysUser/roles`,
+    VALIDUSERNAME: `/system/sysUser/valid/`
   },
   LOGS: {
     PAGEQUERY: `/system/logs`
   },
   ROLES: {
-    PAGEQUERY: `/system/roles`,
+    PAGEQUERY: `/system/sysRole`,
     SAVE: `/system/roles`,
     DETAILS: `/system/roles/`,
     EDIT: `/system/roles/`,

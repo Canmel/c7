@@ -33,6 +33,7 @@ export class MenusComponent implements OnInit {
   listHeader = [
     {title: '菜单名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '地址', field: 'url', type: 'text'},
+    {title: '创建时间', field: 'gmtCreate', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 

@@ -38,12 +38,13 @@ export class UserEditComponent implements OnInit {
    **/
   submitForm = ($event, value) => {
     $event.preventDefault();
+    value['uid'] = this.receiveId;
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.put(Urls.USERS.EDIT + this.receiveId, value).then(resp => {
-        if (resp['httpStatus'] === 200) {
+    this.https.put(Urls.USERS.SAVE, value).then(resp => {
+        if (resp['code'] === 200) {
           this.router.navigate([Urls.BUSINESS.USERS.LIST]);
           this.notification.success('成功', resp['msg']);
         } else {
@@ -78,8 +79,8 @@ export class UserEditComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.post(Urls.USERS.VALIDUSERNAME, {username: control.value, id: _this.receiveId}).then(resp => {
-        if (resp['httpStatus'] === 200) {
+      _this.https.get(Urls.USERS.VALIDUSERNAME + control.value + '?id=' + _this.receiveId).then(resp => {
+        if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
         }
         observer.complete();
@@ -102,7 +103,7 @@ export class UserEditComponent implements OnInit {
       email: ['', [Validators.email]],
       address: ['', [Validators.required]],
       mobile: ['', [Validators.required, Validators.pattern('^1[34578]\\d{9}$')]],
-      remarke: ['', [Validators.required]]
+      remark: ['', [Validators.required]]
     });
   }
 
@@ -124,7 +125,7 @@ export class UserEditComponent implements OnInit {
         email: entity['email'],
         address: entity['address'],
         mobile: entity['mobile'],
-        remarke: entity['remarke']
+        remark: entity['remark']
       });
     });
 

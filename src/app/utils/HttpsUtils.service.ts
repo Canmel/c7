@@ -32,7 +32,6 @@ export class HttpsUtils {
     return this.http.get<T>(url, {
       headers: headers
     }).toPromise().catch(errorResp => {
-      console.log(url);
       this.handleError(errorResp);
     });
   }

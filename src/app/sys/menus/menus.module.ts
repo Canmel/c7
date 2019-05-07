@@ -12,6 +12,7 @@ import {NgZorroAntdModule, NZ_I18N, NzSelectModule, zh_CN} from 'ng-zorro-antd';
 import {MenuEditComponent} from './menu-edit/menu-edit.component';
 import {MenuAddComponent} from './menu-add/menu-add.component';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {DatetimeModule} from '../../pipe/datetime.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {HttpsUtils} from '../../utils/HttpsUtils.service';
     ListModule,
     NzSelectModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    DatetimeModule.forRoot()
   ],
   bootstrap: [MenusComponent],
   providers: [{provide: NZ_I18N, useValue: zh_CN}, HttpsUtils]
