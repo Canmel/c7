@@ -56,8 +56,10 @@ export class UsersComponent implements OnInit {
     roleIds: []
   };
 
-
-  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils, private notification: NzNotificationService) {
+  constructor(public router: Router,
+              public modalService: NzModalService,
+              public https: HttpsUtils,
+              private notification: NzNotificationService) {
   }
 
   ngOnInit() {
@@ -70,8 +72,8 @@ export class UsersComponent implements OnInit {
    **/
   loadUsers() {
     this.https.get(Urls.USERS.PAGEQUERY, this.formData).then(resp => {
-      this.users = resp['data']['records'];
-      this.formData.curPage = resp['data']['current'];
+      this.users = resp['data']['list'];
+      this.formData.curPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }

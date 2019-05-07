@@ -23,16 +23,16 @@ export class MenusComponent implements OnInit {
   formData: any = {
     totalNum: 21,
     pageSize: 10,
-    currentPage: 1,
-    menuname: ''
+    pageNum: 1,
+    name: ''
   };
 
   /**
    * 表头
    */
   listHeader = [
-    {title: '角色名称', field: 'menuname', type: 'text', class: 'text-success'},
-    {title: '描述', field: 'description', type: 'number'},
+    {title: '菜单名称', field: 'name', type: 'text', class: 'text-success'},
+    {title: '地址', field: 'url', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -53,8 +53,9 @@ export class MenusComponent implements OnInit {
    **/
   loadEntities() {
     this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-      this.entities = resp['data']['records'];
-      this.formData.currentPage = resp['data']['current'];
+      this.entities = resp['data']['list'];
+      console.log('-------------->', resp['data']);
+      this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }
@@ -73,14 +74,14 @@ export class MenusComponent implements OnInit {
    **/
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['menuname'] + '?',
+      nzTitle: '你确定要删除 ' + param['name'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
         const _this = this;
-        this.https.delete(Urls.MENUS.DELETE, param['id']).then(resp => {
-          if (resp['httpStatus'] === 200) {
+        this.https.delete(Urls.MENUS.DELETE, param['menuId']).then(resp => {
+          if (resp['code'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {
             _this.notification.error('失败', resp['msg']);

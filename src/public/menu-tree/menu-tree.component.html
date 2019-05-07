@@ -26,13 +26,13 @@
                         </span>
         <i class="{{item.icon}}">
         </i>
-        <span>{{item.menuname}}</span>
+        <span>{{item.name}}</span>
       </a>
       <ul class="nav dk text-sm">
-        <li *ngFor="let m of level2(item.id)">
-          <a class="auto" routerLinkActive="active" routerLink="{{m.address}}">
+        <li *ngFor="let m of level2(item.menuId)">
+          <a class="auto" routerLinkActive="active" routerLink="{{m.url}}">
             <i class="{{m.icon}}"></i>
-            <span>{{m.menuname}}</span>
+            <span>{{m.name}}</span>
           </a>
         </li>
       </ul>

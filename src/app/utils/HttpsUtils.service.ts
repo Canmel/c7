@@ -50,20 +50,9 @@ export class HttpsUtils {
     }
     return this.http.post<T>(url, params, {
       headers: headers
-    }).toPromise().catch(error => {
-      if (error['status'] === 401) {
-        sessionStorage.clear();
-        this.router.navigate([Urls.SESSION.LOGIN]);
-      }
-      return Promise.reject(error['error']);
-    }).then(onfulfilled => {
-      if (200 === onfulfilled['httpStatus']) {
-        return Promise.resolve(onfulfilled);
-      }
-      if (404 === onfulfilled['httpStatus']) {
-        return Promise.reject(onfulfilled);
-      }
-      return Promise.reject(onfulfilled);
+    }).toPromise().catch(errorResp => {
+      console.log(url);
+      this.handleError(errorResp);
     });
   }
 
@@ -81,15 +70,8 @@ export class HttpsUtils {
     return this.http.put<T>(url, params, {
       headers: headers
     }).toPromise().catch(errorResp => {
-      if (errorResp.url.endsWith(Urls.SESSION.REJECTED)) {
-        this.router.navigate(['login']);
-      }
-      return Promise.reject(errorResp.error);
-    }).then(onfulfilled => {
-      if (200 === onfulfilled['httpStatus']) {
-        return Promise.resolve(onfulfilled);
-      }
-      return Promise.reject(onfulfilled);
+      console.log(url);
+      this.handleError(errorResp);
     });
   }
 
@@ -108,14 +90,9 @@ export class HttpsUtils {
     return this.http.delete(url, {
       headers: headers
     }).toPromise().catch(errorResp => {
-      return Promise.reject(errorResp.error);
-    }).then(onfulfilled => {
-      if (200 === onfulfilled['httpStatus']) {
-        return Promise.resolve(onfulfilled);
-      }
-      return Promise.reject(onfulfilled);
+      console.log(url);
+      this.handleError(errorResp);
     });
-
   }
 
   objToParams(obj: Object) {

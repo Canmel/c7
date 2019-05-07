@@ -21,7 +21,7 @@ export class MenuTreeComponent implements OnInit {
   level1() {
     const result = [];
     $.each(this.menuTree, function (i, item) {
-      if (item.level === 1) {
+      if (item.type === 0) {
         result.push(item);
       }
     });
@@ -31,7 +31,7 @@ export class MenuTreeComponent implements OnInit {
   level2(id) {
     const result = [];
     $.each(this.menuTree, function (i, item) {
-      if (item.level === 2 && id === item.pid) {
+      if (item.type === 1 && id === item.parentId) {
         result.push(item);
       }
     });

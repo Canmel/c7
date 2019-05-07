@@ -48,7 +48,7 @@ export const Urls = {
     EDIT: `/system/sysMenu/`,
     TOPMENUS: `/system/sysMenu/tops`,
     SUBS: `/system/sysMenu/subs`,
-    VALIDMENUNAME: `/system/sysMenu/name/valid`
+    VALIDMENUNAME: `/system/sysMenu/valid/`
   },
   WORKFLOW: {
     PAGEQUERY: `/api/workflow`,
@@ -69,8 +69,8 @@ export const Urls = {
   },
   OPTIONS: {
     MENUS: {
-      STATUS: `/api/options/menus/statuses`,
-      LEVEL: `/api/options/menus/levels`
+      STATUS: `/system/sysMenu/typies`,
+      LEVEL: `/system/sysMenu/typies`
     },
     WORKFLOW: {
       TYPES: `/api/options/workflow/typies`,

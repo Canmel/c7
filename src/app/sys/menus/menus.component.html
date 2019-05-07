@@ -31,7 +31,7 @@
           <td *ngFor="let head of listHeader">
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.menuId})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
@@ -46,7 +46,7 @@
     </div>
     <footer class="panel-footer">
       <div class="row">
-        <nz-pagination [(nzPageIndex)]="formData.currentPage" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+        <nz-pagination [(nzPageIndex)]="formData.pageNum" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
       </div>
     </footer>
   </section>

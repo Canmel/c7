@@ -27,8 +27,8 @@ export class MenuAddComponent implements OnInit {
   validTimeOutEvent: any;
 
   menuLevels: [
-    {name: '一级菜单', value: 1},
-    {name: '二级菜单', value: 2}
+    {name: '一级菜单', value: 0},
+    {name: '二级菜单', value: 1}
     ];
 
   formData = {};
@@ -46,14 +46,13 @@ export class MenuAddComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
     this.https.post(Urls.MENUS.SAVE, value).then(resp => {
-      if (resp['httpStatus'] === 200) {
+      console.log(resp);
+      if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.MENUS.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
         this.notification.error('失败', resp['msg']);
       }
-    }, resp => {
-      console.log(resp);
     });
   };
 
@@ -80,9 +79,11 @@ export class MenuAddComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.post(Urls.MENUS.VALIDMENUNAME, {menuname: control.value}).then(resp => {
-        if (resp['httpStatus'] === 200) {
+      _this.https.get(Urls.MENUS.VALIDMENUNAME + control.value).then(resp => {
+        if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
+        } else {
+          observer.next({error: true, duplicated: true});
         }
         observer.complete();
       }, resp => {
@@ -98,10 +99,10 @@ export class MenuAddComponent implements OnInit {
    **/
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      menuname: ['', [Validators.required], [this.userNameAsyncValidator]],
-      description: ['', [Validators.required]],
-      level: ['', Validators.required],
-      pid: ['', [], [this.subMenuValidator]]
+      name: ['', [Validators.required], [this.userNameAsyncValidator]],
+      url: ['', [Validators.required]],
+      type: ['', Validators.required],
+      parentId: ['', [], [this.subMenuValidator]]
     });
     this.https.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
       this.menuLevels = data['data'];
@@ -109,13 +110,13 @@ export class MenuAddComponent implements OnInit {
     const _this = this;
     this.https.get(Urls.MENUS.TOPMENUS).then(data => {
       $.each(data['data'], function (index, item) {
-        _this.topMenus.push({name: item['menuname'], value: item['id']});
+        _this.topMenus.push({name: item['name'], value: item['menuId']});
       });
     });
   }
 
   subMenuValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
-    if (this.formData['menuLevels'] && this.formData['menuLevels'] === '2'
+    if (this.formData['type'] && this.formData['type'] === '2'
       && !control.value) {
       observer.next({error: true, duplicated: true});
     } else {
@@ -125,8 +126,8 @@ export class MenuAddComponent implements OnInit {
   });
 
   nzListOfSelectedValueChange() {
-      this.validateForm.controls['pid'].markAsPristine();
-      this.validateForm.controls['pid'].updateValueAndValidity();
+      this.validateForm.controls['parentId'].markAsPristine();
+      this.validateForm.controls['parentId'].updateValueAndValidity();
   }
 
   ngOnInit() {

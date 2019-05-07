@@ -26,6 +26,7 @@ export class LefterComponent implements OnInit {
   constructor(private http: HttpsUtils, public notificationService: NzNotificationService) {
     const _this = this;
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
+      console.log(resp)
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);
       });
@@ -47,7 +48,7 @@ export class LefterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todos();
+    // this.todos();
   }
 
   todos () {
