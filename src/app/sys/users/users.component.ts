@@ -42,8 +42,10 @@ export class UsersComponent implements OnInit {
    */
   listHeader = [
     {title: '用户名', field: 'username', type: 'text', class: 'text-success'},
+    {title: '昵称', field: 'nickname', type: 'text'},
     {title: '邮箱', field: 'email', type: 'number'},
-    {title: '电话', field: 'mobile', type: 'phone'},
+    {title: '电话', field: 'mobile', type: 'text'},
+    {title: '上次登录时间', field: 'lastLoginTime', type: 'phone'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -96,9 +98,21 @@ export class UsersComponent implements OnInit {
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
-      nzOnOk: () => console.log(param),
+      nzOnOk: () => this.deleteUser(param),
       nzCancelText: '否',
       nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
+  deleteUser(params) {
+    const _this = this;
+    this.https.delete(Urls.USERS.DELETE, params['id']).then(resp => {
+      if (resp['code'] === 200) {
+        _this.notification.success('成功', resp['msg']);
+      } else {
+        _this.notification.error('失败', resp['msg']);
+      }
+      _this.loadUsers();
     });
   }
 
@@ -115,8 +129,8 @@ export class UsersComponent implements OnInit {
       _this.nodes = [];
       $.each(resp['data'], function (index, item) {
         _this.nodes.push({
-          title: item['rolename'],
-          key: item['id']
+          title: item['roleName']  + '(' +  item['remark'] + ')',
+          key: item['roleId']
         });
       });
     });

@@ -8,7 +8,7 @@ import {UnAuthenticationModule} from './layout/un-authentication/un-authenticati
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/app',
+    redirectTo: '/app/home',
     pathMatch: 'full'
   },
   {

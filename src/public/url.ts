@@ -22,13 +22,13 @@ export const Urls = {
   },
   ROLES: {
     PAGEQUERY: `/system/sysRole`,
-    SAVE: `/system/roles`,
-    DETAILS: `/system/roles/`,
-    EDIT: `/system/roles/`,
-    DELETE: `/system/roles/`,
-    UPDATEMENUS: `/system/roles/menus`,
-    ALL: `/system/roles/all`,
-    VALIDROLENAME: `/system/roles/name/valid`
+    SAVE: `/system/sysRole`,
+    DETAILS: `/system/sysRole/`,
+    EDIT: `/system/sysRole/`,
+    DELETE: `/system/sysRole/`,
+    UPDATEMENUS: `/system/sysRole/menus`,
+    ALL: `/system/sysRole/all/list`,
+    VALIDROLENAME: `/system/sysRole/name/valid`
   },
   REIMBURSEMENT: {
     PAGEQUERY: `/api/reimbursement`,

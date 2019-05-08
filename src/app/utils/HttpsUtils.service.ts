@@ -89,7 +89,6 @@ export class HttpsUtils {
     return this.http.delete(url, {
       headers: headers
     }).toPromise().catch(errorResp => {
-      console.log(url);
       this.handleError(errorResp);
     });
   }

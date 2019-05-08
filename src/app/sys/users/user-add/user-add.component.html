@@ -104,9 +104,9 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>个人信息</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <textarea formControlName="remarke" nz-input rows="2" placeholder="简短介绍..."></textarea>
+          <textarea formControlName="remark" nz-input rows="2" placeholder="简短介绍..."></textarea>
           <nz-form-explain
-            *ngIf="validateForm.get('remarke').dirty&&validateForm.get('remarke').hasError('required')">
+            *ngIf="validateForm.get('remark').dirty&&validateForm.get('remark').hasError('required')">
             简介不能为空！
           </nz-form-explain>
         </nz-form-control>

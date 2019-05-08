@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Observer} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {Urls} from '../../../../public/url';
@@ -41,7 +41,7 @@ export class UserAddComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
     this.https.post(Urls.USERS.SAVE, value).then(resp => {
-      if (resp['httpStatus'] === 200) {
+      if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.USERS.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
@@ -64,7 +64,6 @@ export class UserAddComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
   }
-
   /**
    * 方法用途: 验证确认密码
    * 参数: 无
@@ -72,7 +71,6 @@ export class UserAddComponent implements OnInit {
   validateConfirmPassword(): void {
     setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
   }
-
   /**
    * 方法用途: 用户名称异步验证
    * 参数:
@@ -83,11 +81,9 @@ export class UserAddComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.post(Urls.USERS.VALIDUSERNAME, {username: control.value}).then(resp => {
-        console.log(resp);
-        if (resp['httpStatus'] === 200) {
+      _this.https.get(Urls.USERS.VALIDUSERNAME + control.value).then(resp => {
+        if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
-          observer.next({error: true, duplicated: true});
         }
         observer.complete();
       }, resp => {
@@ -107,7 +103,7 @@ export class UserAddComponent implements OnInit {
     } else if (control.value !== this.validateForm.controls.password.value) {
       return {confirm: true, error: true};
     }
-  };
+  }
 
   /**
    * 方法用途: 构造器构造验证对象
@@ -122,7 +118,7 @@ export class UserAddComponent implements OnInit {
       address: ['', [Validators.required]],
       mobile: ['', [Validators.required, Validators.pattern('^1[34578]\\d{9}$')]],
       nickname: ['', [Validators.required, Validators.maxLength(6)]],
-      remarke: ['', [Validators.required]]
+      remark: ['', [Validators.required]]
     });
   }
 
