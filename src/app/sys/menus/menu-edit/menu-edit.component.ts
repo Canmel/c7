@@ -78,7 +78,7 @@ export class MenuEditComponent implements OnInit {
    * 方法用途: 菜单名称异步验证
    * 参数:
    **/
-  userNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
+  menuNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
     const _this = this;
     if (this.validTimeOutEvent) {
       clearTimeout(this.validTimeOutEvent);
@@ -104,7 +104,7 @@ export class MenuEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required], [this.userNameAsyncValidator]],
+      name: ['', [Validators.required], [this.menuNameAsyncValidator]],
       url: ['', [Validators.required]],
       type: ['', Validators.required],
       parentId: ['', [], [this.subMenuValidator]]

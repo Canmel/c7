@@ -54,7 +54,7 @@ export class UsersComponent implements OnInit {
   nodes = [];
 
   userRole = {
-    id: 0,
+    uid: 0,
     roleIds: []
   };
 
@@ -119,7 +119,7 @@ export class UsersComponent implements OnInit {
   editRoles(param, username) {
     this.loadRoleEntities();
     this.loadEntityById(param['id']);
-    this.userRole.id = param['id'];
+    this.userRole.uid = param['id'];
     this.isVisible = true;
   }
 
@@ -141,7 +141,7 @@ export class UsersComponent implements OnInit {
     this.isVisible = false;
     this.https.post(Urls.USERS.ROLES, this.userRole).then(
       resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
         } else {
           this.notification.error('失败', resp['msg']);

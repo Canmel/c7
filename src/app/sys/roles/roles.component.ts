@@ -36,8 +36,8 @@ export class RolesComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '角色名称', field: 'rolename', type: 'text', class: 'text-success'},
-    {title: '描述', field: 'description', type: 'number'},
+    {title: '角色名称', field: 'roleName', type: 'text', class: 'text-success'},
+    {title: '描述', field: 'remark', type: 'number'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -58,8 +58,8 @@ export class RolesComponent implements OnInit {
    **/
   loadEntities() {
     this.https.get(Urls.ROLES.PAGEQUERY, this.formData).then(resp => {
-      this.roles = resp['data']['records'];
-      this.formData.currentPage = resp['data']['current'];
+      this.roles = resp['data']['list'];
+      this.formData.currentPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }

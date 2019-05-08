@@ -28,7 +28,7 @@ export const Urls = {
     DELETE: `/system/sysRole/`,
     UPDATEMENUS: `/system/sysRole/menus`,
     ALL: `/system/sysRole/all/list`,
-    VALIDROLENAME: `/system/sysRole/name/valid`
+    VALIDROLENAME: `/system/sysRole/valid/`
   },
   REIMBURSEMENT: {
     PAGEQUERY: `/api/reimbursement`,

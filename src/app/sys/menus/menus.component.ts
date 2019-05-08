@@ -55,7 +55,6 @@ export class MenusComponent implements OnInit {
   loadEntities() {
     this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
       this.entities = resp['data']['list'];
-      console.log('-------------->', resp['data']);
       this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });

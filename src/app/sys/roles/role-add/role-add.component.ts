@@ -33,13 +33,14 @@ export class RoleAddComponent implements OnInit {
    * 参数: 事件， 表单值
    **/
   submitForm = ($event, value) => {
+    const _this = this;
     $event.preventDefault();
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
     this.https.post(Urls.ROLES.SAVE, value).then(resp => {
-      if (resp['httpStatus'] === 200) {
+      if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
@@ -67,15 +68,17 @@ export class RoleAddComponent implements OnInit {
    * 方法用途: 用户名称异步验证
    * 参数:
    **/
-  userNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
+  roleNameAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
     const _this = this;
     if (this.validTimeOutEvent) {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.post(Urls.ROLES.VALIDROLENAME, {rolename: control.value}).then(resp => {
-        if (resp['httpStatus'] === 200) {
+      _this.https.get(Urls.ROLES.VALIDROLENAME + control.value).then(resp => {
+        if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
+        } else {
+          observer.next({error: true, duplicated: true});
         }
         observer.complete();
       }, resp => {
@@ -91,8 +94,8 @@ export class RoleAddComponent implements OnInit {
    **/
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      rolename: ['', [Validators.required], [this.userNameAsyncValidator]],
-      description: ['', [Validators.required]]
+      roleName: ['', [Validators.required], [this.roleNameAsyncValidator]],
+      remark: ['', [Validators.required]]
     });
   }
 

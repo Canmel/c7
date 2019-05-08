@@ -41,7 +41,7 @@ export class RoleEditComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
     this.https.put(Urls.ROLES.EDIT + this.receiveId, value).then(resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
           this.notification.success('成功', resp['msg']);
         } else {
@@ -76,11 +76,14 @@ export class RoleEditComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.post(Urls.ROLES.VALIDROLENAME, {rolename: control.value, id: _this.receiveId}).then(resp => {
+      _this.https.get(Urls.ROLES.VALIDROLENAME + control.value, {id: _this.receiveId}).then(resp => {
         console.log(resp);
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
+        } else {
+          observer.next({error: true, duplicated: true});
         }
+
         observer.complete();
       }, resp => {
         observer.next({error: true, duplicated: true});
@@ -96,8 +99,8 @@ export class RoleEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public activatedRoute: ActivatedRoute,
               public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      rolename: ['', [Validators.required], [this.userNameAsyncValidator]],
-      description: ['', [Validators.required]]
+      roleName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      remark: ['', [Validators.required]]
     });
   }
 
@@ -114,8 +117,8 @@ export class RoleEditComponent implements OnInit {
     this.https.get(Urls.ROLES.EDIT + id).then(resp => {
       const entity = resp['data'];
       this.validateForm.setValue({
-        rolename: entity['rolename'],
-        description: entity['description']
+        roleName: entity['roleName'],
+        remark: entity['remark']
       });
     });
   }
