@@ -24,7 +24,7 @@ export const Urls = {
     PAGEQUERY: `/system/sysRole`,
     SAVE: `/system/sysRole`,
     DETAILS: `/system/sysRole/`,
-    EDIT: `/system/sysRole/`,
+    EDIT: `/system/sysRole`,
     DELETE: `/system/sysRole/`,
     UPDATEMENUS: `/system/sysRole/menus`,
     ALL: `/system/sysRole/all/list`,

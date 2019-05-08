@@ -45,11 +45,12 @@ export class MenuEditComponent implements OnInit {
     value['menuId'] = this.receiveId;
     $event.preventDefault();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
     }
     this.https.put(Urls.MENUS.SAVE, value).then(resp => {
-      console.log(resp);
       if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.MENUS.LIST]);
         this.notification.success('成功', resp['msg']);
@@ -69,8 +70,10 @@ export class MenuEditComponent implements OnInit {
     e.preventDefault();
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsPristine();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
     }
   }
 
@@ -138,7 +141,6 @@ export class MenuEditComponent implements OnInit {
   ngOnInit() {
     const _this = this;
     this.activatedRoute.queryParams.subscribe(queryParams => {
-      console.log(queryParams);
       this.receiveId = queryParams['id'];
       this.loadEntityById(queryParams['id']);
     });

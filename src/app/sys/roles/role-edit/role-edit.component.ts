@@ -37,10 +37,14 @@ export class RoleEditComponent implements OnInit {
   submitForm = ($event, value) => {
     $event.preventDefault();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+
     }
-    this.https.put(Urls.ROLES.EDIT + this.receiveId, value).then(resp => {
+    value['roleId'] = this.receiveId;
+    this.https.put(Urls.ROLES.EDIT, value).then(resp => {
         if (resp['code'] === 200) {
           this.router.navigate([Urls.BUSINESS.ROLES.LIST]);
           this.notification.success('成功', resp['msg']);
@@ -121,6 +125,14 @@ export class RoleEditComponent implements OnInit {
         remark: entity['remark']
       });
     });
+
+    for (const key in this.validateForm.controls) {
+      if (this.validateForm.controls) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+    }
+
   }
 
 }

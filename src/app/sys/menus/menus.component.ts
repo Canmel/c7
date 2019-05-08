@@ -92,7 +92,7 @@ export class MenusComponent implements OnInit {
         });
       },
       nzCancelText: '否',
-      nzOnCancel: () => console.log('Cancel')
+      nzOnCancel: () => console.log('操作取消')
     });
     console.log(param);
   }

@@ -85,7 +85,7 @@ export class RolesComponent implements OnInit {
       nzOnOk: () => {
         const _this = this;
         this.https.delete(Urls.ROLES.DELETE, param['id']).then(resp => {
-          if (resp['httpStatus'] === 200) {
+          if (resp['code'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {
             _this.notification.error('失败', resp['msg']);
