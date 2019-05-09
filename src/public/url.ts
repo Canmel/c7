@@ -18,7 +18,7 @@ export const Urls = {
     VALIDUSERNAME: `/system/sysUser/valid/`
   },
   LOGS: {
-    PAGEQUERY: `/system/logs`
+    PAGEQUERY: `/system/sysLog`
   },
   ROLES: {
     PAGEQUERY: `/system/sysRole`,

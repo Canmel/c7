@@ -31,11 +31,11 @@ export class LogsComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '日志名称', field: 'title', type: 'text', class: 'text-success'},
+    {title: '所属模块', field: 'module', type: 'text', class: 'text-success'},
     {title: '方法', field: 'method', type: 'text'},
     {title: '参数', field: 'params', type: 'text'},
-    {title: '描述', field: 'description', type: 'text'},
-    {title: '用户', field: 'optor.username', type: 'text'}
+    {title: '描述', field: 'operation', type: 'text'},
+    {title: '用户', field: 'username', type: 'text'}
   ];
 
   entities: Array<any> = [];
@@ -55,8 +55,8 @@ export class LogsComponent implements OnInit {
    **/
   loadEntities() {
     this.https.get(Urls.LOGS.PAGEQUERY, this.formData).then(resp => {
-      this.entities = resp['data']['records'];
-      this.formData.currentPage = resp['data']['current'];
+      this.entities = resp['data']['list'];
+      this.formData.currentPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }
