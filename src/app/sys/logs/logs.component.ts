@@ -24,7 +24,7 @@ export class LogsComponent implements OnInit {
     totalNum: 21,
     pageSize: 10,
     currentPage: 1,
-    title: ''
+    module: ''
   };
 
   /**

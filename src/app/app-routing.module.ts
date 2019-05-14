@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {PageNotFoundComponent} from './layout/page-not-found/page-not-found.component';
 import {LoginModule} from '../login/login.module';
 import {MainModule} from '../main/main.module';
 import {UnAuthenticationModule} from './layout/un-authentication/un-authentication.module';

@@ -1,12 +1,16 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Properties} from '../../public/properties';
-import {Urls} from '../../public/url';
-import {throwError} from 'rxjs';
+
+// 请求类型
+
 
 @Injectable()
 export class HttpsUtils {
+
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*'})
+  };
 
   constructor(private http: HttpClient, public router: Router) {
   }
@@ -16,23 +20,14 @@ export class HttpsUtils {
    * 参数：
    **/
   get<T>(url: string, params?: Object, token?: string): Promise<void | Object> {
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    headers.append('x-auth-token', token);
-    if (token !== '' && sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
-      if (!params) {
-        params = {};
-      }
-      params['access_token'] = sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
-    }
     if (params) {
       url = this.objAppendToUrl(url, params);
     }
 
-    return this.http.get<T>(url, {
-      headers: headers
-    }).toPromise().catch(errorResp => {
-      this.handleError(errorResp);
+    return this.http.get<T>(url, this.httpOptions).toPromise().catch(errorResp => {
+      return this.handleError(errorResp);
+    }).then(onfulfilled => {
+      return Promise.resolve(onfulfilled);
     });
   }
 
@@ -41,15 +36,7 @@ export class HttpsUtils {
    * 参数：
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    headers.append('x-auth-token', token);
-    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
-      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
-    }
-    return this.http.post<T>(url, params, {
-      headers: headers
-    }).toPromise().catch(errorResp => {
+    return this.http.post<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       console.log(url);
       this.handleError(errorResp);
     });
@@ -60,15 +47,7 @@ export class HttpsUtils {
    * 参数：
    **/
   put<T>(url: string, params: Object, token?: string): Promise<void | Object> {
-    const headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    headers.append('x-auth-token', token);
-    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
-      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
-    }
-    return this.http.put<T>(url, params, {
-      headers: headers
-    }).toPromise().catch(errorResp => {
+    return this.http.put<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       console.log(url);
       this.handleError(errorResp);
     });
@@ -83,12 +62,7 @@ export class HttpsUtils {
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     // headers.append('x-auth-token', token);
     url = url + params;
-    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
-      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
-    }
-    return this.http.delete(url, {
-      headers: headers
-    }).toPromise().catch(errorResp => {
+    return this.http.delete(url, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
     });
   }
@@ -129,10 +103,10 @@ export class HttpsUtils {
    * 错误消息类
    * @param error
    */
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Promise<void | Object> {
     if (error.status === 0) {
       this.router.navigate(['/unauthentication']);
     }
-    return throwError('Something bad happened; please try again later.');
+    return Promise.reject(error);
   }
 }

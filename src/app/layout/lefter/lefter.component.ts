@@ -32,7 +32,7 @@ export class LefterComponent implements OnInit {
       });
     }, resp => {
       console.log(resp);
-      this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['msg']);
+      this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['message']);
     });
     this.http.get(Urls.MENUS.SUBS).then(resp => {
       $.each(resp['data'], function (index, item) {
@@ -42,7 +42,7 @@ export class LefterComponent implements OnInit {
       if ( resp.indexOf(Properties.STRING.SYSTEM.PROXY_ERROR) > -1) {
         this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, _i18n.NET.PROXY_ERROR);
       } else {
-        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['msg']);
+        this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['message']);
       }
     });
   }

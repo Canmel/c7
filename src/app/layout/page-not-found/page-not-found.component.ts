@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Urls} from '../../public/url';
+import {Urls} from '../../../public/url';
 
 declare var StarField: any;
 
@@ -11,7 +11,8 @@ declare var StarField: any;
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     new StarField('fullScreen').render(333, 3);
