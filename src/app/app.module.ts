@@ -18,8 +18,7 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    MacroAddComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,

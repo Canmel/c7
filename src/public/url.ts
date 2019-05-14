@@ -6,7 +6,7 @@ export const Urls = {
     DELETE: `/api/deployedWorkflows/`
   },
   USERS: {
-    ME: `/system/user`,
+    ME: `/system/sysUser/me`,
     PAGEQUERY: `/system/sysUser`,
     CURRENT: `/system/sysUser/current`,
     SAVE: `/system/sysUser`,

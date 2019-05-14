@@ -19,21 +19,11 @@ export class ProfileComponent implements OnInit {
     address: '浙江省杭州市西湖区',
     mobile: '18357162602',
     email: '892379244@qq.com',
-    remarke: '我爱北京天安门，天安门外很冷啊，早上早点去，晚上早点回， 晚上风大，不能一直在户外的，如果一直在户外会让人心碎，毕竟这是北京...'
+    remark: '我爱北京天安门，天安门外很冷啊，早上早点去，晚上早点回， 晚上风大，不能一直在户外的，如果一直在户外会让人心碎，毕竟这是北京...'
   };
 
   userLogs = [
-    {title: '删除用户', date: '208-10-12 09:21:22', description: '用户 张三 删除用户 "祝覅是" '},
-    {title: '删除用户', date: '208-10-13 01:21:44', description: '用户 张三 删除用户 "张筱雨" '},
-    {title: '新建用户', date: '208-10-15 13:21:s2', description: '用户 张三 新建用户 "材料管理员" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '},
-    {title: '新建角色', date: '208-10-12 16:53:22', description: '用户 张三 新建角色 "admin" '}
-
+    {operation: '删除用户', gmtCreate: '208-10-12 09:21:22', module: '用户 张三 删除用户 "祝覅是" '}
   ];
 
   constructor(public http: HttpsUtils) {
@@ -45,10 +35,12 @@ export class ProfileComponent implements OnInit {
 
   loadMe() {
     this.http.get(Urls.USERS.ME).then(resp => {
+      console.log(resp);
       if (resp['data']) {
         this.userDetails = resp['data'];
-        this.http.get(Urls.LOGS.PAGEQUERY, {operator: this.userDetails['id']}).then(r => {
-          this.userLogs = r['data']['records'];
+        this.http.get(Urls.LOGS.PAGEQUERY, {userId: this.userDetails['id']}).then(r => {
+          console.log(r);
+          this.userLogs = r['data']['list'];
         });
       }
     });
