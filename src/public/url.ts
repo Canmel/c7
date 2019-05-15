@@ -1,6 +1,7 @@
 export const Urls = {
   GetBillTypes: `/return/thumbnail`,
   PROJECTS: `/project`,
+  UNAUTHENTICATION: `/unauthentication`,
   DEPLOYEDWORKFLOW: {
     PAGEQUERY: `/api/deployedWorkflows`,
     DELETE: `/api/deployedWorkflows/`
@@ -16,6 +17,13 @@ export const Urls = {
     DELETE: `/system/sysUser/`,
     UPDATEROLES: `/system/sysUser/roles`,
     VALIDUSERNAME: `/system/sysUser/valid/`
+  },
+  MACRO: {
+    PAGEQUERY: `/system/sysMacro`,
+    SAVE: `/system/sysMacro`,
+    DETAILS: `/system/sysMacro/`,
+    EDIT: `/system/sysMacro/`,
+    DELETE: `/system/sysMacro/`
   },
   LOGS: {
     PAGEQUERY: `/system/sysLog`

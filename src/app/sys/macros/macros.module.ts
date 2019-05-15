@@ -21,7 +21,6 @@ import {ListModule} from '../../../public/list/list.module';
     CrumbsModule,
     FormsModule,
     BailyTableModule,
-    CrumbsModule,
     PaginationModule,
     ListModule,
     ReactiveFormsModule,

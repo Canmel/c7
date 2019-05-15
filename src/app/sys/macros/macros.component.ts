@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {_i18n} from '../../../public/i18n/i18n';
+import {Urls} from '../../../public/url';
+import {Router} from '@angular/router';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
 
 @Component({
   selector: 'app-macros',
@@ -30,19 +34,40 @@ export class MacrosComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '用户名', field: 'username', type: 'text', class: 'text-success'},
-    {title: '昵称', field: 'nickname', type: 'text'},
-    {title: '邮箱', field: 'email', type: 'number'},
-    {title: '电话', field: 'mobile', type: 'text'},
-    {title: '上次登录时间', field: 'lastLoginTime', type: 'phone'},
+    {title: '字段名称', field: 'name', type: 'text', class: 'text-success'},
+    {title: '字典代码', field: 'code', type: 'text'},
+    {title: '值', field: 'value', type: 'text'},
+    {title: '类型', field: 'type', type: 'text'},
+    {title: '序号', field: 'orderNum', type: 'text'},
+    {title: '备注', field: 'remark', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
   macros: Array<any> = [];
 
-  constructor() { }
+  constructor(public router: Router,
+              public modalService: NzModalService,
+              public https: HttpsUtils,
+              private notification: NzNotificationService) { }
 
   ngOnInit() {
+    this.loadEntities();
+  }
+
+  /**
+   * 方法用途: 加载列表信息
+   * 参数：
+   **/
+  loadEntities() {
+    this.https.get(Urls.MACRO.PAGEQUERY, this.formData).then(resp => {
+      this.macros = resp['data']['list'];
+      this.formData.curPage = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    }, error => {
+      console.log(123123);
+      alert(12);
+      this.notification.error('错误', error['error']['msg'] || error['message'] );
+    });
   }
 
 }
