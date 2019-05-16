@@ -1,13 +1,11 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {Urls} from '../../public/url';
 
 // 请求类型
-
-
 @Injectable()
 export class HttpsUtils {
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*'})
   };
@@ -60,7 +58,6 @@ export class HttpsUtils {
   delete<T>(url: string, params, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    // headers.append('x-auth-token', token);
     url = url + params;
     return this.http.delete(url, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
@@ -101,11 +98,11 @@ export class HttpsUtils {
 
   /**
    * 错误消息类
-   * @param error
+   * @param error 错误请求响应
    */
   private handleError(error: HttpErrorResponse): Promise<void | Object> {
     if (error.status === 0) {
-      this.router.navigate(['/unauthentication']);
+      return this.router.navigate([Urls.UNAUTHENTICATION]);
     }
     return Promise.reject(error);
   }

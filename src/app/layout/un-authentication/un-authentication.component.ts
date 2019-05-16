@@ -29,7 +29,7 @@ export class UnAuthenticationComponent implements OnInit {
       if (_this.jumpTime === 0) {
         return location.href = Urls.SESSION.LOGIN;
       }
-    }, 1000);
+    }, 100000);
   }
 
 }
