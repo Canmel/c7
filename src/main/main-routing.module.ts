@@ -9,7 +9,6 @@ import {ProfileModule} from '../app/sys/profile/profile.module';
 import {LogsModule} from '../app/sys/logs/logs.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {ReimbursementModule} from '../app/business/reimbursement/reimbursement.module';
-import {MacrosComponent} from '../app/sys/macros/macros.component';
 import {MacrosModule} from '../app/sys/macros/macros.module';
 
 const routes: Routes = [
