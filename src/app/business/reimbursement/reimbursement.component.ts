@@ -62,7 +62,9 @@ export class ReimbursementComponent implements OnInit {
   /**
    * 表头
    */
-  listHeader = [];
+  listHeader = [
+    {title: '菜单名称', field: 'name', type: 'text', class: 'text-success'},
+  ];
 
   reimbursements: Array<any> = [];
 
@@ -110,8 +112,8 @@ export class ReimbursementComponent implements OnInit {
    **/
   loadEntities() {
     this.https.get(Urls.REIMBURSEMENT.PAGEQUERY, this.formData).then(resp => {
-      this.reimbursements = resp['data']['records'];
-      this.formData.currentPage = resp['data']['current'];
+      this.reimbursements = resp['data']['list'];
+      this.formData.currentPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }
