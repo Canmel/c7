@@ -45,7 +45,7 @@ export class WorkFlowEditComponent implements OnInit {
 
   /** 属性用途: 保存SVG名称 **/
   public saveName = '';
-  
+
   /** 属性用途: 新建图形初始xml内容 **/
   public newDiagramText = null;
 
@@ -185,7 +185,7 @@ export class WorkFlowEditComponent implements OnInit {
       this.https.put(Urls.WORKFLOW.EDIT + this.receiveId, this.validateForm.value).then(resp => {
         this.isVisible = false;
         this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
         } else {
           this.notification.error('失败', resp['msg']);

@@ -175,7 +175,7 @@ export class WorkFlowAddComponent implements OnInit {
       this.https.post(Urls.WORKFLOW.SAVE, this.validateForm.value).then(resp => {
         this.isVisible = false;
         this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
         } else {
           this.notification.error('失败', resp['msg']);

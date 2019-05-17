@@ -3,8 +3,8 @@ export const Urls = {
   PROJECTS: `/project`,
   UNAUTHENTICATION: `/unauthentication`,
   DEPLOYEDWORKFLOW: {
-    PAGEQUERY: `/api/deployedWorkflows`,
-    DELETE: `/api/deployedWorkflows/`
+    PAGEQUERY: `/bpm/deployedWorkflows`,
+    DELETE: `/bpm/deployedWorkflows/`
   },
   USERS: {
     ME: `/system/sysUser/me`,
@@ -59,17 +59,17 @@ export const Urls = {
     VALIDMENUNAME: `/system/sysMenu/valid/`
   },
   WORKFLOW: {
-    PAGEQUERY: `/api/workflow`,
-    SAVE: `/api/workflow`,
-    DELETE: `/api/workflow/`,
-    EDIT: `/api/workflow/`,
-    DETAILS: `/api/workflow/`,
-    PUBLISH: `/api/workflow/publish/`,
-    DEPLOYED: `/api/workflow/deployed`,
-    TASKIMAGE: `/api/workflow/task/image/`,
-    TASKPASS: `/api/workflow/task/pass/`,
-    TASKBACK: `/api/workflow/task/back/`,
-    COMMENTS: `/api/workflow/comments`,
+    PAGEQUERY: `/bpm/workFlow`,
+    SAVE: `/bpm/workFlow`,
+    DELETE: `/bpm/workFlow/`,
+    EDIT: `/bpm/workFlow/`,
+    DETAILS: `/bpm/workFlow/`,
+    PUBLISH: `/bpm/flow/deploy/`,
+    DEPLOYED: `/bpm/workFlow/deployed`,
+    TASKIMAGE: `/bpm/workFlow/task/image/`,
+    TASKPASS: `/bpm/workFlow/task/pass/`,
+    TASKBACK: `/bpm/workFlow/task/back/`,
+    COMMENTS: `/bpm/workFlow/comments`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     },
@@ -81,7 +81,7 @@ export const Urls = {
       LEVEL: `/system/sysMenu/typies`
     },
     WORKFLOW: {
-      TYPES: `/api/options/workflow/typies`,
+      TYPES: `/bpm/workFlow/typies`,
       TYPE: `/api/options/workflow`
     },
     REIMBURSEMENT: {

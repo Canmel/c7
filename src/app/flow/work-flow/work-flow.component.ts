@@ -69,8 +69,8 @@ export class WorkFlowComponent implements OnInit {
   loadEntities() {
     const entityParams = {isPublic: 0};
     this.https.get(Urls.WORKFLOW.PAGEQUERY, $.extend(entityParams, this.formData)).then(resp => {
-      this.entities = resp['data']['records'];
-      this.formData.currentPage = resp['data']['current'];
+      this.entities = resp['data']['list'];
+      this.formData.curPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     }, resp => {
       console.log(resp);
@@ -85,8 +85,8 @@ export class WorkFlowComponent implements OnInit {
     console.log(this.deployedFormData.currentPage);
     this.https.get(Urls.DEPLOYEDWORKFLOW.PAGEQUERY, this.deployedFormData).then(resp => {
       console.log(resp);
-      this.deployedEntities = resp['data']['records'];
-      this.deployedFormData.currentPage = resp['data']['current'];
+      this.deployedEntities = resp['data']['list'];
+      this.deployedFormData.currentPage = resp['data']['pageNum'];
       this.deployedFormData.totalNum = resp['data']['total'];
     }, resp => {
       console.log(resp);
@@ -154,7 +154,7 @@ export class WorkFlowComponent implements OnInit {
    **/
   publishOkHandler(item) {
     this.https.get(Urls.WORKFLOW.PUBLISH + item.id).then(resp => {
-      if (resp['httpStatus'] === 200) {
+      if (resp['code'] === 200) {
         this.loadEntities();
         this.loadDeployedEntities();
         this.notification.success('成功', resp['msg']);
