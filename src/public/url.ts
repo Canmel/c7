@@ -6,6 +6,10 @@ export const Urls = {
     PAGEQUERY: `/bpm/deployedWorkflows`,
     DELETE: `/bpm/deployedWorkflows/`
   },
+  DEFINITIONWORKFLOW: {
+    PAGEQUERY: `/bpm/flow/defWorkflows`,
+    DELETE: `/bpm/flow/defWorkflows/`
+  },
   USERS: {
     ME: `/system/sysUser/me`,
     PAGEQUERY: `/system/sysUser`,
@@ -85,7 +89,7 @@ export const Urls = {
       TYPE: `/api/options/workflow`
     },
     REIMBURSEMENT: {
-      STATUS: `/api/options/reimbursement/status`
+      STATUS: `/api/reimbursement/status`
     }
   },
   SESSION: {

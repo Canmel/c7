@@ -3,8 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {ReimbursementComponent} from './reimbursement.component';
-import {ReimbursementEditComponent} from '../reimbursement-edit/reimbursement-edit.component';
-import {ReimbursementAddComponent} from '../reimbursement-add/reimbursement-add.component';
+import {ReimbursementEditComponent} from './reimbursement-edit/reimbursement-edit.component';
+import {ReimbursementAddComponent} from './reimbursement-add/reimbursement-add.component';
 
 const routes: Routes = [
   {

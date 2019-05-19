@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-work-flow',
@@ -37,17 +36,31 @@ export class WorkFlowComponent implements OnInit {
     menuname: ''
   };
 
+  /** 属性用途: 页面参数 分页级查询条件 **/
+  definitionFormData: any = {
+    totalNum: 21,
+    pageSize: 10,
+    currentPage: 1,
+    menuname: ''
+  };
+
   /** 属性用途: 未发布流程 表头 **/
   listHeader = [];
 
   /** 属性用途: 已发布的流程 表头 **/
   deployedListHeader = [];
 
+  /** 属性用途: 已定义的流程 表头 **/
+  definitionHeader = [];
+
   /** 属性用途: 未发布的流程 接收实体类 **/
   entities: Array<any> = [];
 
   /** 属性用途: 已发布流程 接收实体类 **/
   deployedEntities: Array<any> = [];
+
+  /** 属性用途: 已定义流程 接收实体类 **/
+  definitionEntities: Array<any> = [];
 
   /** 属性用途: 工作流类型集合 **/
   public workFlowTypies = [];
@@ -60,6 +73,7 @@ export class WorkFlowComponent implements OnInit {
   ngOnInit() {
     this.loadEntities();
     this.loadDeployedEntities();
+    this.loadDefinitionEntities();
   }
 
   /**
@@ -94,6 +108,20 @@ export class WorkFlowComponent implements OnInit {
   }
 
   /**
+   * 方法用途: 加载已定义流程信息
+   * 参数：
+   **/
+  loadDefinitionEntities() {
+    this.https.get(Urls.DEFINITIONWORKFLOW.PAGEQUERY, this.deployedFormData).then(resp => {
+      this.definitionEntities = resp['data']['list'];
+      this.definitionFormData.currentPage = resp['data']['pageNum'];
+      this.definitionFormData.totalNum = resp['data']['total'];
+    }, resp => {
+      console.log(resp);
+    });
+  }
+
+  /**
    * 方法用途: 页面工具方法 格式化时间   年月日 时分秒
    * 参数:
    **/
@@ -113,6 +141,7 @@ export class WorkFlowComponent implements OnInit {
       this.listHeader = [{title: '流程ID', field: 'id', type: 'text'},
         {title: '流程名称', field: 'name', type: 'text', class: 'text-success'},
         {title: '类型', field: 'flowType', type: 'enum', options: this.workFlowTypies},
+        {title: 'KEY', field: 'key', type: 'text'},
         {title: '操作', field: 'option', type: 'opt', width: '20%'}];
       this.deployedListHeader = [
         {title: '流程ID', field: 'id', type: 'text'},
@@ -120,6 +149,12 @@ export class WorkFlowComponent implements OnInit {
         // {title: '类型', field: 'flowType', type: 'enum', options: this.workFlowTypies},
         {title: '发布时间', field: 'deploymentTime', type: 'timeStamp'},
         {title: '操作', field: 'option', type: 'opt', width: '20%'}];
+      this.definitionHeader = [
+        {title: '流程ID', field: 'id', type: 'text'},
+        {title: '名称', field: 'resourceName', type: 'text'},
+        {title: 'KEY', field: 'key', type: 'text', class: 'text-success'},
+        {title: '版本', field: 'version', type: 'text'},
+        ];
     });
   }
 

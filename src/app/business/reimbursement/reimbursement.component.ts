@@ -62,9 +62,7 @@ export class ReimbursementComponent implements OnInit {
   /**
    * 表头
    */
-  listHeader = [
-    {title: '菜单名称', field: 'name', type: 'text', class: 'text-success'},
-  ];
+  listHeader = [];
 
   reimbursements: Array<any> = [];
 
@@ -101,7 +99,7 @@ export class ReimbursementComponent implements OnInit {
   }
 
   loadDepolyedProcess() {
-    this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3}).then(resp => {
+    this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3, key: 'REIMBURSEMENT'}).then(resp => {
       this.deployedProcess = resp['data'];
     });
   }
@@ -139,7 +137,7 @@ export class ReimbursementComponent implements OnInit {
       nzOnOk: () => {
         const _this = this;
         this.https.delete(Urls.REIMBURSEMENT.DELETE, param['id']).then(resp => {
-          if (resp['httpStatus'] === 200) {
+          if (resp['code'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {
             _this.notification.error('失败', resp['msg']);
@@ -202,7 +200,7 @@ export class ReimbursementComponent implements OnInit {
       businessId: this.selectItem['id']
     }).then(
       resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
           this.isVisibleExam = false;
         } else {
@@ -246,7 +244,7 @@ export class ReimbursementComponent implements OnInit {
   }
 
   isShowApplyButton(item) {
-    return ! item['task'];
+    return !item['task'];
   }
 
   /**
@@ -256,7 +254,7 @@ export class ReimbursementComponent implements OnInit {
   handleOk() {
     this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
       resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
           this.loadEntities();
         } else {
@@ -277,7 +275,7 @@ export class ReimbursementComponent implements OnInit {
   handleFlowOk() {
     this.https.get(Urls.REIMBURSEMENT.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
       resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
         } else {
           this.notification.error('失败', resp['msg']);
@@ -302,7 +300,7 @@ export class ReimbursementComponent implements OnInit {
       businessId: this.selectItem['id']
     }).then(
       resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
           this.isVisibleExam = false;
         } else {

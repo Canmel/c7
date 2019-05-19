@@ -8,8 +8,8 @@ import {CrumbsModule} from '../../../public/crumbs/crumbs.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
 import {NgZorroAntdModule, NzInputNumberModule} from 'ng-zorro-antd';
-import {ReimbursementAddComponent} from '../reimbursement-add/reimbursement-add.component';
-import {ReimbursementEditComponent} from '../reimbursement-edit/reimbursement-edit.component';
+import {ReimbursementAddComponent} from './reimbursement-add/reimbursement-add.component';
+import {ReimbursementEditComponent} from './reimbursement-edit/reimbursement-edit.component';
 
 @NgModule({
   declarations: [

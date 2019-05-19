@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Urls} from '../../../public/url';
+import {Urls} from '../../../../public/url';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
@@ -31,12 +31,15 @@ export class ReimbursementEditComponent implements OnInit {
    **/
   submitForm = ($event, value) => {
     $event.preventDefault();
+
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
     }
     this.https.put(Urls.REIMBURSEMENT.EDIT + this.receiveId, value).then(resp => {
-        if (resp['httpStatus'] === 200) {
+        if (resp['code'] === 200) {
           this.router.navigate([Urls.BUSINESS.REIMBURSEMENT.LIST]);
           this.notification.success('成功', resp['msg']);
         } else {

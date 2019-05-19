@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Urls} from '../../../public/url';
 import {Router} from '@angular/router';
-import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
+import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 
 @Component({
   selector: 'app-reimbursement-add',
@@ -30,11 +30,13 @@ export class ReimbursementAddComponent implements OnInit {
   submitForm = ($event, value) => {
     $event.preventDefault();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
     }
     this.https.post(Urls.REIMBURSEMENT.SAVE, value).then(resp => {
-      if (resp['httpStatus'] === 200) {
+      if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.REIMBURSEMENT.LIST]);
         this.notification.success('成功', resp['msg']);
       } else {
@@ -53,8 +55,10 @@ export class ReimbursementAddComponent implements OnInit {
     e.preventDefault();
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsPristine();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
     }
   }
 
