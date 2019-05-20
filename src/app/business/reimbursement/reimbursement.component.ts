@@ -323,6 +323,11 @@ export class ReimbursementComponent implements OnInit {
 
   }
 
+  current(item) {
+    this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'})
+    this.notification.success('提示', '');
+  }
+
   /**
    * 方法用途: 显示审核模态框
    * 参数：

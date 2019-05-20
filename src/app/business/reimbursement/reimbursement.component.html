@@ -56,6 +56,10 @@
               <a nz-button nz-popover nzContent="审核" (click)="showExamModal(item)" *ngIf="isShowExamButton(item)"><i
                 class="fa fa-gavel text-info-dk text-active"></i><i
                 class="fa fa-gavel text-info-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="当前" (click)="current(item)"><i
+                class="fa fa-gavel text-info-dk text-active"></i><i
+                class="fa fa-gavel text-info-dk text"></i></a>
             </div>
           </td>
         </tr>
