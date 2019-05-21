@@ -324,7 +324,14 @@ export class ReimbursementComponent implements OnInit {
   }
 
   current(item) {
-    this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'})
+    this.selectItem = item;
+    this.selectedItemId = item['id'];
+    this.isVisibleExam = true;
+    this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
+      console.log(resp);
+      const respData = resp['data'];
+      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
+    });
     this.notification.success('提示', '');
   }
 
@@ -337,8 +344,7 @@ export class ReimbursementComponent implements OnInit {
     this.selectedItemId = item['id'];
     this.isVisibleExam = true;
     if (item['task']) {
-      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
-        sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'];
     }
 
     const _this = this;

@@ -71,7 +71,7 @@ export const Urls = {
     DETAILS: `/bpm/workFlow/`,
     PUBLISH: `/bpm/flow/deploy/`,
     DEPLOYED: `/bpm/workFlow/deployed`,
-    TASKIMAGE: `/bpm/workFlow/task/image/`,
+    TASKIMAGE: `/bpm/flow/trace/`,
     TASKPASS: `/bpm/workFlow/task/pass/`,
     TASKBACK: `/bpm/workFlow/task/back/`,
     COMMENTS: `/bpm/workFlow/comments`,
