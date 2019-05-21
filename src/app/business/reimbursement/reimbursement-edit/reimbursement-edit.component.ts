@@ -59,8 +59,11 @@ export class ReimbursementEditComponent implements OnInit {
     e.preventDefault();
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateForm.controls[key].markAsPristine();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+
     }
   }
 

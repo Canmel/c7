@@ -49,9 +49,10 @@ export const Urls = {
     DELETE: `/api/reimbursement/`,
     APPLY: `/api/reimbursement/apply/`,
     CURRENT: `/api/reimbursement/current/`,
-    TASKPASS: `/api/reimbursement/task/pass/`,
-    TASKBACK: `/api/reimbursement/task/back/`,
-    EDIT: `/api/reimbursement/`
+    TASKPASS: `/api/reimbursement/pass/`,
+    TASKBACK: `/api/reimbursement/back/`,
+    EDIT: `/api/reimbursement/`,
+    COMMENT: `/api/reimbursement/comment/`
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
@@ -74,7 +75,7 @@ export const Urls = {
     TASKIMAGE: `/bpm/flow/trace/`,
     TASKPASS: `/bpm/workFlow/task/pass/`,
     TASKBACK: `/bpm/workFlow/task/back/`,
-    COMMENTS: `/bpm/workFlow/comments`,
+    COMMENTS: `/api/reimbursement/comment/`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     },

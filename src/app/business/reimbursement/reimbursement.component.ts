@@ -51,7 +51,8 @@ export class ReimbursementComponent implements OnInit {
   selectItem = {
     name: '',
     amount: 0,
-    description: ''
+    description: '',
+    task: null
   };
 
   commitForm = {
@@ -73,7 +74,7 @@ export class ReimbursementComponent implements OnInit {
   taskImageUrl = '';
 
   comments = [
-    {taskname: '', message: ''}
+    {taskname: '', message: '', username: '', createdTime: ''}
   ];
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
@@ -89,10 +90,18 @@ export class ReimbursementComponent implements OnInit {
   loadEntityStatus() {
     this.https.get(Urls.OPTIONS.REIMBURSEMENT.STATUS).then(resp => {
       this.listHeader = [
-        {title: '名称', field: 'name', type: 'text', class: 'text-success'},
+        {title: '名称', field: 'name', type: 'text'},
         {title: '描述', field: 'description', type: 'text'},
-        {title: '状态', field: 'status', type: 'enum', options: resp['data']},
-        {title: '流程', field: 'task.name', type: 'union', clickFn: this.clickFnFlow, class: 'text-success', cursor: 'pointer'},
+        {
+          title: '状态',
+          field: 'status',
+          type: 'enum',
+          options: resp['data'],
+          clickFn: this.clickFnFlow,
+          class: 'text-success',
+          cursor: 'pointer'
+        },
+        // {title: '流程', field: 'processStatus', type: 'union', clickFn: this.clickFnFlow, class: 'text-success', cursor: 'pointer'},
         {title: '操作', field: 'option', type: 'opt', width: '20%'}
       ];
     });
@@ -239,7 +248,7 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   isShowExamButton(reimbursement) {
-    const flag = reimbursement['task'] && !reimbursement['task']['isEnd'] && this.permissions(reimbursement);
+    const flag = reimbursement['status'] === 2 && this.permissions(reimbursement);
     return flag;
   }
 
@@ -292,10 +301,11 @@ export class ReimbursementComponent implements OnInit {
    * 参数：
    **/
   handleExamOk() {
-    if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
+    console.log(this.selectItem['id']);
+    if (!this.selectItem['id']) {
       return this.notification.error('失败', '未找到任务信息');
     }
-    this.https.get(Urls.REIMBURSEMENT.TASKPASS + this.selectItem['task']['id'], {
+    this.https.get(Urls.REIMBURSEMENT.TASKPASS + this.selectItem['id'], {
       comment: this.commitForm.commontValue,
       businessId: this.selectItem['id']
     }).then(
@@ -332,7 +342,6 @@ export class ReimbursementComponent implements OnInit {
       const respData = resp['data'];
       this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
     });
-    this.notification.success('提示', '');
   }
 
   /**
@@ -343,18 +352,20 @@ export class ReimbursementComponent implements OnInit {
     this.selectItem = item;
     this.selectedItemId = item['id'];
     this.isVisibleExam = true;
-    if (item['task']) {
-      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'];
-    }
+    this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id']).then(resp => {
+      const respData = resp['data'];
+      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
+      this.selectItem.task = respData[0];
+    });
 
     const _this = this;
-    if (item['task']) {
+    if (this.selectItem.task) {
       this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
         this.selectTask = resp['data'];
         _this.comments = [];
         $.each(this.selectTask, function (index, task) {
           $.each(task['comment'], function (i, c) {
-            _this.comments.push({taskname: task['name'], message: c['message']});
+            _this.comments.push({taskname: task['name'], message: c['message'], username: 'asda'});
           });
         });
       }, resp => {
@@ -376,20 +387,45 @@ export class ReimbursementComponent implements OnInit {
 
   clickFnFlow(item): void {
     this.selectItem = item;
-    if (item['task']) {
-      this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + item['task']['id'] + '?access_token=' +
-        sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
-    }
+    const _this = this;
+    this.taskImageUrl = '';
+    this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
+      const respData = resp['data'];
+      if (respData) {
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
+        this.selectItem.task = respData[0];
+
+        if (item['status'] !== 1) {
+          this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(r => {
+            this.selectTask = r['data'];
+            _this.comments = [];
+            $.each(this.selectTask, function (index, task) {
+              $.each(task['comment'], function (i, c) {
+                _this.comments.push({taskname: task['name'], message: c['fullMessage'], username: c['userId'], createdTime: c['time']});
+              });
+            });
+            console.log(_this.comments);
+          });
+        }
+
+
+      }
+    });
     this.isVisibleFlow = true;
     this.loadEntities();
     const _this = this;
-    if (item['task']) {
-      this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
+
+  }
+
+  comments() {
+    console.log(item);
+    if (item['status'] !== 1) {
+      this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(resp => {
         this.selectTask = resp['data'];
         _this.comments = [];
         $.each(this.selectTask, function (index, task) {
           $.each(task['comment'], function (i, c) {
-            _this.comments.push({taskname: task['name'], message: c['message']});
+            _this.comments.push({taskname: task['name'], message: c['message'], username: 'asda', createdTime: c['time']});
           });
         });
       }, resp => {

@@ -31,10 +31,10 @@
         <tr *ngFor="let item of reimbursements; let i = index">
           <td *ngFor="let head of listHeader">
             <span *ngIf="head.type == 'text'" ngClass="{{head.class}}"
-                  [ngStyle]="{'width': item.width}">{{item[head.field]}}</span>
+                  [ngStyle]="{'width': item.width, 'cursor': item.cursor}">{{item[head.field]}}</span>
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width}" *ngIf="head.type === 'enum'">
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, 'cursor': 'pointer'}" *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
                   <p *ngFor="let obj of head.options">
                     {{obj.value == item[head.field] ? obj.name: ''}}
                   </p>
@@ -83,8 +83,8 @@
 </nz-modal>
 
 
-<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="handleFlowCancel()"
-          (nzOnOk)="handleFlowOk()">
+<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="isVisibleFlow=false"
+          [nzFooter]="null">
   <div>
     <div style="overflow: auto;">
       <img style="width: 100%;" src="{{taskImageUrl}}">
@@ -120,6 +120,15 @@
         </tbody>
       </table>
     </div>
+    <nz-timeline>
+      <nz-timeline-item *ngFor="let c of comments">
+        <li>{{c.userId}} 在 {{c.taskname}} 表示: {{c.message}}</li>
+        <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
+      </nz-timeline-item>
+      <nz-timeline-item>Solve initial network problems 2015-09-01</nz-timeline-item>
+      <nz-timeline-item>Technical testing 2015-09-01</nz-timeline-item>
+      <nz-timeline-item>Network problems being solved 2015-09-01</nz-timeline-item>
+    </nz-timeline>
   </div>
 </nz-modal>
 
