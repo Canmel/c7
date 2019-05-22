@@ -247,13 +247,14 @@ export class ReimbursementComponent implements OnInit {
    * 方法用途: 是否显示审核按钮
    * 参数：
    **/
-  isShowExamButton(reimbursement) {
+  isProcessing(reimbursement) {
     const flag = reimbursement['status'] === 2 && this.permissions(reimbursement);
     return flag;
   }
 
-  isShowApplyButton(item) {
-    return !item['task'];
+  isShowApplyButton(reimbursement) {
+    const flag = reimbursement['status'] === 1 && this.permissions(reimbursement);
+    return flag;
   }
 
   /**
@@ -407,8 +408,6 @@ export class ReimbursementComponent implements OnInit {
             console.log(_this.comments);
           });
         }
-
-
       }
     });
     this.isVisibleFlow = true;

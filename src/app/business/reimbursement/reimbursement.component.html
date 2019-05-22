@@ -49,15 +49,11 @@
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)" *ngIf="isShowApplyButton(item)"><i
+              <a nz-button nz-popover nzContent="提交申请" (click)="showModal(item.id)" *ngIf="!isProcessing(item)"><i
                 class="fa fa-sitemap text-info-dk text-active"></i><i
                 class="fa fa-sitemap text-info-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="审核" (click)="showExamModal(item)" *ngIf="isShowExamButton(item)"><i
-                class="fa fa-gavel text-info-dk text-active"></i><i
-                class="fa fa-gavel text-info-dk text"></i></a>
-
-              <a nz-button nz-popover nzContent="当前" (click)="current(item)"><i
+              <a nz-button nz-popover nzContent="审核" (click)="showExamModal(item)" *ngIf="isProcessing(item)"><i
                 class="fa fa-gavel text-info-dk text-active"></i><i
                 class="fa fa-gavel text-info-dk text"></i></a>
             </div>
@@ -125,9 +121,6 @@
         <li>{{c.userId}} 在 {{c.taskname}} 表示: {{c.message}}</li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
-      <nz-timeline-item>Solve initial network problems 2015-09-01</nz-timeline-item>
-      <nz-timeline-item>Technical testing 2015-09-01</nz-timeline-item>
-      <nz-timeline-item>Network problems being solved 2015-09-01</nz-timeline-item>
     </nz-timeline>
   </div>
 </nz-modal>
