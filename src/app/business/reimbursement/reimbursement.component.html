@@ -101,24 +101,10 @@
     </div>
     <div class="comment-content">
       <label class="comment-title"><b>审核过程</b></label>
-      <table>
-        <thead>
-        <tr>
-          <th style="width: 40%;">步骤</th>
-          <th style="width: 40%;">审批意见</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let c of comments">
-          <td>{{c.taskname}}</td>
-          <td>{{c.message}}</td>
-        </tr>
-        </tbody>
-      </table>
     </div>
     <nz-timeline>
       <nz-timeline-item *ngFor="let c of comments">
-        <li>{{c.userId}} 在 {{c.taskname}} 表示: {{c.message}}</li>
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
     </nz-timeline>
@@ -146,20 +132,6 @@
     </div>
     <div class="comment-content">
       <label class="comment-title"><b>审核过程</b></label>
-      <table>
-        <thead>
-        <tr>
-          <th style="width: 40%;">步骤</th>
-          <th style="width: 40%;">审批意见</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let c of comments">
-          <td>{{c.taskname}}</td>
-          <td>{{c.message}}</td>
-        </tr>
-        </tbody>
-      </table>
     </div>
     <textarea rows="2" nz-input [(ngModel)]="commitForm.commontValue" placeholder="请输入审核备注..."></textarea>
   </div>

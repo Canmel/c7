@@ -48,6 +48,8 @@ export class ReimbursementComponent implements OnInit {
 
   selectTask;
 
+  showTasks;
+
   selectItem = {
     name: '',
     amount: 0,
@@ -74,7 +76,7 @@ export class ReimbursementComponent implements OnInit {
   taskImageUrl = '';
 
   comments = [
-    {taskname: '', message: '', username: '', createdTime: ''}
+    {taskName: '', message: '', username: '', createdTime: '', pass: true}
   ];
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
@@ -358,15 +360,15 @@ export class ReimbursementComponent implements OnInit {
       this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
       this.selectItem.task = respData[0];
     });
-
     const _this = this;
     if (this.selectItem.task) {
       this.https.get(Urls.WORKFLOW.COMMENTS, {id: this.selectItem['task']['id']}).then(resp => {
         this.selectTask = resp['data'];
+        console.log(this.selectTask);
         _this.comments = [];
         $.each(this.selectTask, function (index, task) {
           $.each(task['comment'], function (i, c) {
-            _this.comments.push({taskname: task['name'], message: c['message'], username: 'asda'});
+            _this.comments.push({taskName: task['name'], message: c['message'], username: 'asda', createdTime: '', pass: false});
           });
         });
       }, resp => {
@@ -402,29 +404,33 @@ export class ReimbursementComponent implements OnInit {
             _this.comments = [];
             $.each(this.selectTask, function (index, task) {
               $.each(task['comment'], function (i, c) {
-                _this.comments.push({taskname: task['name'], message: c['fullMessage'], username: c['userId'], createdTime: c['time']});
+                _this.comments.push({taskName: task['name'], message: c['fullMessage'], username: c['userId'], createdTime: c['time'], pass: task['pass']});
               });
             });
-            console.log(_this.comments);
+            console.log(_this.selectTask);
           });
         }
       }
     });
     this.isVisibleFlow = true;
     this.loadEntities();
-    const _this = this;
-
   }
 
-  comments() {
-    console.log(item);
+  getComments(item) {
+    const _this = this;
     if (item['status'] !== 1) {
       this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(resp => {
         this.selectTask = resp['data'];
         _this.comments = [];
         $.each(this.selectTask, function (index, task) {
           $.each(task['comment'], function (i, c) {
-            _this.comments.push({taskname: task['name'], message: c['message'], username: 'asda', createdTime: c['time']});
+            _this.comments.push({
+              taskName: task['name'],
+              message: c['message'],
+              username: 'asda',
+              createdTime: c['time'],
+              pass: task['pass']
+            });
           });
         });
       }, resp => {
