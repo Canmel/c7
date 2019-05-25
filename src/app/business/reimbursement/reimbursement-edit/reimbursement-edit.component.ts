@@ -38,7 +38,7 @@ export class ReimbursementEditComponent implements OnInit {
         this.validateForm.controls[key].updateValueAndValidity();
       }
     }
-    this.https.put(Urls.REIMBURSEMENT.EDIT + this.receiveId, value).then(resp => {
+    this.https.put(Urls.REIMBURSEMENT.EDIT, value).then(resp => {
         if (resp['code'] === 200) {
           this.router.navigate([Urls.BUSINESS.REIMBURSEMENT.LIST]);
           this.notification.success('成功', resp['msg']);
@@ -49,8 +49,7 @@ export class ReimbursementEditComponent implements OnInit {
       resp => {
         console.log(resp);
       });
-  };
-
+  }
   /**
    * 方法用途: 重置表单
    * 参数:  事件
@@ -74,6 +73,7 @@ export class ReimbursementEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public activatedRoute: ActivatedRoute,
               public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
+      id: ['', []],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       amount: ['', [Validators.required]]
@@ -93,6 +93,7 @@ export class ReimbursementEditComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.EDIT + id).then(resp => {
       const entity = resp['data'];
       this.validateForm.setValue({
+        id: entity['id'],
         name: entity['name'],
         description: entity['description'],
         amount: entity['amount']
