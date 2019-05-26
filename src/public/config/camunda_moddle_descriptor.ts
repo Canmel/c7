@@ -1,7 +1,7 @@
 export const CamundaModdleDescriptor = {
   'name': 'Camunda',
   'uri': 'http://camunda.org/schema/1.0/bpmn',
-  'prefix': 'camunda',
+  'prefix': 'camASDASDunda',
   'xml': {
     'tagAlias': 'lowerCase'
   },
