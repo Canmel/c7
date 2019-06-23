@@ -1,3 +1,5 @@
+import {StringUtils} from '../../utils/StringUtils';
+
 export class BaseEvent {
   x: number;
   y: number;
@@ -14,6 +16,8 @@ export class BaseEvent {
   twidth: number;
   type: string;
   role: any;
+  id: string;
+  xmlTagName: string;
   // strokeWidth: any;
 
   constructor() {
@@ -27,6 +31,7 @@ export class BaseEvent {
     this.type = '未知';
     this.hborder = 0.5 * this.horizontal() + this.borderWidth + 10;
     this.lborder = 0.5 * this.longitudinal() + this.borderWidth + 10;
+    this.id = StringUtils.getID();
   }
 
   horizontal(): number {

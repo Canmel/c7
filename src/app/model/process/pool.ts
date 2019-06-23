@@ -1,4 +1,5 @@
 import {BaseEvent} from './base-event';
+import {StringUtils} from '../../utils/StringUtils';
 
 export class Pool extends BaseEvent {
   width: number;
@@ -21,6 +22,8 @@ export class Pool extends BaseEvent {
     this.hborder = 0.5 * this.horizontal() + this.borderWidth + 10;
     this.lborder = 0.5 * this.longitudinal() + this.borderWidth + 10;
     this.role = '1';
+    this.id = Pool.name + 'Event_' + StringUtils.getID();
+    this.xmlTagName = 'poolEvent';
   }
 
   horizontal(): number {

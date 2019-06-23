@@ -11,6 +11,12 @@ import * as $ from 'jquery';
 import {TransitionLine} from '../../model/process/transition-line';
 import {Polyline} from '../../model/process/polyline';
 import {FormGroup} from '@angular/forms';
+import {ProcessDetails} from '../../model/process/process-details';
+import {BPMUtil} from '../../utils/BPMUtil';
+import {Urls} from '../../../public/url';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {Router} from '@angular/router';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-designer',
@@ -43,6 +49,8 @@ export class ProcessDesignerComponent implements OnInit {
   isShowMoveTask: Boolean = false;
 
   allRect: Array<BaseEvent> = [];
+
+  processDetails: ProcessDetails;
 
   operator: Pool;
 
@@ -93,7 +101,9 @@ export class ProcessDesignerComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private https: HttpsUtils, private router: Router, private notification: NzNotificationService) {
+    this.processDetails = new ProcessDetails();
+
   }
 
   getAllRect(): Array<BaseEvent> {
@@ -494,4 +504,27 @@ export class ProcessDesignerComponent implements OnInit {
     }
     console.log(this.operator.y, this.operator.height);
   }
+
+  saveHandler() {
+    this.https.post(Urls.WORKFLOW.SAVE, this.getSaveValue()).then(resp => {
+      // this.isVisible = false;
+      this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
+      if (resp['code'] === 200) {
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
+  }
+
+  getSaveValue(): any {
+    const result = {};
+    result['name'] = this.processDetails.name;
+    result['key'] = this.processDetails.busniessKey;
+    result['flow'] = BPMUtil.generateXML(this.processDetails, this.getAllRect(), this.polyLines);
+    return result;
+  }
+
 }

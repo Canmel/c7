@@ -1,4 +1,5 @@
 import {BaseEvent} from './base-event';
+import {StringUtils} from '../../utils/StringUtils';
 
 export class Intermediate extends BaseEvent{
   radius: number;
@@ -24,6 +25,8 @@ export class Intermediate extends BaseEvent{
     this.hborder = 0.5 * this.horizontal() + this.borderWidth + 10;
     this.lborder = 0.5 * this.longitudinal() + this.borderWidth + 10;
     this.role = '1';
+    this.id = Intermediate.name + 'Event_' + StringUtils.getID();
+    this.xmlTagName = 'intermediateEvent';
   }
 
 
