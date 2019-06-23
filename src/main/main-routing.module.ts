@@ -10,6 +10,8 @@ import {LogsModule} from '../app/sys/logs/logs.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {ReimbursementModule} from '../app/business/reimbursement/reimbursement.module';
 import {MacrosModule} from '../app/sys/macros/macros.module';
+import {ProcessDesignerModule} from '../app/flow/process-designer/process-designer.module';
+import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 
 const routes: Routes = [
   {
@@ -48,6 +50,9 @@ const routes: Routes = [
       }, {
         path: 'macros',
         loadChildren: () => MacrosModule
+      }, {
+        path: 'process-designer',
+        loadChildren: () => ProcessDesignerModule
       }
     ]
   }
@@ -55,7 +60,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{provide: NZ_I18N, useValue: zh_CN}],
 })
 export class MainRoutingModule {
 }

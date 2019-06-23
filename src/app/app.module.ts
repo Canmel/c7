@@ -11,7 +11,6 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {HttpsUtils} from './utils/HttpsUtils.service';
 import {CookieService} from 'ngx-cookie-service';
-import { MacroAddComponent } from './sys/macros/macro-add/macro-add.component';
 
 registerLocaleData(zh);
 

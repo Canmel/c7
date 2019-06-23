@@ -27,8 +27,10 @@
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "ng-zorro-antd": "^1.8.0",
+    "ng2-drag-drop": "^3.0.2",
     "particles.js": "^2.0.0",
     "rxjs": "~6.3.3",
+    "rxjs-compat": "^6.4.0",
     "zone.js": "~0.8.26",
     "ngx-cookie-service": "^2.1.0"
   },

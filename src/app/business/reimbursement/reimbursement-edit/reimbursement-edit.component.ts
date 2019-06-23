@@ -93,7 +93,6 @@ export class ReimbursementEditComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.EDIT + id).then(resp => {
       const entity = resp['data'];
       this.validateForm.setValue({
-        id: entity['id'],
         name: entity['name'],
         description: entity['description'],
         amount: entity['amount']

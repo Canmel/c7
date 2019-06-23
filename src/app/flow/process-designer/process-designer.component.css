@@ -1,0 +1,83 @@
+.designer-background {
+  height: 800px;
+  background-color: #efefef4d;
+  overflow: hidden;
+}
+
+.tools-background {
+  height: 500px;
+  /*width: 150px;*/
+  background-color: #cccccc54;
+}
+
+p {
+  margin: 0;
+}
+
+.d-outline {
+
+}
+
+.d-outline-selected-true {
+  stroke: green;
+}
+
+.d-outline-selected-false {
+  stroke: red;
+}
+
+.d-outline:hover + rect {
+  stroke-dasharray: 3, 3;
+  stroke: #ffb500;
+  stroke-width: 1;
+}
+
+.d-outline-selected-false:hover + rect {
+  stroke-dasharray: 3, 3;
+  stroke: red;
+  stroke-width: 1;
+}
+
+.d-outline-selected-true:hover + rect {
+  stroke-dasharray: 3, 3;
+  stroke: green;
+  stroke-width: 1;
+}
+
+.tool-move-tips {
+  background-color: beige;
+  position: fixed;
+}
+
+.tool-panel-left > div{
+  border-right: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+}
+
+.tool-panel-right > div{
+  border-bottom: 1px solid #dadada;
+}
+
+.svg-tools {
+  position: absolute;
+  font-size: 20px;
+}
+
+.svg-tools :hover {
+  background-color: #bbbbbb;
+}
+
+.operator-pool {
+
+}
+
+.operator-pool-move {
+  cursor: nesw-resize;
+  stroke: green;
+  fill: green;
+}
+
+.operator-pool:hover + rect {
+  stroke-width: 1;
+  cursor: nesw-resize;
+}
