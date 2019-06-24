@@ -108,7 +108,7 @@
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">参与角色</nz-form-label>
           <nz-form-control [nzSm]="18" [nzXs]="24">
             <nz-select
-              style="width: 200px;"
+              style="width: 100%;"
               nzShowSearch
               nzAllowClear
               nzPlaceHolder="选择参与角色"
@@ -145,6 +145,23 @@
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">流程名称</nz-form-label>
           <nz-form-control [nzSm]="18" [nzXs]="24">
             <input type="text" nz-input placeholder="节点名称" [(ngModel)]="processDetails.name"/>
+          </nz-form-control>
+        </nz-input-group>
+
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">流程类型</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              style="width: 100%;"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="选择流程类型"
+              [(ngModel)]="processDetails.flowType">
+              <nz-option nzLabel="所有类型" nzValue="0"></nz-option>
+              <nz-option nzLabel="普通流程" nzValue="1"></nz-option>
+              <nz-option nzLabel="财务流程" nzValue="2"></nz-option>
+              <nz-option nzLabel="报销流程" nzValue="3"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-input-group>
       </div>

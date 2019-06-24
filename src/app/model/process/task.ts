@@ -21,7 +21,7 @@ export class Task extends BaseEvent {
     this.lborder = 0.5 * this.longitudinal() + this.borderWidth + 10;
     this.role = '0';
     this.id = Task.name + 'Event_' + StringUtils.getID();
-    this.xmlTagName = 'taskEvent';
+    this.xmlTagName = 'userTask';
   }
 
   centerX(): number {

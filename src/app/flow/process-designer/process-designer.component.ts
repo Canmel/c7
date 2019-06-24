@@ -107,7 +107,8 @@ export class ProcessDesignerComponent implements OnInit {
   }
 
   getAllRect(): Array<BaseEvent> {
-    return this.allRect.concat(this.tasks).concat(this.starts).concat(this.ends).concat(this.intermediates).concat(this.getways).concat(this.pools);
+    return this.allRect.concat(this.starts).concat(this.tasks).concat(this.intermediates).concat(this.getways)
+      .concat(this.pools).concat(this.ends);
   }
 
   ngOnInit() {
@@ -506,6 +507,7 @@ export class ProcessDesignerComponent implements OnInit {
   }
 
   saveHandler() {
+    console.log(this.getSaveValue());
     this.https.post(Urls.WORKFLOW.SAVE, this.getSaveValue()).then(resp => {
       // this.isVisible = false;
       this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
@@ -524,6 +526,7 @@ export class ProcessDesignerComponent implements OnInit {
     result['name'] = this.processDetails.name;
     result['key'] = this.processDetails.busniessKey;
     result['flow'] = BPMUtil.generateXML(this.processDetails, this.getAllRect(), this.polyLines);
+    result['flowType'] = this.processDetails.flowType;
     return result;
   }
 
