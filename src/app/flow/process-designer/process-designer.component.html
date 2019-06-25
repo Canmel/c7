@@ -113,10 +113,10 @@
               nzAllowClear
               nzPlaceHolder="选择参与角色"
               [(ngModel)]="selected.role">
-              <nz-option nzLabel="所有角色" nzValue="0"></nz-option>
-              <nz-option nzLabel="系统管理员" nzValue="1"></nz-option>
-              <nz-option nzLabel="部门主管" nzValue="2"></nz-option>
-              <nz-option nzLabel="工程师" nzValue="3"></nz-option>
+              <nz-option nzLabel="所有角色"></nz-option>
+              <nz-option nzLabel="系统管理员" nzValue="ADMIN"></nz-option>
+              <nz-option nzLabel="部门主管" nzValue="DEVOPS"></nz-option>
+              <nz-option nzLabel="工程师" nzValue="ADMIN1"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-input-group>
@@ -134,7 +134,7 @@
         <br/>
 
         <nz-input-group>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">节点ID</nz-form-label>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">流程ID</nz-form-label>
           <nz-form-control [nzSm]="18" [nzXs]="24">
             <input type="text" nz-input placeholder="ID" [(ngModel)]="processDetails.id"/>
           </nz-form-control>

@@ -3,6 +3,7 @@ import {MainComponent} from '../../../main/main.component';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {CookieService} from 'ngx-cookie-service';
+import {Urls} from '../../../public/url';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,10 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class HeaderComponent extends MainComponent implements OnInit {
 
+  currentTasks: Array<any> = [];
+
   ngOnInit() {
+    this.getTodos();
   }
 
   constructor(router: Router, http: HttpsUtils, cookies: CookieService) {
@@ -31,5 +35,14 @@ export class HeaderComponent extends MainComponent implements OnInit {
     this.http.get('/api/workflow/test').then(resp => {
       console.log(resp);
     });
+  }
+
+  getTodos() {
+    this.http.get(Urls.WORKFLOW.TODO).then(resp => {
+      console.log(resp['data']);
+      this.currentTasks = this.currentTasks.concat(resp['data']);
+      console.log(this.currentTasks);
+    });
+    console.log(this.currentTasks);
   }
 }

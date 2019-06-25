@@ -61,9 +61,10 @@ export class BPMUtil {
   }
 
   static generateProcess(rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
+    const _this = this;
     let result = '';
     rects.forEach(function (item, index) {
-      result += '    <' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" > \n';
+      result += '    <' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '"> \n';
       polyLines.forEach(function (polyLine: Polyline) {
         if (polyLine.startRect === item) {
           result += '      <outgoing>' + polyLine.id + '</outgoing> \n';
@@ -72,9 +73,24 @@ export class BPMUtil {
           result += '      <incoming>' + polyLine.id + '</incoming> \n';
         }
       });
+      result += _this.generateAssignee(item);
       result += '    </' + item.xmlTagName + '> \n';
     });
     return result;
+  }
+
+  static generateAssignee(rect: BaseEvent): string {
+    let assignee = '';
+    if (rect.role) {
+      assignee =
+        '      <potentialOwner>\n' +
+        '        <resourceAssignmentExpression>\n' +
+        '          <formalExpression>user(' + rect.role + '), group(' + rect.role + ')</formalExpression>\n' +
+        '        </resourceAssignmentExpression>\n' +
+        '      </potentialOwner>\n';
+    }
+    console.log(assignee);
+    return assignee;
   }
 
   static generateSequenceFlow(polyLines: Array<Polyline>): string {

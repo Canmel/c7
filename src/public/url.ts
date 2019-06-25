@@ -79,7 +79,7 @@ export const Urls = {
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     },
-    TODO: `/api/workflow/todo`
+    TODO: `/bpm/flow/todo`
   },
   OPTIONS: {
     MENUS: {

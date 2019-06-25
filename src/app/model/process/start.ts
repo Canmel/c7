@@ -20,7 +20,6 @@ export class Start extends BaseEvent {
     this.type = '开始';
     this.hborder = 0.5 * this.horizontal() + 10;
     this.lborder = 0.5 * this.longitudinal() + 10;
-    this.role = '1';
     this.id = Start.name + 'Event_' + StringUtils.getID();
     this.xmlTagName = 'startEvent';
   }
