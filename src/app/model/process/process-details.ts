@@ -12,4 +12,16 @@ export class ProcessDetails {
     this.busniessKey = 'BUSNIESSKEY_' + StringUtils.getID();
     this.flowType = '1';
   }
+
+  getBusniessKey(): string {
+    if (this.flowType === '1') {
+      return 'REIMBURSEMENT';
+    }
+    if (this.flowType === '2') {
+      return 'REIMBURSEMENT';
+    }
+    if (this.flowType === '3') {
+      return 'REIMBURSEMENT';
+    }
+  }
 }

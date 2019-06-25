@@ -1,5 +1,6 @@
 import {SvgPoint} from './svg-point';
 import {BaseEvent} from './base-event';
+import {StringUtils} from '../../utils/StringUtils';
 
 export class Polyline {
   points: Array<SvgPoint>;
@@ -9,6 +10,7 @@ export class Polyline {
   minClearanceY: number;
   mainColor: string;
   pointStrs: Array<string>;
+  id: string;
 
   constructor(startRect: BaseEvent, endRect: BaseEvent) {
     this.startRect = startRect;
@@ -17,6 +19,7 @@ export class Polyline {
     this.minClearanceY = 70;
     this.mainColor = 'black';
     this.setPoints();
+    this.id = 'SequenceFlow_' + StringUtils.getID();
   }
 
   setPoints() {

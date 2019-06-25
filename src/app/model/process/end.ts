@@ -21,7 +21,8 @@ export class End extends BaseEvent {
     this.hborder = 0.5 * this.horizontal() + 10;
     this.lborder = 0.5 * this.longitudinal() + 10;
     this.role = '1';
-    this.id = End.name + 'Event_' + StringUtils.getID();
+
+
     this.xmlTagName = 'endEvent';
   }
 

@@ -10,37 +10,71 @@ export class BPMUtil {
   static generateXML(processDetails: ProcessDetails, rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
     let result = '';
     result += '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" ' +
-      'xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" ' +
-      'xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" ' +
-      'xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"> \n' +
-      '<process id="' + processDetails.busniessKey + '" name="' + processDetails.name + '" isExecutable="true"> \n' +
-      this.generateProcess(rects) +
+      '<definitions ' +
+      'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+      'xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" ' +
+      'xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" ' +
+      'xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" ' +
+      'xmlns:di="http://www.omg.org/spec/DD/20100524/DI" ' +
+      'targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"> \n' +
+      '  <process id="' + processDetails.getBusniessKey() + '" name="' + processDetails.name + '"> \n' +
+      this.generateProcess(rects, polyLines) +
       this.generateSequenceFlow(polyLines) +
-      '</process> \n' +
-      '</definitions> \n';
+      '  </process> \n' +
+      this.generateBPMNdi(rects, polyLines, processDetails) +
+      '</definitions>';
     return result;
   }
 
-  static generateProcess(rects: Array<BaseEvent>): string {
+  static generateBPMNdi(rects: Array<BaseEvent>, polyLines: Array<Polyline>, processDetails: ProcessDetails): string {
     let result = '';
-    rects.forEach(function (item) {
-      if (item instanceof Start) {
-        result += '<' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" >' +
-          '</' + item.xmlTagName + '> \n';
-      }
-      if (item instanceof End) {
-        result += '<' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" >' +
-          '</' + item.xmlTagName + '> \n';
-      }
-      if (item instanceof Task) {
-        result += '<' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" >' +
-          '</' + item.xmlTagName + '> \n';
-      }
-      if (item instanceof Getway) {
-        result += '<' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" >' +
-          '</' + item.xmlTagName + '> \n';
-      }
+    result +=
+      '  <bpmndi:BPMNDiagram id="BPMNDiagram_1"> \n' +
+      '    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="' + processDetails.getBusniessKey() + '"> \n' +
+      this.generateBPMNDIDetails(rects, polyLines) +
+      '    </bpmndi:BPMNPlane> \n' +
+      '  </bpmndi:BPMNDiagram> \n';
+    return result;
+  }
+
+  static generateBPMNDIDetails(rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
+    let result = '';
+    rects.forEach(function (rect: BaseEvent) {
+      result +=
+        '      <bpmndi:BPMNShape id="_BPMNShape_' + rect.xmlTagName.toLocaleUpperCase() + '_2" bpmnElement="StartEvent_1"> \n' +
+        '        <dc:Bounds x="' + rect.centerX() + '" y="' + rect.centerY() + '" ' +
+        'width="' + rect.horizontal() + '" height="' + rect.longitudinal() + '" /> \n' +
+        '        <bpmndi:BPMNLabel> \n' +
+        '          <dc:Bounds x="' + rect.centerX() + '" y="' + rect.centerY() + '" width="22" height="14" /> \n' +
+        '        </bpmndi:BPMNLabel> \n' +
+        '      </bpmndi:BPMNShape> \n';
+    });
+
+    polyLines.forEach(function (polyLine) {
+      result +=
+        '      <bpmndi:BPMNEdge id="' + polyLine.id + '" bpmnElement="' + polyLine.id + '"> \n' +
+        '        <di:waypoint x="' + polyLine.points[0].x + '" y="' + polyLine.points[0].y + '" /> \n' +
+        '        <di:waypoint x="' + polyLine.points[polyLine.points.length - 1].x + '" ' +
+        'y="' + polyLine.points[polyLine.points.length - 1].y + '" /> \n' +
+        '      </bpmndi:BPMNEdge> \n';
+    });
+
+    return result;
+  }
+
+  static generateProcess(rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
+    let result = '';
+    rects.forEach(function (item, index) {
+      result += '    <' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '" > \n';
+      polyLines.forEach(function (polyLine: Polyline) {
+        if (polyLine.startRect === item) {
+          result += '      <outgoing>' + polyLine.id + '</outgoing> \n';
+        }
+        if (polyLine.endRect === item) {
+          result += '      <incoming>' + polyLine.id + '</incoming> \n';
+        }
+      });
+      result += '    </' + item.xmlTagName + '> \n';
     });
     return result;
   }
@@ -48,9 +82,7 @@ export class BPMUtil {
   static generateSequenceFlow(polyLines: Array<Polyline>): string {
     let result = '';
     polyLines.forEach(function (item, index) {
-      result += '<sequenceFlow id="sequenceFlow_' + index + '" ' +
-        'name="flow_' + index + '" sourceRef="' + item.startRect.id + '" ' +
-        'targetRef="' + item.endRect.id + '" /> \n';
+      result += '    <sequenceFlow id="' + item.id + '" sourceRef="' + item.startRect.id + '" targetRef="' + item.endRect.id + '" /> \n';
     });
 
     return result;
