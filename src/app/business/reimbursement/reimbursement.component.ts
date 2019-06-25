@@ -360,6 +360,7 @@ export class ReimbursementComponent implements OnInit {
     this.taskImageUrl = '';
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
+      console.log(123123);
       if (respData) {
         this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
         this.selectItem.task = respData[0];
@@ -397,6 +398,7 @@ export class ReimbursementComponent implements OnInit {
     const _this = this;
     _this.comments = [];
     this.taskImageUrl = '';
+    console.log(123123);
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
       if (respData) {

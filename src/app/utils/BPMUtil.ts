@@ -9,15 +9,13 @@ import {Polyline} from '../model/process/polyline';
 export class BPMUtil {
   static generateXML(processDetails: ProcessDetails, rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
     let result = '';
-    result += '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<definitions ' +
-      'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-      'xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" ' +
-      'xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" ' +
-      'xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" ' +
-      'xmlns:di="http://www.omg.org/spec/DD/20100524/DI" ' +
-      'targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"> \n' +
-      '  <process id="' + processDetails.getBusniessKey() + '" name="' + processDetails.name + '"> \n' +
+    result +=
+      '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" ' +
+      'xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" ' +
+      'xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" ' +
+      'xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">' +
+      '  <process id="' + processDetails.getBusniessKey() + '" name="' + processDetails.name + '" isExecutable="true"> \n' +
       this.generateProcess(rects, polyLines) +
       this.generateSequenceFlow(polyLines) +
       '  </process> \n' +
@@ -39,9 +37,9 @@ export class BPMUtil {
 
   static generateBPMNDIDetails(rects: Array<BaseEvent>, polyLines: Array<Polyline>): string {
     let result = '';
-    rects.forEach(function (rect: BaseEvent) {
+    rects.forEach(function (rect: BaseEvent, index: number) {
       result +=
-        '      <bpmndi:BPMNShape id="_BPMNShape_' + rect.xmlTagName.toLocaleUpperCase() + '_2" bpmnElement="StartEvent_1"> \n' +
+        '      <bpmndi:BPMNShape id="' + rect.id + '_di" bpmnElement="' + rect.id + '"> \n' +
         '        <dc:Bounds x="' + rect.centerX() + '" y="' + rect.centerY() + '" ' +
         'width="' + rect.horizontal() + '" height="' + rect.longitudinal() + '" /> \n' +
         '        <bpmndi:BPMNLabel> \n' +
@@ -52,7 +50,7 @@ export class BPMUtil {
 
     polyLines.forEach(function (polyLine) {
       result +=
-        '      <bpmndi:BPMNEdge id="' + polyLine.id + '" bpmnElement="' + polyLine.id + '"> \n' +
+        '      <bpmndi:BPMNEdge id="' + polyLine.id + '_di" bpmnElement="' + polyLine.id + '"> \n' +
         '        <di:waypoint x="' + polyLine.points[0].x + '" y="' + polyLine.points[0].y + '" /> \n' +
         '        <di:waypoint x="' + polyLine.points[polyLine.points.length - 1].x + '" ' +
         'y="' + polyLine.points[polyLine.points.length - 1].y + '" /> \n' +
