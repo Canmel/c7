@@ -1,6 +1,7 @@
 <div nz-row [nzGutter]="8">
   <div nz-col nzSpan="3" style="min-width: 100px; max-width: 120px;">
-    <nz-card style="text-align: center;" [nzBordered]="true" nzTitle="工具栏" [nzExtra]="extraTemplate" class="tools-background" style="padding: 0px">
+    <nz-card style="text-align: center;" [nzBordered]="true" nzTitle="工具栏" [nzExtra]="extraTemplate"
+             class="tools-background" style="padding: 0px">
       <div nz-row style="height: 100%;">
         <div draggable="true" [dragData]="'start'">
           <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +76,7 @@
     </nz-card>
   </div>
   <div style="position: absolute; top: 0px; right: 0px; height: 500px; width: 300px; z-index: 999">
-    <nz-card [nzBordered]="true" nzTitle="属性详情" [nzExtra]="extraTemplate" class="tools-background"
+    <nz-card [nzBordered]="true" nzTitle="属性" [nzExtra]="extraTemplate" class="tools-background"
              style="padding: 0px">
       <div nz-row style="height: 100%;" *ngIf="selected">
         <nz-input-group>
@@ -104,23 +105,17 @@
 
         <br/>
 
-        <nz-input-group>
+        <nz-input-group *ngIf="isShowRoleSelector()">
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">参与角色</nz-form-label>
           <nz-form-control [nzSm]="18" [nzXs]="24">
-            <nz-select
-              style="width: 100%;"
-              nzShowSearch
-              nzAllowClear
-              nzPlaceHolder="选择参与角色"
-              [(ngModel)]="selected.role">
-              <nz-option nzLabel="所有角色"></nz-option>
-              <nz-option nzLabel="系统管理员" nzValue="ADMIN"></nz-option>
-              <nz-option nzLabel="部门主管" nzValue="DEVOPS"></nz-option>
-              <nz-option nzLabel="工程师" nzValue="ADMIN1"></nz-option>
+            <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="选择参与角色"
+                       [(ngModel)]="selected.role">
+              <nz-option nzLabel="所有角色" nzValue="0"></nz-option>
+              <nz-option *ngFor="let item of allRoles" [nzLabel]="item['remark']"
+                         [nzValue]="item['roleName']"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-input-group>
-
         <br/>
       </div>
 
@@ -157,10 +152,8 @@
               nzAllowClear
               nzPlaceHolder="选择流程类型"
               [(ngModel)]="processDetails.flowType">
-              <nz-option nzLabel="所有类型" nzValue="0"></nz-option>
-              <nz-option nzLabel="普通流程" nzValue="1"></nz-option>
-              <nz-option nzLabel="财务流程" nzValue="2"></nz-option>
-              <nz-option nzLabel="报销流程" nzValue="3"></nz-option>
+              <nz-option nzLabel="通用流程" nzValue="0"></nz-option>
+              <nz-option *ngFor="let item of allFlowType" [nzLabel]="item['name']" [nzValue]="item['value']"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-input-group>

@@ -54,6 +54,10 @@ export class ProcessDesignerComponent implements OnInit {
 
   operator: Pool;
 
+  allRoles: Array<any>;
+
+  allFlowType: Array<any>;
+
   svgProperties = {
     scaleX: 1.0,
     scaleY: 1.0,
@@ -103,7 +107,6 @@ export class ProcessDesignerComponent implements OnInit {
 
   constructor(private https: HttpsUtils, private router: Router, private notification: NzNotificationService) {
     this.processDetails = new ProcessDetails();
-
   }
 
   getAllRect(): Array<BaseEvent> {
@@ -114,6 +117,30 @@ export class ProcessDesignerComponent implements OnInit {
   ngOnInit() {
     this.svgProperties.width = $('#designer-content').width();
     this.svgProperties.height = $('#designer-content').height();
+    this.getAllFlowType();
+    this.getAllRoles();
+  }
+
+  getAllRoles(): void {
+    const _this = this;
+    this.https.get(Urls.ROLES.ALL).then(
+      resp => {
+        console.log(resp['data']);
+        _this.allRoles = resp['data'];
+        console.log(this.allRoles);
+      }
+    );
+  }
+
+  getAllFlowType(): void {
+    this.https.get(Urls.OPTIONS.WORKFLOW.TYPES).then(resp => {
+      this.allFlowType = resp['data'];
+      console.log(this.allFlowType);
+    });
+  }
+
+  isShowRoleSelector(): boolean {
+    return (this.selected instanceof Task);
   }
 
   svgMouseDownHandler(e) {
@@ -507,7 +534,6 @@ export class ProcessDesignerComponent implements OnInit {
   }
 
   saveHandler() {
-    console.log(this.getSaveValue());
     this.https.post(Urls.WORKFLOW.SAVE, this.getSaveValue()).then(resp => {
       // this.isVisible = false;
       this.router.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
@@ -524,7 +550,7 @@ export class ProcessDesignerComponent implements OnInit {
   getSaveValue(): any {
     const result = {};
     result['name'] = this.processDetails.name;
-    result['key'] = this.processDetails.busniessKey;
+    result['key'] = this.processDetails.getBusniessKey();
     result['flow'] = BPMUtil.generateXML(this.processDetails, this.getAllRect(), this.polyLines);
     result['flowType'] = this.processDetails.flowType;
     return result;

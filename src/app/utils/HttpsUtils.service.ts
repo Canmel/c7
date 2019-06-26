@@ -57,8 +57,10 @@ export class HttpsUtils {
    **/
   delete<T>(url: string, params, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
+    if (params) {
+      url = this.objAppendToUrl(url, params);
+    }
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    url = url + params;
     return this.http.delete(url, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
     });

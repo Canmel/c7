@@ -20,6 +20,7 @@ export class Task extends BaseEvent {
     this.hborder = 0.5 * this.horizontal() + this.borderWidth + 10;
     this.lborder = 0.5 * this.longitudinal() + this.borderWidth + 10;
     this.id = Task.name + 'Event_' + StringUtils.getID();
+    this.role = '0';
     this.xmlTagName = 'userTask';
   }
 

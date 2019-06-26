@@ -89,7 +89,6 @@ export class BPMUtil {
         '        </resourceAssignmentExpression>\n' +
         '      </potentialOwner>\n';
     }
-    console.log(assignee);
     return assignee;
   }
 

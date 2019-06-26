@@ -9,10 +9,11 @@ export class ProcessDetails {
   constructor() {
     this.id = 'Process_' + StringUtils.getID();
     this.name = '未命名流程';
-    this.flowType = '1';
+    this.flowType = '0';
   }
 
   getBusniessKey(): string {
+    this.flowType += '';
     if (!this.busniessKey && this.flowType === '1') {
       return 'REIMBURSEMENT';
     }
