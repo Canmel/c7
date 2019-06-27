@@ -27,15 +27,15 @@ export class HeaderComponent extends MainComponent implements OnInit {
    * 参数：无
    **/
   logout() {
-    this.http.get('/system/session', ).then(resp => {
-      console.log(resp);
-      this.router.navigate(['/login']);
-    });
-    // this.http.delete(Urls.SESSION.LOGOUT, {token: 'asdad'}).then(
-    //   resp => {
-    //     console.log(resp);
-    //   }
-    // );
+    // this.http.get('/system/session', ).then(resp => {
+    //   console.log(resp);
+    //   this.router.navigate(['/login']);
+    // });
+    this.http.get(Urls.SESSION.LOGOUT).then(
+      resp => {
+        console.log(resp);
+      }
+    );
     // this.router.navigate(['/login']);
   }
 
