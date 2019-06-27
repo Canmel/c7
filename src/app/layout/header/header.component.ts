@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {CookieService} from 'ngx-cookie-service';
 import {Urls} from '../../../public/url';
+import {cleanSession} from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-header',
@@ -27,9 +28,17 @@ export class HeaderComponent extends MainComponent implements OnInit {
    * 参数：无
    **/
   logout() {
-    this.http.get('/system/session', ).then(resp => {
+    // sessionStorage.clear();
+    // sessionStorage.clear();
+    // this.setCookie(name, '', -1);
+    this.http.get(Urls.SESSION.LOGOUT).then(resp => {
       console.log(resp);
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
+    });
+
+    this.http.get(Urls.SESSION.LOGOUT2).then(resp => {
+      console.log(resp);
+      // this.router.navigate(['/login']);
     });
     // this.http.delete(Urls.SESSION.LOGOUT, {token: 'asdad'}).then(
     //   resp => {
@@ -37,6 +46,13 @@ export class HeaderComponent extends MainComponent implements OnInit {
     //   }
     // );
     // this.router.navigate(['/login']);
+  }
+
+  setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    const expires = 'expires=' + d.toUTCString();
+    document.cookie = cname + '=' + cvalue + '; ' + expires;
   }
 
   test() {
@@ -47,10 +63,7 @@ export class HeaderComponent extends MainComponent implements OnInit {
 
   getTodos() {
     this.http.get(Urls.WORKFLOW.TODO).then(resp => {
-      console.log(resp['data']);
       this.currentTasks = this.currentTasks.concat(resp['data']);
-      console.log(this.currentTasks);
     });
-    console.log(this.currentTasks);
   }
 }
