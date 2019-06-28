@@ -23,6 +23,7 @@ export class HttpsUtils {
     }
 
     return this.http.get<T>(url, this.httpOptions).toPromise().catch(errorResp => {
+      console.log(errorResp);
       return this.handleError(errorResp);
     }).then(onfulfilled => {
       return Promise.resolve(onfulfilled);
@@ -35,7 +36,6 @@ export class HttpsUtils {
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
     return this.http.post<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
-      console.log(url);
       this.handleError(errorResp);
     });
   }
@@ -46,7 +46,6 @@ export class HttpsUtils {
    **/
   put<T>(url: string, params: Object, token?: string): Promise<void | Object> {
     return this.http.put<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
-      console.log(url);
       this.handleError(errorResp);
     });
   }
@@ -103,7 +102,7 @@ export class HttpsUtils {
    * @param error 错误请求响应
    */
   private handleError(error: HttpErrorResponse): Promise<void | Object> {
-    if (error.status === 0) {
+    if (error.status === 401 || error.status === 0) {
       return this.router.navigate([Urls.UNAUTHENTICATION]);
     }
     return Promise.reject(error);
