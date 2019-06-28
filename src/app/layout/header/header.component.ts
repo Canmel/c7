@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {CookieService} from 'ngx-cookie-service';
 import {Urls} from '../../../public/url';
+import {cleanSession} from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-header',
