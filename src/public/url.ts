@@ -97,7 +97,7 @@ export const Urls = {
   SESSION: {
     LOGIN: `/login`,
     QRCODE: `/code/verify`,
-    LOGOUT: `/authserver/session/logout`,
+    LOGOUT: `/auth/authserver/session/logout`,
     REJECTED: `/auth/require`,
     APP: '/app',
     USERINFO: '/api/user'

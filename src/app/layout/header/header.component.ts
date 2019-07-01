@@ -30,7 +30,7 @@ export class HeaderComponent extends MainComponent implements OnInit {
   logout() {
     this.http.get(Urls.SESSION.LOGOUT, ).then(resp => {
       console.log(resp);
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
     });
     // this.http.get(Urls.SESSION.LOGOUT).then(
     //   resp => {
