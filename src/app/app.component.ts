@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   constructor(public https: HttpsUtils, private router: Router, private location: PlatformLocation, private cookieService: CookieService) {
     this.isLogin();
   }
+
   ngOnInit(): void {
   }
 
@@ -32,6 +33,12 @@ export class AppComponent implements OnInit {
         this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
         console.log(resp);
       });
+    }
+
+    if (sessionStorage.getItem('access_token') === null || sessionStorage.getItem('access_token') === '') {
+      window.location.href = '/login';
+    } else {
+      this.router.navigate(['/app/home']);
     }
   }
 }

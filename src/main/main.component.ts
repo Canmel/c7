@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
       sessionStorage.setItem('authentication', resp['principal']);
       console.log(resp);
       if (resp['principal']) {
-        this.userInfo.username = resp['principal'];
+        this.userInfo.username = resp['principal']['username'];
       }
       // this.userInfo.username = this.cookieService.get(SystemProperties.session.authenticated);
     }, error => {

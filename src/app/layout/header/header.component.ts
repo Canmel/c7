@@ -16,7 +16,7 @@ export class HeaderComponent extends MainComponent implements OnInit {
   currentTasks: Array<any> = [];
 
   ngOnInit() {
-    this.getTodos();
+    // this.getTodos();
   }
 
   constructor(router: Router, http: HttpsUtils, cookies: CookieService) {
@@ -28,22 +28,27 @@ export class HeaderComponent extends MainComponent implements OnInit {
    * 参数：无
    **/
   logout() {
-    this.http.get(Urls.SESSION.LOGOUT, ).then(resp => {
+    this.http.get(Urls.SESSION.LOGOUT).then(resp => {
       console.log(resp);
-      // this.router.navigate(['/login']);
+
     });
-    // this.http.get(Urls.SESSION.LOGOUT).then(
-    //   resp => {
-    //     console.log(resp);
-    //   }
-    // );
-    // this.router.navigate(['/login']);
+    this.clearCookie('XSRF-TOKEN');
+    this.clearCookie('AUTHENTICATED');
   }
 
-  test() {
-    this.http.get('/api/workflow/test').then(resp => {
-      console.log(resp);
-    });
+  clearCookie(name) {
+    this.setCookie(name, '', -1);
+  }
+
+  setCookie(name, value, seconds) {
+    seconds = seconds || 0;
+    let expires = '';
+    if (seconds !== 0) {
+      const date = new Date();
+      date.setTime(date.getTime() + (seconds * 1000));
+      expires = '; expires=' + date.toDateString();
+    }
+    document.cookie = name + '=' + escape(value) + expires + '; path=/';
   }
 
   getTodos() {

@@ -13,6 +13,15 @@
   "/logout": {
     "target": "http://127.0.0.1:8080"
   },
+  "/css": {
+    "target": "http://127.0.0.1:8080"
+  },
+  "/images": {
+    "target": "http://127.0.0.1:8080"
+  },
+  "/js": {
+    "target": "http://127.0.0.1:8080"
+  },
   "/system": {
     "target": "http://127.0.0.1:8080"
   },

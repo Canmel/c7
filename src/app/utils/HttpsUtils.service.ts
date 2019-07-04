@@ -18,6 +18,9 @@ export class HttpsUtils {
    * 参数：
    **/
   get<T>(url: string, params?: Object, token?: string): Promise<void | Object> {
+    token = token ? token : sessionStorage.getItem('access_token');
+    params = params ? params : {};
+    params['access_token'] = token;
     if (params) {
       url = this.objAppendToUrl(url, params);
     }
