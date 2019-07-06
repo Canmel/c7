@@ -59,6 +59,9 @@ export class HttpsUtils {
    **/
   delete<T>(url: string, params, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
+    token = token ? token : sessionStorage.getItem('access_token');
+    params = params ? params : {};
+    params['access_token'] = token;
     if (params) {
       url = this.objAppendToUrl(url, params);
     }

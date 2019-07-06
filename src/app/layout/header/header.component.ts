@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {CookieService} from 'ngx-cookie-service';
 import {Urls} from '../../../public/url';
-import {cleanSession} from 'selenium-webdriver/safari';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-header',
@@ -16,10 +16,10 @@ export class HeaderComponent extends MainComponent implements OnInit {
   currentTasks: Array<any> = [];
 
   ngOnInit() {
-    // this.getTodos();
+    this.getTodos();
   }
 
-  constructor(router: Router, http: HttpsUtils, cookies: CookieService) {
+  constructor(router: Router, http: HttpsUtils, cookies: CookieService, public notification: NzNotificationService) {
     super(router, http, cookies);
   }
 
@@ -28,9 +28,14 @@ export class HeaderComponent extends MainComponent implements OnInit {
    * 参数：无
    **/
   logout() {
-    this.http.get(Urls.SESSION.LOGOUT).then(resp => {
-      console.log(resp);
-
+    this.http.delete(Urls.SESSION.LOGOUT, {}).then(resp => {
+      if (resp['code'] === 200) {
+        this.notification.success('成功', resp['message']);
+        sessionStorage.clear();
+        this.router.navigate(['/unauthentication']);
+      } else {
+        this.notification.error('失败', resp['message']);
+      }
     });
     this.clearCookie('XSRF-TOKEN');
     this.clearCookie('AUTHENTICATED');
