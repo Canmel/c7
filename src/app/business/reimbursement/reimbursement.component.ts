@@ -360,11 +360,9 @@ export class ReimbursementComponent implements OnInit {
     this.taskImageUrl = '';
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
-      console.log(123123);
       if (respData) {
-        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
         this.selectItem.task = respData[0];
-
         if (item['status'] !== 1) {
           this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(r => {
             this.selectTask = r['data'];
@@ -402,7 +400,7 @@ export class ReimbursementComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
       if (respData) {
-        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'];
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
         this.selectItem.task = respData[0];
 
         if (item['status'] !== 1) {

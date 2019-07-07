@@ -43,16 +43,16 @@ export const Urls = {
     VALIDROLENAME: `/system/sysRole/valid/`
   },
   REIMBURSEMENT: {
-    PAGEQUERY: `/api/reimbursement`,
-    SAVE: `/api/reimbursement`,
-    DETAILS: `/api/reimbursement/`,
-    DELETE: `/api/reimbursement/`,
-    APPLY: `/api/reimbursement/apply/`,
-    CURRENT: `/api/reimbursement/current/`,
-    TASKPASS: `/api/reimbursement/pass/`,
-    TASKBACK: `/api/reimbursement/back/`,
-    EDIT: `/api/reimbursement/`,
-    COMMENT: `/api/reimbursement/comment/`
+    PAGEQUERY: `/oa/reimbursement`,
+    SAVE: `/oa/reimbursement`,
+    DETAILS: `/oa/reimbursement/`,
+    DELETE: `/oa/reimbursement/`,
+    APPLY: `/oa/reimbursement/apply/`,
+    CURRENT: `/oa/reimbursement/current/`,
+    TASKPASS: `/oa/reimbursement/pass/`,
+    TASKBACK: `/oa/reimbursement/back/`,
+    EDIT: `/oa/reimbursement/`,
+    COMMENT: `/oa/reimbursement/comment/`
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
@@ -75,7 +75,7 @@ export const Urls = {
     TASKIMAGE: `/bpm/flow/trace/`,
     TASKPASS: `/bpm/workFlow/task/pass/`,
     TASKBACK: `/bpm/workFlow/task/back/`,
-    COMMENTS: `/api/reimbursement/comment/`,
+    COMMENTS: `/oa/reimbursement/comment/`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     },
@@ -91,7 +91,7 @@ export const Urls = {
       TYPE: `/api/options/workflow`
     },
     REIMBURSEMENT: {
-      STATUS: `/api/reimbursement/status`
+      STATUS: `/oa/reimbursement/status`
     }
   },
   SESSION: {

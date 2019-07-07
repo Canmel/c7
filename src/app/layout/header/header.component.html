@@ -34,7 +34,7 @@
     <li class="hidden-xs">
       <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
         <i class="icon-bell"></i>
-        <span class="badge badge-sm up bg-danger count">2</span>
+        <span class="badge badge-sm up bg-danger count" *ngIf="currentTasks && currentTasks.length">{{currentTasks && currentTasks.length}}</span>
       </a>
       <section class="dropdown-menu aside-xl animated fadeInUp">
         <section class="panel bg-white">

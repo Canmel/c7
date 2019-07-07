@@ -78,8 +78,6 @@ export class UsersComponent implements OnInit {
       this.formData.curPage = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     }, error => {
-      console.log(123123);
-      alert(12);
       this.notification.error('错误', error['error']['msg'] || error['message'] );
     });
   }

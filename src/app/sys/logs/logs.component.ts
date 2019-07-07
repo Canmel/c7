@@ -35,7 +35,7 @@ export class LogsComponent implements OnInit {
     {title: '方法', field: 'method', type: 'text'},
     {title: '参数', field: 'params', type: 'text'},
     {title: '描述', field: 'operation', type: 'text'},
-    {title: '相应时间', field: 'time', type: 'text'},
+    {title: '响应时间', field: 'time', type: 'text'},
     {title: '用户', field: 'username', type: 'text'}
   ];
 
