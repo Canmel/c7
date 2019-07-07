@@ -15,22 +15,19 @@ declare var layui: any;
 })
 export class MainComponent implements OnInit {
 
+  authentication: {
+    username: 'aas',
+    sysRoles: '未知'
+  };
+
   userInfo = {
     username: 'aas',
     sysRoles: '未知'
   };
 
   constructor(public router: Router, public http: HttpsUtils, private cookieService: CookieService) {
-    this.http.get(Urls.SESSION.USERINFO).then(resp => {
-      sessionStorage.setItem('authentication', resp['principal']);
-      console.log(resp);
-      if (resp['principal']) {
-        this.userInfo.username = resp['principal']['username'];
-      }
-      // this.userInfo.username = this.cookieService.get(SystemProperties.session.authenticated);
-    }, error => {
-      console.log(error);
-    });
+    const authentication = JSON.parse(sessionStorage.getItem('authentication'));
+    this.authentication = authentication;
   }
 
   /**

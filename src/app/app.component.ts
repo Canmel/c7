@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     if (this.cookieValue !== 'true') {
       this.https.get(Urls.SESSION.USERINFO, {}).then(resp => {
         this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
-        console.log(resp);
+        sessionStorage.setItem('authentication', JSON.stringify(resp['principal']));
       });
     }
 

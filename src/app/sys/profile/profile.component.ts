@@ -34,16 +34,8 @@ export class ProfileComponent implements OnInit {
   }
 
   loadMe() {
-    this.http.get(Urls.USERS.ME).then(resp => {
-      console.log(resp);
-      if (resp['data']) {
-        this.userDetails = resp['data'];
-        this.http.get(Urls.LOGS.PAGEQUERY, {userId: this.userDetails['id']}).then(r => {
-          console.log(r);
-          this.userLogs = r['data']['list'];
-        });
-      }
-    });
+    const authentication = JSON.parse(sessionStorage.getItem('authentication'));
+    this.userDetails = authentication['sysUser'];
   }
 
 }
