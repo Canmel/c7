@@ -101,4 +101,9 @@ export class RolesComponent implements OnInit {
     console.log(param);
   }
 
+  editMenu(params: any) {
+    // TODO
+    alert('没想好怎么展现');
+  }
+
 }

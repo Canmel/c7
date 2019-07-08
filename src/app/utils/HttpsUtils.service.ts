@@ -39,8 +39,7 @@ export class HttpsUtils {
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
     token = token ? token : sessionStorage.getItem('access_token');
-    params = params ? params : {};
-    params['access_token'] = token;
+    url += '?access_token=' + token;
     return this.http.post<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
     });
@@ -52,8 +51,7 @@ export class HttpsUtils {
    **/
   put<T>(url: string, params: Object, token?: string): Promise<void | Object> {
     token = token ? token : sessionStorage.getItem('access_token');
-    params = params ? params : {};
-    params['access_token'] = token;
+    url += '?access_token=' + token;
     return this.http.put<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
     });
@@ -66,8 +64,7 @@ export class HttpsUtils {
   delete<T>(url: string, params, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
     token = token ? token : sessionStorage.getItem('access_token');
-    params = params ? params : {};
-    params['access_token'] = token;
+    url += '?access_token=' + token;
     if (params) {
       url = this.objAppendToUrl(url, params);
     }

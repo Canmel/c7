@@ -12,6 +12,7 @@ import {ReimbursementModule} from '../app/business/reimbursement/reimbursement.m
 import {MacrosModule} from '../app/sys/macros/macros.module';
 import {ProcessDesignerModule} from '../app/flow/process-designer/process-designer.module';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
+import {ErrandModule} from '../app/business/errand/errand.module';
 
 const routes: Routes = [
   {
@@ -53,6 +54,9 @@ const routes: Routes = [
       }, {
         path: 'process-designer',
         loadChildren: () => ProcessDesignerModule
+      }, {
+        path: 'errand',
+        loadChildren: () => ErrandModule
       }
     ]
   }

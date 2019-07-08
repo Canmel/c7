@@ -87,7 +87,7 @@ export class MenuEditComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.get(Urls.MENUS.VALIDMENUNAME + control.value + '?id=' + _this.receiveId).then(resp => {
+      _this.https.get(Urls.MENUS.VALIDMENUNAME + control.value, {id: _this.receiveId}).then(resp => {
         console.log(resp);
         if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);

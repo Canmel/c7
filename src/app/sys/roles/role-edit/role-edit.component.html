@@ -4,16 +4,16 @@
   <section class="panel panel-default">
     <div class="panel-body">
       <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
+        <nz-form-label [nzSpan]="7" nzRequired>角色名</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="roleName" placeholder="请输入用户名...">
+          <input nz-input formControlName="roleName" placeholder="请输入角色名...">
           <nz-form-explain
             *ngIf="validateForm.get('roleName').dirty && validateForm.get('roleName').errors || validateForm.get('roleName').pending ">
             <ng-container *ngIf="validateForm.get('roleName').hasError('required')">
-              用户名不能为空！
+              角色名不能为空！
             </ng-container>
             <ng-container *ngIf="validateForm.get('roleName').hasError('duplicated')">
-              该用户名已经被使用！请修改
+              该角色名已经被使用！请修改
             </ng-container>
             <ng-container *ngIf="validateForm.get('roleName').pending">
               正在验证中

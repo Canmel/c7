@@ -13,7 +13,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class ReimbursementComponent implements OnInit {
   crumbs = {
-    title: '财务管理',
+    title: '日常管理',
     subTitle: '报销管理'
   };
 
