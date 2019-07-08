@@ -15,7 +15,7 @@ export class UnAuthenticationComponent implements OnInit {
   urlCollection = Urls;
 
   constructor(private router: Router) {
-    this.jumpTime = 50;
+    this.jumpTime = 5;
   }
 
   ngOnInit() {
