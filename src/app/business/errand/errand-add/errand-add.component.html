@@ -1,3 +1,121 @@
-<p>
-  errand-add works!
-</p>
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body" style="width: 80%; margin: auto;">
+      <div class="elogo"><img src="assets/img/goshine.png"></div>
+      <nz-form-item style="margin: 0;">
+        <div class="ant-col-17 ant-form-item-label ehead">
+          <span style="font-size: 25px;">出差申请单</span>
+        </div>
+        <div class="ant-col-7 ant-form-item-label ehead">
+          <span>ST-MT-01v1.0.1</span>
+        </div>
+      </nz-form-item>
+      <div style="border: 1px solid black;">
+        <div class="ant-row">
+          <div class="ant-col-4 ant-form-item-label elabel"><b>申请人</b></div>
+          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
+          <div class="ant-col-4 ant-form-item-label elabel"><b>所属部门</b></div>
+          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
+          <div class="ant-col-4 ant-form-item-label elabel"><b>申请日期</b></div>
+          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
+        </div>
+        <div class="ant-row">
+          <div class="ant-col-4 ant-form-item-label elabel"><b>差期</b></div>
+          <div class="ant-col-20 ant-form-item-label elabel">&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日上/下午
+            &nbsp;&nbsp;&nbsp;&nbsp;时至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日上/下午&nbsp;&nbsp;&nbsp;&nbsp;时
+          </div>
+        </div>
+        <div class="ant-row">
+          <div class="ant-col-4 ant-form-item-label elabel e2"><b>出差事由</b></div>
+          <div class="ant-col-20 ant-form-item-label elabel" style="min-height: 102px;text-align: left;">
+            <div style="line-height: 25px;"><input type="checkbox"/>售前<input type="checkbox"/>项目<input type="checkbox"/>其他</div>
+            <div style="line-height: 25px;">
+              <span style="width: 10%;"><b>目的和计划:</b></span>
+            </div>
+            <div>
+              <textarea placeholder="点击修改目的和计划..." style="width: 100%; border: 1px solid rgba(255, 255, 255, 0.21);"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="ant-row">
+          <div class="ant-col-6 ant-form-item-label elabel"><b>目的地</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+          <div class="ant-col-6 ant-form-item-label elabel"><b>部门负责人意见</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+        </div>
+        <div class="ant-row">
+          <div class="ant-col-6 ant-form-item-label elabel"><b>分管领导意见</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+          <div class="ant-col-6 ant-form-item-label elabel"><b>运营管理部确认</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+        </div>
+        <div class="ant-row">
+          <div class="ant-col-6 ant-form-item-label elabel"><b>人力资源部核准</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+          <div class="ant-col-6 ant-form-item-label elabel"><b>总经理意见</b></div>
+          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+      </table>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>报销名称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="name" placeholder="请输入报销名称...">
+          <nz-form-explain
+            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              报销名称不能为空！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
+              报销名称已经被使用！请修改
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').pending">
+              正在验证中
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>报销数额</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-input-number formControlName="amount" nz-input rows="2" [nzPlaceHolder]="'报销数额...'" [nzMin]="1"
+                           style="width: 100%;"></nz-input-number>
+          <nz-form-explain
+            *ngIf="validateForm.get('amount').dirty&&validateForm.get('amount').hasError('required')">
+            数额不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>描述介绍</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <textarea formControlName="description" nz-input rows="2" placeholder="描述介绍..."></textarea>
+          <nz-form-explain
+            *ngIf="validateForm.get('description').dirty&&validateForm.get('description').hasError('required')">
+            简介不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/errand">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>

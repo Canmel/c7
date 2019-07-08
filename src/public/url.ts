@@ -54,6 +54,9 @@ export const Urls = {
     EDIT: `/oa/reimbursement/`,
     COMMENT: `/oa/reimbursement/comment/`
   },
+  ERRAND: {
+    PAGEQUERY: `/oa/errand`
+  },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
     SAVE: `/system/sysMenu`,

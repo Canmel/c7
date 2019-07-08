@@ -28,7 +28,16 @@ export class MainComponent implements OnInit {
   constructor(public router: Router, public http: HttpsUtils, private cookieService: CookieService) {
     const authentication = JSON.parse(sessionStorage.getItem('authentication'));
     console.log(this.authentication);
+    if (!authentication) {
+      this.http.get(Urls.SESSION.USERINFO, {}).then(resp => {
+        this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
+        sessionStorage.setItem('authentication', JSON.stringify(resp['principal']));
+        this.authentication = resp['principal'];
+      });
+    }
+
     this.authentication = authentication;
+
   }
 
   /**

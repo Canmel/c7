@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
+import {Urls} from '../../../public/url';
 
 @Component({
   selector: 'app-errand',
@@ -33,10 +37,24 @@ export class ErrandComponent implements OnInit {
     name: ''
   };
 
-  constructor() {
+  constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
+              public notification: NzNotificationService) {
   }
 
   ngOnInit() {
+    this.loadEntities();
+  }
+
+  /**
+   * 方法用途: 加载列表信息
+   * 参数：
+   **/
+  loadEntities() {
+    this.https.get(Urls.ERRAND.PAGEQUERY, this.formData).then(resp => {
+      this.errands = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   showModal() {

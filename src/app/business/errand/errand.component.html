@@ -5,7 +5,7 @@
     <div class="row wrapper">
       <div class="col-sm-5 m-b-xs flex-left">
         <div class="btn-group" data-toggle="buttons">
-          <a routerLinkActive="active" routerLink="/app/reimbursement/add" class="btn btn-sm btn-success">
+          <a routerLinkActive="active" routerLink="/app/errand/add" class="btn btn-sm btn-success">
             <i class="fa fa-plus fa-fw m-r-xs"></i>新建
           </a>
         </div>
@@ -13,7 +13,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入报销名称..." [(ngModel)]="formData.name"
+          <input type="text" class="input-sm form-control" placeholder="请输入出差编号..." [(ngModel)]="formData.name"
                  (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
