@@ -17,7 +17,7 @@ export class ErrandComponent implements OnInit {
   };
 
   listHeader = [
-    {title: '编号', field: 'eno', type: 'text', class: 'text-success'},
+    {title: '编号', field: 'eno', type: 'click', class: 'text-success'},
     {title: '出差人员', field: 'username', type: 'text'},
     {title: '目的地', field: 'target', type: 'text'},
     {title: '差期', field: 'dateRange', type: 'text'},
@@ -25,6 +25,10 @@ export class ErrandComponent implements OnInit {
   ];
 
   errands: Array<any> = [];
+
+  selected: any = null;
+
+  isVisible = false;
 
   /**
    * 属性描述: 分页组建参数
@@ -73,8 +77,23 @@ export class ErrandComponent implements OnInit {
     alert('前往编辑');
   }
 
-  noProcess() {
-    console.log('不在流程');
+  noProcess(item) {
+    console.log(item);
+  }
+
+  isProcessing(errand: any) {
+    return ! (this.errands['status'] !== 0);
+  }
+
+
+  details(v): void {
+    this.selected = v;
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
   }
 
 }

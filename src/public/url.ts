@@ -140,6 +140,11 @@ export const Urls = {
       LIST: `/app/reimbursement`,
       ADD: `/app/reimbursement/add`,
       EDIT: `/app/reimbursement/edit`
+    },
+    ERRAND: {
+      LIST: `/app/errand`,
+      ADD: `/app/errand/add`,
+      EDIT: `/app/errand/edit`
     }
   }
 };

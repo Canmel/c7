@@ -1,0 +1,46 @@
+export class Errand {
+  id: number;
+  eno: string;
+  orgId: number;
+  orgName: string;
+  plan: string;
+  planType: number;
+  processStatus: number;
+  applyDate: Date;
+  dateRangeStart: Date;
+  dateRangeEnd: Date;
+  director: number;
+  directorComment: string;
+  leader: number;
+  leaderComment: string;
+  manager: number;
+  managerComment: string;
+  operator: number;
+  operatorComment: string;
+  resources: number;
+  resourcesComment: string;
+
+
+  constructor(data: any) {
+    this.id = data['id'];
+    this.eno = data['eno'];
+    this.orgId = data['orgId'];
+    this.orgName = data['oegName'];
+    this.plan = data['plan'];
+    this.planType = data['planType'];
+    this.processStatus = data['processStatus'];
+    this.applyDate = data['applyDate'];
+    this.dateRangeStart = data['dateRangeStart'];
+    this.dateRangeEnd = data['dateRangeEnd'];
+    this.director = data['director'];
+    this.directorComment = data['directorComment'];
+    this.leader = data['leader'];
+    this.leaderComment = data['leaderComment'];
+    this.manager = data['manager'];
+    this.managerComment = data['managerComment'];
+    this.operator = data['operator'];
+    this.operatorComment = data['operatorComment'];
+    this.resources = data['resources'];
+    this.resourcesComment = data['resourcesComment'];
+  }
+}

@@ -22,3 +22,71 @@
 .error_message {
   color: red;
 }
+
+.elogo {
+  text-align: center;
+  transform: scale(1.5);
+}
+
+.ehead {
+  text-align: left;
+  margin: 0px;
+  color: black;
+}
+
+.elabel {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.e2 {
+  min-height: 150px;
+  line-height: 151px;
+}
+
+.evalue {
+  padding: 0px;
+}
+
+.evalue > input {
+  width: 100%;
+  height: 55px;
+  text-align: center;
+}
+
+nz-select > div {
+  width: 100%;
+  height: 55px;
+  text-align: center;
+}
+
+.ant-table-bordered .ant-table-tbody>tr>td, .ant-table-bordered .ant-table-thead>tr>th {
+  border: 2px solid black;
+}
+
+.ant-select-selection--single {
+  height: 55px;
+  position: relative;
+}
+
+tr:hover{
+  background-color: unset;
+}
+
+::selection {
+
+}
+
+.error_message {
+  color: red;
+}
+
+.ant-table-placeholder{
+  display: none;
+}
+
+nz-date-picker {
+  margin: 0 8px 12px 0;
+}
+
