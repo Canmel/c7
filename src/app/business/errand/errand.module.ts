@@ -10,7 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NzCalendarModule, NzRadioModule} from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [ErrandComponent, ErrandEditComponent, ErrandAddComponent],
@@ -23,7 +23,9 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
     ListModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-    ErrandRoutingModule
+    ErrandRoutingModule,
+    NzCalendarModule,
+    NzRadioModule
   ]
 })
 export class ErrandModule { }

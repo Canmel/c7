@@ -20,7 +20,8 @@ export const Urls = {
     ROLES: `/system/sysUser/roles`,
     DELETE: `/system/sysUser/`,
     UPDATEROLES: `/system/sysUser/roles`,
-    VALIDUSERNAME: `/system/sysUser/valid/`
+    VALIDUSERNAME: `/system/sysUser/valid/`,
+    ALL: `/system/sysUser/all`
   },
   MACRO: {
     PAGEQUERY: `/system/sysMacro`,
@@ -55,7 +56,8 @@ export const Urls = {
     COMMENT: `/oa/reimbursement/comment/`
   },
   ERRAND: {
-    PAGEQUERY: `/oa/errand`
+    PAGEQUERY: `/oa/errand`,
+    SAVE: `/oa/errand`,
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,

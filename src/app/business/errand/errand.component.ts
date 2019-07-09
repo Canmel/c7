@@ -74,7 +74,7 @@ export class ErrandComponent implements OnInit {
   }
 
   noProcess() {
-    alert('不在流程');
+    console.log('不在流程');
   }
 
 }

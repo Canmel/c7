@@ -13,102 +13,169 @@
           <span>ST-MT-01v1.0.1</span>
         </div>
       </nz-form-item>
-      <div style="border: 1px solid black;">
-        <div class="ant-row">
-          <div class="ant-col-4 ant-form-item-label elabel"><b>申请人</b></div>
-          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
-          <div class="ant-col-4 ant-form-item-label elabel"><b>所属部门</b></div>
-          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
-          <div class="ant-col-4 ant-form-item-label elabel"><b>申请日期</b></div>
-          <div class="ant-col-4 ant-form-item-label elabel"><input type="text" class="einput"/></div>
-        </div>
-        <div class="ant-row">
-          <div class="ant-col-4 ant-form-item-label elabel"><b>差期</b></div>
-          <div class="ant-col-20 ant-form-item-label elabel">&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日上/下午
-            &nbsp;&nbsp;&nbsp;&nbsp;时至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日上/下午&nbsp;&nbsp;&nbsp;&nbsp;时
+
+      <nz-table #basicTable [nzData]="[{}, {}]">
+        <div class="ant-table-wrapper ant-table-empty">
+          <div>
+            <div class="ant-spin-container">
+              <div>
+                <div class="ant-table ant-table-bordered ant-table-large">
+                  <div class="ant-table-body">
+                    <table>
+                      <colgroup></colgroup>
+                      <thead class="ant-table-thead"></thead>
+                      <tbody _ngcontent-c13="" style="border: 1px solid black;" class="ant-table-tbody">
+                      <tr *ngFor="let data of basicTable.data"></tr>
+                      <tr _ngcontent-c13="" class="ant-table-row">
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">申请人</td>
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue">
+                          <nz-select formControlName="uid" nzShowSearch nzAllowClear (ngModelChange)="applyUserChange($event)">
+                            <nz-option [nzLabel]="item.username" [nzValue]="item.uid" *ngFor="let item of applyUsers"></nz-option>
+                          </nz-select>
+                        </td>
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">所属部门
+                        </td>
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue"><input type="text" nz-input disabled
+                                                                                          formControlName="orgName"/>
+                        </td>
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">申请日期
+                        </td>
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue">
+                          <nz-date-picker formControlName="applyDate" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+                        </td>
+                      </tr>
+                      <tr _ngcontent-c13="" class="ant-table-row">
+                        <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">差期
+                        </td>
+                        <td _ngcontent-c13="" colspan="10" class="ant-col-20" style="text-align: center;">
+                          <nz-date-picker
+                            [nzDisabledDate]="disabledStartDate"
+                            nzShowTime
+                            nzFormat="yyyy-MM-dd HH:mm:ss"
+                            formControlName="dateRangeStart"
+                            nzPlaceHolder="开始"
+                            (ngModelChange)="onStartChange($event)"
+                            (nzOnOpenChange)="handleStartOpenChange($event)"
+                          >
+                          </nz-date-picker>
+                          至
+                          <nz-date-picker
+                            [nzDisabledDate]="disabledEndDate"
+                            nzShowTime
+                            nzFormat="yyyy-MM-dd HH:mm:ss"
+                            formControlName="dateRangeEnd"
+                            nzPlaceHolder="结束"
+                            [nzOpen]="endOpen"
+                            (ngModelChange)="onEndChange($event)"
+                            (nzOnOpenChange)="handleEndOpenChange($event)"
+                          >
+                          </nz-date-picker>
+                        </td>
+                      </tr>
+                      <tr class="ant-table-row">
+                        <td colspan="2" rowspan="2" class="elabel">出差事由</td>
+                        <td colspan="10" rowspan="2" style="padding: 0px;">
+                          <nz-radio-group formControlName="planType" nzName="radiogroup">
+                            <label nz-radio nzValue="1">售前</label>
+                            <label nz-radio nzValue="2">项目</label>
+                            <label nz-radio nzValue="3">其他</label>
+                          </nz-radio-group>
+                          <div><span style="color: black; font-weight: bold;">目的和计划</span></div>
+                          <textarea name="plan" placeholder="点击修改目的和计划..." style="width: 100%; border: 0;"
+                                    rows="3" nz-input formControlName="plan"></textarea>
+                        </td>
+                      </tr>
+                      <tr></tr>
+
+                      <tr _ngcontent-c13="" class="ant-table-row">
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">目的地
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" nz-input
+                                                                                          formControlName="target"/>
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">部门负责人意见
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" disabled/>
+                        </td>
+                      </tr>
+                      <tr _ngcontent-c13="" class="ant-table-row">
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">分管领导意见
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" disabled/>
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">运营管理部确认
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" disabled/>
+                        </td>
+                      </tr>
+                      <tr _ngcontent-c13="" class="ant-table-row">
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">人力资源部核准
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" disabled/>
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">总经理意见
+                        </td>
+                        <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue"><input type="text" disabled/>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="ant-row">
-          <div class="ant-col-4 ant-form-item-label elabel e2"><b>出差事由</b></div>
-          <div class="ant-col-20 ant-form-item-label elabel" style="min-height: 102px;text-align: left;">
-            <div style="line-height: 25px;"><input type="checkbox"/>售前<input type="checkbox"/>项目<input type="checkbox"/>其他</div>
-            <div style="line-height: 25px;">
-              <span style="width: 10%;"><b>目的和计划:</b></span>
-            </div>
-            <div>
-              <textarea placeholder="点击修改目的和计划..." style="width: 100%; border: 1px solid rgba(255, 255, 255, 0.21);"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="ant-row">
-          <div class="ant-col-6 ant-form-item-label elabel"><b>目的地</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-          <div class="ant-col-6 ant-form-item-label elabel"><b>部门负责人意见</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-        </div>
-        <div class="ant-row">
-          <div class="ant-col-6 ant-form-item-label elabel"><b>分管领导意见</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-          <div class="ant-col-6 ant-form-item-label elabel"><b>运营管理部确认</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-        </div>
-        <div class="ant-row">
-          <div class="ant-col-6 ant-form-item-label elabel"><b>人力资源部核准</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-          <div class="ant-col-6 ant-form-item-label elabel"><b>总经理意见</b></div>
-          <div class="ant-col-6 ant-form-item-label evalue"><input type="text" class="einput"/></div>
-        </div>
+      </nz-table>
+      <div class="error_message"
+           *ngIf="validateForm.get('uid').dirty && validateForm.get('uid').errors || validateForm.get('uid').pending ">
+        <ng-container *ngIf="validateForm.get('uid').hasError('required')">
+          申请人不能为空！
+        </ng-container>
       </div>
-      <table>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>3</td>
-          <td>4</td>
-        </tr>
-      </table>
+      <div class="error_message"
+           *ngIf="validateForm.get('orgName').dirty && validateForm.get('orgName').errors || validateForm.get('orgName').pending ">
+        <ng-container *ngIf="validateForm.get('orgName').hasError('required')">
+          部门不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('applyDate').dirty && validateForm.get('applyDate').errors || validateForm.get('applyDate').pending ">
+        <ng-container *ngIf="validateForm.get('applyDate').hasError('required')">
+          申请日期不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('dateRangeStart').dirty && validateForm.get('dateRangeStart').errors || validateForm.get('dateRangeStart').pending ">
+        <ng-container *ngIf="validateForm.get('dateRangeStart').hasError('required')">
+          差期开始不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('dateRangeEnd').dirty && validateForm.get('dateRangeEnd').errors || validateForm.get('dateRangeEnd').pending ">
+        <ng-container *ngIf="validateForm.get('dateRangeEnd').hasError('required')">
+          差期结束不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('planType').dirty && validateForm.get('planType').errors || validateForm.get('planType').pending ">
+        <ng-container *ngIf="validateForm.get('planType').hasError('required')">
+          出差事由类型不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('plan').dirty && validateForm.get('plan').errors || validateForm.get('plan').pending ">
+        <ng-container *ngIf="validateForm.get('plan').hasError('required')">
+          目的和计划不能为空！
+        </ng-container>
+      </div>
+      <div class="error_message"
+           *ngIf="validateForm.get('target').dirty && validateForm.get('target').errors || validateForm.get('target').pending ">
+        <ng-container *ngIf="validateForm.get('target').hasError('required')">
+          目的地不能为空！
+        </ng-container>
+      </div>
 
-
-      <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>报销名称</nz-form-label>
-        <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="name" placeholder="请输入报销名称...">
-          <nz-form-explain
-            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
-            <ng-container *ngIf="validateForm.get('name').hasError('required')">
-              报销名称不能为空！
-            </ng-container>
-            <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
-              报销名称已经被使用！请修改
-            </ng-container>
-            <ng-container *ngIf="validateForm.get('name').pending">
-              正在验证中
-            </ng-container>
-          </nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>报销数额</nz-form-label>
-        <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <nz-input-number formControlName="amount" nz-input rows="2" [nzPlaceHolder]="'报销数额...'" [nzMin]="1"
-                           style="width: 100%;"></nz-input-number>
-          <nz-form-explain
-            *ngIf="validateForm.get('amount').dirty&&validateForm.get('amount').hasError('required')">
-            数额不能为空！
-          </nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>描述介绍</nz-form-label>
-        <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <textarea formControlName="description" nz-input rows="2" placeholder="描述介绍..."></textarea>
-          <nz-form-explain
-            *ngIf="validateForm.get('description').dirty&&validateForm.get('description').hasError('required')">
-            简介不能为空！
-          </nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>
       <nz-form-item>
         <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
           <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
