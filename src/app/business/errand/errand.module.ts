@@ -11,6 +11,7 @@ import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
 import {NgZorroAntdModule, NzCalendarModule, NzRadioModule} from 'ng-zorro-antd';
+import {EssenceNg2PrintModule} from 'essence-ng2-print';
 
 @NgModule({
   declarations: [ErrandComponent, ErrandEditComponent, ErrandAddComponent],
@@ -25,7 +26,8 @@ import {NgZorroAntdModule, NzCalendarModule, NzRadioModule} from 'ng-zorro-antd'
     NgZorroAntdModule,
     ErrandRoutingModule,
     NzCalendarModule,
-    NzRadioModule
+    NzRadioModule,
+    EssenceNg2PrintModule
   ]
 })
 export class ErrandModule { }

@@ -4,7 +4,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
   <section class="panel panel-default">
     <div class="panel-body" style="width: 80%; margin: auto;">
-      <div class="elogo"><img src="assets/img/goshine.png"></div>
+      <div class="elogo"><img src="assets/img/goshine.png" style="transform: scale(1.5);"></div>
       <nz-form-item style="margin: 0;">
         <div class="ant-col-17 ant-form-item-label ehead">
           <span style="font-size: 25px;">出差申请单</span>
@@ -14,7 +14,7 @@
         </div>
       </nz-form-item>
 
-      <nz-table #basicTable [nzData]="[{}, {}]">
+      <nz-table #basicTable [nzData]="[{}, {}]" [nzShowPagination]="false">
         <div class="ant-table-wrapper ant-table-empty">
           <div>
             <div class="ant-spin-container">

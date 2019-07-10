@@ -25,6 +25,7 @@
     "bpmn-js-properties-panel": "^0.28.2",
     "camunda-bpmn-moddle": "^3.1.1",
     "core-js": "^2.5.4",
+    "essence-ng2-print": "^1.1.0",
     "jquery": "^3.4.1",
     "ng-zorro-antd": "^1.8.0",
     "ng2-drag-drop": "^3.0.2",
