@@ -16,19 +16,40 @@ export class ErrandComponent implements OnInit {
     subTitle: '出差管理'
   };
 
-  listHeader = [
-    {title: '编号', field: 'eno', type: 'click', class: 'text-success'},
-    {title: '出差人员', field: 'username', type: 'text'},
-    {title: '目的地', field: 'target', type: 'text'},
-    {title: '差期', field: 'dateRange', type: 'text'},
-    {title: '操作', field: 'option', type: 'opt', width: '20%'}
-  ];
+  listHeader: Array<any>;
 
   errands: Array<any> = [];
 
   selected: any = null;
 
+  /**
+   * 属性描述: 流程显示状态
+   * 参数：
+   **/
+  isVisibleFlow = false;
+
+  selectTask;
+
+  isVisibleApply = false;
+
+  selectItem = {
+    name: '',
+    amount: 0,
+    description: '',
+    task: null
+  };
+
+  selectedValue;
+  deployedProcess = [];
+
+  selectedItemId;
+  taskImageUrl = '';
+  comments = [
+    {taskName: '', message: '', username: '', createdTime: '', pass: true}
+  ];
+
   isVisible = false;
+  isVisibleExam = false;
 
   printCSS: string[];
   printStyle: string;
@@ -45,13 +66,97 @@ export class ErrandComponent implements OnInit {
     name: ''
   };
 
+  commitForm = {
+    commontValue: ''
+  };
+
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
     this.loadPrintStyle();
   }
 
   ngOnInit() {
+    this.loadEntityStatus();
     this.loadEntities();
+    this.loadDepolyedProcess();
+  }
+
+  clickFnFlow(item): void {
+    this.selectItem = item;
+    const _this = this;
+    _this.comments = [];
+    this.taskImageUrl = '';
+    console.log(123123);
+    this.https.get(Urls.ERRAND.CURRENT + item['id'], {}).then(resp => {
+      const respData = resp['data'];
+      if (respData) {
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
+        this.selectItem.task = respData[0];
+
+        if (item['status'] !== 1) {
+          this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(r => {
+            this.selectTask = r['data'];
+            $.each(this.selectTask, function (index, task) {
+              $.each(task['comment'], function (i, c) {
+                _this.comments.push(
+                  {taskName: task['name'], message: c['fullMessage'], username: c['userId'], createdTime: c['time'], pass: task['pass']}
+                );
+              });
+            });
+            console.log(_this.selectTask);
+          });
+        }
+      }
+    });
+    this.isVisibleFlow = true;
+    this.loadEntities();
+  }
+
+  loadEntityStatus() {
+    this.https.get(Urls.OPTIONS.ERRAND.STATUS).then(resp => {
+      this.listHeader = [
+        {title: '编号', field: 'eno', type: 'click', class: 'text-success'},
+        {title: '出差人员', field: 'username', type: 'text'},
+        {title: '目的地', field: 'target', type: 'text'},
+        {title: '差期', field: 'dateRange', type: 'text'},
+        {
+          title: '状态',
+          field: 'status',
+          type: 'enum',
+          options: resp['data'],
+          clickFn: this.clickFnFlow,
+          class: 'text-success',
+          cursor: 'pointer'
+        },
+        {title: '操作', field: 'option', type: 'opt', width: '20%'}
+      ];
+    });
+  }
+
+  /**
+   * 方法用途: 模态框确认回调
+   * 参数：
+   **/
+  handleApplyOk() {
+    this.https.get(Urls.ERRAND.APPLY + this.selectedItemId, {flowId: this.selectedValue}).then(
+      resp => {
+        if (resp['code'] === 200) {
+          this.notification.success('成功', resp['msg']);
+          this.loadEntities();
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      },
+      resp => {
+      }
+    );
+    this.isVisible = false;
+  }
+
+  loadDepolyedProcess() {
+    this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3, key: 'ERRAND'}).then(resp => {
+      this.deployedProcess = resp['data'];
+    });
   }
 
   /**
@@ -66,12 +171,37 @@ export class ErrandComponent implements OnInit {
     });
   }
 
-  showModal() {
-    alert('弹窗');
+  showModal(id): void {
+    this.selectedItemId = id;
+    this.isVisibleApply = true;
   }
 
-  showExamModal() {
-    alert('弹窗');
+  showExamModal(item) {
+    this.selectItem = item;
+    const _this = this;
+    _this.comments = [];
+    this.taskImageUrl = '';
+    this.https.get(Urls.ERRAND.CURRENT + item['id'], {}).then(resp => {
+      const respData = resp['data'];
+      if (respData) {
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
+        this.selectItem.task = respData[0];
+        if (item['status'] !== 1) {
+          this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(r => {
+            this.selectTask = r['data'];
+            $.each(this.selectTask, function (index, task) {
+              $.each(task['comment'], function (i, c) {
+                _this.comments.push(
+                  {taskName: task['name'], message: c['fullMessage'], username: c['userId'], createdTime: c['time'], pass: task['pass']}
+                );
+              });
+            });
+            console.log(_this.selectTask);
+          });
+        }
+      }
+    });
+    this.isVisibleExam = true;
   }
 
   remove() {
@@ -82,12 +212,18 @@ export class ErrandComponent implements OnInit {
     alert('前往编辑');
   }
 
-  noProcess(item) {
-    console.log(item);
+  noProcess(errand) {
+    const flag = errand['status'] === 1 && this.permissions(errand);
+    return flag;
   }
 
   isProcessing(errand: any) {
-    return !(this.errands['status'] !== 0);
+    const flag = errand['status'] === 2 && this.permissions(errand);
+    return flag;
+  }
+
+  permissions(errand) {
+    return true;
   }
 
 
@@ -98,6 +234,60 @@ export class ErrandComponent implements OnInit {
 
   handleOk(): void {
     this.isVisible = false;
+  }
+
+  /**
+   * 方法用途: 模态框取消回调
+   * 参数：
+   **/
+  handleExamCancel() {
+    if (!this.selectItem['task'] && !this.selectItem['task']['id']) {
+      return this.notification.error('失败', '未找到任务信息');
+    }
+    this.https.get(Urls.REIMBURSEMENT.TASKBACK + this.selectItem['task']['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
+      resp => {
+        if (resp['code'] === 200) {
+          this.notification.success('成功', resp['msg']);
+          this.isVisibleExam = false;
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+        this.loadEntities();
+      },
+      resp => {
+      }
+    );
+    this.isVisibleExam = false;
+  }
+
+  /**
+   * 方法用途: 审核模态框确认回调
+   * 参数：
+   **/
+  handleExamOk() {
+    console.log(this.selectItem['id']);
+    if (!this.selectItem['id']) {
+      return this.notification.error('失败', '未找到任务信息');
+    }
+    this.https.get(Urls.ERRAND.TASKPASS + this.selectItem['id'], {
+      comment: this.commitForm.commontValue,
+      businessId: this.selectItem['id']
+    }).then(
+      resp => {
+        if (resp['code'] === 200) {
+          this.notification.success('成功', resp['msg']);
+          this.isVisibleExam = false;
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+        this.loadEntities();
+      },
+      resp => {
+      }
+    );
   }
 
 
@@ -127,100 +317,13 @@ export class ErrandComponent implements OnInit {
   loadPrintStyle() {
     this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
     this.printStyle =
-      `
-      .show-details > span {
-  margin-left: 20px;
-}
+      `td {
+  border: 1px solid black;
 
-.show-details {
-  display: inline-block;
-  margin-top: 20px;
-  width: 33%;
 }
-
-.comment-title {
-  font-size: 16px;
-}
-
-.comment-content {
-  background-color: darkseagreen;
+.etable {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
-
-.error_message {
-  color: red;
-}
-
-.elogo {
-  text-align: center;
-}
-
-.ehead {
-  text-align: left;
-  margin: 0px;
-  color: black;
-}
-
-.elabel {
-  text-align: center;
-  color: black;
-  font-weight: bold;
-}
-
-.e2 {
-  min-height: 150px;
-  line-height: 151px;
-}
-
-.evalue {
-  padding: 0px;
-}
-
-.evalue > input {
-  width: 100%;
-  height: 55px;
-  text-align: center;
-}
-
-nz-select > div {
-  width: 100%;
-  height: 55px;
-  text-align: center;
-}
-
-.ant-table-bordered .ant-table-tbody>tr>td, .ant-table-bordered .ant-table-thead>tr>th {
-  border: 2px solid black;
-}
-
-.ant-select-selection--single {
-  height: 55px;
-  position: relative;
-}
-
-tr:hover{
-  background-color: unset;
-}
-
-::selection {
-
-}
-
-.error_message {
-  color: red;
-}
-
-.ant-table-placeholder{
-  display: none;
-}
-
-nz-date-picker {
-  margin: 0 8px 12px 0;
-}
-
-
-     }
      `;
   }
 

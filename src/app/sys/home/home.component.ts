@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,34 @@ export class HomeComponent implements OnInit {
     subTitle: null
   };
 
-  constructor() { }
+  printCSS: string[];
+  printStyle: string;
+  printBtnBoolean = true;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.loadPrintStyle();
+  }
+
+  printComplete() {
+    this.printBtnBoolean = true;
+  }
+
+  beforePrint() {
+    this.printBtnBoolean = false;
+  }
+
+  loadPrintStyle() {
+    this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
+    this.printStyle =
+      `td {
+        border: 1px solid black;
+      }
+      .etable {
+        width: 100%;
+      }`;
   }
 
 }

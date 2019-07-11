@@ -65,14 +65,6 @@ export class BPMUtil {
     let result = '';
     rects.forEach(function (item, index) {
       result += '    <' + item.xmlTagName + ' id="' + item.id + '" name="' + item.name + '"> \n';
-      polyLines.forEach(function (polyLine: Polyline) {
-        if (polyLine.startRect === item) {
-          result += '      <outgoing>' + polyLine.id + '</outgoing> \n';
-        }
-        if (polyLine.endRect === item) {
-          result += '      <incoming>' + polyLine.id + '</incoming> \n';
-        }
-      });
       result += _this.generateAssignee(item);
       result += '    </' + item.xmlTagName + '> \n';
     });

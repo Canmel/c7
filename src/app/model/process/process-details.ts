@@ -23,5 +23,8 @@ export class ProcessDetails {
     if (!this.busniessKey && this.flowType === '3') {
       return 'REIMBURSEMENT';
     }
+    if (!this.busniessKey && this.flowType === '3') {
+      return 'ERRAND';
+    }
   }
 }

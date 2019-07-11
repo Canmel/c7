@@ -58,6 +58,12 @@ export const Urls = {
   ERRAND: {
     PAGEQUERY: `/oa/errand`,
     SAVE: `/oa/errand`,
+    DELETE: `/oa/errand/`,
+    APPLY: `/oa/errand/apply/`,
+    TASKPASS: `/oa/errand/pass/`,
+    TASKBACK: `/oa/errand/back/`,
+    EDIT: `/oa/errand/`,
+    CURRENT: `/oa/errand/current/`,
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
@@ -97,6 +103,9 @@ export const Urls = {
     },
     REIMBURSEMENT: {
       STATUS: `/oa/reimbursement/status`
+    },
+    ERRAND: {
+      STATUS: `/oa/errand/status`
     }
   },
   SESSION: {

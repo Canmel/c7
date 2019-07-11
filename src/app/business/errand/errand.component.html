@@ -38,7 +38,7 @@
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, 'cursor': 'pointer'}"
-                  *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
+                             *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
                   <p *ngFor="let obj of head.options">
                     {{obj.value == item[head.field] ? obj.name: ''}}
                   </p>
@@ -79,108 +79,67 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="出差申请单详情" [nzWidth]="800" (nzOnCancel)="isVisible = false" *ngIf="selected"
           [nzFooter]="modalFooter">
 
-  <!--startprint1-->
-  <!--打印内容开始-->
-  <div id="errand-panel" #print>
-    <div class="elogo"><img src="assets/img/goshine.png" style="transform: scale(1.5);"></div>
-    <nz-form-item style="margin: 0;">
-      <div class="ant-col-17 ant-form-item-label ehead">
-        <span style="font-size: 25px;">出差申请单</span>
+  <div class="row" style="padding-top: 20px" #print>
+    <div style="text-align: center"><img src="http://127.0.0.1:4200/assets/img/goshine.png" style="transform: scale(1.5);"></div>
+    <div>
+      <div style="display: inline-block;width: 70%;">
+        <span style="font-size: 25px;color: black; font-weight: bold;">出差申请单</span>
       </div>
-      <div class="ant-col-7 ant-form-item-label ehead">
+      <div style="display: inline-block; width: 30%">
         <span>ST-MT-01v1.0.1</span>
       </div>
-    </nz-form-item>
-    <nz-table #basicTable [nzData]="[{}, {}]" [nzShowPagination]="false" >
-      <div class="ant-table-wrapper ant-table-empty">
-        <div>
-          <div class="ant-spin-container">
-            <div>
-              <div class="ant-table ant-table-bordered ant-table-large">
-                <div class="ant-table-body">
-                  <table>
-                    <colgroup></colgroup>
-                    <thead class="ant-table-thead"></thead>
-                    <tbody _ngcontent-c13="" style="border: 1px solid black;" class="ant-table-tbody">
-                    <tr *ngFor="let data of basicTable.data"></tr>
-                    <tr _ngcontent-c13="" class="ant-table-row">
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">申请人</td>
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue">{{selected.username}}</td>
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">所属部门</td>
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue">{{selected.orgName}}</td>
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">申请日期</td>
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 evalue">{{selected.applyDate}}</td>
-                    </tr>
-                    <tr _ngcontent-c13="" class="ant-table-row">
-                      <td _ngcontent-c13="" colspan="2" class="ant-col-4 elabel">差期
-                      </td>
-                      <td _ngcontent-c13="" colspan="10" class="ant-col-20" style="text-align: center;">
-                        {{selected.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}
-                        至
-                        {{selected.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}
-                      </td>
-                    </tr>
-                    <tr class="ant-table-row">
-                      <td colspan="2" rowspan="2" class="elabel">出差事由</td>
-                      <td colspan="10" rowspan="2" style="padding: 0px;">
-                        <nz-radio-group nzName="radiogroup" [(ngModel)]="selected.planType" disabled>
-                          <label nz-radio [nzValue]="1">售前</label>
-                          <label nz-radio [nzValue]="2">项目</label>
-                          <label nz-radio [nzValue]="3">其他</label>
-                        </nz-radio-group>
-                        <div><span style="color: black; font-weight: bold;">目的和计划</span></div>
-                        <textarea name="plan" placeholder="点击修改目的和计划..." style="width: 100%; border: 0;" disabled
-                                  rows="3" nz-input [(ngModel)]="selected.plan"></textarea>
-                      </td>
-                    </tr>
-                    <tr class="ant-table-row">
-
-                    </tr>
-
-                    <tr _ngcontent-c13="" class="ant-table-row">
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">目的地
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.target}}
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">部门负责人意见
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.directorComment}}
-                      </td>
-                    </tr>
-                    <tr _ngcontent-c13="" class="ant-table-row">
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">分管领导意见
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.leaderComment}}
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">运营管理部确认
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.operatorComment}}
-                      </td>
-                    </tr>
-                    <tr _ngcontent-c13="" class="ant-table-row">
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">人力资源部核准
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.resourcesComment}}
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 elabel">总经理意见
-                      </td>
-                      <td _ngcontent-c13="" colspan="3" class="ant-col-6 evalue">{{selected.managerComment}}
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+    </div>
+    <table class="etable">
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">申请人</td>
+        <td colspan="2">{{selected.username}}</td>
+        <td colspan="2" style="color: #333; font-weight: bold;">所属部门</td>
+        <td colspan="2">{{selected.orgName}}</td>
+        <td colspan="2" style="color: #333; font-weight: bold;">申请日期</td>
+        <td colspan="2">{{selected.applyDate}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">差期</td>
+        <td colspan="10">
+          <span>{{selected.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+          至
+          <span>{{selected.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"  style="color: #333; font-weight: bold;text-align: center;">出差事由</td>
+        <td colspan="10">
+          <div>
+            <input name="planType" type="radio" [ngModel]="selected.planType"/> 售前
+            <input name="planType" type="radio"/> 项目
+            <input name="planType" type="radio"/> 其他
           </div>
-        </div>
-      </div>
-    </nz-table>
+          <div style="color: black; font-weight: bold;">目的和计划：</div>
+          <div style="min-height: 5em">
+            {{selected.plan}}
+          </div>
+        </td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">目的地</td>
+        <td colspan="3">{{selected.target}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">部门负责人意见</td>
+        <td colspan="4">{{selected.directorComment}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">分管领导意见</td>
+        <td colspan="3">{{selected.leaderComment}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">运营管理部确认</td>
+        <td colspan="4">{{selected.operatorComment}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">人力资源部核准</td>
+        <td colspan="3">{{selected.resourcesComment}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">总经理意见</td>
+        <td colspan="4">{{selected.managerComment}}</td>
+      </tr>
+    </table>
   </div>
-
-  <!--打印内容结束-->
-  <!--endprint1-->
-  <!--测试范围打印是否生效-->
   <ng-template #modalFooter>
     <essence-ng2-print
       [mode]="'popup'"
@@ -198,4 +157,80 @@
   </ng-template>
 </nz-modal>
 
+
+<nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="handleCancel()" (nzOnOk)="handleApplyOk()">
+  <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;">
+    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.resourceName}}"></nz-option>
+  </nz-select>
+</nz-modal>
+
+
+<nz-modal [(nzVisible)]="isVisibleFlow" [nzWidth]="800" nzTitle="流程信息" (nzOnCancel)="isVisibleFlow=false"
+          [nzFooter]="null">
+  <div>
+    <div style="overflow: auto;">
+      <img style="width: 100%;" src="{{taskImageUrl}}">
+    </div>
+    <div class="show-details">
+      <label>申请名称: </label>
+      <span>{{selectItem.name}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请金额: </label>
+      <span>{{selectItem.amount}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请备注: </label>
+      <span>{{selectItem.description}}</span>
+    </div>
+    <div class="comment-content">
+      <label class="comment-title"><b>审核过程</b></label>
+    </div>
+    <nz-timeline>
+      <nz-timeline-item *ngFor="let c of comments">
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
+      </nz-timeline-item>
+    </nz-timeline>
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleExam" nzTitle="审核" [nzFooter]="modalFooter" (nzOnCancel)="isVisibleExam = false">
+  <div>
+    <div style="overflow: auto;">
+      <img style="width: 100%" src="{{taskImageUrl}}">
+    </div>
+    <div class="show-details">
+      <label>申请名称: </label>
+      <span>{{selectItem.name}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请金额: </label>
+      <span>{{selectItem.amount}}</span>
+    </div>
+
+    <div class="show-details">
+      <label>申请备注: </label>
+      <span>{{selectItem.description}}</span>
+    </div>
+    <div class="comment-content">
+      <label class="comment-title"><b>审核过程</b></label>
+    </div>
+    <nz-timeline>
+      <nz-timeline-item *ngFor="let c of comments">
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
+      </nz-timeline-item>
+    </nz-timeline>
+    <textarea rows="2" nz-input [(ngModel)]="commitForm.commontValue" placeholder="请输入审核备注..."></textarea>
+  </div>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleExamCancel()">驳回</button>
+    <button nz-button nzType="primary" (click)="handleExamOk()">同意</button>
+  </ng-template>
+</nz-modal>
 

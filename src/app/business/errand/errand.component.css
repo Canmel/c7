@@ -68,24 +68,14 @@ nz-select > div {
   height: 55px;
   position: relative;
 }
-
-tr:hover{
-  background-color: unset;
-}
-
-::selection {
+.print-content {
 
 }
 
-.error_message {
-  color: red;
-}
+.etable tr td {
+  border: 2px solid black;
 
-.ant-table-placeholder{
-  display: none;
 }
-
-nz-date-picker {
-  margin: 0 8px 12px 0;
+.etable {
+  width: 100%;
 }
-
