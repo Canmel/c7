@@ -92,7 +92,7 @@
     <table class="etable">
       <tr style="text-align: center;line-height: 3em;">
         <td colspan="2" style="color: #333; font-weight: bold;">申请人</td>
-        <td colspan="2">{{selected.username}}</td>
+        <td colspan="2" style="width: 15%;">{{selected.username}}</td>
         <td colspan="2" style="color: #333; font-weight: bold;">所属部门</td>
         <td colspan="2">{{selected.orgName}}</td>
         <td colspan="2" style="color: #333; font-weight: bold;">申请日期</td>
@@ -158,7 +158,7 @@
 </nz-modal>
 
 
-<nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="handleCancel()" (nzOnOk)="handleApplyOk()">
+<nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="isVisibleApply = false" (nzOnOk)="handleApplyOk()">
   <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;">
     <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.resourceName}}"></nz-option>
   </nz-select>

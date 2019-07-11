@@ -142,6 +142,7 @@ export class ErrandComponent implements OnInit {
       resp => {
         if (resp['code'] === 200) {
           this.notification.success('成功', resp['msg']);
+          this.isVisibleApply = false;
           this.loadEntities();
         } else {
           this.notification.error('失败', resp['msg']);

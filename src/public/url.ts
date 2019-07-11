@@ -142,8 +142,8 @@ export const Urls = {
     },
     WORKFLOW: {
       LIST: `/app/workflows`,
-      ADD: `/app/workflows/add`,
-      EDIT: `/app/workflows/edit`
+      ADD: `/app/process-designer`,
+      EDIT: `/app/process-designer/edit`
     },
     REIMBURSEMENT: {
       LIST: `/app/reimbursement`,
