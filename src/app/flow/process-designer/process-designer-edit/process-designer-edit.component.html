@@ -1,0 +1,427 @@
+<div nz-row [nzGutter]="8" style="height: 100%;">
+  <div nz-col nzSpan="3" style="min-width: 100px; max-width: 120px;">
+    <nz-card style="text-align: center;" [nzBordered]="true" nzTitle="工具栏" [nzExtra]="extraTemplate"
+             class="tools-background" style="padding: 0px">
+      <div nz-row style="height: 100%;">
+        <div draggable="true" [dragData]="'start'">
+          <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个开始组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <ellipse stroke="#000" ry="16.785761" rx="16.857173" cy="21.357138" cx="21.000001" stroke-width="1.5"
+                     fill="#fff"></ellipse>
+          </svg>
+        </div>
+        <div draggable="true" [dragData]="'intermediates'">
+          <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个中继组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <ellipse stroke="#000" ry="17.142898" rx="16.857173" cy="21" cx="20.999999" stroke-width="1.5"
+                     fill="#fff"></ellipse>
+            <ellipse stroke="#000" ry="13.571235" rx="13.571236" cy="20.999999" cx="21.000001" fill-opacity="null"
+                     stroke-opacity="null" stroke-width="1.5" fill="#fff"></ellipse>
+
+          </svg>
+        </div>
+        <div draggable="true" [dragData]="'getway'">
+          <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个排它网关组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <g>
+              <rect height="0.714276" width="0" y="87.025846" x="574.920652" fill-opacity="null" stroke-opacity="null"
+                    stroke="#000" fill="#fff"></rect>
+              <path d="m29.214148,15.598293" opacity="0.5" fill-opacity="null" stroke-opacity="null"
+                    stroke-width="2" stroke="#000" fill="#fff"></path>
+              <rect stroke="#000" transform="rotate(-45 21.153844833374016,20.375) " height="22.966811"
+                    width="22.711909" y="8.891594" x="9.79789" fill-opacity="null" stroke-opacity="null"
+                    stroke-width="2" fill="#fff"></rect>
+              <line stroke="#000" y2="25.836538" x2="27.230769" y1="14.451923" x1="15.230769" fill-opacity="null"
+                    stroke-opacity="null" stroke-width="2" fill="none"></line>
+              <line y2="14.451923" x2="26.769231" y1="25.221154" x1="16" fill-opacity="null" stroke-opacity="null"
+                    stroke-width="2" stroke="#000" fill="none"></line>
+            </g>
+          </svg>
+        </div>
+        <div draggable [dragData]="'end'">
+          <svg width="100%" height="40px" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个结束组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <ellipse stroke="#000" ry="15.000072" rx="14.714345" cy="21" cx="21" stroke-width="5"
+                     fill="#fff"></ellipse>
+          </svg>
+        </div>
+        <div draggable [dragData]="'task'">
+          <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个任务组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <rect stroke="#000" id="svg_10" height="24.856817" rx="4" width="30.713848" y="9.571592" x="5.643076"
+                  fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="#fff"></rect>
+          </svg>
+        </div>
+
+        <div draggable [dragData]="'pool'">
+          <svg width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               (mousemove)="toolsMouseMoveHandler($event, '创建一个泳道组件')" (mouseout)="toolsMouseOutHandler()"
+               style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <rect id="svg_26" height="22.615385" width="36" y="9.528846" x="3.076923" fill-opacity="null"
+                  stroke-opacity="null" stroke-width="2" stroke="#000" fill="none"></rect>
+            <line id="svg_30" y2="31.836538" x2="9.538462" y1="9.836538"
+                  x1="9.384615" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#000"
+                  fill="none"></line>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <button nz-button (click)="saveHandler()">保存<i nz-icon type="save"></i></button>
+      </div>
+    </nz-card>
+  </div>
+  <div style="position: absolute; top: 0px; right: 0px; height: 500px; width: 300px; z-index: 999">
+    <nz-card [nzBordered]="true" nzTitle="属性" [nzExtra]="extraTemplate" class="tools-background"
+             style="padding: 0px">
+      <div nz-row style="height: 100%;" *ngIf="selected">
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">节点类型</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="节点类型" [value]="selected.type" [disabled]="true"
+                   [readonly]="true"/>
+          </nz-form-control>
+        </nz-input-group>
+        <br/>
+
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">节点ID</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="ID" [(ngModel)]="selected.id"/>
+          </nz-form-control>
+        </nz-input-group>
+
+        <br/>
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">节点名称</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="节点名称" [(ngModel)]="selected.name"/>
+          </nz-form-control>
+        </nz-input-group>
+
+        <br/>
+
+        <nz-input-group *ngIf="isShowRoleSelector()">
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">参与角色</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="选择参与角色"
+                       [(ngModel)]="selected.role">
+              <nz-option nzLabel="所有角色" nzValue="0"></nz-option>
+              <nz-option *ngFor="let item of allRoles" [nzLabel]="item['remark']"
+                         [nzValue]="item['roleName']"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-input-group>
+        <br/>
+      </div>
+
+      <div nz-row style="height: 100%;" *ngIf="!selected && processDetails">
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">业务字段</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="业务字段（BUSNIESSKEY）" [(ngModel)]="processDetails.busniessKey"/>
+          </nz-form-control>
+        </nz-input-group>
+        <br/>
+
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">流程ID</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="ID" [(ngModel)]="processDetails.id"/>
+          </nz-form-control>
+        </nz-input-group>
+
+        <br/>
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">流程名称</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <input type="text" nz-input placeholder="节点名称" [(ngModel)]="processDetails.name"/>
+          </nz-form-control>
+        </nz-input-group>
+
+        <nz-input-group>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">流程类型</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              style="width: 100%;"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="选择流程类型"
+              [(ngModel)]="processDetails.flowType">
+              <nz-option nzLabel="通用流程" nzValue="0"></nz-option>
+              <nz-option *ngFor="let item of allFlowType" [nzLabel]="item['name']" [nzValue]="item['value']"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-input-group>
+      </div>
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="21" style="height: 100%; width: 87.5%" class="designer-background" droppable (onDrop)="onItemDrop($event)">
+    <svg id="designer-content" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"
+         [ngStyle]="{cursor: svgProperties.cursor}"
+         (mousedown)="svgMouseDownHandler($event)" (mouseup)="svgMouseUpHandler($event)"
+         (mousemove)="svgMouseMoveHandler($event)" (wheel)="svgWheelHandler($event)">
+      <g>
+        <g
+          [attr.transform]="'translate('+ svgProperties.translateX * svgProperties.scaleX + ', ' + svgProperties.translateY * svgProperties.scaleY + ')scale(' + svgProperties.scaleX + ',' + svgProperties.scaleY + ')'">
+          <g *ngFor="let item of polyLines">
+            <polyline [attr.points]="item.pointStrs"
+                      [attr.stroke-width]="2" [attr.stroke]="item.mainColor" [attr.fill]="'none'"
+                      marker-end='url(#markerArrow)'></polyline>
+          </g>
+
+          <g>
+            <line
+              [attr.x1]="transitionLine.x" [attr.y1]="transitionLine.y" [attr.stroke-dasharray]="[2, 3]"
+              [attr.x2]="(svgProperties.cursorX ) / svgProperties.scaleX - svgProperties.translateX"
+              [attr.y2]="(svgProperties.cursorY ) / svgProperties.scaleY - svgProperties.translateY"
+              [attr.stroke-width]="transitionLine.strokeWidth" [attr.stroke]="transitionLine.stroke"
+              *ngIf="transitionLine"></line>
+          </g>
+          <!--任务相关 开始-->
+          <g *ngFor="let item of tasks"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <rect [attr.width]="item.width" [attr.height]="item.height"
+                    [attr.x]="item.x" [attr.y]="item.y"
+                    [attr.rx]="12" [attr.fill]="item.mainColor"
+                    stroke="black" stroke-width="2">
+              </rect>
+              <text fill="black" text-anchor="middle" [attr.x]="item.x + (item.width / 2)"
+                    [attr.y]="item.y + 6 + (item.height / 2)" width="30"
+                    [attr.width]="item.width" [attr.height]="item.height">{{item.name}}
+              </text>
+            </g>
+            <rect [attr.width]="item.width + 2 * item.borderWidth" [attr.height]="item.height + 2 * item.borderWidth"
+                  fill="none"
+                  [attr.x]="item.x - item.borderWidth" [attr.y]="item.y - item.borderWidth"></rect>
+          </g>
+          <!--任务相关 结束-->
+
+
+          <!--开始相关 开始-->
+          <g *ngFor="let item of starts"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <circle [attr.r]="item.radius"
+                      [attr.cx]="item.x" [attr.cy]="item.y"
+                      [attr.fill]="item.mainColor"
+                      stroke="black" stroke-width="2">
+              </circle>
+            </g>
+            <rect [attr.width]="2 * item.radius + 2 * item.borderWidth"
+                  [attr.height]="2 * item.radius + 2 * item.borderWidth" fill="none"
+                  [attr.x]="item.x - item.borderWidth - item.radius"
+                  [attr.y]="item.y - item.borderWidth - item.radius"></rect>
+          </g>
+          <!--开始相关 结束-->
+
+          <!--结束相关 开始-->
+          <g *ngFor="let item of ends"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <circle [attr.r]="item.radius"
+                      [attr.cx]="item.x" [attr.cy]="item.y"
+                      [attr.fill]="item.mainColor"
+                      stroke="black" [attr.stroke-width]="item.strokeWidth">
+              </circle>
+            </g>
+            <rect [attr.width]="2 * item.radius + 2 * item.borderWidth"
+                  [attr.height]="2 * item.radius + 2 * item.borderWidth" fill="none"
+                  [attr.x]="item.x - item.borderWidth - item.radius"
+                  [attr.y]="item.y - item.borderWidth - item.radius"></rect>
+          </g>
+          <!--结束相关 结束-->
+
+          <!--中继器 开始-->
+          <g *ngFor="let item of intermediates"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <circle [attr.r]="item.radius"
+                      [attr.cx]="item.x" [attr.cy]="item.y"
+                      [attr.fill]="item.mainColor"
+                      stroke="black" [attr.stroke-width]="item.strokeWidth">
+              </circle>
+
+              <circle [attr.r]="item.radiusInner"
+                      [attr.cx]="item.x" [attr.cy]="item.y"
+                      [attr.fill]="item.mainColor"
+                      stroke="black" [attr.stroke-width]="item.strokeWidth">
+              </circle>
+            </g>
+            <rect [attr.width]="2 * item.radius + 2 * item.borderWidth"
+                  [attr.height]="2 * item.radius + 2 * item.borderWidth" fill="none"
+                  [attr.x]="item.x - item.borderWidth - item.radius"
+                  [attr.y]="item.y - item.borderWidth - item.radius"></rect>
+          </g>
+          <!--中继器 结束-->
+
+          <!--路由 开始-->
+          <g *ngFor="let item of getways"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <polygon fill="white" [attr.points]="[
+                      [item.x - 0.2 * item.width, item.y + 0.5 * item.height],
+                      [item.x + 0.5 * item.width, item.y + 1.2 * item.height],
+                      [item.x + 1.2 * item.width, item.y + 0.5 * item.height],
+                      [item.x + 0.5 * item.width, item.y - 0.2 * item.height]]"
+                       [attr.stroke]="'black'" [attr.stroke-width]="item.strokeWidth"></polygon>
+              <g>
+                <line
+                  [attr.x1]="item.x + 0.25 * item.width" [attr.x2]="item.x + 0.75 * item.width"
+                  [attr.y1]="item.y + 0.25 * item.height" [attr.y2]="item.y + 0.75 * item.height"
+                  [attr.stroke]="'black'" [attr.stroke-width]="3"
+                ></line>
+
+                <line
+                  [attr.x1]="item.x + 0.25 * item.width" [attr.x2]="item.x + 0.75 * item.width"
+                  [attr.y1]="item.y + 0.75 * item.height" [attr.y2]="item.y + 0.25 * item.height"
+                  [attr.stroke]="'black'" [attr.stroke-width]="3"
+                ></line>
+              </g>
+            </g>
+            <rect [attr.width]="1.5 * item.width + 2 * item.borderWidth"
+                  [attr.height]="1.5 * item.height + 2 * item.borderWidth" fill="none"
+                  [attr.x]="item.x - item.borderWidth - 0.25 * item.width"
+                  [attr.y]="item.y - item.borderWidth - 0.25 * item.height"></rect>
+          </g>
+          <!--路由 结束-->
+
+          <g *ngFor="let item of pools"
+             (click)="rectClickHandler($event, item)"
+             (mousedown)="rectMouseDownHandler($event, item)"
+             (mouseout)="rectMouseOutHandler($event, item)"
+             (mouseover)="rectMouseOverHandler($event, item)">
+            <g class="d-outline">
+              <rect [attr.width]="item.width" [attr.height]="item.height"
+                    [attr.x]="item.x" [attr.y]="item.y"
+                    [attr.fill]="item.mainColor"
+                    stroke="black" stroke-width="2">
+              </rect>
+              <line [attr.x1]="item.x + item.twidth" [attr.y1]="item.y"
+                    [attr.x2]="item.x + item.twidth" [attr.y2]="item.y + item.height"
+                    [attr.stroke]="'black'" [attr.stroke-width]="2"></line>
+            </g>
+            <rect [attr.width]="item.width + 2 * item.borderWidth" [attr.height]="item.height + 2 * item.borderWidth"
+                  fill="none"
+                  [attr.x]="item.x - item.borderWidth" [attr.y]="item.y - item.borderWidth"></rect>
+
+            <circle [attr.cx]="item.x+item.width" [attr.cy]="item.y" r="5" [attr.stroke]="'black'" [attr.fill]="'black'"
+                    (mouseover)="operatorRectMouseOverHandler($event,item)"
+                    (mousedown)="operatorRectMouseDownHandler($event, item)"
+                    (mouseout)="operatorRectMouseOutHandler($event, item)"
+                    (mouseup)="operatorRectMouseUpHandler($event, item)"
+                    stroke-width="2"/>
+          </g>
+        </g>
+
+        <!--移动组件 开始-->
+        <g *ngIf="taskMove && isShowMoveTask"
+           (mouseup)="rectMouseUpHandler($event)">
+          <g>
+            <rect *ngIf="isShowRect(taskMove)"
+                  [attr.width]="taskMove.width" [attr.height]="taskMove.height"
+                  [attr.x]="taskMove.x" [attr.y]="taskMove.y"
+                  [attr.rx]="12" fill="white"
+                  [attr.stroke]="taskMove.skin" stroke-width="2">
+            </rect>
+            <text *ngIf="isShowText(taskMove)" [attr.fill]="taskMove.skin" text-anchor="middle"
+                  [attr.x]="taskMove.x + (taskMove.width / 2)"
+                  [attr.y]="taskMove.y + 6 + (taskMove.height / 2)" width="30"
+                  [attr.width]="taskMove.width" [attr.height]="taskMove.height">{{taskMove.name}}
+            </text>
+
+            <circle *ngIf="isShowCircle(taskMove)" [attr.r]="taskMove.radius"
+                    [attr.cx]="taskMove.x" [attr.cy]="taskMove.y" fill="white"
+                    [attr.stroke]="taskMove.skin" [attr.stroke-width]="taskMove.strokeWidth">
+            </circle>
+
+            <circle *ngIf="isShowInnerCircle(taskMove)" [attr.r]="taskMove.radiusInner"
+                    [attr.cx]="taskMove.x" [attr.cy]="taskMove.y" fill="white"
+                    [attr.stroke]="taskMove.skin" [attr.stroke-width]="taskMove.strokeWidth">
+            </circle>
+
+            <g *ngIf="isShowGetWay(taskMove)">
+              <polygon fill="white" [attr.points]="[
+                      [taskMove.x - 0.2 * taskMove.width, taskMove.y + 0.5 * taskMove.height],
+                      [taskMove.x + 0.5 * taskMove.width, taskMove.y + 1.2 * taskMove.height],
+                      [taskMove.x + 1.2 * taskMove.width, taskMove.y + 0.5 * taskMove.height],
+                      [taskMove.x + 0.5 * taskMove.width, taskMove.y - 0.2 * taskMove.height]]"
+                       [attr.stroke]="taskMove.skin" [attr.stroke-width]="taskMove.strokeWidth"></polygon>
+              <line
+                [attr.x1]="taskMove.x + 0.25 * taskMove.width" [attr.x2]="taskMove.x + 0.75 * taskMove.width"
+                [attr.y1]="taskMove.y + 0.25 * taskMove.height" [attr.y2]="taskMove.y + 0.75 * taskMove.height"
+                [attr.stroke]="taskMove.skin" [attr.stroke-width]="3"
+              ></line>
+
+              <line
+                [attr.x1]="taskMove.x + 0.25 * taskMove.width" [attr.x2]="taskMove.x + 0.75 * taskMove.width"
+                [attr.y1]="taskMove.y + 0.75 * taskMove.height" [attr.y2]="taskMove.y + 0.25 * taskMove.height"
+                [attr.stroke]="taskMove.skin" [attr.stroke-width]="3"
+              ></line>
+            </g>
+
+            <g *ngIf="isShowPool(taskMove)">
+              <rect [attr.width]="taskMove.width" [attr.height]="taskMove.height"
+                    [attr.x]="taskMove.x" [attr.y]="taskMove.y"
+                    [attr.fill]="taskMove.mainColor"
+                    [attr.stroke]="taskMove.skin" [attr.stroke-width]="2">
+              </rect>
+              <line [attr.x1]="taskMove.x + taskMove.twidth" [attr.y1]="taskMove.y"
+                    [attr.x2]="taskMove.x + taskMove.twidth" [attr.y2]="taskMove.y + taskMove.height"
+                    [attr.stroke]="taskMove.skin" [attr.stroke-width]="2"></line>
+            </g>
+          </g>
+        </g>
+        <!--移动组件 结束-->
+
+        <!--&lt;!&ndash;工具组件 开始&ndash;&gt;-->
+        <!--<g *ngIf="selected && selected.showTools">-->
+        <!--<rect [attr.x]="selected.horizontal()" [attr.y]="selected.longitudinal()" width="30" height="30"></rect>-->
+        <!--</g>-->
+        <!--&lt;!&ndash;工具组件 结束&ndash;&gt;-->
+      </g>
+      <defs>
+        <marker id="markerArrow"
+                viewBox="0 0 20 10" refX="0" refY="10"
+                markerUnits="strokeWidth" markerWidth="6" markerHeight="20"
+                orient="auto">
+          <path d="M 0 0 L 20 10 L 0 20 z" fill="black" stroke="black"/>
+
+        </marker>
+
+      </defs>
+    </svg>
+
+    <div class="svg-tools" (wheel)="wheelTools($event)"
+         [ngStyle]="{'left': ((selected.horizontal() * 0.5) + selected.centerX() + svgProperties.translateX + 5) * svgProperties.scaleX + 'px',
+          top: (selected.centerY() - (selected.longitudinal()  * 0.5)+ svgProperties.translateY - 5) * svgProperties.scaleY + 'px'}"
+         *ngIf="selected && selected.showTools">
+      <div><i nz-icon [type]="'arrow-right'" nzTheme="outline" (click)="showTransition($event)"></i></div>
+      <div><i nz-icon [type]="'delete'" nzTheme="fill" (click)="toolDeleteHandler($event)"></i></div>
+    </div>
+
+  </div>
+</div>
+<div class="tool-move-tips" [style.top]="currentTip.y + 'px'" [style.left]="currentTip.x + 'px'">
+  <span>{{currentTip.message}}</span>
+</div>
