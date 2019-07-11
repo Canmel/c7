@@ -51,7 +51,7 @@
     </div>
     <footer class="panel-footer">
       <div class="row">
-        <nz-pagination [(nzPageIndex)]="formData.curPage" [nzTotal]="formData.totalNum"></nz-pagination>
+        <nz-pagination [(nzPageIndex)]="formData.pageNum" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
       </div>
     </footer>
   </section>

@@ -23,7 +23,7 @@ export class LogsComponent implements OnInit {
   formData: any = {
     totalNum: 21,
     pageSize: 10,
-    currentPage: 1,
+    pageNum: 1,
     module: ''
   };
 
@@ -57,7 +57,7 @@ export class LogsComponent implements OnInit {
   loadEntities() {
     this.https.get(Urls.LOGS.PAGEQUERY, this.formData).then(resp => {
       this.entities = resp['data']['list'];
-      this.formData.currentPage = resp['data']['pageNum'];
+      this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
   }

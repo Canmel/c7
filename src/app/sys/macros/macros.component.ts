@@ -26,7 +26,7 @@ export class MacrosComponent implements OnInit {
   formData: any = {
     totalNum: null,
     pageSize: 10,
-    currentPage: 1,
+    pageNum: 1,
     name: ''
   };
 
@@ -61,7 +61,7 @@ export class MacrosComponent implements OnInit {
   loadEntities() {
     this.https.get(Urls.MACRO.PAGEQUERY, this.formData).then(resp => {
       this.macros = resp['data']['list'];
-      this.formData.curPage = resp['data']['pageNum'];
+      this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     }, error => {
       this.notification.error('错误', error['error']['msg'] || error['message'] );

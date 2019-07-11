@@ -163,7 +163,7 @@ export class ProcessDesignerEditComponent implements OnInit {
     for (let i = 0; i < flows.length; i++) {
       const flow = flows.item(i);
       const user_name = flow.getAttribute('name');
-      const user_id = user.getAttribute('id');
+      const user_id = flow.getAttribute('id');
       const user_di = this.getDi(doc, user_id);
       const dc = user_di.getElementsByTagName('dc:Bounds');
       const task: Task = new Task(Number.parseInt(dc[0].getAttribute('x')), Number.parseInt(dc[0].getAttribute('y')), user_name);

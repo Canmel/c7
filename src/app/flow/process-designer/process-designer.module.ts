@@ -6,7 +6,6 @@ import {ProcessDesignerComponent} from './process-designer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {Ng2DragDropModule} from 'ng2-drag-drop';
-import {EditComponent} from './edit/edit.component';
 import {ProcessDesignerEditComponent} from './process-designer-edit/process-designer-edit.component';
 
 @NgModule({
