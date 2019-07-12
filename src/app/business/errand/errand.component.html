@@ -60,6 +60,10 @@
               <a nz-button nz-popover nzContent="审核" (click)="showExamModal(item)" *ngIf="isProcessing(item)"><i
                 class="fa fa-gavel text-info-dk text-active"></i><i
                 class="fa fa-gavel text-info-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="完善差程" (click)="completeErrand({id: item.id})" *ngIf="processSucess(item)"><i
+                class="fa fa-folder text-info-dk text-active"></i><i
+                class="fa fa-folder text-info-dk text"></i></a>
             </div>
           </td>
         </tr>
@@ -76,70 +80,23 @@
 </section>
 
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="出差申请单详情" [nzWidth]="800" (nzOnCancel)="isVisible = false" *ngIf="selected"
+<nz-modal [(nzVisible)]="isVisible" nzTitle="出差申请单详情" [nzWidth]="900" (nzOnCancel)="isVisible = false" *ngIf="selected"
           [nzFooter]="modalFooter">
 
-  <div class="row" style="padding-top: 20px" #print>
-    <div style="text-align: center"><img src="http://127.0.0.1:4200/assets/img/goshine.png" style="transform: scale(1.5);"></div>
-    <div>
-      <div style="display: inline-block;width: 70%;">
-        <span style="font-size: 25px;color: black; font-weight: bold;">出差申请单</span>
-      </div>
-      <div style="display: inline-block; width: 30%">
-        <span>ST-MT-01v1.0.1</span>
-      </div>
-    </div>
-    <table class="etable">
-      <tr style="text-align: center;line-height: 3em;">
-        <td colspan="2" style="color: #333; font-weight: bold;">申请人</td>
-        <td colspan="2" style="width: 15%;">{{selected.username}}</td>
-        <td colspan="2" style="color: #333; font-weight: bold;">所属部门</td>
-        <td colspan="2">{{selected.orgName}}</td>
-        <td colspan="2" style="color: #333; font-weight: bold;">申请日期</td>
-        <td colspan="2">{{selected.applyDate}}</td>
-      </tr>
-      <tr style="text-align: center;line-height: 3em;">
-        <td colspan="2" style="color: #333; font-weight: bold;">差期</td>
-        <td colspan="10">
-          <span>{{selected.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
-          至
-          <span>{{selected.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"  style="color: #333; font-weight: bold;text-align: center;">出差事由</td>
-        <td colspan="10">
-          <div>
-            <input name="planType" type="radio" [ngModel]="selected.planType"/> 售前
-            <input name="planType" type="radio"/> 项目
-            <input name="planType" type="radio"/> 其他
-          </div>
-          <div style="color: black; font-weight: bold;">目的和计划：</div>
-          <div style="min-height: 5em">
-            {{selected.plan}}
-          </div>
-        </td>
-      </tr>
-      <tr style="text-align: center;line-height: 3em;">
-        <td colspan="2" style="color: #333; font-weight: bold;">目的地</td>
-        <td colspan="3">{{selected.target}}</td>
-        <td colspan="3" style="color: #333; font-weight: bold;">部门负责人意见</td>
-        <td colspan="4">{{selected.directorComment}}</td>
-      </tr>
-      <tr style="text-align: center;line-height: 3em;">
-        <td colspan="2" style="color: #333; font-weight: bold;">分管领导意见</td>
-        <td colspan="3">{{selected.leaderComment}}</td>
-        <td colspan="3" style="color: #333; font-weight: bold;">运营管理部确认</td>
-        <td colspan="4">{{selected.operatorComment}}</td>
-      </tr>
-      <tr style="text-align: center;line-height: 3em;">
-        <td colspan="2" style="color: #333; font-weight: bold;">人力资源部核准</td>
-        <td colspan="3">{{selected.resourcesComment}}</td>
-        <td colspan="3" style="color: #333; font-weight: bold;">总经理意见</td>
-        <td colspan="4">{{selected.managerComment}}</td>
-      </tr>
-    </table>
+  <div>
+    <nz-tabset [nzTabPosition]="'left'" [nzSelectedIndex]="2">
+      <nz-tab [nzTitle]="'另用单'"> 另用单 </nz-tab>
+      <nz-tab [nzTitle]="'费用报销单'">
+        <app-errand-expense></app-errand-expense>
+      </nz-tab>
+      <nz-tab [nzTitle]="'出差申请单'">
+        <app-errand-doc [selected]="selected"></app-errand-doc>
+      </nz-tab>
+      <nz-tab [nzTitle]="'出差补贴统计单'"> 出差补贴统计单 </nz-tab>
+      <nz-tab [nzTitle]="'交通费报销单'"> 交通费报销单 </nz-tab>
+    </nz-tabset>
   </div>
+
   <ng-template #modalFooter>
     <essence-ng2-print
       [mode]="'popup'"
@@ -233,4 +190,5 @@
     <button nz-button nzType="primary" (click)="handleExamOk()">同意</button>
   </ng-template>
 </nz-modal>
+
 

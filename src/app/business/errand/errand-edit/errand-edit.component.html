@@ -76,9 +76,9 @@
                         <td colspan="2" rowspan="2" class="elabel">出差事由</td>
                         <td colspan="10" rowspan="2" style="padding: 0px;">
                           <nz-radio-group formControlName="planType" nzName="radiogroup">
-                            <label nz-radio nzValue="1">售前</label>
-                            <label nz-radio nzValue="2">项目</label>
-                            <label nz-radio nzValue="3">其他</label>
+                            <label nz-radio [nzValue]="1" >售前</label>
+                            <label nz-radio [nzValue]="2" >项目</label>
+                            <label nz-radio [nzValue]="3" >其他</label>
                           </nz-radio-group>
                           <div><span style="color: black; font-weight: bold;">目的和计划</span></div>
                           <textarea name="plan" placeholder="点击修改目的和计划..." style="width: 100%; border: 0;"

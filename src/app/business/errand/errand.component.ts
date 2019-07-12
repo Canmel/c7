@@ -205,12 +205,16 @@ export class ErrandComponent implements OnInit {
     this.isVisibleExam = true;
   }
 
+  completeErrand(params) {
+    this.router.navigate([Urls.BUSINESS.ERRAND.CPMPLETE], {queryParams: params});
+  }
+
   remove() {
     alert('弹窗');
   }
 
-  edit() {
-    alert('前往编辑');
+  edit(param) {
+    this.router.navigate([Urls.BUSINESS.ERRAND.EDIT], {queryParams: param});
   }
 
   noProcess(errand) {
@@ -221,6 +225,10 @@ export class ErrandComponent implements OnInit {
   isProcessing(errand: any) {
     const flag = errand['status'] === 2 && this.permissions(errand);
     return flag;
+  }
+
+  processSucess(errand) {
+    return errand['status'] === 3;
   }
 
   permissions(errand) {

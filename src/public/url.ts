@@ -59,11 +59,17 @@ export const Urls = {
     PAGEQUERY: `/oa/errand`,
     SAVE: `/oa/errand`,
     DELETE: `/oa/errand/`,
+    UPDATE: `/oa/errand`,
     APPLY: `/oa/errand/apply/`,
     TASKPASS: `/oa/errand/pass/`,
     TASKBACK: `/oa/errand/back/`,
     EDIT: `/oa/errand/`,
     CURRENT: `/oa/errand/current/`,
+    COMPLETEVALID: `/oa/errand/complete/valid/`,
+    IMPERFECT: `/oa/errand/imperfect`
+  },
+  IMPERFECT: {
+    COMPLETEVALID: `/oa/imperfect/errand/valid/`,
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
@@ -153,7 +159,8 @@ export const Urls = {
     ERRAND: {
       LIST: `/app/errand`,
       ADD: `/app/errand/add`,
-      EDIT: `/app/errand/edit`
+      EDIT: `/app/errand/edit`,
+      CPMPLETE: `/app/errand/complete`
     }
   }
 };

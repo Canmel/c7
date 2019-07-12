@@ -1,0 +1,56 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">出差行程</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <span>{{selectedErrand['target'] + '(' +selectedErrand['applyDate'] + ')'}}</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">差期</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <span>{{selectedErrand.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+          至
+          <span>{{selectedErrand.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-divider nzText="车船票" nzOrientation="right"></nz-divider>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7"> 车票时间 </nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-date-picker
+            [nzDisabledDate]="disabledStartDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm:ss"
+            [(ngModel)]="startValue"
+            nzPlaceHolder="Start"
+            (ngModelChange)="onStartChange($event)"
+            (nzOnOpenChange)="handleStartOpenChange($event)"
+          >
+          </nz-date-picker>
+          <nz-date-picker
+            [nzDisabledDate]="disabledEndDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm:ss"
+            [(ngModel)]="endValue"
+            nzPlaceHolder="End"
+            [nzOpen]="endOpen"
+            (ngModelChange)="onEndChange($event)"
+            (nzOnOpenChange)="handleEndOpenChange($event)"
+          >
+          </nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">起始站点</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input placeholder="起点" style="width: 40%"/>-
+          <input nz-input placeholder="终点" style="width: 40%"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>

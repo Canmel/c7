@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ErrandComponent} from './errand.component';
 import {ErrandAddComponent} from './errand-add/errand-add.component';
 import {ErrandEditComponent} from './errand-edit/errand-edit.component';
+import {ErrandCompleteComponent} from './errand-complete/errand-complete.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
   }, {
     path: 'edit',
     component: ErrandEditComponent
+  }, {
+    path: 'complete',
+    component: ErrandCompleteComponent
   }
 ];
 

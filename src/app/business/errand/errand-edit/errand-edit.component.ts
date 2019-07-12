@@ -27,6 +27,7 @@ export class ErrandEditComponent implements OnInit {
 
   constructor(public activatedRoute: ActivatedRoute, private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
+      id: ['', []],
       uid: ['', [Validators.required]],
       username: ['', [Validators.required]],
       orgName: ['', []],
@@ -53,7 +54,24 @@ export class ErrandEditComponent implements OnInit {
 
   loadEntity(id) {
     this.https.get(Urls.ERRAND.EDIT + id).then(resp => {
-      console.log(resp);
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        uid: entity['uid'],
+        username: entity['username'],
+        orgName: entity['orgName'],
+        orgId: entity['orgId'],
+        applyDate: entity['applyDate'],
+        dateRangeStart: entity['dateRangeStart'],
+        dateRangeEnd: entity['dateRangeEnd'],
+        planType: entity['planType'],
+        plan: entity['plan'],
+        target: entity['target'],
+        leader: null,
+        director: null,
+        operate: null,
+        manager: null
+      });
     });
   }
 
@@ -102,7 +120,7 @@ export class ErrandEditComponent implements OnInit {
     $event.preventDefault();
     console.log(value);
     console.log(this.validateForm.value);
-    this.https.post(Urls.ERRAND.SAVE, this.validateForm.value).then(resp => {
+    this.https.put(Urls.ERRAND.UPDATE, this.validateForm.value).then(resp => {
       this.notification.success('成功', resp['msg']);
       this.router.navigate([Urls.BUSINESS.ERRAND.LIST]);
     });
