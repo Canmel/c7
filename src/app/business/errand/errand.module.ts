@@ -10,7 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
-import {NgZorroAntdModule, NzCalendarModule, NzDividerModule, NzRadioModule} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NzCalendarModule, NzDividerModule, NzGridModule, NzRadioModule} from 'ng-zorro-antd';
 import {EssenceNg2PrintModule} from 'essence-ng2-print';
 import {ErrandDocComponent} from '../../public/common/errand-doc/errand-doc.component';
 import {ErrandExpenseComponent} from '../../public/common/errand-expense/errand-expense.component';
@@ -32,6 +32,7 @@ import { ErrandCompleteComponent } from './errand-complete/errand-complete.compo
     NzRadioModule,
     EssenceNg2PrintModule,
     NzDividerModule,
+    NzGridModule,
     CommonModule
   ]
 })

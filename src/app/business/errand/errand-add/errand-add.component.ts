@@ -50,7 +50,6 @@ export class ErrandAddComponent implements OnInit {
   }
 
   applyUserChange(value) {
-    console.log(value);
     const _this = this;
     this.applyUsers.forEach(function (v, i) {
       if (value === v['uid']) {

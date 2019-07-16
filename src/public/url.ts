@@ -70,6 +70,7 @@ export const Urls = {
   },
   IMPERFECT: {
     COMPLETEVALID: `/oa/imperfect/errand/valid/`,
+    TRIPS: `/oa/imperfect/trips/`
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,

@@ -61,9 +61,9 @@ export class ErrandEditComponent implements OnInit {
         username: entity['username'],
         orgName: entity['orgName'],
         orgId: entity['orgId'],
-        applyDate: entity['applyDate'],
-        dateRangeStart: entity['dateRangeStart'],
-        dateRangeEnd: entity['dateRangeEnd'],
+        applyDate: new Date(entity['applyDate']),
+        dateRangeStart: new Date(entity['dateRangeStart']),
+        dateRangeEnd: new Date(entity['dateRangeEnd']),
         planType: entity['planType'],
         plan: entity['plan'],
         target: entity['target'],
@@ -93,7 +93,6 @@ export class ErrandEditComponent implements OnInit {
   loadApplyUser() {
     this.https.get(Urls.USERS.ALL).then(resp => {
       this.applyUsers = resp['data'];
-      console.log(this.applyUsers);
     });
   }
 
@@ -111,7 +110,6 @@ export class ErrandEditComponent implements OnInit {
       }
     }
   }
-
   /**
    * 方法用途: 提交表单
    * 参数: 事件， 表单值
@@ -146,11 +144,11 @@ export class ErrandEditComponent implements OnInit {
   };
 
   onStartChange(date: Date): void {
-    this.startValue = date;
+    this.validateForm.controls['dateRangeStart'].setValue(date);
   }
 
   onEndChange(date: Date): void {
-    this.endValue = date;
+    this.validateForm.controls['dateRangeEnd'].setValue(date);
   }
 
   handleStartOpenChange(open: boolean): void {

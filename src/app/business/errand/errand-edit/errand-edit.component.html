@@ -54,7 +54,6 @@
                             nzFormat="yyyy-MM-dd HH:mm:ss"
                             formControlName="dateRangeStart"
                             nzPlaceHolder="开始"
-                            (ngModelChange)="onStartChange($event)"
                             (nzOnOpenChange)="handleStartOpenChange($event)"
                           >
                           </nz-date-picker>
@@ -66,7 +65,6 @@
                             formControlName="dateRangeEnd"
                             nzPlaceHolder="结束"
                             [nzOpen]="endOpen"
-                            (ngModelChange)="onEndChange($event)"
                             (nzOnOpenChange)="handleEndOpenChange($event)"
                           >
                           </nz-date-picker>
