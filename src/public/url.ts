@@ -66,11 +66,15 @@ export const Urls = {
     EDIT: `/oa/errand/`,
     CURRENT: `/oa/errand/current/`,
     COMPLETEVALID: `/oa/errand/complete/valid/`,
-    IMPERFECT: `/oa/errand/imperfect`
+    IMPERFECT: `/oa/errand/imperfect`,
+    TRIPS: `/oa/errand/trips/`
   },
   IMPERFECT: {
     COMPLETEVALID: `/oa/imperfect/errand/valid/`,
     TRIPS: `/oa/imperfect/trips/`
+  },
+  TRIP: {
+    SAVE: `/oa/trip`
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,

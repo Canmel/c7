@@ -17,39 +17,117 @@
     </div>
   </div>
   <nz-divider nzText="车船票" nzOrientation="right"></nz-divider>
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7"> 车票时间</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <nz-date-picker
-          [nzDisabledDate]="disabledStartDate"
-          nzShowTime
-          nzFormat="yyyy-MM-dd HH:mm:ss"
-          nzPlaceHolder="Start"
-          formControlName="start"
-          (ngModelChange)="onStartChange($event)"
-          (nzOnOpenChange)="handleStartOpenChange($event)"
-        >
-        </nz-date-picker>
-        <nz-date-picker
-          [nzDisabledDate]="disabledEndDate"
-          nzShowTime
-          nzFormat="yyyy-MM-dd HH:mm:ss"
-          nzPlaceHolder="End"
-          formControlName="finish"
-          [nzOpen]="endOpen"
-          (ngModelChange)="onEndChange($event)"
-          (nzOnOpenChange)="handleEndOpenChange($event)"
-        >
-        </nz-date-picker>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="7">起始站点</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <input nz-input placeholder="起点" style="width: 40%"/>-
-        <input nz-input placeholder="终点" style="width: 40%"/>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+
+  <nz-list [nzDataSource]="savedTrips" nzBordered [nzHeader]="'行程'" [nzRenderItem]="defaultItem">
+    <ng-template #defaultItem let-item>
+      <nz-list-item nzNoFlex>
+        <div style="width: 100%;">
+          <div nz-col nzSpan="16">
+            <span class="ant-typography"><mark>[行程]</mark></span>
+            {{ item.start }} ( {{item.startAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ item.finish }} ( {{item.finishAt |
+            date: 'yyyy-MM-dd HH:mm'}} )
+          </div>
+          <div nz-col nzSpan="4">
+            {{item.amount}}<span style="font-weight: bold;"> 元</span>
+          </div>
+          <div nz-col nzSpan="4">
+            <a nz-button nz-popover nzContent="删除" (click)="deleteTrip(item)"><i
+              class="fa fa-trash-o text-danger-dk text-active"></i><i
+              class="fa fa-trash-o text-danger-dk text"></i></a>
+          </div>
+        </div>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+  <div nz-row nzType="flex" nzJustify="end">
+    <button nz-button [nzType]="'primary'" (click)="showModal()"><span>添加车船票</span></button>
+  </div>
+
+
+
+
+
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="添加车船票" (nzOnCancel)="handleCancel()"
+            nzMaskClosable=false [nzWidth]="800" (nzOnOk)="handleOk()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5"> 发车时间</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <nz-date-picker
+            [nzDisabledDate]="disabledStartDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="发车时间"
+            formControlName="startAt"
+            style="width: 100%"
+            (nzOnOpenChange)="handleStartOpenChange($event)"
+          >
+          </nz-date-picker>
+          <nz-form-explain *ngIf="validateForm.get('startAt').dirty&&validateForm.get('startAt').errors">
+            <ng-container *ngIf="validateForm.get('startAt').hasError('required')">
+              发车时间不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5"> 到达时间</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <nz-date-picker
+            [nzDisabledDate]="disabledEndDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="到达时间(请先确认开始时间)"
+            formControlName="finishAt"
+            [nzOpen]="endOpen"
+            style="width: 100%"
+            (nzOnOpenChange)="handleEndOpenChange($event)"
+          >
+          </nz-date-picker>
+          <nz-form-explain
+            *ngIf="validateForm.get('finishAt').dirty&&validateForm.get('finishAt').hasError('required')">
+            到达时间不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">起始站点</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input placeholder="起点" formControlName="start"/>
+          <nz-form-explain
+            *ngIf="validateForm.get('start').dirty&&validateForm.get('start').hasError('required')">
+            起点不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="1" style="text-align: center;"> -</nz-form-control>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input placeholder="终点" formControlName="finish"/>
+          <nz-form-explain
+            *ngIf="validateForm.get('finish').dirty&&validateForm.get('finish').hasError('required')">
+            终点不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">票面金额</nz-form-label>
+        <nz-form-control [nzSpan]="5">
+          <nz-input-number
+            formControlName="amount"
+            [nzMin]="1"
+            [nzStep]="1"
+            style="width: 100%"
+            [nzPlaceHolder]="'票面金额'"
+          ></nz-input-number>
+          <nz-form-explain
+            *ngIf="validateForm.get('amount').dirty&&validateForm.get('amount').hasError('required')">
+            终点不能为空！
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
 </section>

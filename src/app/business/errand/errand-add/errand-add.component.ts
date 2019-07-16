@@ -91,8 +91,6 @@ export class ErrandAddComponent implements OnInit {
    **/
   submitForm = ($event, value) => {
     $event.preventDefault();
-    console.log(value);
-    console.log(this.validateForm.value);
     this.https.post(Urls.ERRAND.SAVE, this.validateForm.value).then(resp => {
       this.notification.success('成功', resp['msg']);
       this.router.navigate([Urls.BUSINESS.ERRAND.LIST]);

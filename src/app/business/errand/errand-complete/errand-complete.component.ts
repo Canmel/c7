@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {Urls} from '../../../../public/url';
-import {Observable, Observer} from 'rxjs';
 
 @Component({
   selector: 'app-errand-complete',
@@ -22,7 +21,7 @@ export class ErrandCompleteComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  errands: Array<any> = [];
+  savedTrips: Array<any> = [];
 
   validTimeOutEvent: any;
 
@@ -48,12 +47,17 @@ export class ErrandCompleteComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       this.validateForm.controls['imperfectId'].setValue(this.receiveId);
       this.loadImperfect();
     });
+  }
+
+  deleteTrip(data: any) {
+    console.log(data);
   }
 
   /**
@@ -63,46 +67,40 @@ export class ErrandCompleteComponent implements OnInit {
     this.https.get(Urls.ERRAND.EDIT + this.receiveId).then(resp => {
       this.selectedErrand = resp['data'];
     });
+
+    this.loadTrips(this.receiveId);
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleCancel() {
+    this.isVisible = false;
+  }
+
+  handleOk() {
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
+    if (!this.validateForm.valid) {
+      return;
+    }
+    this.https.post(Urls.TRIP.SAVE, this.validateForm.value).then(resp => {
+      this.isVisible = false;
+      this.notification.success('成功', resp['msg']);
+      this.loadImperfect();
+    });
   }
 
   /**
    * 加载行程
    */
   loadTrips(id) {
-    this.https.get(Urls.IMPERFECT.TRIPS + id).then(resp => {
-      console.log(resp);
+    this.https.get(Urls.ERRAND.TRIPS + id).then(resp => {
+      this.savedTrips = resp['data'];
     });
-  }
-
-
-  /**
-   * 方法用途: 出差差程异步验证 没有被占用 TODO
-   * 参数:
-   **/
-  errandAsyncValidator = (control: FormControl) => Observable.create((observer: Observer<ValidationErrors>) => {
-    const _this = this;
-    if (this.validTimeOutEvent) {
-      clearTimeout(this.validTimeOutEvent);
-    }
-    this.validTimeOutEvent = setTimeout(function () {
-      _this.https.get(Urls.IMPERFECT.COMPLETEVALID + control.value).then(resp => {
-        if (resp['code'] === 200 && resp['data'] === true) {
-          observer.next(null);
-        }
-        observer.complete();
-      }, resp => {
-        observer.next({error: true, duplicated: true});
-        observer.complete();
-      });
-    }, 1000);
-  })
-
-  onStartChange(date: Date): void {
-    this.startValue = date;
-  }
-
-  onEndChange(date: Date): void {
-    this.endValue = date;
   }
 
   handleStartOpenChange(open: boolean): void {
