@@ -2,11 +2,10 @@
 
 
 <section class="panel panel-default">
-  <div><span style="font-weight: bold;">补全出差行程</span></div>
   <nz-divider nzText="出差申请概况" nzOrientation="right"></nz-divider>
   <div nz-row nzType="flex" nzJustify="center">
-    <div nz-col nzSpan="4" style="font-weight: bold; color: black;">出差行程:</div>
-    <div nz-col nzSpan="8">{{selectedErrand['target'] + '(' +selectedErrand['applyDate'] + ')'}}</div>
+    <div nz-col nzSpan="4" style="font-weight: bold; color: black;">出差申请:</div>
+    <div nz-col nzSpan="8">{{selectedErrand['eno'] + '(' +selectedErrand['applyDate'] + ')'}}</div>
   </div>
   <div nz-row nzType="flex" nzJustify="center">
     <div nz-col nzSpan="4" style="font-weight: bold; color: black;">本次差期:</div>
@@ -15,6 +14,10 @@
       至
       <span>{{selectedErrand.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
     </div>
+  </div>
+  <div nz-row nzType="flex" nzJustify="center">
+    <div nz-col nzSpan="4" style="font-weight: bold; color: black;">目的地:</div>
+    <div nz-col nzSpan="8">{{selectedErrand['target']}}</div>
   </div>
   <nz-divider nzText="车船票" nzOrientation="right"></nz-divider>
 
@@ -130,4 +133,7 @@
       </nz-form-item>
     </form>
   </nz-modal>
+
+  <div style="text-align: center;"><button nz-button nzType="default" routerLink="/app/errand">返回</button></div>
+
 </section>

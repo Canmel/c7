@@ -1,44 +1,44 @@
 {
   "/authserver": {
-    "target": "http://127.0.0.1:7070",
+    "target": "http://192.168.2.5:7070",
     "secure": false,
     "changeOrigin": true
   },
   "/api": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/login": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/logout": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/css": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/images": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/js": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/system": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/bpm": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/auth": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/session": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/personInfo": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   },
   "/oa": {
-    "target": "http://127.0.0.1:8080"
+    "target": "http://192.168.2.5:8080"
   }
 }
 

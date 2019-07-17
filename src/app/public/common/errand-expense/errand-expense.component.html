@@ -1,1 +1,174 @@
-费用报销单
+<div #print>
+  <div>
+    <div style="text-align: right; font-size: 26px; width: 65%; display: inline-block;"><u>外阜出差费报销单</u></div>
+    <div style="display: inline-block; width: 35%; text-align: center;">
+      <div class="eno-left"><label>编号</label></div>
+      <div class="eno-right"><label>123123eqwfreq1</label></div>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <label style="width: 75%; font-size: 12px;">报销日期: 2019 年 07 月 17 日</label>
+    <label>附 单据 5 张</label>
+  </div>
+  <table style="width: 100%; border: 2px solid black;text-align: center; font-size: 12px;">
+    <tbody>
+    <tr>
+      <td colspan="2">部门</td>
+      <td colspan="3"></td>
+      <td colspan="2">出差人姓名</td>
+      <td colspan="3"></td>
+      <td colspan="2">事由</td>
+      <td colspan="5">支援长沙项目组</td>
+    </tr>
+    <tr>
+      <td colspan="6">起止时间、地址</td>
+      <td rowspan="2">车船票<br/>飞机票</td>
+      <td colspan="2">未乘卧铺补贴</td>
+      <td colspan="2">住宿费</td>
+      <td colspan="2">住勤补贴</td>
+      <td rowspan="2">市内<br/>交通费</td>
+      <td colspan="2" style="border-right: 2px solid black;">其他费用</td>
+    </tr>
+    <tr>
+      <td>月/日</td>
+      <td>时</td>
+      <td>起程</td>
+      <td>月/日</td>
+      <td>时</td>
+      <td>到达</td>
+      <td>人/天</td>
+      <td>金额</td>
+      <td>人/天</td>
+      <td>金额</td>
+      <td>人/天</td>
+      <td>金额</td>
+      <td>摘要</td>
+      <td style="border-right: 2px solid black;">金额</td>
+    </tr>
+    <tr>
+      <td>ww</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="border-right: 2px solid black;">2</td>
+    </tr>
+    <tr>
+      <td>//</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="border-right: 2px solid black;">3</td>
+    </tr>
+    <tr>
+      <td>//</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="border-right: 2px solid black;"></td>
+    </tr>
+    <tr>
+      <td colspan="6">
+        <div>
+          <label>合计</label>
+          <label>小计</label>
+        </div>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="border-right: 2px solid black;"></td>
+    </tr>
+    <tr style="font-size: 14px; text-align: left">
+      <td colspan="16" style="border-right: 2px solid black;">
+        <div style="display: inline-block; width: 15%;">
+          <label style="font-weight: bold;">原借支￥</label>
+        </div>
+        <div style="display: inline-block; width: 15%;">
+          <label style="font-weight: bold;">核销￥</label>
+        </div>
+        <div style="display: inline-block; width: 15%;">
+          <label style="font-weight: bold;">退补￥</label>
+        </div>
+        <div style="display: inline-block; width: 55%;">
+          <label style="font-weight: bold; width: 38%;">共计人民币（大写）</label>
+
+          <label style="width: 60%; text-align: right;">
+            玖仟捌佰伍拾
+            <span style="font-weight: bold;">元</span>
+            贰<span style="font-weight: bold;">角</span>
+            零<span style="font-weight: bold;">分</span>
+          </label>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div style="display: inline-block; width: 100%;">
+    <div style="display: inline-block;width: 20%;">
+      <span>财会主管:</span>
+    </div>
+    <div style="display: inline-block;width: 15%;">
+      <span>记账</span>
+    </div>
+    <div style="display: inline-block;width: 15%;">
+      <span>出纳</span>
+    </div>
+    <div style="display: inline-block;width: 20%;">
+      <span>部门主管</span>
+    </div>
+    <div style="display: inline-block;width: 30%;">
+      <span>出差报销人员</span>
+    </div>
+  </div>
+</div>
+<essence-ng2-print
+  [mode]="'popup'"
+  [popTitle]="'表格打印'"
+  [btnText]="'打印'"
+  [btnClass]="{'btn': true, 'btn-info': true}"
+  [printHTML]="print"
+  [printStyle]="printStyle"
+  [printCSS]="printCSS"
+  [showBtn]="printBtnBoolean"
+  (click)="beforePrint()"
+  (printComplete)="printComplete()">
+</essence-ng2-print>

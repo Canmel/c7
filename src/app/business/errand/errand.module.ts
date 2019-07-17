@@ -11,7 +11,7 @@ import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
 import {
-  NgZorroAntdModule,
+  NgZorroAntdModule, NzButtonModule,
   NzCalendarModule,
   NzDividerModule,
   NzGridModule,
@@ -42,7 +42,8 @@ import {CommonsModule} from '../../public/common/commons.module';
     NzGridModule,
     NzInputNumberModule,
     NzListModule,
-    CommonsModule
+    CommonsModule,
+    NzButtonModule
   ]
 })
 export class ErrandModule {

@@ -1,7 +1,18 @@
-.etable tr td {
-  border: 2px solid black;
-
+.eno-left {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  display: inline-block;
 }
-.etable {
-  width: 100%;
+
+.eno-right {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  display: inline-block;
+}
+
+td {
+  border: 1px solid black;
 }

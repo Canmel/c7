@@ -1,0 +1,13 @@
+.etable tr td {
+  border: 2px solid black;
+
+}
+
+.etable th {
+  border: 2px solid black;
+
+}
+
+.etable {
+  width: 100%;
+}

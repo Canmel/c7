@@ -118,7 +118,6 @@ export class ErrandComponent implements OnInit {
         {title: '编号', field: 'eno', type: 'click', class: 'text-success'},
         {title: '出差人员', field: 'username', type: 'text'},
         {title: '目的地', field: 'target', type: 'text'},
-        {title: '差期', field: 'dateRange', type: 'text'},
         {
           title: '状态',
           field: 'status',

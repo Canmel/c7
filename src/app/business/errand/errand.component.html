@@ -92,7 +92,9 @@
       <nz-tab [nzTitle]="'出差申请单'">
         <app-errand-doc [selected]="selected"></app-errand-doc>
       </nz-tab>
-      <nz-tab [nzTitle]="'出差补贴统计单'"> 出差补贴统计单 </nz-tab>
+      <nz-tab [nzTitle]="'出差补贴统计单'">
+        <app-errand-subsidy [selected]="selected"></app-errand-subsidy>
+      </nz-tab>
       <nz-tab [nzTitle]="'交通费报销单'">
         <app-trips-expense></app-trips-expense>
       </nz-tab>

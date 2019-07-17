@@ -46,11 +46,21 @@ export class ErrandExpenseComponent implements OnInit {
   loadPrintStyle() {
     this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
     this.printStyle = `
-      td {
-        border: 1px solid black;
-      }
-      .etable {
-        width: 100%;
-      }`;
+          .eno-left {
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      display: inline-block;
+    }
+    .eno-right {
+      border-top: 1px solid black;
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+      display: inline-block;
+    }
+    td {
+      border: 1px solid black;
+    }`;
   }
 }
