@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
-import {NzNotificationService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {Urls} from '../../../../public/url';
 
 @Component({
@@ -35,7 +35,7 @@ export class ErrandCompleteComponent implements OnInit {
   endValue: Date | null = null;
   endOpen = false;
 
-  constructor(private fb: FormBuilder, public activatedRoute: ActivatedRoute,
+  constructor(private fb: FormBuilder, public activatedRoute: ActivatedRoute, private modalService: NzModalService,
               public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       imperfectId: ['', []],
@@ -57,7 +57,19 @@ export class ErrandCompleteComponent implements OnInit {
   }
 
   deleteTrip(data: any) {
-    console.log(data);
+    this.modalService.confirm({
+      nzTitle: '您确定要删除这条由 【' + data['start'] + '】 到 【' + data['finish'] + '】 的行程吗？',
+      nzContent: '<b style="color: red;">删除后无法恢复</b>',
+      nzOkText: '确认',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        this.https.delete(Urls.TRIP.DELETE, data['id']).then(resp => {
+          this.notification.success('成功', resp['msg']);
+        });
+      },
+      nzCancelText: '取消',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
 
   /**

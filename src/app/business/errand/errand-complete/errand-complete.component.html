@@ -22,15 +22,15 @@
     <ng-template #defaultItem let-item>
       <nz-list-item nzNoFlex>
         <div style="width: 100%;">
-          <div nz-col nzSpan="16">
+          <div nz-col nzSpan="20">
             <span class="ant-typography"><mark>[行程]</mark></span>
             {{ item.start }} ( {{item.startAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ item.finish }} ( {{item.finishAt |
             date: 'yyyy-MM-dd HH:mm'}} )
           </div>
-          <div nz-col nzSpan="4">
+          <div nz-col nzSpan="2">
             {{item.amount}}<span style="font-weight: bold;"> 元</span>
           </div>
-          <div nz-col nzSpan="4">
+          <div nz-col nzSpan="2">
             <a nz-button nz-popover nzContent="删除" (click)="deleteTrip(item)"><i
               class="fa fa-trash-o text-danger-dk text-active"></i><i
               class="fa fa-trash-o text-danger-dk text"></i></a>

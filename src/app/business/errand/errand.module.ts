@@ -20,13 +20,11 @@ import {
   NzRadioModule
 } from 'ng-zorro-antd';
 import {EssenceNg2PrintModule} from 'essence-ng2-print';
-import {ErrandDocComponent} from '../../public/common/errand-doc/errand-doc.component';
-import {ErrandExpenseComponent} from '../../public/common/errand-expense/errand-expense.component';
 import {ErrandCompleteComponent} from './errand-complete/errand-complete.component';
+import {CommonsModule} from '../../public/common/commons.module';
 
 @NgModule({
-  declarations: [ErrandComponent, ErrandEditComponent, ErrandAddComponent, ErrandDocComponent,
-    ErrandExpenseComponent, ErrandCompleteComponent],
+  declarations: [ErrandComponent, ErrandEditComponent, ErrandAddComponent, ErrandCompleteComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,7 +42,7 @@ import {ErrandCompleteComponent} from './errand-complete/errand-complete.compone
     NzGridModule,
     NzInputNumberModule,
     NzListModule,
-    CommonModule
+    CommonsModule
   ]
 })
 export class ErrandModule {

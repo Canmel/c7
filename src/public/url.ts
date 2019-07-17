@@ -74,7 +74,8 @@ export const Urls = {
     TRIPS: `/oa/imperfect/trips/`
   },
   TRIP: {
-    SAVE: `/oa/trip`
+    SAVE: `/oa/trip`,
+    DELETE: `/oa/trip/`,
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
