@@ -22,6 +22,8 @@ export class ErrandComponent implements OnInit {
 
   selected: any = null;
 
+  trips: Array<any> = [];
+
   /**
    * 属性描述: 流程显示状态
    * 参数：
@@ -86,7 +88,6 @@ export class ErrandComponent implements OnInit {
     const _this = this;
     _this.comments = [];
     this.taskImageUrl = '';
-    console.log(123123);
     this.https.get(Urls.ERRAND.CURRENT + item['id'], {}).then(resp => {
       const respData = resp['data'];
       if (respData) {
@@ -103,7 +104,6 @@ export class ErrandComponent implements OnInit {
                 );
               });
             });
-            console.log(_this.selectTask);
           });
         }
       }
@@ -238,6 +238,10 @@ export class ErrandComponent implements OnInit {
   details(v): void {
     this.selected = v;
     this.isVisible = true;
+    this.https.get(Urls.ERRAND.TRIPS + v['id']).then(resp => {
+      this.trips = resp['data'];
+      console.log(this.trips);
+    });
   }
 
   handleOk(): void {

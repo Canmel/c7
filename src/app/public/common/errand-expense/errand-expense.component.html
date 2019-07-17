@@ -7,18 +7,18 @@
     </div>
   </div>
   <div style="text-align: center;">
-    <label style="width: 75%; font-size: 12px;">报销日期: 2019 年 07 月 17 日</label>
+    <label style="width: 75%; font-size: 12px;">报销日期: {{selected.applyDate | date: 'yyyy 年 MM 月 dd 日'}}</label>
     <label>附 单据 5 张</label>
   </div>
   <table style="width: 100%; border: 2px solid black;text-align: center; font-size: 12px;">
     <tbody>
     <tr>
       <td colspan="2">部门</td>
-      <td colspan="3"></td>
+      <td colspan="3">{{selected['orgName']}}}</td>
       <td colspan="2">出差人姓名</td>
-      <td colspan="3"></td>
+      <td colspan="3">{{selected['username']}}</td>
       <td colspan="2">事由</td>
-      <td colspan="5">支援长沙项目组</td>
+      <td colspan="5">{{selected['target']}}</td>
     </tr>
     <tr>
       <td colspan="6">起止时间、地址</td>
@@ -45,14 +45,14 @@
       <td>摘要</td>
       <td style="border-right: 2px solid black;">金额</td>
     </tr>
-    <tr>
-      <td>ww</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let item of trips">
+      <td>{{item.startAt | date: 'MM/dd'}}</td>
+      <td>{{item.startAt | date: 'hh'}}</td>
+      <td>{{item.start}}</td>
+      <td>{{item.finishAt | date: 'MM/dd'}}</td>
+      <td>{{item.finishAt | date: 'hh'}}</td>
+      <td>{{item.finish}}</td>
+      <td>￥{{item.amount}}</td>
       <td></td>
       <td></td>
       <td></td>
@@ -106,7 +106,7 @@
           <label>小计</label>
         </div>
       </td>
-      <td></td>
+      <td>￥{{subtotal().trip}}</td>
       <td></td>
       <td></td>
       <td></td>

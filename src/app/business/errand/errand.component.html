@@ -87,7 +87,7 @@
     <nz-tabset [nzTabPosition]="'left'" [nzSelectedIndex]="2">
       <nz-tab [nzTitle]="'另用单'"> 另用单 </nz-tab>
       <nz-tab [nzTitle]="'费用报销单'">
-        <app-errand-expense></app-errand-expense>
+        <app-errand-expense [selected]="selected" [trips]="trips"></app-errand-expense>
       </nz-tab>
       <nz-tab [nzTitle]="'出差申请单'">
         <app-errand-doc [selected]="selected"></app-errand-doc>

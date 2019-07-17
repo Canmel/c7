@@ -9,6 +9,12 @@ export class ErrandExpenseComponent implements OnInit {
 
   @Input() selected;
 
+  @Input() trips;
+
+  subtotalValue = {
+    trip: 0
+  };
+
   printCSS: string[];
   printStyle: string;
   printBtnBoolean = true;
@@ -18,6 +24,18 @@ export class ErrandExpenseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subtotal();
+  }
+
+  subtotal(): any{
+    const _this = this;
+    let trip = 0;
+    this.trips.forEach(function (item) {
+      console.log(item);
+      trip = trip + item['amount'];
+    });
+    this.subtotalValue.trip = trip;
+    return this.subtotalValue;
   }
 
   handlePrint(oper) {
