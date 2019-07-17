@@ -21,19 +21,38 @@ export class ErrandCompleteComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  savedTrips: Array<any> = [];
+  validateRouteForm: FormGroup;
 
-  validTimeOutEvent: any;
+  savedTrips: Array<any> = [];
 
   selectedErrand: any = {};
 
+  /**
+   * 接受参数ID
+   */
   receiveId = 0;
 
+  /**
+   * 车船票表单是否显示
+   */
   isVisible = false;
+
+  /**
+   * 路线表单是否显示
+   */
+  isRouteVisible = false;
 
   startValue: Date | null = null;
   endValue: Date | null = null;
   endOpen = false;
+
+  startRouteValue: Date | null = null;
+  endRouteValue: Date | null = null;
+  endRouteOpen = false;
+
+  startRouteBackValue: Date | null = null;
+  endRouteBackValue: Date | null = null;
+  endRouteBackOpen = false;
 
   constructor(private fb: FormBuilder, public activatedRoute: ActivatedRoute, private modalService: NzModalService,
               public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
@@ -44,6 +63,18 @@ export class ErrandCompleteComponent implements OnInit {
       startAt: ['', [Validators.required]],
       finishAt: ['', [Validators.required]],
       amount: ['', [Validators.required]]
+    });
+
+    this.validateRouteForm = this.fb.group({
+      imperfectId: ['', []],
+      come: ['', [Validators.required]],
+      comeAt: ['', [Validators.required]],
+      comeToAt: ['', [Validators.required]],
+      comeTo: ['', [Validators.required]],
+      back: ['', [Validators.required]],
+      backTo: ['', [Validators.required]],
+      backAt: ['', [Validators.required]],
+      backToAt: ['', [Validators.required]]
     });
   }
 
@@ -87,6 +118,10 @@ export class ErrandCompleteComponent implements OnInit {
     this.isVisible = true;
   }
 
+  showRouteModal(): void {
+    this.isRouteVisible = true;
+  }
+
   handleCancel() {
     this.isVisible = false;
   }
@@ -106,6 +141,19 @@ export class ErrandCompleteComponent implements OnInit {
     });
   }
 
+  handleRouteOk() {
+    for (const key in this.validateRouteForm.controls) {
+      this.validateRouteForm.controls[key].markAsDirty();
+      this.validateRouteForm.controls[key].updateValueAndValidity();
+    }
+    if (!this.validateRouteForm.valid) {
+      return;
+    }
+    this.https.post(Urls.ROUTERS.SAVE, this.validateRouteForm.value).then(resp => {
+      console.log('resp-------->', resp);
+    });
+  }
+
   /**
    * 加载行程
    */
@@ -122,9 +170,30 @@ export class ErrandCompleteComponent implements OnInit {
     console.log('handleStartOpenChange', open, this.endOpen);
   }
 
+  handleRouteStartOpenChange(open: boolean): void {
+    if (!open) {
+      this.endRouteOpen = true;
+    }
+    console.log('handleStartOpenChange', open, this.endRouteOpen);
+  }
+
+  handleRouteBackStartOpenChange(open: boolean): void {
+    if (!open) {
+      this.endRouteBackOpen = true;
+    }
+    console.log('handleStartOpenChange', open, this.endRouteOpen);
+  }
+
   handleEndOpenChange(open: boolean): void {
-    console.log(open);
     this.endOpen = open;
+  }
+
+  handleRouteEndOpenChange(open: boolean): void {
+    this.endRouteOpen = open;
+  }
+
+  handleRouteBackEndOpenChange(open: boolean): void {
+    this.endRouteBackOpen = open;
   }
 
   disabledStartDate = (startValue: Date): boolean => {
@@ -139,5 +208,31 @@ export class ErrandCompleteComponent implements OnInit {
       return false;
     }
     return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  disabledRouteStartDate = (startRouteValue: Date): boolean => {
+    if (!startRouteValue || !this.endRouteValue) {
+      return false;
+    }
+    return startRouteValue.getTime() > this.endRouteValue.getTime();
+  };
+  disabledRouteEndDate = (endRouteValue: Date): boolean => {
+    if (!endRouteValue || !this.startRouteValue) {
+      return false;
+    }
+    return endRouteValue.getTime() <= this.startRouteValue.getTime();
+  };
+
+  disabledRouteBackStartDate = (startRouteValue: Date): boolean => {
+    if (!startRouteValue || !this.endRouteBackValue) {
+      return false;
+    }
+    return startRouteValue.getTime() > this.endRouteBackValue.getTime();
+  };
+  disabledRouteBackEndDate = (endRouteValue: Date): boolean => {
+    if (!endRouteValue || !this.startRouteBackValue) {
+      return false;
+    }
+    return endRouteValue.getTime() <= this.startRouteBackValue.getTime();
   };
 }

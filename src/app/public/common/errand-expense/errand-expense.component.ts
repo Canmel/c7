@@ -31,7 +31,6 @@ export class ErrandExpenseComponent implements OnInit {
     const _this = this;
     let trip = 0;
     this.trips.forEach(function (item) {
-      console.log(item);
       trip = trip + item['amount'];
     });
     this.subtotalValue.trip = trip;

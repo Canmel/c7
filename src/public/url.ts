@@ -69,6 +69,10 @@ export const Urls = {
     IMPERFECT: `/oa/errand/imperfect`,
     TRIPS: `/oa/errand/trips/`
   },
+  ROUTERS: {
+    PAGEQUERY: `/oa/router`,
+    SAVE: `/oa/router/`
+  },
   IMPERFECT: {
     COMPLETEVALID: `/oa/imperfect/errand/valid/`,
     TRIPS: `/oa/imperfect/trips/`

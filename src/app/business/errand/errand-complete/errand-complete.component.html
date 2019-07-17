@@ -46,9 +46,144 @@
     <button nz-button [nzType]="'primary'" (click)="showModal()"><span>添加车船票</span></button>
   </div>
 
+  <br/>
+  <nz-divider nzText="往返路线" nzOrientation="right"></nz-divider>
 
 
+  <div nz-row nzType="flex" nzJustify="end">
+    <button nz-button [nzType]="'primary'" (click)="showRouteModal()"><span>设置</span></button>
+  </div>
 
+
+  <nz-modal [(nzVisible)]="isRouteVisible" nzTitle="添加往返路线" (nzOnCancel)="isRouteVisible = false"
+            nzMaskClosable=false [nzWidth]="800" (nzOnOk)="handleRouteOk()">
+    <form nz-form [formGroup]="validateRouteForm" data-validate="parsley">
+      <nz-divider nzText="去程" nzOrientation="right"></nz-divider>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 离开时间</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-date-picker
+            [nzDisabledDate]="disabledRouteStartDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="离开时间"
+            formControlName="comeAt"
+            style="width: 100%"
+            (nzOnOpenChange)="handleRouteStartOpenChange($event)">
+          </nz-date-picker>
+          <nz-form-explain *ngIf="validateRouteForm.get('comeAt').dirty&&validateRouteForm.get('comeAt').errors">
+            <ng-container *ngIf="validateRouteForm.get('comeAt').hasError('required')">
+              离开时间不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 到达时间</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-date-picker
+            [nzDisabledDate]="disabledRouteEndDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="到达时间(请先确认开始时间)"
+            formControlName="comeToAt"
+            [nzOpen]="endRouteOpen"
+            style="width: 100%"
+            (nzOnOpenChange)="handleRouteEndOpenChange($event)">
+          </nz-date-picker>
+          <nz-form-explain *ngIf="validateRouteForm.get('comeToAt').dirty&&validateRouteForm.get('comeToAt').errors">
+            <ng-container *ngIf="validateRouteForm.get('comeToAt').hasError('required')">
+              到达时间不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 离开地点</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input placeholder="离开地点" formControlName="come"/>
+          <nz-form-explain *ngIf="validateRouteForm.get('come').dirty&&validateRouteForm.get('come').errors">
+            <ng-container *ngIf="validateRouteForm.get('come').hasError('required')">
+              离开地点不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 到达地点</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input placeholder="到达地点" formControlName="comeTo"/>
+          <nz-form-explain *ngIf="validateRouteForm.get('comeTo').dirty&&validateRouteForm.get('comeTo').errors">
+            <ng-container *ngIf="validateRouteForm.get('comeTo').hasError('required')">
+              到达地点不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-divider nzText="返程" nzOrientation="right"></nz-divider>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 离开时间</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-date-picker
+            [nzDisabledDate]="disabledRouteBackStartDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="离开时间"
+            formControlName="backAt"
+            style="width: 100%"
+            (nzOnOpenChange)="handleRouteBackStartOpenChange($event)">
+          </nz-date-picker>
+          <nz-form-explain *ngIf="validateRouteForm.get('backAt').dirty&&validateRouteForm.get('backAt').errors">
+            <ng-container *ngIf="validateRouteForm.get('backAt').hasError('required')">
+              离开时间不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 到达时间</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-date-picker
+            [nzDisabledDate]="disabledRouteBackEndDate"
+            nzShowTime
+            nzFormat="yyyy-MM-dd HH:mm"
+            nzPlaceHolder="到达时间(请先确认开始时间)"
+            formControlName="backToAt"
+            [nzOpen]="endRouteBackOpen"
+            style="width: 100%"
+            (nzOnOpenChange)="handleRouteBackEndOpenChange($event)">
+          </nz-date-picker>
+          <nz-form-explain *ngIf="validateRouteForm.get('backToAt').dirty&&validateRouteForm.get('backToAt').errors">
+            <ng-container *ngIf="validateRouteForm.get('backToAt').hasError('required')">
+              到达时间不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 离开地点</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input placeholder="离开地点" formControlName="back"/>
+          <nz-form-explain *ngIf="validateRouteForm.get('back').dirty&&validateRouteForm.get('back').errors">
+            <ng-container *ngIf="validateRouteForm.get('back').hasError('required')">
+              离开地点不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item style="margin-bottom: 5px;">
+        <nz-form-label [nzSpan]="8"> 到达地点</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input placeholder="到达地点" formControlName="backTo"/>
+          <nz-form-explain *ngIf="validateRouteForm.get('backTo').dirty&&validateRouteForm.get('backTo').errors">
+            <ng-container *ngIf="validateRouteForm.get('backTo').hasError('required')">
+              到达地点不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
 
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="添加车船票" (nzOnCancel)="handleCancel()"
@@ -134,6 +269,8 @@
     </form>
   </nz-modal>
 
-  <div style="text-align: center;"><button nz-button nzType="default" routerLink="/app/errand">返回</button></div>
+  <div style="text-align: center;">
+    <button nz-button nzType="default" routerLink="/app/errand">返回</button>
+  </div>
 
 </section>
