@@ -45,7 +45,8 @@
               "src/assets/js/jPlayer/add-on/jplayer.playlist.min.js",
               "src/assets/js/app.js",
               "src/assets/js/jq22.js",
-              "src/assets/js/apps.js"
+              "src/assets/js/apps.js",
+              "src/assets/js/trans/chinanumtoenglishnum.js"
             ]
           },
           "configurations": {
