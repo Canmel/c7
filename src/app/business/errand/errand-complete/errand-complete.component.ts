@@ -27,6 +27,8 @@ export class ErrandCompleteComponent implements OnInit {
 
   selectedErrand: any = {};
 
+  route: any = {};
+
   /**
    * 接受参数ID
    */
@@ -83,6 +85,7 @@ export class ErrandCompleteComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       this.validateForm.controls['imperfectId'].setValue(this.receiveId);
+      this.validateRouteForm.controls['imperfectId'].setValue(this.receiveId);
       this.loadImperfect();
     });
   }
@@ -112,6 +115,14 @@ export class ErrandCompleteComponent implements OnInit {
     });
 
     this.loadTrips(this.receiveId);
+    this.loadRoute(this.receiveId);
+  }
+
+  loadRoute(id) {
+    this.https.get(Urls.ERRAND.ROUTES + id).then(resp => {
+      this.route = resp['data'];
+      console.log(resp);
+    } );
   }
 
   showModal(): void {

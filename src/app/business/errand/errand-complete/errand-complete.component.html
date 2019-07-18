@@ -48,7 +48,24 @@
 
   <br/>
   <nz-divider nzText="往返路线" nzOrientation="right"></nz-divider>
-
+  <div>
+    <div nz-row class="ant-list-item ng-star-inserted"
+         style="border-bottom: 1px solid #e8e8e8; padding-left: 24px; padding-right: 24px;">
+      <div>
+        <mark>[去程]</mark>
+        {{ route.come }} ( {{route.comeAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ route.comeTo }} ( {{route.comeToAt |
+        date: 'yyyy-MM-dd HH:mm'}} )
+      </div>
+    </div>
+    <div nz-row class="ant-list-item ng-star-inserted"
+         style="border-bottom: 1px solid #e8e8e8; padding-left: 24px; padding-right: 24px;">
+      <div>
+        <mark>[返程]</mark>
+        {{ route.back }} ( {{route.backAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ route.backTo }} ( {{ route.backToAt |
+        date: 'yyyy-MM-dd HH:mm'}} )
+      </div>
+    </div>
+  </div>
 
   <div nz-row nzType="flex" nzJustify="end">
     <button nz-button [nzType]="'primary'" (click)="showRouteModal()"><span>设置</span></button>
