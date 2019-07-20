@@ -98,14 +98,14 @@ export class ChmPipe implements PipeTransform {
           resAIW += bigRadices[quotient];
         }
       }
-      resAIW += ' 元 ';
+      resAIW += '元';
     }
 
     vDec = vDec.length > 0 ? vDec : '00';
     // 处理小数部分（如果有）
     for (i = 0; i < vDec.length; i++) {
       d = vDec.substr(i, 1);
-      resAIW += digits[Number(d)] + ' ' + decimals[i] + ' ';
+      resAIW += digits[Number(d)] + decimals[i];
     }
     // 处理结果
     if (resAIW === '') {

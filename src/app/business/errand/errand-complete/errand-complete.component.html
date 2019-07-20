@@ -10,10 +10,11 @@
   <div nz-row nzType="flex" nzJustify="center">
     <div nz-col nzSpan="4" style="font-weight: bold; color: black;">本次差期:</div>
     <div nz-col nzSpan="8">
-      <span>{{selectedErrand.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+      <span>{{selectedErrand.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时':'GMT+00:00'}}</span>
       至
-      <span>{{selectedErrand.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
+      <span>{{selectedErrand.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时':'GMT+00:00'}}</span>
     </div>
+
   </div>
   <div nz-row nzType="flex" nzJustify="center">
     <div nz-col nzSpan="4" style="font-weight: bold; color: black;">目的地:</div>
@@ -27,8 +28,8 @@
         <div style="width: 100%;">
           <div nz-col nzSpan="20">
             <span class="ant-typography"><mark>[行程]</mark></span>
-            {{ item.start }} ( {{item.startAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ item.finish }} ( {{item.finishAt |
-            date: 'yyyy-MM-dd HH:mm'}} )
+            {{ item.start }} ( {{item.startAt | date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} ) - {{ item.finish }} ( {{item.finishAt |
+            date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} )
           </div>
           <div nz-col nzSpan="2">
             {{item.amount}}<span style="font-weight: bold;"> 元</span>
@@ -48,21 +49,21 @@
 
   <br/>
   <nz-divider nzText="往返路线" nzOrientation="right"></nz-divider>
-  <div>
+  <div *ngIf="route">
     <div nz-row class="ant-list-item ng-star-inserted"
          style="border-bottom: 1px solid #e8e8e8; padding-left: 24px; padding-right: 24px;">
       <div>
         <mark>[去程]</mark>
-        {{ route.come }} ( {{route.comeAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ route.comeTo }} ( {{route.comeToAt |
-        date: 'yyyy-MM-dd HH:mm'}} )
+        {{ route.come }} ( {{route.comeAt | date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} ) - {{ route.comeTo }} ( {{route.comeToAt |
+        date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} )
       </div>
     </div>
     <div nz-row class="ant-list-item ng-star-inserted"
          style="border-bottom: 1px solid #e8e8e8; padding-left: 24px; padding-right: 24px;">
       <div>
         <mark>[返程]</mark>
-        {{ route.back }} ( {{route.backAt | date: 'yyyy-MM-dd HH:mm'}} ) - {{ route.backTo }} ( {{ route.backToAt |
-        date: 'yyyy-MM-dd HH:mm'}} )
+        {{ route.back }} ( {{route.backAt | date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} ) - {{ route.backTo }} ( {{ route.backToAt |
+        date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} )
       </div>
     </div>
   </div>

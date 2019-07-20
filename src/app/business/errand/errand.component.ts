@@ -24,6 +24,8 @@ export class ErrandComponent implements OnInit {
 
   trips: Array<any> = [];
 
+  route: any = {};
+
   /**
    * 属性描述: 流程显示状态
    * 参数：
@@ -242,10 +244,21 @@ export class ErrandComponent implements OnInit {
       this.trips = resp['data'];
       console.log(this.trips);
     });
+    this.https.get(Urls.ERRAND.ROUTES + v['id']).then(resp => {
+      this.route = resp['data'];
+    });
   }
 
   handleOk(): void {
     this.isVisible = false;
+  }
+
+  toPrintDoc() {
+    $('#print').html('');
+    const hs = $('.print');
+    for (let index = 0; index < hs.length; index++) {
+      $('#print').append($($(hs).get(index)).html());
+    }
   }
 
   /**
@@ -302,41 +315,45 @@ export class ErrandComponent implements OnInit {
     );
   }
 
-
-  handlePrint(oper) {
-    if (oper < 10) {
-      const bdhtml = window.document.body.innerHTML;
-      const sprnstr = '<!--startprint' + oper + '-->';
-      const eprnstr = '<!--endprint' + oper + '-->';
-      let prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 18);
-      prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-      window.document.body.innerHTML = prnhtml;
-      window.print();
-      window.document.body.innerHTML = bdhtml;
-    } else {
-      window.print();
-    }
-  }
-
   printComplete() {
     this.printBtnBoolean = true;
   }
 
   beforePrint() {
+    this.toPrintDoc();
     this.printBtnBoolean = false;
   }
 
   loadPrintStyle() {
-    this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
+    this.printCSS = ['/assets/css/ng-zorro-antd.min.css'];
     this.printStyle =
       `td {
-  border: 1px solid black;
-
-}
-.etable {
-  width: 100%;
-}
-     `;
+          border: 1px solid black;
+        }
+        .etable {
+          width: 100%;
+        }
+        .half-page {
+          min-height: 148mm;
+        }
+        .etable th {
+          border: 1px solid black;
+          text-align: center;
+        }
+        .eno-left {
+          border-top: 1px solid black;
+          border-left: 1px solid black;
+          border-bottom: 1px solid black;
+          border-right: 1px solid black;
+          display: inline-block;
+        }
+        .eno-right {
+          border-top: 1px solid black;
+          border-right: 1px solid black;
+          border-bottom: 1px solid black;
+          display: inline-block;
+        }
+      `;
   }
 
 }

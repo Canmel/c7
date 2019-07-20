@@ -22,7 +22,6 @@ export class PaginationComponent implements OnInit {
    **/
   changePage(pageNo) {
     this.curPage = pageNo;
-    console.log(this.curPage, pageNo);
     this.changeCurPage.emit(this.curPage);
   }
 

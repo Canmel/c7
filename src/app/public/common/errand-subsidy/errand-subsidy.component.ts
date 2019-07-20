@@ -9,38 +9,11 @@ export class ErrandSubsidyComponent implements OnInit {
 
   @Input() selected;
 
-  printCSS: string[];
-  printStyle: string;
-  printBtnBoolean = true;
+  @Input() route;
 
   constructor() {
-    this.loadPrintStyle();
   }
 
   ngOnInit() {
-  }
-
-  printComplete() {
-    this.printBtnBoolean = true;
-  }
-
-  beforePrint() {
-    this.printBtnBoolean = false;
-  }
-
-  loadPrintStyle() {
-    this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
-    this.printStyle = `
-          .etable tr td {
-          border: 1px solid black;
-            }
-            .etable th {
-              border: 1px solid black;
-            }
-            .etable {
-              width: 100%;
-              text-align: center;
-              font-size: 12px;
-            }`;
   }
 }

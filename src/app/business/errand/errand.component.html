@@ -38,7 +38,7 @@
             <span *ngIf="head.type == 'union'" ngClass="{{head.class}}"
                   [ngStyle]="{'width': item.width, cursor: 'pointer'}" (click)="clickFnFlow(item)">{{unionHead(item, head)}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, 'cursor': 'pointer'}"
-                             *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
+                  *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
                   <p *ngFor="let obj of head.options">
                     {{obj.value == item[head.field] ? obj.name: ''}}
                   </p>
@@ -61,7 +61,8 @@
                 class="fa fa-gavel text-info-dk text-active"></i><i
                 class="fa fa-gavel text-info-dk text"></i></a>
 
-              <a nz-button nz-popover nzContent="完善差程" (click)="completeErrand({id: item.id})" *ngIf="processSucess(item)"><i
+              <a nz-button nz-popover nzContent="完善差程" (click)="completeErrand({id: item.id})"
+                 ><i
                 class="fa fa-folder text-info-dk text-active"></i><i
                 class="fa fa-folder text-info-dk text"></i></a>
             </div>
@@ -84,19 +85,18 @@
           [nzFooter]="modalFooter">
 
   <div>
-    <nz-tabset [nzTabPosition]="'left'" [nzSelectedIndex]="2">
-      <nz-tab [nzTitle]="'另用单'"> 另用单 </nz-tab>
-      <nz-tab [nzTitle]="'费用报销单'">
-        <app-errand-expense [selected]="selected" [trips]="trips"></app-errand-expense>
-      </nz-tab>
+    <nz-tabset [nzTabPosition]="'left'" [nzSelectedIndex]="0">
       <nz-tab [nzTitle]="'出差申请单'">
         <app-errand-doc [selected]="selected"></app-errand-doc>
       </nz-tab>
       <nz-tab [nzTitle]="'出差补贴统计单'">
-        <app-errand-subsidy [selected]="selected"></app-errand-subsidy>
+        <app-errand-subsidy [selected]="selected" [route]="route"></app-errand-subsidy>
+      </nz-tab>
+      <nz-tab [nzTitle]="'外阜出差费报销单'">
+        <app-errand-expense [selected]="selected" [trips]="trips" [route]="route"></app-errand-expense>
       </nz-tab>
       <nz-tab [nzTitle]="'交通费报销单'">
-        <app-trips-expense></app-trips-expense>
+        <app-trips-expense [selected]="selected"></app-trips-expense>
       </nz-tab>
     </nz-tabset>
   </div>
@@ -104,7 +104,6 @@
   <ng-template #modalFooter>
     <essence-ng2-print
       [mode]="'popup'"
-      [popTitle]="'表格打印'"
       [btnText]="'打印'"
       [btnClass]="{'btn': true, 'btn-info': true}"
       [printHTML]="print"
@@ -118,8 +117,14 @@
   </ng-template>
 </nz-modal>
 
+<div style="position: fixed; z-index: -99;"><div #print id="print"></div></div>
 
-<nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="isVisibleApply = false" (nzOnOk)="handleApplyOk()">
+
+
+
+
+<nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="isVisibleApply = false"
+          (nzOnOk)="handleApplyOk()">
   <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;">
     <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.resourceName}}"></nz-option>
   </nz-select>
@@ -151,7 +156,9 @@
     </div>
     <nz-timeline>
       <nz-timeline-item *ngFor="let c of comments">
-        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span>
+          的审批决定
+        </li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
     </nz-timeline>
@@ -182,7 +189,9 @@
     </div>
     <nz-timeline>
       <nz-timeline-item *ngFor="let c of comments">
-        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span>
+          的审批决定
+        </li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
     </nz-timeline>

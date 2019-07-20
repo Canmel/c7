@@ -27,7 +27,7 @@ export class ErrandCompleteComponent implements OnInit {
 
   selectedErrand: any = {};
 
-  route: any = {};
+  route: any;
 
   /**
    * 接受参数ID
@@ -121,8 +121,20 @@ export class ErrandCompleteComponent implements OnInit {
   loadRoute(id) {
     this.https.get(Urls.ERRAND.ROUTES + id).then(resp => {
       this.route = resp['data'];
-      console.log(resp);
-    } );
+      if (this.route) {
+        this.validateRouteForm.setValue({
+          imperfectId: this.receiveId,
+          come: this.route['come'],
+          comeAt: this.route['comeAt'],
+          comeToAt: this.route['comeToAt'],
+          comeTo: this.route['comeTo'],
+          back: this.route['back'],
+          backTo: this.route['backTo'],
+          backAt: this.route['backAt'],
+          backToAt: this.route['backToAt'],
+        });
+      }
+    });
   }
 
   showModal(): void {
@@ -154,8 +166,10 @@ export class ErrandCompleteComponent implements OnInit {
 
   handleRouteOk() {
     for (const key in this.validateRouteForm.controls) {
-      this.validateRouteForm.controls[key].markAsDirty();
-      this.validateRouteForm.controls[key].updateValueAndValidity();
+      if (key) {
+        this.validateRouteForm.controls[key].markAsDirty();
+        this.validateRouteForm.controls[key].updateValueAndValidity();
+      }
     }
     if (!this.validateRouteForm.valid) {
       return;

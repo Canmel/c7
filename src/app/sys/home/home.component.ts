@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadPrintStyle() {
-    this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
+    this.printCSS = ['/assets/css/ng-zorro-antd.min.css'];
     this.printStyle =
       `td {
         border: 1px solid black;

@@ -11,16 +11,13 @@ export class ErrandExpenseComponent implements OnInit {
 
   @Input() trips;
 
+  @Input() route;
+
   subtotalValue = {
     trip: 0
   };
 
-  printCSS: string[];
-  printStyle: string;
-  printBtnBoolean = true;
-
   constructor() {
-    this.loadPrintStyle();
   }
 
   ngOnInit() {
@@ -35,49 +32,5 @@ export class ErrandExpenseComponent implements OnInit {
     });
     this.subtotalValue.trip = trip;
     return this.subtotalValue;
-  }
-
-  handlePrint(oper) {
-    if (oper < 10) {
-      const bdhtml = window.document.body.innerHTML;
-      const sprnstr = '<!--startprint' + oper + '-->';
-      const eprnstr = '<!--endprint' + oper + '-->';
-      let prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 18);
-      prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-      window.document.body.innerHTML = prnhtml;
-      window.print();
-      window.document.body.innerHTML = bdhtml;
-    } else {
-      window.print();
-    }
-  }
-
-  printComplete() {
-    this.printBtnBoolean = true;
-  }
-
-  beforePrint() {
-    this.printBtnBoolean = false;
-  }
-
-  loadPrintStyle() {
-    this.printCSS = ['http://127.0.0.1:4200/assets/css/ng-zorro-antd.min.css'];
-    this.printStyle = `
-          .eno-left {
-      border-top: 1px solid black;
-      border-left: 1px solid black;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-      display: inline-block;
-    }
-    .eno-right {
-      border-top: 1px solid black;
-      border-right: 1px solid black;
-      border-bottom: 1px solid black;
-      display: inline-block;
-    }
-    td {
-      border: 1px solid black;
-    }`;
   }
 }

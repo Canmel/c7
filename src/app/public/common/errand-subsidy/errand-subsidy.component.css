@@ -5,11 +5,11 @@
 
 .etable th {
   border: 1px solid black;
-text-align: center;
+  text-align: center;
 }
 
 .etable {
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: xx-small;
 }

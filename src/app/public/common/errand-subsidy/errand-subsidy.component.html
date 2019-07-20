@@ -1,20 +1,21 @@
-<div class="row" style="padding: 20px 20px 0px 0px" #print>
-  <div style="text-align: center"><img src="http://127.0.0.1:4200/assets/img/goshine.png"
-                                       style="transform: scale(1.5);"></div>
-  <div>
-    <div style="display: inline-block;width: 70%;">
-      <span style="font-size: 25px;color: black; font-weight: bold;">出差补贴统计单</span>
-    </div>
-    <div style="display: inline-block; width: 30%">
-      <span>ST-MT-02 v1.0.0</span>
-    </div>
+<div class="print" style="margin-top: 20px;" #print>
+  <div class="half-page">
+    <div style="text-align: center;"><img src="/assets/img/goshine.png"
+                                                           style="transform: scale(1.5);"></div>
     <div>
-      <label style="width: 50%;">部门: {{selected['orgName']}}</label>
-      <label>出差人: {{selected['username']}}</label>
+      <div style="display: inline-block;width: 70%;">
+        <span style="font-size: 25px;color: black; font-weight: bold;">出差补贴统计单</span>
+      </div>
+      <div style="display: inline-block; width: 30%">
+        <span>ST-MT-02 v1.0.0</span>
+      </div>
+      <div>
+        <div style="display: inline-block; width: 50%;">部门: <span style="font-weight: bold;">{{selected['orgName']}}</span></div>
+        <div style="display: inline-block;">出差人: <span style="font-weight: bold;">{{selected['username']}}</span></div>
+      </div>
     </div>
-  </div>
-  <table class="etable">
-    <thead>
+    <table class="etable" style="font-size: 12px;">
+      <thead>
       <th>序号</th>
       <th>出发</th>
       <th>&nbsp;</th>
@@ -22,51 +23,51 @@
       <th>&nbsp;</th>
       <th>天数</th>
       <th>补贴金额</th>
-      <th>备注</th>
-    </thead>
-    <tbody>
+      <th style="width: 10%;">备注</th>
+      </thead>
+      <tbody>
       <tr>
         <td>1</td>
         <td>
-          <u>2019</u>年
-          <u>06</u>月
-          <u>10</u>日
-          <u>09:25</u>时
+          <u>{{route.comeAt | date: 'yyyy'}}</u>年
+          <u>{{route.comeAt | date: 'MM'}}</u>月
+          <u>{{route.comeAt | date: 'dd'}}</u>日
+          <u>{{route.comeAt | date: 'hh:mm':'GMT+00:00'}}</u>时
           <span>从</span>
-          <u>杭州</u>出发
+          <u>{{route.come}}</u>出发
         </td>
         <td> </td>
         <td>
-          <u>2019</u>年
-          <u>07</u>月
-          <u>2</u>日
-          <u>09:25</u>时
+          <u>{{route.comeToAt | date: 'yyyy'}}</u>年
+          <u>{{route.comeToAt | date: 'MM'}}</u>月
+          <u>{{route.comeToAt | date: 'dd'}}</u>日
+          <u>{{route.comeToAt | date: 'hh:mm':'GMT+00:00'}}</u>时
           <span>到达</span>
-          <u>南昌</u>
+          <u>{{route.comeTo}}</u>
         </td>
         <td></td>
-        <td rowspan="2">28</td>
-        <td rowspan="2">￥1680</td>
+        <td rowspan="2">{{route.days}}</td>
+        <td rowspan="2">￥{{60 * route.days}}</td>
         <td rowspan="2"></td>
       </tr>
       <tr>
         <td>2</td>
         <td>
-          <u>2019</u>年
-          <u>07</u>月
-          <u>4</u>日
-          <u>09:25</u>时
+          <u>{{route.backAt | date: 'yyyy'}}</u>年
+          <u>{{route.backAt | date: 'MM'}}</u>月
+          <u>{{route.backAt | date: 'dd'}}</u>日
+          <u>{{route.backAt | date: 'hh:mm':'GMT+00:00'}}</u>时
           <span>从</span>
-          <u>南昌</u>出发
+          <u>{{route.back}}</u>出发
         </td>
         <td></td>
         <td>
-          <u>2019</u>年
-          <u>07</u>月
-          <u>8</u>日
-          <u>09:25</u>时
+          <u>{{route.backToAt | date: 'yyyy'}}</u>年
+          <u>{{route.backToAt | date: 'MM'}}</u>月
+          <u>{{route.backToAt | date: 'dd'}}</u>日
+          <u>{{route.backToAt | date: 'hh:mm':'GMT+00:00'}}</u>时
           <span>到达</span>
-          <u>杭州</u>
+          <u>{{route.backTo}}</u>
         </td>
         <td></td>
       </tr>
@@ -205,30 +206,18 @@
         </td>
         <td></td>
       </tr>
-    </tbody>
-  </table>
-  <div>
+      </tbody>
+    </table>
     <div>
-      <span>备注: 每次出差请填写两条记录，分别表示去程和返程内容。同时报销，可填写在同一张统计表上。</span>
-    </div>
-    <div style="display: inline-block;width: 50%;">
-      <span>财务:</span>
-    </div>
-    <div style="display: inline-block;width: 50%;">
-      <span>制单人:</span>
+      <div>
+        <span>备注: 每次出差请填写两条记录，分别表示去程和返程内容。同时报销，可填写在同一张统计表上。</span>
+      </div>
+      <div style="display: inline-block;width: 50%;">
+        <span>财务:</span>
+      </div>
+      <div style="display: inline-block;width: 50%;">
+        <span>制单人:</span> <span style="font-weight: bold;">  {{selected['username']}}</span>
+      </div>
     </div>
   </div>
 </div>
-
-<essence-ng2-print
-  [mode]="'popup'"
-  [popTitle]="'表格打印'"
-  [btnText]="'打印'"
-  [btnClass]="{'btn': true, 'btn-info': true}"
-  [printHTML]="print"
-  [printStyle]="printStyle"
-  [printCSS]="printCSS"
-  [showBtn]="printBtnBoolean"
-  (click)="beforePrint()"
-  (printComplete)="printComplete()">
-</essence-ng2-print>

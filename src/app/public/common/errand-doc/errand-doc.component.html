@@ -1,75 +1,64 @@
-<div class="row" style="padding: 20px 20px 0px 0px" #print>
-  <div style="text-align: center"><img src="http://127.0.0.1:4200/assets/img/goshine.png"
-                                       style="transform: scale(1.5);"></div>
-  <div>
-    <div style="display: inline-block;width: 70%;">
-      <span style="font-size: 25px;color: black; font-weight: bold;">出差申请单</span>
+<div class="row print" style="margin: 20px 20px 0px 0px" #print>
+  <div class="half-page">
+    <div style="text-align: center; margin-top: 2em;"><img src="/assets/img/goshine.png"
+                                                           style="transform: scale(1.5);"></div>
+    <div>
+      <div style="display: inline-block;width: 70%;">
+        <span style="font-size: 25px;color: black; font-weight: bold;">出差申请单</span>
+      </div>
+      <div style="display: inline-block; width: 30%">
+        <span>ST-MT-01v1.0.1</span>
+      </div>
     </div>
-    <div style="display: inline-block; width: 30%">
-      <span>ST-MT-01v1.0.1</span>
-    </div>
+    <table class="etable">
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">申请人</td>
+        <td colspan="2" style="width: 15%;">{{selected.username}}</td>
+        <td colspan="2" style="color: #333; font-weight: bold;">所属部门</td>
+        <td colspan="2">{{selected.orgName}}</td>
+        <td colspan="2" style="color: #333; font-weight: bold;">申请日期</td>
+        <td colspan="2">{{selected.applyDate}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">差期</td>
+        <td colspan="10">
+          <span>{{selected.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时':'GMT+00:00'}}</span>
+          至
+          <span>{{selected.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时':'GMT+00:00'}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="color: #333; font-weight: bold;text-align: center;">出差事由</td>
+        <td colspan="10">
+          <div>
+            <input name="planType" type="checkbox" [value]="1" [checked]="selected.planType === 1"/> 售前
+            <input name="planType" type="checkbox" [value]="2" [checked]="selected.planType === 2"/> 项目
+            <input name="planType" type="checkbox" [value]="3" [checked]="selected.planType === 3"/> 其他
+          </div>
+          <div style="color: black; font-weight: bold;">目的和计划：</div>
+          <div style="min-height: 5em">
+            {{selected.plan}}
+          </div>
+        </td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">目的地</td>
+        <td colspan="3">{{selected.target}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">部门负责人意见</td>
+        <td colspan="4">{{selected.directorComment}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">分管领导意见</td>
+        <td colspan="3">{{selected.leaderComment}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">运营管理部确认</td>
+        <td colspan="4">{{selected.operatorComment}}</td>
+      </tr>
+      <tr style="text-align: center;line-height: 3em;">
+        <td colspan="2" style="color: #333; font-weight: bold;">人力资源部核准</td>
+        <td colspan="3">{{selected.resourcesComment}}</td>
+        <td colspan="3" style="color: #333; font-weight: bold;">总经理意见</td>
+        <td colspan="4">{{selected.managerComment}}</td>
+      </tr>
+    </table>
   </div>
-  <table class="etable">
-    <tr style="text-align: center;line-height: 3em;">
-      <td colspan="2" style="color: #333; font-weight: bold;">申请人</td>
-      <td colspan="2" style="width: 15%;">{{selected.username}}</td>
-      <td colspan="2" style="color: #333; font-weight: bold;">所属部门</td>
-      <td colspan="2">{{selected.orgName}}</td>
-      <td colspan="2" style="color: #333; font-weight: bold;">申请日期</td>
-      <td colspan="2">{{selected.applyDate}}</td>
-    </tr>
-    <tr style="text-align: center;line-height: 3em;">
-      <td colspan="2" style="color: #333; font-weight: bold;">差期</td>
-      <td colspan="10">
-        <span>{{selected.dateRangeStart | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
-        至
-        <span>{{selected.dateRangeEnd | date: 'yyyy 年 MM 月 dd 日 HH 时'}}</span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" style="color: #333; font-weight: bold;text-align: center;">出差事由</td>
-      <td colspan="10">
-        <div>
-          <input name="planType" type="checkbox" [value]="1" [checked]="selected.planType === 1"/> 售前
-          <input name="planType" type="checkbox" [value]="2" [checked]="selected.planType === 2"/> 项目
-          <input name="planType" type="checkbox" [value]="3" [checked]="selected.planType === 3"/> 其他
-        </div>
-        <div style="color: black; font-weight: bold;">目的和计划：</div>
-        <div style="min-height: 5em">
-          {{selected.plan}}
-        </div>
-      </td>
-    </tr>
-    <tr style="text-align: center;line-height: 3em;">
-      <td colspan="2" style="color: #333; font-weight: bold;">目的地</td>
-      <td colspan="3">{{selected.target}}</td>
-      <td colspan="3" style="color: #333; font-weight: bold;">部门负责人意见</td>
-      <td colspan="4">{{selected.directorComment}}</td>
-    </tr>
-    <tr style="text-align: center;line-height: 3em;">
-      <td colspan="2" style="color: #333; font-weight: bold;">分管领导意见</td>
-      <td colspan="3">{{selected.leaderComment}}</td>
-      <td colspan="3" style="color: #333; font-weight: bold;">运营管理部确认</td>
-      <td colspan="4">{{selected.operatorComment}}</td>
-    </tr>
-    <tr style="text-align: center;line-height: 3em;">
-      <td colspan="2" style="color: #333; font-weight: bold;">人力资源部核准</td>
-      <td colspan="3">{{selected.resourcesComment}}</td>
-      <td colspan="3" style="color: #333; font-weight: bold;">总经理意见</td>
-      <td colspan="4">{{selected.managerComment}}</td>
-    </tr>
-  </table>
-
-  <essence-ng2-print
-    [mode]="'popup'"
-    [popTitle]="'表格打印'"
-    [btnText]="'打印'"
-    [btnClass]="{'btn': true, 'btn-info': true}"
-    [printHTML]="print"
-    [printStyle]="printStyle"
-    [printCSS]="printCSS"
-    [showBtn]="printBtnBoolean"
-    (click)="beforePrint()"
-    (printComplete)="printComplete()">
-  </essence-ng2-print>
 </div>
