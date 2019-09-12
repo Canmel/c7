@@ -99,7 +99,7 @@ export const Urls = {
     EDIT: `/bpm/workFlow/`,
     DETAILS: `/bpm/workFlow/`,
     PUBLISH: `/bpm/flow/deploy/`,
-    DEPLOYED: `/bpm/workFlow/deployed`,
+    DEPLOYED: `/acti/deployments`,
     TASKIMAGE: `/bpm/flow/trace/`,
     TASKPASS: `/bpm/workFlow/task/pass/`,
     TASKBACK: `/bpm/workFlow/task/back/`,

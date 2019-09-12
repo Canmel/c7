@@ -74,7 +74,7 @@
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="提交申请" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <nz-select [(ngModel)]="selectedValue" nzPlaceHolder="请选择流程" style="width: 100%;">
-    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.resourceName}}"></nz-option>
+    <nz-option *ngFor="let item of deployedProcess" nzValue="{{item.id}}" nzLabel="{{item.diagramResourceName}}"></nz-option>
   </nz-select>
 </nz-modal>
 

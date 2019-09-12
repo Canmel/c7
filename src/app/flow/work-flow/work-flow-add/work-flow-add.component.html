@@ -1,57 +1,63 @@
-<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
-<div class="content with-diagram" id="js-drop-zone">
-  <div class="canvas" id="js-canvas"></div>
-  <div class="properties-panel-parent" id="js-properties-panel"
-       style="position: absolute;top: 5%;right: 1%;width: 20%;height: auto;"></div>
+<div id="myflow_tools"
+     style="position: absolute; top: 10px; left: 10px; background-color: #fff; width: 70px; cursor: default; padding: 3px;"
+     class="ui-widget-content">
+  <div id="myflow_tools_handle" style="text-align: center;"
+       class="ui-widget-header">工具集
+  </div>
+
+
+  <div class="node" id="myflow_save"><img src="assets/images/process/save.gif"/>&nbsp;&nbsp;保存</div>
+  <div>
+    <hr/>
+  </div>
+  <div class="node selectable" id="pointer"><img
+    src="assets/images/process/select16.gif"/>&nbsp;&nbsp;选择
+  </div>
+  <div class="node selectable" id="path"><img
+    src="assets/images/process/16/flow_sequence.png"/>&nbsp;&nbsp;转换
+  </div>
+  <div>
+    <hr/>
+  </div>
+  <div class="node state" id="start" type="start"><img
+    src="assets/images/process/16/start_event_empty.png"/>&nbsp;&nbsp;开始
+  </div>
+  <div class="node state" id="state" type="state"><img
+    src="assets/images/process/16/task_empty.png"/>&nbsp;&nbsp;状态
+  </div>
+  <div class="node state" id="task" type="task"><img
+    src="assets/images/process/16/task_empty.png"/>&nbsp;&nbsp;任务
+  </div>
+  <div class="node state" id="fork" type="fork"><img
+    src="assets/images/process/16/gateway_parallel.png"/>&nbsp;&nbsp;分支
+  </div>
+  <div class="node state" id="join" type="join"><img
+    src="assets/images/process/16/gateway_parallel.png"/>&nbsp;&nbsp;合并
+  </div>
+  <div class="node state" id="end" type="end"><img
+    src="assets/images/process/16/end_event_terminate.png"/>&nbsp;&nbsp;结束
+  </div>
+  <div class="node state" id="end-cancel" type="end-cancel"><img
+    src="assets/images/process/16/end_event_cancel.png"/>&nbsp;&nbsp;取消
+  </div>
+  <div class="node state" id="end-error" type="end-error"><img
+    src="assets/images/process/16/end_event_error.png"/>&nbsp;&nbsp;错误
+  </div>
 </div>
 
+<div id="myflow_props"
+     style="position: absolute; top: 30px; right: 50px; background-color: #fff; width: 220px; padding: 3px;"
+     class="ui-widget-content">
+  <div id="myflow_props_handle" class="ui-widget-header">属性</div>
+  <table border="1" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>aaa</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+    </tr>
+  </table>
+  <div>&nbsp;</div>
+</div>
 
-<ul class="buttons">
-  <li>
-    <button nz-button [nzType]="'primary'" (click)="backToList(event)"><span>返回</span></button>
-  </li>
-  <li>
-    <button nz-button [nzType]="'primary'" (click)="saveDiagram($event)"><span>保存流程</span></button>
-  </li>
-  <li>
-    <a id="js-download-svg" href title="download as SVG image" class="active" (click)="saveSVG($event)">
-      保存SVG图片
-    </a>
-  </li>
-  <li *ngIf="saveHref">
-    <a id="download" [href]="saveHref" [download]="saveName" class="active ">下载</a>
-  </li>
-</ul>
-
-<nz-modal [(nzVisible)]="isVisible" nzTitle="保存工作流" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
-    <section class="panel panel-default">
-      <div class="panel-body">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="7" nzRequired>流程名称</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <input nz-input formControlName="name" placeholder="请输入流程名称...">
-            <nz-form-explain
-              *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-              <ng-container *ngIf="validateForm.get('name').hasError('required')">
-                流程名称不能为空！
-              </ng-container>
-            </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSpan]="7" nzRequired>流程类型</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <nz-select nzAllowClear nzPlaceHolder="Choose" formControlName="flowType">
-              <nz-option *ngFor="let i of workFlowTypies" nzValue="{{i.value}}" nzLabel="{{i.name}}"></nz-option>
-            </nz-select>
-            <nz-form-explain
-              *ngIf="validateForm.get('flowType').dirty&&validateForm.get('flowType').hasError('required')">
-              流程类型不能为空！
-            </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </section>
-  </form>
-</nz-modal>
+<div id="myflow"></div>

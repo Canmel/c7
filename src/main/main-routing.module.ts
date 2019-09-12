@@ -7,12 +7,12 @@ import {MenusModule} from '../app/sys/menus/menus.module';
 import {HomeModule} from '../app/sys/home/home.module';
 import {ProfileModule} from '../app/sys/profile/profile.module';
 import {LogsModule} from '../app/sys/logs/logs.module';
-import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {ReimbursementModule} from '../app/business/reimbursement/reimbursement.module';
 import {MacrosModule} from '../app/sys/macros/macros.module';
 import {ProcessDesignerModule} from '../app/flow/process-designer/process-designer.module';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {ErrandModule} from '../app/business/errand/errand.module';
+import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 
 const routes: Routes = [
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
         path: 'logs',
         loadChildren: () => LogsModule
       }, {
-        path: 'workflows',
+        path: 'workflow',
         loadChildren: () => WorkFlowModule
       }, {
         path: 'reimbursement',

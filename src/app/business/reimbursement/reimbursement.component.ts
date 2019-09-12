@@ -396,7 +396,6 @@ export class ReimbursementComponent implements OnInit {
     const _this = this;
     _this.comments = [];
     this.taskImageUrl = '';
-    console.log(123123);
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
       if (respData) {
