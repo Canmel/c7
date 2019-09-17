@@ -79,7 +79,7 @@ export class UserEditComponent implements OnInit {
       clearTimeout(this.validTimeOutEvent);
     }
     this.validTimeOutEvent = setTimeout(function () {
-      _this.https.get(Urls.USERS.VALIDUSERNAME + control.value + '?id=' + _this.receiveId).then(resp => {
+      _this.https.get(Urls.USERS.VALIDUSERNAME + control.value, {id: _this.receiveId}).then(resp => {
         if (resp['code'] === 200 && resp['data'] === true) {
           observer.next(null);
         }

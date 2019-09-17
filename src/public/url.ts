@@ -100,14 +100,14 @@ export const Urls = {
     DETAILS: `/bpm/workFlow/`,
     PUBLISH: `/bpm/flow/deploy/`,
     DEPLOYED: `/acti/deployments`,
-    TASKIMAGE: `/bpm/flow/trace/`,
+    TASKIMAGE: `/acti/process/trace/`,
     TASKPASS: `/bpm/workFlow/task/pass/`,
     TASKBACK: `/bpm/workFlow/task/back/`,
     COMMENTS: `/oa/reimbursement/comment/`,
     INSTANCE: {
       SAVE: `/api/workflow/instance`
     },
-    TODO: `/bpm/flow/todo`
+    TODO: `/acti/process/todo`
   },
   OPTIONS: {
     MENUS: {
