@@ -90,7 +90,8 @@ export const Urls = {
     EDIT: `/system/sysMenu/`,
     TOPMENUS: `/system/sysMenu/tops`,
     SUBS: `/system/sysMenu/subs`,
-    VALIDMENUNAME: `/system/sysMenu/valid/`
+    VALIDMENUNAME: `/system/sysMenu/valid/`,
+    ALL: `system/sysMenu/all/list`
   },
   WORKFLOW: {
     PAGEQUERY: `/bpm/workFlow`,

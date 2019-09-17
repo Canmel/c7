@@ -19,7 +19,15 @@ export class RolesComponent implements OnInit {
     subTitle: '角色列表'
   };
 
+  roleMenu = {
+    id: 0,
+    menuIds: []
+  };
+
   ses = 1;
+
+  isVisible = false;
+  nodes = [];
 
   /**
    * 属性描述: 分页组建参数
@@ -84,7 +92,7 @@ export class RolesComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         const _this = this;
-        this.https.delete(Urls.ROLES.DELETE, param['id']).then(resp => {
+        this.https.delete(Urls.ROLES.DELETE + param['id']).then(resp => {
           if (resp['code'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {
@@ -102,8 +110,39 @@ export class RolesComponent implements OnInit {
   }
 
   editMenu(params: any) {
-    // TODO
-    alert('没想好怎么展现');
+    this.loadEntityById(params['id']);
+    this.roleMenu.id = params['id'];
+    this.loadMenuEntities();
+    this.isVisible = true;
+  }
+
+  loadMenuEntities() {
+    const _this = this;
+    this.https.get(Urls.MENUS.ALL).then(resp => {
+      _this.nodes = [];
+      $.each(resp['data'], function (index, item) {
+        _this.nodes.push({
+          title: item['url'] + '(' + item['name'] + ')',
+          key: item['menuId']
+        });
+      });
+    });
+
+  }
+
+  handleOk() {
+    this.isVisible = false;
+  }
+
+  handleCancel() {
+    this.isVisible = false;
+  }
+
+  loadEntityById(id) {
+    this.https.get(Urls.ROLES.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.roleMenu.menuIds = entity['menuIds'];
+    });
   }
 
 }

@@ -55,3 +55,13 @@
     </footer>
   </section>
 </section>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="角色菜单" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+  <nz-tree-select [nzNodes]="nodes" style="width: 100%;"
+                  nzCheckable
+                  nzPlaceHolder="Please select"
+                  [nzMultiple]="true"
+                  [(ngModel)]="roleMenu.menuIds"
+  >
+  </nz-tree-select>
+</nz-modal>

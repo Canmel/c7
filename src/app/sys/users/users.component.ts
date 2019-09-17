@@ -108,7 +108,7 @@ export class UsersComponent implements OnInit {
 
   deleteUser(params) {
     const _this = this;
-    this.https.delete(Urls.USERS.DELETE, params['id']).then(resp => {
+    this.https.delete(Urls.USERS.DELETE + params['id']).then(resp => {
       if (resp['code'] === 200) {
         _this.notification.success('成功', resp['msg']);
       } else {
@@ -157,10 +157,10 @@ export class UsersComponent implements OnInit {
   }
 
   loadEntityById(id) {
-    this.https.get(Urls.USERS.EDIT + id).then(resp => {
-      const entity = resp['data'];
-      this.userRole.roleIds = entity['roleIds'];
-      console.log(this.userRole);
-    });
+      this.https.get(Urls.USERS.EDIT + id).then(resp => {
+        const entity = resp['data'];
+        this.userRole.roleIds = entity['roleIds'];
+        console.log(this.userRole);
+      });
   }
 }

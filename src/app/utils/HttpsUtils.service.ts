@@ -61,7 +61,7 @@ export class HttpsUtils {
    * 方法用途: 发送delete请求
    * 参数：
    **/
-  delete<T>(url: string, params, token?: string): Promise<void | Object> {
+  delete<T>(url: string, params?, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
     token = token ? token : sessionStorage.getItem('access_token');
     url += '?access_token=' + token;
@@ -101,8 +101,12 @@ export class HttpsUtils {
       url += param + '&';
     });
     if (url.endsWith('&')) {
-      url.substr(0, url.length - 1);
+      url = url.substr(0, url.length - 1);
     }
+    if (url.endsWith('?')) {
+      url = url.substr(0, url.length - 1);
+    }
+    console.log(123123);
     return url;
   }
 

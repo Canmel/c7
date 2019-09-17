@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DatetimePipe} from './datetime.pipe';
-import { ChmPipe } from './chm.pipe';
 
 @NgModule({
-  declarations: [DatetimePipe, ChmPipe],
+  declarations: [DatetimePipe],
   imports: [
     CommonModule
   ],
