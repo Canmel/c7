@@ -104,7 +104,7 @@
     </div>
     <nz-timeline>
       <nz-timeline-item *ngFor="let c of comments">
-        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '驳回'}}</b></span> 的审批决定</li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
     </nz-timeline>
@@ -135,7 +135,7 @@
     </div>
     <nz-timeline>
       <nz-timeline-item *ngFor="let c of comments">
-        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '失败'}}</b></span> 的审批决定</li>
+        <li><b>{{c.username}}</b> 在 <b>{{c.taskName}}</b> 表示: <b>{{c.message}}</b>, 并且做出 <span style="color: red"><b>{{c.pass? '通过' : '驳回'}}</b></span> 的审批决定</li>
         <li>{{c.createdTime | date:'y-MM-dd HH:mm:ss'}}</li>
       </nz-timeline-item>
     </nz-timeline>
