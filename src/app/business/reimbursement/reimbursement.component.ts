@@ -42,7 +42,7 @@ export class ReimbursementComponent implements OnInit {
 
   isVisibleExam = false;
 
-  selectedValue;
+  selectedValue = null;
 
   deployedProcess = [];
 
@@ -111,7 +111,7 @@ export class ReimbursementComponent implements OnInit {
 
   loadDepolyedProcess() {
     this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3, key: 'REIMBURSEMENT'}).then(resp => {
-      this.deployedProcess = resp['data'];
+      this.deployedProcess = resp['data']['list'];
     });
   }
 

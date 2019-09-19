@@ -62,7 +62,7 @@
                 class="fa fa-gavel text-info-dk text"></i></a>
 
               <a nz-button nz-popover nzContent="完善差程" (click)="completeErrand({id: item.id})"
-                 ><i
+              ><i
                 class="fa fa-folder text-info-dk text-active"></i><i
                 class="fa fa-folder text-info-dk text"></i></a>
             </div>
@@ -117,10 +117,9 @@
   </ng-template>
 </nz-modal>
 
-<div style="position: fixed; z-index: -99;"><div #print id="print"></div></div>
-
-
-
+<div style="position: fixed; z-index: -99;">
+  <div #print id="print"></div>
+</div>
 
 
 <nz-modal [(nzVisible)]="isVisibleApply" nzTitle="提交申请" (nzOnCancel)="isVisibleApply = false"
@@ -137,19 +136,13 @@
     <div style="overflow: auto;">
       <img style="width: 100%;" src="{{taskImageUrl}}">
     </div>
-    <div class="show-details">
+    <div class="show-details" style="width: 60%;">
       <label>申请名称: </label>
-      <span>{{selectItem.name}}</span>
+      <span>{{selectItem.eno}}</span>
     </div>
-
-    <div class="show-details">
-      <label>申请金额: </label>
-      <span>{{selectItem.amount}}</span>
-    </div>
-
-    <div class="show-details">
-      <label>申请备注: </label>
-      <span>{{selectItem.description}}</span>
+    <div class="show-details" style="width: 40%;">
+      <label>申请名称: </label>
+      <span>{{selectItem.orgName}}</span>
     </div>
     <div class="comment-content">
       <label class="comment-title"><b>审核过程</b></label>
@@ -170,19 +163,14 @@
     <div style="overflow: auto;">
       <img style="width: 100%" src="{{taskImageUrl}}">
     </div>
-    <div class="show-details">
+    <div class="show-details" style="width: 60%;">
       <label>申请名称: </label>
       <span>{{selectItem.name}}</span>
     </div>
 
-    <div class="show-details">
-      <label>申请金额: </label>
-      <span>{{selectItem.amount}}</span>
-    </div>
-
-    <div class="show-details">
-      <label>申请备注: </label>
-      <span>{{selectItem.description}}</span>
+    <div class="show-details" style="width: 40%;">
+      <label>申请名称: </label>
+      <span>{{selectItem.orgName}}</span>
     </div>
     <div class="comment-content">
       <label class="comment-title"><b>审核过程</b></label>

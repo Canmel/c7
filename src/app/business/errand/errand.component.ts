@@ -157,7 +157,7 @@ export class ErrandComponent implements OnInit {
 
   loadDepolyedProcess() {
     this.https.get(Urls.WORKFLOW.DEPLOYED, {flowType: 3, key: 'ERRAND'}).then(resp => {
-      this.deployedProcess = resp['data'];
+      this.deployedProcess = resp['data']['list'];
     });
   }
 
