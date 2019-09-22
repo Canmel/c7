@@ -24,13 +24,27 @@ export class ErrandExpenseComponent implements OnInit {
     this.subtotal();
   }
 
-  subtotal(): any{
-    const _this = this;
+  subtotal(): any {
     let trip = 0;
-    this.trips.forEach(function (item) {
-      trip = trip + item['amount'];
-    });
-    this.subtotalValue.trip = trip;
+    if (this.trips) {
+      this.trips.forEach(function (item) {
+        trip = trip + item['amount'];
+      });
+    }
+    if (trip !== undefined) {
+      this.subtotalValue.trip = trip;
+    }
     return this.subtotalValue;
+  }
+
+  amount() {
+    return this.subtotal().trip + this.other();
+  }
+
+  other() {
+    if (this.route && this.route.days) {
+      return 60 * this.route.days;
+    }
+    return 0;
   }
 }

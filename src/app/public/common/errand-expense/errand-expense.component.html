@@ -90,7 +90,7 @@
         <td colspan="6">
           <div>
             <div style="display: inline-block; text-align: left; width: 30%;">合计</div>
-            <div style="display: inline-block; text-align: left; width: 30%;">￥{{subtotal().trip + 60 * route.days}}
+            <div style="display: inline-block; text-align: left; width: 30%;">￥{{amount()}}
             </div>
             <div style="display: inline-block; text-align: right; width: 40%;">小计</div>
           </div>
@@ -104,7 +104,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td style="border-right: 2px solid black;">￥{{60 * route.days}}</td>
+        <td style="border-right: 2px solid black;">￥{{other()}}</td>
       </tr>
       <tr style="font-size: 14px; text-align: left">
         <td colspan="16" style="border-right: 2px solid black;">

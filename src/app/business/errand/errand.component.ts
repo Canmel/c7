@@ -245,7 +245,10 @@ export class ErrandComponent implements OnInit {
       console.log(this.trips);
     });
     this.https.get(Urls.ERRAND.ROUTES + v['id']).then(resp => {
-      this.route = resp['data'];
+      console.log('-------->', resp);
+      if (resp['data']) {
+        this.route = resp['data'];
+      }
     });
   }
 
