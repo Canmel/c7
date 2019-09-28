@@ -58,10 +58,12 @@
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="角色菜单" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
   <nz-tree-select [nzNodes]="nodes" style="width: 100%;"
-                  nzCheckable
-                  nzPlaceHolder="Please select"
+                  [nzCheckable]="false"
+                  nzPlaceHolder="请选择菜单信息"
                   [nzMultiple]="true"
                   [(ngModel)]="roleMenu.menuIds"
+                  [nzDefaultExpandAll]="false"
+                  [nzAllowClear]="true"
   >
   </nz-tree-select>
 </nz-modal>

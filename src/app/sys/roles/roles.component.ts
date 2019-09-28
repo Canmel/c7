@@ -121,10 +121,26 @@ export class RolesComponent implements OnInit {
     this.https.get(Urls.MENUS.ALL).then(resp => {
       _this.nodes = [];
       $.each(resp['data'], function (index, item) {
-        _this.nodes.push({
-          title: item['url'] + '(' + item['name'] + ')',
-          key: item['menuId']
+        if (item['parentId'] === 0) {
+          _this.nodes.push({
+            title: item['url'] + '(' + item['name'] + ')',
+            key: item['menuId'],
+            children: []
+          });
+        }
+      });
+      $.each(this.nodes, function (index, item) {
+        $.each(resp['data'], function (i, t) {
+          if (item['key'] === t['parentId']) {
+            item.children.push(
+              {
+                title: t['url'] + '(' + t['name'] + ')',
+                key: t['menuId']
+              }
+            );
+          }
         });
+
       });
     });
 
@@ -132,6 +148,17 @@ export class RolesComponent implements OnInit {
 
   handleOk() {
     this.isVisible = false;
+    console.log(this.roleMenu);
+    this.https.post(Urls.ROLES.UPDATEMENUS, this.roleMenu).then(
+      resp => {
+        if (resp['code'] === 200) {
+          this.notification.success('成功', resp['msg']);
+        } else {
+          this.notification.error('失败', resp['msg']);
+        }
+      }
+    );
+
   }
 
   handleCancel() {
