@@ -24,6 +24,8 @@ export class NoticeAddComponent implements OnInit {
     subTitle: '新建通知'
   };
 
+  targetType: [];
+
   validateForm: FormGroup;
 
   /**
@@ -41,6 +43,7 @@ export class NoticeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadTargetType();
   }
 
   /**
@@ -76,6 +79,18 @@ export class NoticeAddComponent implements OnInit {
     }, resp => {
       console.log(resp);
     });
-  };
+  }
+
+  loadTargetType() {
+    this.https.get(Urls.NOTICE.TARGETTYPE).then(
+      resp => {
+        this.targetType = resp['data'];
+        console.log(resp);
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
 
 }

@@ -34,7 +34,10 @@ export const Urls = {
     SAVE: `/system/sysNotice`,
     PAGEQUERY: `/system/sysNotice`,
     EDIT: `/system/sysNotice/`,
-    DELETE: `/system/sysNotice/`
+    DELETE: `/system/sysNotice/`,
+    TARGETTYPE: `/system/sysNotice/targetType`,
+    TOP: `/system/sysNotice/top/`,
+    PUSH: `/system/sysNotice/push/`
   },
   LOGS: {
     PAGEQUERY: `/system/sysLog`

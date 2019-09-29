@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
@@ -85,6 +85,24 @@ export class NoticeComponent implements OnInit {
     });
   }
 
+  toTop(param) {
+    this.https.put(Urls.NOTICE.TOP + param['id'], {}).then(
+      resp => {
+        this.loadEntities();
+        this.notification.success('成功', resp['msg']);
+      }
+    );
+  }
+
+  pushNotice(param) {
+    this.https.put(Urls.NOTICE.PUSH + param['id'], {}).then(
+      resp => {
+        this.loadEntities();
+        this.notification.success('成功', resp['msg']);
+      }
+    );
+  }
+
   deleteNotice(params) {
     const _this = this;
     this.https.delete(Urls.NOTICE.DELETE + params['id']).then(resp => {
@@ -96,4 +114,5 @@ export class NoticeComponent implements OnInit {
       _this.loadEntities();
     });
   }
+
 }

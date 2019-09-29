@@ -28,6 +28,8 @@ export class NoticeEditComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  targetType: [];
+
   /**
    * 方法用途: 构造器构造验证对象
    * 参数:
@@ -43,6 +45,7 @@ export class NoticeEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadTargetType();
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       console.log(queryParams);
@@ -83,11 +86,12 @@ export class NoticeEditComponent implements OnInit {
    **/
   submitForm = ($event, value) => {
     $event.preventDefault();
+    value['id'] = this.receiveId;
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.NOTICE.SAVE, value).then(resp => {
+    this.https.put(Urls.NOTICE.SAVE, value).then(resp => {
       if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.NOTICE.LIST]);
         this.notification.success('成功', resp['msg']);
@@ -98,5 +102,16 @@ export class NoticeEditComponent implements OnInit {
       console.log(resp);
     });
   };
+
+  loadTargetType() {
+    this.https.get(Urls.NOTICE.TARGETTYPE).then(
+      resp => {
+        this.targetType = resp['data'];
+        console.log(resp);
+      },
+      err => {
+        console.log(err);
+      });
+  }
 
 }

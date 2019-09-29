@@ -18,7 +18,13 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>接收对象类型</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="targetType" placeholder="请选择接收对象类型..."  greatAsync>
+          <nz-select formControlName="targetType" [nzPlaceHolder]="'请选择接收对象类型...'">
+            <nz-option
+              *ngFor="let option of targetType"
+              [nzLabel]="option.name"
+              [nzValue]="option.value">
+            </nz-option>
+          </nz-select>
           <nz-form-explain
             *ngIf="validateForm.get('targetType').dirty && validateForm.get('targetType').errors ">
             <ng-container *ngIf="validateForm.get('targetType').hasError('required')">

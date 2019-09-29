@@ -39,6 +39,14 @@
               <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="推送" (click)="pushNotice(item)"><i
+                class="fa fa-rocket text-warning text-active"></i><i
+                class="fa fa-rocket text-warning text"></i></a>
+
+              <a nz-button nz-popover nzContent="置顶" (click)="toTop(item)"><i
+                class="fa fa-arrow-up text-warning text-active"></i><i
+                class="fa fa-arrow-up text-warning text"></i></a>
             </div>
           </td>
         </tr>
