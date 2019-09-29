@@ -13,6 +13,7 @@ import {ProcessDesignerModule} from '../app/flow/process-designer/process-design
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {ErrandModule} from '../app/business/errand/errand.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
+import {NoticeModule} from '../app/sys/notice/notice.module';
 
 const routes: Routes = [
   {
@@ -57,6 +58,9 @@ const routes: Routes = [
       }, {
         path: 'errand',
         loadChildren: () => ErrandModule
+      }, {
+        path: 'notice',
+        loadChildren: () => NoticeModule
       }
     ]
   }

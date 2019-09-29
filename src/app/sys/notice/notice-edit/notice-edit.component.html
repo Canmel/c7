@@ -1,3 +1,69 @@
-<p>
-  notice-edit works!
-</p>
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>通知标题</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="title" placeholder="请输入通知标题..."  greatAsync>
+          <nz-form-explain
+            *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors ">
+            <ng-container *ngIf="validateForm.get('title').hasError('required')">
+              通知标题不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>接收对象类型</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="targetType" placeholder="请选择接收对象类型..."  greatAsync>
+          <nz-form-explain
+            *ngIf="validateForm.get('targetType').dirty && validateForm.get('targetType').errors ">
+            <ng-container *ngIf="validateForm.get('targetType').hasError('required')">
+              接收对象类型不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>接收对象值</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="targetValue" placeholder="请输入接收对象值..."  greatAsync>
+          <nz-form-explain
+            *ngIf="validateForm.get('targetValue').dirty && validateForm.get('targetValue').errors ">
+            <ng-container *ngIf="validateForm.get('targetValue').hasError('required')">
+              接收对象值不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>通知内容</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <textarea rows="4" nz-input formControlName="content" placeholder="请输入通知内容..."  greatAsync>   </textarea>
+          <nz-form-explain
+            *ngIf="validateForm.get('content').dirty && validateForm.get('content').errors ">
+            <ng-container *ngIf="validateForm.get('content').hasError('required')">
+              通知内容不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">通知备注</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="remark" placeholder="请输入通知备注..."  greatAsync>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">{{_i18n.BUTTON.COMMIT || '提交'}}</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">{{_i18n.BUTTON.RESET || '重置'}}</button>
+          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/notice">{{_i18n.BUTTON.CANCEL || '取消'}}</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>

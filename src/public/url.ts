@@ -30,6 +30,12 @@ export const Urls = {
     EDIT: `/system/sysMacro/`,
     DELETE: `/system/sysMacro/`
   },
+  NOTICE: {
+    SAVE: `/system/sysNotice`,
+    PAGEQUERY: `/system/sysNotice`,
+    EDIT: `/system/sysNotice/`,
+    DELETE: `/system/sysNotice/`
+  },
   LOGS: {
     PAGEQUERY: `/system/sysLog`
   },
@@ -139,6 +145,11 @@ export const Urls = {
       LIST: `/app/users`,
       ADD: `/app/users/add`,
       EDIT: `/app/users/edit`
+    },
+    NOTICE: {
+      LIST: `/app/notice`,
+      ADD: `/app/notice/add`,
+      EDIT: `/app/notice/edit`
     },
     ROLES: {
       LIST: `/app/roles`,
