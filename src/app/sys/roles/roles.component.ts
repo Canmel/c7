@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit {
   };
 
   roleMenu = {
-    id: 0,
+    roleId: 0,
     menuIds: []
   };
 
@@ -111,7 +111,7 @@ export class RolesComponent implements OnInit {
 
   editMenu(params: any) {
     this.loadEntityById(params['id']);
-    this.roleMenu.id = params['id'];
+    this.roleMenu.roleId = params['id'];
     this.loadMenuEntities();
     this.isVisible = true;
   }
