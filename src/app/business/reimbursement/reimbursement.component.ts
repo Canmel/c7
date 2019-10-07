@@ -3,8 +3,6 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
-import {Properties} from '../../../public/properties';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-reimbursement',

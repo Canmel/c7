@@ -31,8 +31,15 @@ export class NoticeComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '标题', field: 'title', type: 'text', class: 'text-success'},
+    {title: '标题', field: 'title', type: 'text'},
     {title: '描述', field: 'remark', type: 'text'},
+    {
+      title: '状态',
+      field: 'status',
+      type: 'enum',
+      options: [{name: '正常', value: 1}, {name: '已推送', value: 2}],
+      class: 'text-success',
+    },
     {title: '创建时间', field: 'createdAt', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];

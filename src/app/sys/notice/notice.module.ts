@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { NoticeRoutingModule } from './notice-routing.module';
-import { NoticeComponent } from './notice.component';
-import { NoticeAddComponent } from './notice-add/notice-add.component';
-import { NoticeEditComponent } from './notice-edit/notice-edit.component';
+import {NoticeRoutingModule} from './notice-routing.module';
+import {NoticeComponent} from './notice.component';
+import {NoticeAddComponent} from './notice-add/notice-add.component';
+import {NoticeEditComponent} from './notice-edit/notice-edit.component';
 import {CrumbsModule} from '../../../public/crumbs/crumbs.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
@@ -27,4 +27,5 @@ import {NgZorroAntdModule, NzSelectModule} from 'ng-zorro-antd';
     NgZorroAntdModule
   ]
 })
-export class NoticeModule { }
+export class NoticeModule {
+}

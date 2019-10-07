@@ -20,9 +20,12 @@ export class MenuTreeComponent implements OnInit {
 
   level1() {
     const result = [];
+    const _this = this;
     $.each(this.menuTree, function (i, item) {
       if (item.type === 0) {
-        result.push(item);
+        if (_this.hasChild(item)) {
+          result.push(item);
+        }
       }
     });
     return result;
@@ -36,6 +39,17 @@ export class MenuTreeComponent implements OnInit {
       }
     });
     return result;
+  }
+
+  hasChild(item) {
+    let flag = false;
+    $.each(this.menuTree, function (index, obj) {
+      if (obj.parentId === item.menuId) {
+        flag = true;
+      }
+
+    });
+    return flag;
   }
 
 }

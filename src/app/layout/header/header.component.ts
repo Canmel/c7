@@ -58,10 +58,7 @@ export class HeaderComponent extends MainComponent implements OnInit {
 
   getTodos() {
     this.http.get(Urls.WORKFLOW.TODO).then(resp => {
-      console.log(resp['data']);
       this.currentTasks = this.currentTasks.concat(resp['data']);
-      console.log(this.currentTasks);
     });
-    console.log(this.currentTasks);
   }
 }
