@@ -20,8 +20,8 @@ export class RoleEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '用户管理',
-    subTitle: '新建用户'
+    title: '角色管理',
+    subTitle: '新建角色'
   };
 
   receiveId = 0;

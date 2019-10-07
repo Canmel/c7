@@ -86,7 +86,6 @@ export class HttpsUtils {
   }
 
   private mapToParams(map: Map<string, any>): HttpParams {
-    console.log('将map转化为params', map);
     const httpParams = new HttpParams();
     map.forEach(function (value, key) {
       httpParams.set(key, value);
@@ -106,7 +105,6 @@ export class HttpsUtils {
     if (url.endsWith('?')) {
       url = url.substr(0, url.length - 1);
     }
-    console.log(123123);
     return url;
   }
 
