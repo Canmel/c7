@@ -30,8 +30,8 @@
       </a>
       <ul class="nav dk text-sm" style="background-color: #1c2831;">
         <li *ngFor="let m of level2(item.menuId)">
-          <a class="auto" routerLinkActive="active" routerLink="{{m.url}}">
-            <i class="{{m.icon}}"></i>
+          <a class="auto" style="padding-left: 35px;" routerLinkActive="active" routerLink="{{m.url}}">
+            <i class="fa fa-circle-o"></i>
             <span>{{m.name}}</span>
           </a>
         </li>
