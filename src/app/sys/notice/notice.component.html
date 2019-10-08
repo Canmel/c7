@@ -29,8 +29,8 @@
         <tbody>
         <tr *ngFor="let item of entities; let i = index">
           <td *ngFor="let head of listHeader">
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.field.indexOf('.') < 0">{{item[head.field]}}</span>
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.field.indexOf('.') != -1">{{item[head.field.split('.')[0]][head.field.split('.')[1]]}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.field.indexOf('.') < 0 && head.type !== 'enum'">{{item[head.field]}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.field.indexOf('.') != -1 && head.type !== 'enum'">{{item[head.field.split('.')[0]][head.field.split('.')[1]]}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, 'cursor': 'pointer'}" *ngIf="head.type === 'enum'" (click)="clickFnFlow(item)">
                   <p *ngFor="let obj of head.options">
                     {{obj.value == item[head.field] ? obj.name: ''}}
