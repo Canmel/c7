@@ -73,6 +73,35 @@
   </div>
 
 
+
+  <nz-divider nzText="市内交通" nzOrientation="right"></nz-divider>
+  <nz-list [nzDataSource]="savedTraffic" nzBordered [nzHeader]="'行程'" [nzRenderItem]="trafficItem">
+    <ng-template #trafficItem let-item>
+      <nz-list-item nzNoFlex>
+        <div style="width: 100%;">
+          <div nz-col nzSpan="20">
+            <span class="ant-typography"><mark>[行程]</mark></span>
+            {{ item.come }} ( {{item.comeAt | date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} ) - {{ item.comeTo }} ( {{item.toAt |
+            date: 'yyyy-MM-dd HH:mm':'GMT+00:00'}} )
+          </div>
+          <div nz-col nzSpan="2">
+            {{item.amount}}<span style="font-weight: bold;"> 元</span>
+          </div>
+          <div nz-col nzSpan="2">
+            <a nz-button nz-popover nzContent="删除" (click)="deleteTrip(item)"><i
+              class="fa fa-trash-o text-danger-dk text-active"></i><i
+              class="fa fa-trash-o text-danger-dk text"></i></a>
+          </div>
+        </div>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+
+  <div nz-row nzType="flex" nzJustify="end">
+    <button nz-button [nzType]="'primary'" (click)="showCityTrafficModal()"><span>添加</span></button>
+  </div>
+
+
   <nz-modal [(nzVisible)]="isRouteVisible" nzTitle="添加往返路线" (nzOnCancel)="isRouteVisible = false"
             nzMaskClosable=false [nzWidth]="800" (nzOnOk)="handleRouteOk()">
     <form nz-form [formGroup]="validateRouteForm" data-validate="parsley">
@@ -203,6 +232,80 @@
     </form>
   </nz-modal>
 
+  <nz-modal [(nzVisible)]="isTrafficVisible" nzTitle="添加市内交通" (nzOnCancel)="isTrafficVisible = false"
+            nzMaskClosable=false [nzWidth]="800" (nzOnOk)="handleTrafficOk()">
+    <form nz-form [formGroup]="validateTrafficForm" data-validate="parsley">
+      <form nz-form [formGroup]="validateTrafficForm" (ngSubmit)="submitForm($event,validateTrafficForm.value)" data-validate="parsley">
+        <nz-form-item>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input placeholder="起点" formControlName="come"/>
+            <nz-form-explain *ngIf="validateTrafficForm.get('come').dirty&&validateTrafficForm.get('come').errors">
+              <ng-container *ngIf="validateTrafficForm.get('come').hasError('required')">
+                发车地点不能为空！
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input placeholder="目的地" formControlName="comeTo"/>
+            <nz-form-explain *ngIf="validateTrafficForm.get('comeTo').dirty&&validateTrafficForm.get('comeTo').errors">
+              <ng-container *ngIf="validateTrafficForm.get('comeTo').hasError('required')">
+                到达地点不能为空！
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control [nzSpan]="12">
+            <nz-date-picker
+              nzShowTime
+              nzFormat="yyyy-MM-dd HH:mm"
+              nzPlaceHolder="发车时间"
+              formControlName="comeAt"
+              style="width: 100%"
+            >
+            </nz-date-picker>
+            <nz-form-explain *ngIf="validateTrafficForm.get('comeAt').dirty&&validateTrafficForm.get('comeAt').errors">
+              <ng-container *ngIf="validateTrafficForm.get('comeAt').hasError('required')">
+                发车时间不能为空！
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+          <nz-form-control [nzSpan]="12">
+            <nz-date-picker
+              nzShowTime
+              nzFormat="yyyy-MM-dd HH:mm"
+              nzPlaceHolder="到达时间"
+              formControlName="toAt"
+              style="width: 100%"
+            >
+            </nz-date-picker>
+            <nz-form-explain *ngIf="validateTrafficForm.get('toAt').dirty&&validateTrafficForm.get('toAt').errors">
+              <ng-container *ngIf="validateTrafficForm.get('toAt').hasError('required')">
+                到达地点不能为空！
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control [nzSpan]="16">
+            <nz-input-number
+              formControlName="amount"
+              [nzMin]="1"
+              [nzStep]="1"
+              style="width: 100%"
+              [nzPlaceHolder]="'票面金额'"
+            ></nz-input-number>
+            <nz-form-explain
+              *ngIf="validateTrafficForm.get('amount').dirty&&validateTrafficForm.get('amount').hasError('required')">
+              票面金额不能为空！
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </form>
+  </nz-modal>
+
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="添加车船票" (nzOnCancel)="handleCancel()"
             nzMaskClosable=false [nzWidth]="800" (nzOnOk)="handleOk()">
@@ -280,7 +383,7 @@
           ></nz-input-number>
           <nz-form-explain
             *ngIf="validateForm.get('amount').dirty&&validateForm.get('amount').hasError('required')">
-            终点不能为空！
+            票面金额不能为空！
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>

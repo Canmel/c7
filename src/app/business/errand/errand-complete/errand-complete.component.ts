@@ -21,9 +21,13 @@ export class ErrandCompleteComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  validateTrafficForm: FormGroup;
+
   validateRouteForm: FormGroup;
 
   savedTrips: Array<any> = [];
+
+  savedTraffic: Array<any> = [];
 
   selectedErrand: any = {};
 
@@ -38,6 +42,11 @@ export class ErrandCompleteComponent implements OnInit {
    * 车船票表单是否显示
    */
   isVisible = false;
+
+  /**
+   * 市内交通费表单是否显示
+   */
+  isTrafficVisible = false;
 
   /**
    * 路线表单是否显示
@@ -78,6 +87,15 @@ export class ErrandCompleteComponent implements OnInit {
       backAt: ['', [Validators.required]],
       backToAt: ['', [Validators.required]]
     });
+
+    this.validateTrafficForm = this.fb.group({
+      imperfectId: ['', [Validators.required]],
+      come: ['', [Validators.required]],
+      comeAt: ['', [Validators.required]],
+      toAt: ['', [Validators.required]],
+      comeTo: ['', [Validators.required]],
+      amount: ['', [Validators.required]]
+    });
   }
 
 
@@ -86,6 +104,7 @@ export class ErrandCompleteComponent implements OnInit {
       this.receiveId = queryParams['id'];
       this.validateForm.controls['imperfectId'].setValue(this.receiveId);
       this.validateRouteForm.controls['imperfectId'].setValue(this.receiveId);
+      this.validateTrafficForm.controls['imperfectId'].setValue(this.receiveId);
       this.loadImperfect();
     });
   }
@@ -116,6 +135,14 @@ export class ErrandCompleteComponent implements OnInit {
 
     this.loadTrips(this.receiveId);
     this.loadRoute(this.receiveId);
+    this.loadTraffic(this.receiveId);
+  }
+
+  loadTraffic(id) {
+    this.https.get(Urls.ERRAND.TRAFFICS + id).then(resp => {
+      console.log(resp);
+      this.savedTraffic = resp['data'];
+    });
   }
 
   loadRoute(id) {
@@ -175,7 +202,23 @@ export class ErrandCompleteComponent implements OnInit {
       return;
     }
     this.https.post(Urls.ROUTERS.SAVE, this.validateRouteForm.value).then(resp => {
-      console.log('resp-------->', resp);
+      this.loadRoute(this.receiveId);
+    });
+  }
+
+  handleTrafficOk() {
+    for (const key in this.validateTrafficForm.controls) {
+      if (key) {
+        this.validateTrafficForm.controls[key].markAsDirty();
+        this.validateTrafficForm.controls[key].updateValueAndValidity();
+      }
+    }
+    if (!this.validateTrafficForm.valid) {
+      return;
+    }
+    console.log(this.validateTrafficForm);
+    this.https.post(Urls.TRAFFIC.SAVE, this.validateTrafficForm.value).then(resp => {
+      this.loadTraffic(this.receiveId);
     });
   }
 
@@ -260,4 +303,9 @@ export class ErrandCompleteComponent implements OnInit {
     }
     return endRouteValue.getTime() <= this.startRouteBackValue.getTime();
   };
+
+  /* --------------市内交通---------------- */
+  showCityTrafficModal() {
+    this.isTrafficVisible = true;
+  }
 }
