@@ -24,6 +24,8 @@ export class ErrandComponent implements OnInit {
 
   trips: Array<any> = [];
 
+  traffics: Array<any> = [];
+
   route: any = {};
 
   /**
@@ -245,9 +247,14 @@ export class ErrandComponent implements OnInit {
       console.log(this.trips);
     });
     this.https.get(Urls.ERRAND.ROUTES + v['id']).then(resp => {
-      console.log('-------->', resp);
       if (resp['data']) {
         this.route = resp['data'];
+      }
+    });
+    this.https.get(Urls.ERRAND.TRAFFICS + v['id']).then(resp => {
+      console.log(resp['data']);
+      if (resp['data']) {
+        this.traffics = resp['data'];
       }
     });
   }

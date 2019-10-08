@@ -64,9 +64,10 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td *ngIf="i == 0">￥{{trafficAmount()}}</td>
+        <td *ngIf="i != 0"></td>
         <td><span *ngIf="route && i == 0">差补</span></td>
-        <td style="border-right: 2px solid black;"><span *ngIf="route && i == 0">{{60 * route.days}}</span></td>
+        <td style="border-right: 2px solid black;"><span *ngIf="route && i == 0">￥{{60 * route.days}}</span></td>
       </tr>
       <tr>
         <td>/</td>
@@ -102,7 +103,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>￥{{trafficAmount()}}</td>
         <td></td>
         <td style="border-right: 2px solid black;">￥{{other()}}</td>
       </tr>
@@ -121,7 +122,7 @@
             <div style="display: inline-block; font-weight: bold; width: 38%;">共计人民币（大写）</div>
 
             <div style="display: inline-block; width: 60%; text-align: right;">
-              {{subtotal().trip + 60 * route.days | chm}}
+              {{amount() | chm}}
             </div>
           </div>
         </td>

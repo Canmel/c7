@@ -93,10 +93,10 @@
         <app-errand-subsidy [selected]="selected" [route]="route"></app-errand-subsidy>
       </nz-tab>
       <nz-tab [nzTitle]="'外阜出差费报销单'">
-        <app-errand-expense [selected]="selected" [trips]="trips" [route]="route"></app-errand-expense>
+        <app-errand-expense [selected]="selected" [trips]="trips" [route]="route" [traffic]="traffics"></app-errand-expense>
       </nz-tab>
       <nz-tab [nzTitle]="'交通费报销单'">
-        <app-trips-expense [selected]="selected"></app-trips-expense>
+        <app-trips-expense [selected]="selected" [traffic]="traffics"></app-trips-expense>
       </nz-tab>
     </nz-tabset>
   </div>

@@ -13,15 +13,20 @@ export class ErrandExpenseComponent implements OnInit {
 
   @Input() route;
 
+  @Input() traffic;
+
   subtotalValue = {
     trip: 0
   };
+
+  trafficAmountValue = 0;
 
   constructor() {
   }
 
   ngOnInit() {
     this.subtotal();
+    this.trafficAmount();
   }
 
   subtotal(): any {
@@ -38,7 +43,7 @@ export class ErrandExpenseComponent implements OnInit {
   }
 
   amount() {
-    return this.subtotal().trip + this.other();
+    return this.subtotal().trip + this.other() + this.trafficAmount();
   }
 
   other() {
@@ -46,5 +51,13 @@ export class ErrandExpenseComponent implements OnInit {
       return 60 * this.route.days;
     }
     return 0;
+  }
+
+  trafficAmount() {
+    let m = 0;
+    this.traffic.forEach(function (item) {
+      m += item.amount;
+    });
+    return m;
   }
 }

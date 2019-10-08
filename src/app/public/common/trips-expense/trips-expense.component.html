@@ -1,7 +1,7 @@
 <div class="print" style="margin-top: 20px;" #print>
   <div class="">
     <div style="text-align: center;"><img src="/assets/img/goshine.png"
-                                                           style="transform: scale(1.5);"></div>
+                                          style="transform: scale(1.5);"></div>
     <div>
       <div style="display: inline-block;width: 70%;">
         <span style="font-size: 25px;color: black; font-weight: bold;">交通费报销清单</span>
@@ -20,31 +20,42 @@
       <th>备注</th>
       </thead>
       <tbody>
-      <tr>
-        <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td>
+      <tr *ngFor="let item of traffic; let i = index;">
+        <td>{{item.comeAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{item.come}}</td>
+        <td>{{item.comeTo}}</td>
+        <td>{{item.amount}}</td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       </tbody>
     </table>
     <div>
       <div style="display: inline-block;width: 25%;">
         <div style="display: inline-block; width: 30%; text-align: right;"><span>报销人:</span></div>
-        <div style="display: inline-block; width: 70%; border-bottom: 1px solid black;"><span style="font-weight: bold;">  {{selected['username']}}</span></div>
+        <div style="display: inline-block; width: 70%; border-bottom: 1px solid black;"><span
+          style="font-weight: bold;">  {{selected['username']}}</span></div>
       </div>
       <div style="display: inline-block;width: 50%;">
         <div style="display: inline-block; width: 50%; text-align: right;"><span>部门主管/经理审核:</span></div>
-        <div style="display: inline-block; width: 50%; border-bottom: 1px solid black;"><span style="font-weight: bold;"> </span></div>
+        <div style="display: inline-block; width: 50%; border-bottom: 1px solid black;"><span
+          style="font-weight: bold;"> </span></div>
       </div>
       <div style="display: inline-block;width: 25%;">
         <div style="display: inline-block; width: 30%; text-align: right;"><span>日期:</span></div>

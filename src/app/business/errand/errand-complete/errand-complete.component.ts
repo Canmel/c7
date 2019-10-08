@@ -110,14 +110,35 @@ export class ErrandCompleteComponent implements OnInit {
   }
 
   deleteTrip(data: any) {
+    console.log(data);
     this.modalService.confirm({
       nzTitle: '您确定要删除这条由 【' + data['start'] + '】 到 【' + data['finish'] + '】 的行程吗？',
       nzContent: '<b style="color: red;">删除后无法恢复</b>',
       nzOkText: '确认',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.https.delete(Urls.TRIP.DELETE, data['id']).then(resp => {
+        this.https.delete(Urls.TRIP.DELETE + data['id']).then(resp => {
           this.notification.success('成功', resp['msg']);
+          this.loadTrips(this.receiveId);
+        });
+      },
+      nzCancelText: '取消',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
+  deleteTraffic(data: any) {
+    console.log(data);
+    this.modalService.confirm({
+      nzTitle: '您确定要删除这条由 【' + data['come'] + '】 到 【' + data['comeTo'] + '】 的行程吗？',
+      nzContent: '<b style="color: red;">删除后无法恢复</b>',
+      nzOkText: '确认',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        console.log(data, data['id']);
+        this.https.delete(Urls.TRAFFIC.DELETE + data['id']).then(resp => {
+          this.notification.success('成功', resp['msg']);
+          this.loadTraffic(this.receiveId);
         });
       },
       nzCancelText: '取消',
@@ -219,6 +240,8 @@ export class ErrandCompleteComponent implements OnInit {
     console.log(this.validateTrafficForm);
     this.https.post(Urls.TRAFFIC.SAVE, this.validateTrafficForm.value).then(resp => {
       this.loadTraffic(this.receiveId);
+      this.isTrafficVisible = false;
+      this.validateTrafficForm.reset();
     });
   }
 

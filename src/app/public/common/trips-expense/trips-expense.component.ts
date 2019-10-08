@@ -9,9 +9,12 @@ export class TripsExpenseComponent implements OnInit {
 
   @Input() selected;
 
+  @Input() traffic;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.traffic);
   }
 
 }
