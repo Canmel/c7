@@ -16,8 +16,8 @@ export class ProjectGroupEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '项目管理',
-    subTitle: '新建项目'
+    title: '项目组管理',
+    subTitle: '新建项目组'
   };
 
   /**
