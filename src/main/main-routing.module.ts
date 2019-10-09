@@ -18,6 +18,7 @@ import {ProjectModule} from '../app/business/project/project.module';
 import {DemoModule} from '../app/business/demo/demo.module';
 import {ProjectGroupModule} from '../app/business/project-group/project-group.module';
 import {StageModule} from '../app/business/stage/stage.module';
+import {MerchantModule} from '../app/business/merchant/merchant.module';
 
 const routes: Routes = [
   {
@@ -77,6 +78,9 @@ const routes: Routes = [
       }, {
         path: 'stage',
         loadChildren: () => StageModule
+      }, {
+        path: 'merchant',
+        loadChildren: () => MerchantModule
       }
     ]
   }
