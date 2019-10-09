@@ -14,6 +14,8 @@ import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {ErrandModule} from '../app/business/errand/errand.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {NoticeModule} from '../app/sys/notice/notice.module';
+import {ProjectModule} from '../app/business/project/project.module';
+import {DemoModule} from '../app/business/demo/demo.module';
 
 const routes: Routes = [
   {
@@ -61,6 +63,12 @@ const routes: Routes = [
       }, {
         path: 'notice',
         loadChildren: () => NoticeModule
+      }, {
+        path: 'project',
+        loadChildren: () => ProjectModule
+      }, {
+        path: 'demo',
+        loadChildren: () => DemoModule
       }
     ]
   }
