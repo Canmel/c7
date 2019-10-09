@@ -155,6 +155,11 @@ export const Urls = {
       ADD: `/app/users/add`,
       EDIT: `/app/users/edit`
     },
+    RESOURCES: {
+      LIST: `/app/resources`,
+      ADD: `/app/resources/add`,
+      EDIT: `/app/resources/edit`
+    },
     NOTICE: {
       LIST: `/app/notice`,
       ADD: `/app/notice/add`,

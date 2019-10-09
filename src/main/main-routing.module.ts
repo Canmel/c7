@@ -20,6 +20,7 @@ import {ProjectGroupModule} from '../app/business/project-group/project-group.mo
 import {StageModule} from '../app/business/stage/stage.module';
 import {MerchantModule} from '../app/business/merchant/merchant.module';
 import {IndustryModule} from '../app/business/industry/industry.module';
+import {ResourcesModule} from '../app/business/resources/resources.module';
 
 const routes: Routes = [
   {
@@ -85,6 +86,9 @@ const routes: Routes = [
       }, {
         path: 'industry',
         loadChildren: () => IndustryModule
+      }, {
+        path: 'resources',
+        loadChildren: () => ResourcesModule
       }
     ]
   }
