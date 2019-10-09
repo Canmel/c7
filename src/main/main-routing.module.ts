@@ -16,6 +16,8 @@ import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {NoticeModule} from '../app/sys/notice/notice.module';
 import {ProjectModule} from '../app/business/project/project.module';
 import {DemoModule} from '../app/business/demo/demo.module';
+import {ProjectGroupModule} from '../app/business/project-group/project-group.module';
+import {StageModule} from '../app/business/stage/stage.module';
 
 const routes: Routes = [
   {
@@ -69,6 +71,12 @@ const routes: Routes = [
       }, {
         path: 'demo',
         loadChildren: () => DemoModule
+      }, {
+        path: 'project_group',
+        loadChildren: () => ProjectGroupModule
+      }, {
+        path: 'stage',
+        loadChildren: () => StageModule
       }
     ]
   }

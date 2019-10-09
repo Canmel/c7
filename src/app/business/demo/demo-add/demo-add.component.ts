@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
-import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-demo-add',
@@ -63,7 +62,5 @@ export class DemoAddComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
 
 }

@@ -170,6 +170,16 @@ export const Urls = {
       ADD: `/app/menus/add`,
       EDIT: `/app/menus/edit`
     },
+    PROJECT: {
+      LIST: `/app/project`,
+      ADD: `/app/project/add`,
+      EDIT: `/app/project/edit`
+    },
+    PROJECT_GROUP: {
+      LIST: `/app/project_group`,
+      ADD: `/app/project_group/add`,
+      EDIT: `/app/project_group/edit`
+    },
     DEMO: {
       LIST: `/app/demo`,
       ADD: `/app/demo/add`,

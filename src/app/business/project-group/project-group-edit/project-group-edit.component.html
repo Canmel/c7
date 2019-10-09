@@ -1,3 +1,27 @@
-<p>
-  project-group-edit works!
-</p>
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目组名称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="name" placeholder="请输入项目名称...">
+          <nz-form-explain
+            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              项目组名称不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>
