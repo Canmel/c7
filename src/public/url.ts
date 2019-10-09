@@ -185,6 +185,11 @@ export const Urls = {
       ADD: `/app/stage/add`,
       EDIT: `/app/stage/edit`
     },
+    INDUSTRY: {
+      LIST: `/app/industry`,
+      ADD: `/app/industry/add`,
+      EDIT: `/app/industry/edit`
+    },
     PROJECT_GROUP: {
       LIST: `/app/project_group`,
       ADD: `/app/project_group/add`,

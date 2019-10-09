@@ -10,8 +10,9 @@ import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgZorroAntdModule, NzSelectModule} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NZ_I18N, NzSelectModule, zh_CN} from 'ng-zorro-antd';
 import {DatetimeModule} from '../../pipe/datetime.module';
+import {HttpsUtils} from '../../utils/HttpsUtils.service';
 
 @NgModule({
   declarations: [StageComponent, StageAddComponent, StageEditComponent],
@@ -27,7 +28,9 @@ import {DatetimeModule} from '../../pipe/datetime.module';
     NgZorroAntdModule,
     DatetimeModule.forRoot(),
     StageRoutingModule
-  ]
+  ],
+  bootstrap: [StageComponent],
+  providers: [{provide: NZ_I18N, useValue: zh_CN}, HttpsUtils]
 })
 export class StageModule {
 }
