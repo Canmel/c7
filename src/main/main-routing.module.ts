@@ -23,6 +23,7 @@ import {IndustryModule} from '../app/business/industry/industry.module';
 import {ResourcesModule} from '../app/business/resources/resources.module';
 import {ProjectMonitorModule} from '../app/business/project-monitor/project-monitor.module';
 import {AssetsTypeModule} from '../app/business/assets-type/assets-type.module';
+import {DocumentModule} from '../app/business/document/document.module';
 
 const routes: Routes = [
   {
@@ -97,6 +98,9 @@ const routes: Routes = [
       }, {
         path: 'assets-type',
         loadChildren: () => AssetsTypeModule
+      }, {
+        path: 'document',
+        loadChildren: () => DocumentModule
       }
     ]
   }

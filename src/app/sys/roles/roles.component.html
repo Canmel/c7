@@ -56,7 +56,7 @@
   </section>
 </section>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="角色菜单" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="角色菜单" [nzWidth]="'80%'" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
   <nz-tree-select [nzNodes]="nodes" style="width: 100%;"
                   [nzCheckable]="false"
                   nzPlaceHolder="请选择菜单信息"
