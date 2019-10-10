@@ -15,8 +15,8 @@ export class AssetsTypeAddComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '项目管理',
-    subTitle: '阶段管理'
+    title: '资源维护',
+    subTitle: '资源类型'
   };
 
   validateForm: FormGroup;

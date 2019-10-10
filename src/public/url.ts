@@ -150,6 +150,11 @@ export const Urls = {
     USERINFO: '/auth/session/me'
   },
   BUSINESS: {
+    ASSETS_TYPE: {
+      LIST: `/app/assets-type`,
+      ADD: `/app/assets-type/add`,
+      EDIT: `/app/assets-type/edit`
+    },
     USERS: {
       LIST: `/app/users`,
       ADD: `/app/users/add`,

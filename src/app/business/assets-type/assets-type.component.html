@@ -5,7 +5,7 @@
     <div class="row wrapper">
       <div class="col-sm-5 m-b-xs flex-left">
         <div class="btn-group" data-toggle="buttons">
-          <a routerLinkActive="active" routerLink="/app/stage/add" class="btn btn-sm btn-success">
+          <a routerLinkActive="active" routerLink="/app/assets-type/add" class="btn btn-sm btn-success">
             <i class="fa fa-plus fa-fw m-r-xs"></i>新建
           </a>
         </div>
@@ -13,7 +13,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入项目名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
+          <input type="text" class="input-sm form-control" placeholder="请输入类型名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
                       </span>
@@ -43,6 +43,10 @@
               <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="已落户项目" (click)="completeProject(item)"><i
+                class="fa fa-eye text-warning-dk text-active"></i><i
+                class="fa fa-eye text-warning-dk text"></i></a>
             </div>
           </td>
         </tr>

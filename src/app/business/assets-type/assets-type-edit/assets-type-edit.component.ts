@@ -16,8 +16,8 @@ export class AssetsTypeEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '项目管理',
-    subTitle: '阶段管理'
+    title: '资源维护',
+    subTitle: '资源类型'
   };
 
   /**
@@ -78,7 +78,7 @@ export class AssetsTypeEditComponent implements OnInit {
    */
   loadEntity(id) {
     this.validateForm.setValue({
-      name: '项目名称'
+      name: '国有资产'
     });
   }
 }

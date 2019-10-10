@@ -15,8 +15,8 @@ export class AssetsTypeComponent implements OnInit {
    * 页头
    */
   crumbs = {
-    title: '项目管理',
-    subTitle: '阶段管理'
+    title: '资源维护',
+    subTitle: '资源类型'
   };
 
   /**
@@ -34,7 +34,7 @@ export class AssetsTypeComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '阶段', field: 'name', type: 'text', class: 'text-success'},
+    {title: '资源类型', field: 'name', type: 'text', class: 'text-success'},
     {title: '编号', field: 'code', type: 'text'},
     {title: '状态', field: 'status', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
@@ -64,9 +64,9 @@ export class AssetsTypeComponent implements OnInit {
     // });
 
     this.entities = [
-      {name: '需求调研', code: 'NO2911112201', status: '正常'},
-      {name: '招投标', code: 'NO2911112201', status: '正常'},
-      {name: '验收', code: 'NO2911112201', status: '开始'}
+      {name: '国有资产', code: 'NO2911112201', status: '正常'},
+      {name: '个人出租', code: 'NO2911112201', status: '正常'},
+      {name: '公私合营', code: 'NO2911112201', status: '终止'}
     ];
   }
 
@@ -76,7 +76,7 @@ export class AssetsTypeComponent implements OnInit {
    */
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['name1'] + '?',
+      nzTitle: '你确定要删除 ' + param['name'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
@@ -104,7 +104,14 @@ export class AssetsTypeComponent implements OnInit {
    * 参数：
    **/
   edit(param) {
-    this.router.navigate([Urls.BUSINESS.STAGE.EDIT], {queryParams: param});
+    this.router.navigate([Urls.BUSINESS.ASSETS_TYPE.EDIT], {queryParams: param});
+  }
+
+  /**
+   * 查看已落户项目
+   */
+  completeProject() {
+    alert('已落户项目');
   }
 
 }
