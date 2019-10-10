@@ -14,6 +14,15 @@ import {NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {ErrandModule} from '../app/business/errand/errand.module';
 import {WorkFlowModule} from '../app/flow/work-flow/work-flow.module';
 import {NoticeModule} from '../app/sys/notice/notice.module';
+import {ProjectModule} from '../app/business/project/project.module';
+import {DemoModule} from '../app/business/demo/demo.module';
+import {ProjectGroupModule} from '../app/business/project-group/project-group.module';
+import {StageModule} from '../app/business/stage/stage.module';
+import {MerchantModule} from '../app/business/merchant/merchant.module';
+import {IndustryModule} from '../app/business/industry/industry.module';
+import {ResourcesModule} from '../app/business/resources/resources.module';
+import {ProjectMonitorModule} from '../app/business/project-monitor/project-monitor.module';
+import {AssetsTypeModule} from '../app/business/assets-type/assets-type.module';
 
 const routes: Routes = [
   {
@@ -61,6 +70,33 @@ const routes: Routes = [
       }, {
         path: 'notice',
         loadChildren: () => NoticeModule
+      }, {
+        path: 'project',
+        loadChildren: () => ProjectModule
+      }, {
+        path: 'demo',
+        loadChildren: () => DemoModule
+      }, {
+        path: 'project_group',
+        loadChildren: () => ProjectGroupModule
+      }, {
+        path: 'stage',
+        loadChildren: () => StageModule
+      }, {
+        path: 'merchant',
+        loadChildren: () => MerchantModule
+      }, {
+        path: 'industry',
+        loadChildren: () => IndustryModule
+      }, {
+        path: 'resources',
+        loadChildren: () => ResourcesModule
+      }, {
+        path: 'monitor',
+        loadChildren: () => ProjectMonitorModule
+      }, {
+        path: 'assets-type',
+        loadChildren: () => AssetsTypeModule
       }
     ]
   }

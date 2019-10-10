@@ -108,7 +108,7 @@ export class MenuAddComponent implements OnInit {
       this.menuLevels = data['data'];
     });
     const _this = this;
-    this.https.get(Urls.MENUS.TOPMENUS).then(data => {
+    this.https.get(Urls.MENUS.TOPMENUS, {parentId: 1}).then(data => {
       $.each(data['data'], function (index, item) {
         _this.topMenus.push({name: item['name'], value: item['menuId']});
       });

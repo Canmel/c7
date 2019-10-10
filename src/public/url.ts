@@ -150,10 +150,25 @@ export const Urls = {
     USERINFO: '/auth/session/me'
   },
   BUSINESS: {
+    ASSETS_TYPE: {
+      LIST: `/app/assets-type`,
+      ADD: `/app/assets-type/add`,
+      EDIT: `/app/assets-type/edit`
+    },
     USERS: {
       LIST: `/app/users`,
       ADD: `/app/users/add`,
       EDIT: `/app/users/edit`
+    },
+    MONITOR: {
+      LIST: `/app/monitor`,
+      ADD: `/app/monitor/add`,
+      EDIT: `/app/monitor/edit`
+    },
+    RESOURCES: {
+      LIST: `/app/resources`,
+      ADD: `/app/resources/add`,
+      EDIT: `/app/resources/edit`
     },
     NOTICE: {
       LIST: `/app/notice`,
@@ -169,6 +184,36 @@ export const Urls = {
       LIST: `/app/menus`,
       ADD: `/app/menus/add`,
       EDIT: `/app/menus/edit`
+    },
+    PROJECT: {
+      LIST: `/app/project`,
+      ADD: `/app/project/add`,
+      EDIT: `/app/project/edit`
+    },
+    MERCHANT: {
+      LIST: `/app/merchant`,
+      ADD: `/app/merchant/add`,
+      EDIT: `/app/merchant/edit`
+    },
+    STAGE: {
+      LIST: `/app/stage`,
+      ADD: `/app/stage/add`,
+      EDIT: `/app/stage/edit`
+    },
+    INDUSTRY: {
+      LIST: `/app/industry`,
+      ADD: `/app/industry/add`,
+      EDIT: `/app/industry/edit`
+    },
+    PROJECT_GROUP: {
+      LIST: `/app/project_group`,
+      ADD: `/app/project_group/add`,
+      EDIT: `/app/project_group/edit`
+    },
+    DEMO: {
+      LIST: `/app/demo`,
+      ADD: `/app/demo/add`,
+      EDIT: `/app/demo/edit`
     },
     FLOWS: {
       LIST: `/app/flows`,
