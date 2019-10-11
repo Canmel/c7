@@ -16,8 +16,8 @@ export class LefterComponent implements OnInit {
     menuList: [
       {address: '/app/home', active: 'active', menuname: '首页', icon: 'icon-disc icon text-success'},
       {address: '/app/users', active: null, menuname: 'Genres', icon: 'icon-music-tone-alt icon text-info'},
-      {address: '/app/roles', active: null, menuname: 'Events', icon: 'icon-drawer icon text-primary-lter'},
-      {address: '/app/menus', active: null, menuname: 'Listen', icon: 'icon-list icon  text-info-dker'},
+      // {address: '/app/roles', active: null, menuname: 'Events', icon: 'icon-drawer icon text-primary-lter'},
+      // {address: '/app/menus', active: null, menuname: 'Listen', icon: 'icon-list icon  text-info-dker'},
       {address: '/app/menus', active: null, menuname: 'Video', icon: 'icon-social-youtube icon  text-primary'}
     ],
     menuTree: []
@@ -26,12 +26,10 @@ export class LefterComponent implements OnInit {
   constructor(private http: HttpsUtils, public notificationService: NzNotificationService) {
     const _this = this;
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
-      console.log(resp)
       $.each(resp['data'], function (index, item) {
         _this.menusData.menuTree.push(item);
       });
     }, resp => {
-      console.log(resp);
       this.notificationService.error(_i18n.TOOLS.NOTIFICATION.ERROR, resp['message']);
     });
     this.http.get(Urls.MENUS.SUBS).then(resp => {
@@ -54,10 +52,8 @@ export class LefterComponent implements OnInit {
   todos () {
     this.http.get(Urls.WORKFLOW.TODO).then(
       resp => {
-        console.log(resp);
       },
       resp => {
-        console.log(resp);
       }
     );
   }

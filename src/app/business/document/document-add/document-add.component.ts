@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
@@ -20,33 +19,6 @@ export class DocumentAddComponent implements OnInit {
     subTitle: '文档管理'
   };
 
-  validateForm: FormGroup;
-
-  /**
-   * 方法用途: 提交表单
-   * 参数:  事件
-   **/
-  submitForm = ($event, value) => {
-    $event.preventDefault();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
-  };
-
-  /**
-   * 方法用途: 重置表单
-   * 参数:  事件
-   **/
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
-  }
-
   /**
    * 构造器
    * @param fb 表单构造器
@@ -54,13 +26,24 @@ export class DocumentAddComponent implements OnInit {
    * @param https   网络请求
    * @param notification  提示工具
    */
-  constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
-    this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
-    });
+  constructor(public router: Router, public https: HttpsUtils,
+              private notification: NzNotificationService) {
+
   }
 
   ngOnInit() {
   }
 
+  // tslint:disable-next-line:no-any
+  handleChange({file, fileList}: { [key: string]: any }): void {
+    const status = file.status;
+    if (status !== 'uploading') {
+      console.log(file, fileList);
+    }
+    if (status === 'done') {
+      this.notification.success('成功', '上传成功！');
+    } else if (status === 'error') {
+      this.notification.success('成功', '上传失败！');
+    }
+  }
 }

@@ -43,6 +43,10 @@
               <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="发送邮件" (click)="sendEmail(item)"><i
+                class="fa fa-mail-forward text-danger-dk text-active"></i><i
+                class="fa fa-mail-forward text-danger-dk text"></i></a>
             </div>
           </td>
         </tr>
@@ -60,3 +64,9 @@
     <!-- 分页 -->
   </section>
 </section>
+
+<nz-modal [(nzVisible)]="isEndEmailVisible" nzTitle="发送邮件" (nzOnCancel)="handlerSendEmailCancel()" (nzOnOk)="handlerSendEmailOk()">
+  <p>Content one</p>
+  <p>Content two</p>
+  <p>Content three</p>
+</nz-modal>

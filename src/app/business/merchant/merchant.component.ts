@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
@@ -44,6 +44,8 @@ export class MerchantComponent implements OnInit {
    * 表格数据
    */
   entities: Array<any> = [];
+
+  isEndEmailVisible = false;
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
@@ -107,5 +109,17 @@ export class MerchantComponent implements OnInit {
     this.router.navigate([Urls.BUSINESS.MERCHANT.EDIT], {queryParams: param});
   }
 
+
+  sendEmail(item) {
+    this.isEndEmailVisible = true;
+  }
+
+  handlerSendEmailOk() {
+    this.isEndEmailVisible = false;
+  }
+
+  handlerSendEmailCancel() {
+    this.isEndEmailVisible = false;
+  }
 
 }
