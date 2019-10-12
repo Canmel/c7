@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Properties} from '../../../../public/properties';
 
 @Component({
   selector: 'app-document-add',
@@ -19,6 +20,8 @@ export class DocumentAddComponent implements OnInit {
     subTitle: '文档管理'
   };
 
+  action = '/oa/document';
+
   /**
    * 构造器
    * @param fb 表单构造器
@@ -32,6 +35,7 @@ export class DocumentAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.action += '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
   }
 
   // tslint:disable-next-line:no-any

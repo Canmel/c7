@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-reimbursement',
@@ -359,7 +360,7 @@ export class ReimbursementComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
       if (respData) {
-        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
         this.selectItem.task = respData[0];
         if (item['status'] !== 1) {
           this.https.get(Urls.WORKFLOW.COMMENTS + this.selectItem['task']['id']).then(r => {
@@ -397,7 +398,8 @@ export class ReimbursementComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.CURRENT + item['id'], {flowId: 'REIMBURSEMENT:6:27504'}).then(resp => {
       const respData = resp['data'];
       if (respData) {
-        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token=' + sessionStorage.getItem('access_token');
+        this.taskImageUrl = Urls.WORKFLOW.TASKIMAGE + respData[0]['id'] + '?access_token='
+          + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
         this.selectItem.task = respData[0];
 
         if (item['status'] !== 1) {

@@ -13,7 +13,7 @@ export const Properties = {
       PRINCIPAL: `PRINCIPAL`,
       NAME: `NAME`,
       NICKNAME: `NICKNAME`,
-      ACCESS_TOKEN: `ACCESS_TOKEN`
+      ACCESS_TOKEN: `access_token`
     },
     ENUM: {
       WORKFLOWPUBLISH: {
@@ -27,7 +27,7 @@ export const Properties = {
       }
     },
     SYSTEM: {
-      PROXY_ERROR: `Error occured while trying to proxy`
+      PROXY_ERROR: `设置的代理地址不可达`
     }
   },
   ENUM: {

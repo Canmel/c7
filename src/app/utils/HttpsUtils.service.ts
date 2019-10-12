@@ -2,6 +2,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Urls} from '../../public/url';
+import {Properties} from '../../public/properties';
 
 // 请求类型
 @Injectable()
@@ -18,7 +19,7 @@ export class HttpsUtils {
    * 参数：
    **/
   get<T>(url: string, params?: Object, token?: string): Promise<void | Object> {
-    token = token ? token : sessionStorage.getItem('access_token');
+    token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     params = params ? params : {};
     params['access_token'] = token;
     if (params) {
@@ -38,7 +39,7 @@ export class HttpsUtils {
    * 参数：
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
-    token = token ? token : sessionStorage.getItem('access_token');
+    token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     url += '?access_token=' + token;
     return this.http.post<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
@@ -50,7 +51,7 @@ export class HttpsUtils {
    * 参数：
    **/
   put<T>(url: string, params: Object, token?: string): Promise<void | Object> {
-    token = token ? token : sessionStorage.getItem('access_token');
+    token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     url += '?access_token=' + token;
     return this.http.put<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
@@ -63,7 +64,7 @@ export class HttpsUtils {
    **/
   delete<T>(url: string, params?, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
-    token = token ? token : sessionStorage.getItem('access_token');
+    token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     url += '?access_token=' + token;
     if (params) {
       url = this.objAppendToUrl(url, params);

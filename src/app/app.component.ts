@@ -5,6 +5,7 @@ import {Urls} from '../public/url';
 import {CookieService} from 'ngx-cookie-service';
 import {SystemProperties} from './utils/system-properties';
 import {HttpsUtils} from './utils/HttpsUtils.service';
+import {Properties} from '../public/properties';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
       });
     }
 
-    if (sessionStorage.getItem('access_token') === null || sessionStorage.getItem('access_token') === '') {
+    if (sessionStorage.getItem('access_token') === null || sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN) === '') {
       window.location.href = '/login';
     } else {
       this.router.navigate(['/app/home']);
