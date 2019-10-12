@@ -34,9 +34,11 @@ export class DocumentComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '文件名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '编号', field: 'code', type: 'text'},
-    {title: '类型', field: 'status', type: 'text'},
+    {title: '文件名称', field: 'dname', type: 'text', class: 'text-success'},
+    {title: '类型', field: 'dtype', type: 'text'},
+    {title: '大小', field: 'dsize', type: 'text'},
+    {title: '创建时间', field: 'createdAt', type: 'text'},
+    {title: '上传者', field: 'creator', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -57,17 +59,11 @@ export class DocumentComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
-
-    this.entities = [
-      {name: '南城溶洞一层设计图.png', code: 'NO2911112201', status: '图片'},
-      {name: '南城溶洞一期设计文档.doc', code: 'NO2911112201', status: 'word文档'},
-      {name: '南城溶洞一层商户排列.png', code: 'NO2911112201', status: '图片'}
-    ];
+    this.https.get(Urls.DOCUMENT.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   /**

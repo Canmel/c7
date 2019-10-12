@@ -97,6 +97,11 @@ export const Urls = {
     SAVE: `/oa/trip`,
     DELETE: `/oa/trip/`,
   },
+  DOCUMENT: {
+    PAGEQUERY: `/oa/document`,
+    SAVE: `/oa/document`,
+    EDIT: `/oa/document/`
+  },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
     SAVE: `/system/sysMenu`,
