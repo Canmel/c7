@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-document',
@@ -37,7 +38,7 @@ export class DocumentComponent implements OnInit {
     {title: '文件名称', field: 'dname', type: 'text', class: 'text-success'},
     {title: '类型', field: 'dtype', type: 'text'},
     {title: '大小', field: 'dsize', type: 'text'},
-    {title: '创建时间', field: 'createdAt', type: 'text'},
+    {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '上传者', field: 'creator', type: 'text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
@@ -68,7 +69,7 @@ export class DocumentComponent implements OnInit {
 
   /**
    * 删除
-   * @param param
+   * @param param 参数
    */
   remove(param) {
     this.modalService.confirm({
@@ -99,8 +100,20 @@ export class DocumentComponent implements OnInit {
    * 方法用途: 修改
    * 参数：
    **/
-  edit(param) {
-    this.router.navigate([Urls.BUSINESS.STAGE.EDIT], {queryParams: param});
+  viewFile(param) {
+    this.https.get(Urls.DOCUMENT.VIEW + param['id']).then(resp => {
+      window.open(resp['data']);
+    }, reject => {
+      this.notification.error('错误', reject['msg']);
+    });
+  }
+
+  downLoad(param) {
+    window.open(Urls.DOCUMENT.DOWNLOAD + param['id'] + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN));
+    // const $form = $('<form method="GET"></form>');
+    // $form.attr('action', '/download/papers/1');
+    // $form.appendTo($('body'));
+    // $form.submit();
   }
 
 }

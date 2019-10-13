@@ -36,13 +36,17 @@
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="下载" (click)="edit({id: item.menuId})"><i
+              <a nz-button nz-popover nzContent="下载" (click)="downLoad({id: item.id})"><i
                 class="fa fa-download text-success text-active"></i><i
                 class="fa fa-download text-success text"></i></a>
 
-              <a nz-button nz-popover nzContent="查看" (click)="remove(item)"><i
-                class="fa fa-eye text-danger-dk text-active"></i><i
-                class="fa fa-eye text-danger-dk text"></i></a>
+              <a nz-button nz-popover nzContent="查看" (click)="viewFile({id: item.id})"><i
+                class="fa fa-eye text-success text-active"></i><i
+                class="fa fa-eye text-success text"></i></a>
+
+              <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
+                class="fa fa-trash-o text-danger-dk text-active"></i><i
+                class="fa fa-trash-o text-danger-dk text"></i></a>
             </div>
           </td>
         </tr>

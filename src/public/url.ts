@@ -100,7 +100,9 @@ export const Urls = {
   DOCUMENT: {
     PAGEQUERY: `/oa/document`,
     SAVE: `/oa/document`,
-    EDIT: `/oa/document/`
+    EDIT: `/oa/document/`,
+    VIEW: `/oa/document/view/`,
+    DOWNLOAD: `/oa/document/download/`
   },
   MENUS: {
     PAGEQUERY: `/system/sysMenu`,
