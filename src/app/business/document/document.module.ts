@@ -4,7 +4,6 @@ import {CommonModule} from '@angular/common';
 import {DocumentRoutingModule} from './document-routing.module';
 import {DocumentComponent} from './document.component';
 import {DocumentAddComponent} from './document-add/document-add.component';
-import {DocumentEditComponent} from './document-edit/document-edit.component';
 import {CrumbsModule} from '../../../public/crumbs/crumbs.module';
 import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
@@ -15,7 +14,7 @@ import {DatetimeModule} from '../../pipe/datetime.module';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 
 @NgModule({
-  declarations: [DocumentComponent, DocumentAddComponent, DocumentEditComponent],
+  declarations: [DocumentComponent, DocumentAddComponent],
   imports: [
     CommonModule,
     CrumbsModule,

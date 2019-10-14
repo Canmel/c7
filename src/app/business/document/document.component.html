@@ -13,7 +13,8 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入项目名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
+          <input type="text" class="input-sm form-control" placeholder="请输入项目名称..." [(ngModel)]="formData.name"
+                 (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
                       </span>
@@ -33,8 +34,12 @@
         <tbody>
         <tr *ngFor="let item of entities; let i = index">
           <td *ngFor="let head of listHeader">
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
-            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+                  *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+                  *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+                  *ngIf="head.type=== 'muilti-text'">{{item[head.field.split('.')[0]][head.field.split('.')[1]]}}</span>
             <div class="" *ngIf="head.field === 'option'">
               <a nz-button nz-popover nzContent="下载" (click)="downLoad({id: item.id})"><i
                 class="fa fa-download text-success text-active"></i><i
@@ -58,7 +63,8 @@
     <!-- 分页 -->
     <footer class="panel-footer">
       <div class="row">
-        <nz-pagination [(nzPageIndex)]="formData.pageNum" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+        <nz-pagination [(nzPageIndex)]="formData.pageNum" [nzTotal]="formData.totalNum"
+                       (nzPageIndexChange)="loadEntities()"></nz-pagination>
       </div>
     </footer>
     <!-- 分页 -->

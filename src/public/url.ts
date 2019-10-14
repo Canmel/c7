@@ -10,6 +10,13 @@ export const Urls = {
     PAGEQUERY: `/bpm/flow/defWorkflows`,
     DELETE: `/bpm/flow/defWorkflows/`
   },
+  RESOURCE: {
+    PAGEQUERY: `/oa/resource`,
+    SAVE: `/oa/resource`,
+    DELETE: `/oa/resource/`,
+    EDIT: `/oa/resource/`,
+    DETAILS: `/oa/resource/`
+  },
   USERS: {
     ME: `/system/sysUser/me`,
     PAGEQUERY: `/system/sysUser`,
@@ -101,6 +108,7 @@ export const Urls = {
     PAGEQUERY: `/oa/document`,
     SAVE: `/oa/document`,
     EDIT: `/oa/document/`,
+    DELETE: `/oa/document/`,
     VIEW: `/oa/document/view/`,
     DOWNLOAD: `/oa/document/download/`
   },

@@ -35,6 +35,8 @@
           <td *ngFor="let head of listHeader">
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+                  *ngIf="head.type=== 'muilti-text'">{{item[head.field.split('.')[0]][head.field.split('.')[1]]}}</span>
             <div class="" *ngIf="head.field === 'option'">
               <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.menuId})"><i
                 class="fa fa-edit text-success text-active"></i><i

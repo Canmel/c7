@@ -61,4 +61,20 @@ export class HeaderComponent extends MainComponent implements OnInit {
       this.currentTasks = this.currentTasks.concat(resp['data']);
     });
   }
+
+  /**
+   * 长用户名
+   */
+  usernameLong() {
+    return this.authentication ? this.authentication.username : '';
+  }
+
+  /**
+   * 短用户名
+   */
+  usernameShort() {
+    return this.authentication ? this.authentication.username.substring(0, 3) : '';
+  }
+
+
 }

@@ -39,7 +39,7 @@ export class DocumentComponent implements OnInit {
     {title: '类型', field: 'dtype', type: 'text'},
     {title: '大小', field: 'dsize', type: 'text'},
     {title: '创建时间', field: 'createdAt', type: 'date'},
-    {title: '上传者', field: 'creator', type: 'text'},
+    {title: '上传者', field: 'creator.username', type: 'muilti-text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -64,6 +64,7 @@ export class DocumentComponent implements OnInit {
       this.entities = resp['data']['list'];
       this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
+      console.log(this.entities);
     });
   }
 
@@ -73,23 +74,22 @@ export class DocumentComponent implements OnInit {
    */
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['name1'] + '?',
+      nzTitle: '你确定要删除 ' + param['dname'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.DOCUMENT.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')
@@ -110,10 +110,6 @@ export class DocumentComponent implements OnInit {
 
   downLoad(param) {
     window.open(Urls.DOCUMENT.DOWNLOAD + param['id'] + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN));
-    // const $form = $('<form method="GET"></form>');
-    // $form.attr('action', '/download/papers/1');
-    // $form.appendTo($('body'));
-    // $form.submit();
   }
 
 }
