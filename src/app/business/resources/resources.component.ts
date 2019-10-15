@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
@@ -7,6 +7,7 @@ import {Urls} from '../../../public/url';
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./resources.component.css']
 })
 export class ResourcesComponent implements OnInit {
@@ -36,8 +37,8 @@ export class ResourcesComponent implements OnInit {
   listHeader = [
     {title: '资源名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '创建者', field: 'creator.username', type: 'muilti-text'},
-    {title: '资源状态', field: 'status.name', type: 'muilti-text'},
-    {title: '类型', field: 'type.name', type: 'muilti-text', class: 'text-tag'},
+    {title: '资源状态', field: 'status.name', type: 'muilti-text', class: '#2db7f5'},
+    {title: '类型', field: 'type.name', type: 'muilti-text', class: '#108ee9'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 

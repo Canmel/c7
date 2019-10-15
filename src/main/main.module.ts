@@ -8,7 +8,7 @@ import {LefterComponent} from '../app/layout/lefter/lefter.component';
 import {FooterComponent} from '../app/layout/footer/footer.component';
 import {ContentFooterComponent} from '../app/layout/content-footer/content-footer.component';
 import {MenuTreeComponent} from '../public/menu-tree/menu-tree.component';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NzSpinModule} from 'ng-zorro-antd';
 import {HttpsUtils} from '../app/utils/HttpsUtils.service';
 
 @NgModule({
@@ -23,6 +23,7 @@ import {HttpsUtils} from '../app/utils/HttpsUtils.service';
   imports: [
     CommonModule,
     MainRoutingModule,
+    NzSpinModule,
     NgZorroAntdModule
   ],
   providers: [HttpsUtils]

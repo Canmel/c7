@@ -1,8 +1,9 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Urls} from '../../public/url';
 import {Properties} from '../../public/properties';
+import * as $ from 'Jquery';
 
 // 请求类型
 @Injectable()
@@ -19,6 +20,7 @@ export class HttpsUtils {
    * 参数：
    **/
   get<T>(url: string, params?: Object, token?: string): Promise<void | Object> {
+    $('#loading').show();
     token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     params = params ? params : {};
     params['access_token'] = token;
@@ -30,6 +32,7 @@ export class HttpsUtils {
       console.log(errorResp);
       return this.handleError(errorResp);
     }).then(onfulfilled => {
+      $('#loading').hide();
       return Promise.resolve(onfulfilled);
     });
   }
@@ -39,10 +42,14 @@ export class HttpsUtils {
    * 参数：
    **/
   post<T>(url: string, params: Object, token?: string): Promise<void | Object> {
+    $('#loading').show();
     token = token ? token : sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
     url += '?access_token=' + token;
     return this.http.post<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
+    }).then(filled => {
+      $('#loading').hide();
+      return Promise.resolve(filled);
     });
   }
 
@@ -55,6 +62,9 @@ export class HttpsUtils {
     url += '?access_token=' + token;
     return this.http.put<T>(url, params, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
+    }).then(filled => {
+      $('#loading').hide();
+      return Promise.resolve(filled);
     });
   }
 
@@ -72,26 +82,10 @@ export class HttpsUtils {
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     return this.http.delete(url, this.httpOptions).toPromise().catch(errorResp => {
       this.handleError(errorResp);
+    }).then(filled => {
+      $('#loading').hide();
+      return Promise.resolve(filled);
     });
-  }
-
-  objToParams(obj: Object) {
-    if (Object.keys(obj).length === 0) {
-      return new HttpParams();
-    }
-    const params = new HttpParams();
-    Object.keys(obj).forEach(function (key) {
-      params.set(key, obj[key]);
-    });
-    return params;
-  }
-
-  private mapToParams(map: Map<string, any>): HttpParams {
-    const httpParams = new HttpParams();
-    map.forEach(function (value, key) {
-      httpParams.set(key, value);
-    });
-    return httpParams;
   }
 
   private objAppendToUrl(url: string, obj: Object): string {
