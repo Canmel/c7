@@ -154,6 +154,10 @@ export const Urls = {
     },
     ERRAND: {
       STATUS: `/oa/errand/status`
+    },
+    RESOURCE: {
+      STATUS: `/oa/resource/status`,
+      TYPES: `/oa/resource/typies`
     }
   },
   SESSION: {

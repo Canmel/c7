@@ -36,9 +36,9 @@ export class ResourcesComponent implements OnInit {
    */
   listHeader = [
     {title: '资源名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '创建者', field: 'creator.username', type: 'muilti-text'},
-    {title: '资源状态', field: 'status.name', type: 'muilti-text', class: '#2db7f5'},
-    {title: '类型', field: 'type.name', type: 'muilti-text', class: '#108ee9'},
+    {title: '创建者', field: 'creator.username', type: 'muilti-text', class: '#87d068'},
+    {title: '资源状态', field: 'status', type: 'text', class: '#2db7f5'},
+    {title: '类型', field: 'type', type: 'text', class: '#108ee9'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 

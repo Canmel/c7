@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-resources-add',
@@ -22,6 +23,8 @@ export class ResourcesAddComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  resourceTypies = [];
+
   /**
    * 方法用途: 提交表单
    * 参数:  事件
@@ -32,6 +35,17 @@ export class ResourcesAddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+
+    this.https.post(Urls.RESOURCE.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.RESOURCES.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -56,11 +70,23 @@ export class ResourcesAddComponent implements OnInit {
    */
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      mapPosition: ['', [Validators.required]],
+      remark: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.loadResourceTyies();
   }
+
+  loadResourceTyies() {
+    this.https.get(Urls.OPTIONS.RESOURCE.TYPES).then(resp => {
+      this.resourceTypies = resp['data'];
+    });
+  };
+
 
 }
