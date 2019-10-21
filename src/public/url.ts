@@ -17,6 +17,13 @@ export const Urls = {
     EDIT: `/oa/resource/`,
     DETAILS: `/oa/resource/`
   },
+  RESOURCE_TYPE: {
+    PAGEQUERY: `/oa/resourceType`,
+    SAVE: `/oa/resourceType`,
+    DELETE: `/oa/resourceType/`,
+    EDIT: `/oa/resourceType/`,
+    DETAILS: `/oa/resourceType/`
+  },
   USERS: {
     ME: `/system/sysUser/me`,
     PAGEQUERY: `/system/sysUser`,
@@ -90,6 +97,15 @@ export const Urls = {
   ROUTERS: {
     PAGEQUERY: `/oa/route`,
     SAVE: `/oa/route/`
+  },
+  PROJECT: {
+    PAGEQUERY: `/oa/project`,
+    SAVE: `/oa/project`,
+    DELETE: `/oa/project/`,
+    EDIT: `/oa/project/`,
+    UPDATE: `/oa/project`,
+    TYPIES: `/oa/project/typies`,
+    RELEASE: `/oa/project/release/`
   },
   TRAFFIC: {
     SAVE: `/oa/traffic`,

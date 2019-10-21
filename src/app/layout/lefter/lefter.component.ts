@@ -14,11 +14,11 @@ export class LefterComponent implements OnInit {
 
   menusData = {
     menuList: [
-      {address: '/app/home', active: 'active', menuname: '首页', icon: 'icon-disc icon text-success'},
-      {address: '/app/users', active: null, menuname: 'Genres', icon: 'icon-music-tone-alt icon text-info'},
+      {address: '/app/home', active: 'active', menuname: '首页', icon: 'icon-disc icon text-success'}
+      // {address: '/app/users', active: null, menuname: 'Genres', icon: 'icon-music-tone-alt icon text-info'},
       // {address: '/app/roles', active: null, menuname: 'Events', icon: 'icon-drawer icon text-primary-lter'},
       // {address: '/app/menus', active: null, menuname: 'Listen', icon: 'icon-list icon  text-info-dker'},
-      {address: '/app/menus', active: null, menuname: 'Video', icon: 'icon-social-youtube icon  text-primary'}
+      // {address: '/app/menus', active: null, menuname: 'Video', icon: 'icon-social-youtube icon  text-primary'}
     ],
     menuTree: []
   };

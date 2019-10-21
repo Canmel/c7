@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-project-edit',
@@ -16,14 +17,16 @@ export class ProjectEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '项目管理',
-    subTitle: '新建项目'
+    title: '调问管理',
+    subTitle: '新建调问'
   };
 
   /**
    * 接收上层传来的主键
    */
   receiveId = 0;
+
+  projectTypies: [];
 
   validateForm: FormGroup;
 
@@ -37,6 +40,14 @@ export class ProjectEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.put(Urls.PROJECT.UPDATE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.PROJECT.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    });
   };
 
   /**
@@ -62,11 +73,15 @@ export class ProjectEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      id: ['', [Validators.required]],
+      pname: ['', [Validators.required]],
+      collectCopies: ['', [Validators.required]],
+      type: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.loadProjectTypies();
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       this.loadEntity(queryParams['id']);
@@ -77,8 +92,20 @@ export class ProjectEditComponent implements OnInit {
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: '项目名称'
+    this.https.get(Urls.PROJECT.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        pname: entity['pname'],
+        type: entity['type'] ? entity['type']['value'] : null,
+        collectCopies: entity['collectCopies']
+      });
+    });
+  }
+
+  loadProjectTypies() {
+    this.https.get(Urls.PROJECT.TYPIES).then(resp => {
+      this.projectTypies = resp['data'];
     });
   }
 

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-resources-edit',
@@ -24,6 +25,8 @@ export class ResourcesEditComponent implements OnInit {
    */
   receiveId = 0;
 
+  resourceTypies = [];
+
   validateForm: FormGroup;
 
   /**
@@ -36,6 +39,17 @@ export class ResourcesEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+
+    this.https.put(Urls.RESOURCE.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.RESOURCES.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -61,23 +75,44 @@ export class ResourcesEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      id: ['', Validators.required],
+      name: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      mapPosition: ['', [Validators.required]],
+      remark: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.loadResourceTyies();
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
-      this.loadEntity(queryParams['id']);
+      this.loadEntity(this.receiveId);
     });
+
   }
+
+  loadResourceTyies() {
+    this.https.get(Urls.OPTIONS.RESOURCE.TYPES).then(resp => {
+      this.resourceTypies = resp['data'];
+    });
+  };
 
   /**
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: '资源名称'
+    this.https.get(Urls.RESOURCE.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        name: entity['name'],
+        type: entity['type'] ? entity['type']['value'] : null ,
+        address: entity['address'],
+        mapPosition: entity['mapPosition'],
+        remark: entity['remark']
+      });
     });
   }
 }

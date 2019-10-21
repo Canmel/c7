@@ -6,6 +6,10 @@ export const Properties = {
     CURRENT_USER_ID: `CURRENT_USER_ID`
   },
   STRING: {
+    COLOR: {
+      STATUS: `#2db7f5`,
+      TYPE: `#87d068`
+    },
     SESSION: {
       DETAILS: `DETAILS`,
       AUTHORITIES: `AUTHORITIES`,

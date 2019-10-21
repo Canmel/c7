@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-resources',
@@ -36,9 +37,9 @@ export class ResourcesComponent implements OnInit {
    */
   listHeader = [
     {title: '资源名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '创建者', field: 'creator.username', type: 'muilti-text', class: '#87d068'},
-    {title: '资源状态', field: 'status', type: 'text', class: '#2db7f5'},
-    {title: '类型', field: 'type', type: 'text', class: '#108ee9'},
+    {title: '创建者', field: 'creator.username', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
+    {title: '资源状态', field: 'status.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
+    {title: '类型', field: 'type.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -77,18 +78,17 @@ export class ResourcesComponent implements OnInit {
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.RESOURCE.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')

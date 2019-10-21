@@ -57,17 +57,17 @@ export class AssetsTypeComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
+    this.https.get(Urls.RESOURCE_TYPE.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
 
-    this.entities = [
-      {name: '国有资产', code: 'NO2911112201', status: '正常'},
-      {name: '个人出租', code: 'NO2911112201', status: '正常'},
-      {name: '公私合营', code: 'NO2911112201', status: '终止'}
-    ];
+    // this.entities = [
+    //   {name: '国有资产', code: 'NO2911112201', status: '正常'},
+    //   {name: '个人出租', code: 'NO2911112201', status: '正常'},
+    //   {name: '公私合营', code: 'NO2911112201', status: '终止'}
+    // ];
   }
 
   /**

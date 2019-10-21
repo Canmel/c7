@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-project',
@@ -27,16 +28,18 @@ export class ProjectComponent implements OnInit {
     totalNum: 21,
     pageSize: 10,
     pageNum: 1,
-    name: ''  // 搜索项目名称
+    pname: ''  // 搜索项目名称
   };
 
   /**
    * 表头
    */
   listHeader = [
-    {title: '项目名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '项目编号', field: 'code', type: 'text'},
-    {title: '状态', field: 'status', type: 'text'},
+    {title: '调问名称', field: 'pname', type: 'text', class: 'text-success'},
+    {title: '调问编号', field: 'code', type: 'text'},
+    {title: '收集份数', field: 'collectCopies', type: 'text'},
+    {title: '类型', field: 'type.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
+    {title: '状态', field: 'status.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -57,17 +60,11 @@ export class ProjectComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
-
-    this.entities = [
-      {name: '城西大市场招商', code: 'NO2911112201', status: '正常'},
-      {name: '城西大市场招商', code: 'NO2911112201', status: '正常'},
-      {name: '城西大市场招商', code: 'NO2911112201', status: '开始'}
-    ];
+    this.https.get(Urls.PROJECT.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   /**
@@ -76,27 +73,47 @@ export class ProjectComponent implements OnInit {
    */
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['name1'] + '?',
+      nzTitle: '你确定要删除 ' + param['pname'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.PROJECT.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')
     });
+  }
+
+  /**
+   * 发布
+   * @param item
+   */
+  release(item) {
+    this.modalService.confirm({
+      nzTitle: '你确定要发布 ' + item['pname'] + '?',
+      nzOkText: '是',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        this.https.get(Urls.PROJECT.RELEASE + item['id']).then(resp => {
+          this.notification.success('成功', resp['msg']);
+          this.loadEntities();
+        });
+      },
+      nzCancelText: '否',
+      nzOnCancel: () => console.log('操作取消')
+    });
+
   }
 
   /**

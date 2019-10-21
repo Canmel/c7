@@ -6,15 +6,45 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>项目名称</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="name" placeholder="请输入项目名称...">
+          <input nz-input formControlName="pname" placeholder="请输入项目名称...">
           <nz-form-explain
-            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
-            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+            *ngIf="validateForm.get('pname').dirty && validateForm.get('pname').errors || validateForm.get('pname').pending ">
+            <ng-container *ngIf="validateForm.get('pname').hasError('required')">
               项目名称不能为空！
             </ng-container>
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>收集份数</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-input-number nz-input formControlName="collectCopies" [nzMin]="1" [nzStep]="1"
+                           placeholder="请输入收集份数..."></nz-input-number>
+          <nz-form-explain
+            *ngIf="validateForm.get('collectCopies').dirty && validateForm.get('collectCopies').errors || validateForm.get('collectCopies').pending ">
+            <ng-container *ngIf="validateForm.get('collectCopies').hasError('required')">
+              收集份数不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目类型</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select nzShowSearch nzAllowClear [nzPlaceHolder]="'请选择类型...'" formControlName="type">
+            <nz-option [nzLabel]="item.name" [nzValue]="item.value" *ngFor="let item of projectTypies"></nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors || validateForm.get('type').pending ">
+            <ng-container *ngIf="validateForm.get('type').hasError('required')">
+              项目类型不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
       <nz-form-item>
         <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
           <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>

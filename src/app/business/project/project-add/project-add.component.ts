@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-project-add',
@@ -16,9 +17,11 @@ export class ProjectAddComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '菜单管理',
-    subTitle: '新建菜单'
+    title: '项目管理',
+    subTitle: '新建项目'
   };
+
+  projectTypies: [];
 
   validateForm: FormGroup;
 
@@ -32,6 +35,14 @@ export class ProjectAddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.post(Urls.PROJECT.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.PROJECT.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    });
   };
 
   /**
@@ -56,11 +67,20 @@ export class ProjectAddComponent implements OnInit {
    */
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      pname: ['', [Validators.required]],
+      collectCopies: ['', [Validators.required]],
+      type: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.loadProjectTypies();
+  }
+
+  loadProjectTypies() {
+    this.https.get(Urls.PROJECT.TYPIES).then(resp => {
+      this.projectTypies = resp['data'];
+    });
   }
 
 }
