@@ -6,6 +6,14 @@ export const Urls = {
     PAGEQUERY: `/bpm/deployedWorkflows`,
     DELETE: `/bpm/deployedWorkflows/`
   },
+  ZS_PROJECT: {
+    PAGEQUERY: `/oa/zsProject`,
+    SAVE: `/oa/zsProject`,
+    DELETE: `/oa/zsProject/`,
+    EDIT: `/oa/zsProject/`,
+    DETAILS: `/oa/zsProject/`,
+    ALL: `/oa/zsProject/all`
+  },
   DEFINITIONWORKFLOW: {
     PAGEQUERY: `/bpm/flow/defWorkflows`,
     DELETE: `/bpm/flow/defWorkflows/`
@@ -294,6 +302,16 @@ export const Urls = {
       ADD: `/app/errand/add`,
       EDIT: `/app/errand/edit`,
       CPMPLETE: `/app/errand/complete`
+    },
+    ZS_PROJECT: {
+      LIST: `/app/zs-project`,
+      ADD: `/app/zs-project/add`,
+      EDIT: `/app/zs-project/edit`
+    },
+    ZS_CLUE: {
+      LIST: `/app/zs-clue`,
+      ADD: `/app/zs-clue/add`,
+      EDIT: `/app/zs-clue/edit`
     }
   }
 };

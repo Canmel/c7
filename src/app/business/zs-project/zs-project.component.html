@@ -1,0 +1,62 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+<section class="scrollable">
+  <section class="panel panel-default">
+    <!-- 新建按钮和查询 -->
+    <div class="row wrapper">
+      <div class="col-sm-5 m-b-xs flex-left">
+        <div class="btn-group" data-toggle="buttons">
+          <a routerLinkActive="active" [routerLink]="Urls.BUSINESS.ZS_PROJECT.ADD" class="btn btn-sm btn-success">
+            <i class="fa fa-plus fa-fw m-r-xs"></i>新建
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input type="text" class="input-sm form-control" placeholder="请输入项目名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
+          <span class="input-group-btn">
+                        <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
+                      </span>
+        </div>
+      </div>
+    </div>
+    <!-- 新建按钮和查询 -->
+
+    <!--table-->
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+          <th *ngFor="let item of listHeader" [ngStyle]="{'width': item.width}">{{item.title}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of entities; let i = index">
+          <td *ngFor="let head of listHeader">
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+            <div class="" *ngIf="head.field === 'option'">
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
+                class="fa fa-edit text-success text-active"></i><i
+                class="fa fa-edit text-success text"></i></a>
+
+              <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
+                class="fa fa-trash-o text-danger-dk text-active"></i><i
+                class="fa fa-trash-o text-danger-dk text"></i></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--table-->
+
+    <!-- 分页 -->
+    <footer class="panel-footer">
+      <div class="row">
+        <nz-pagination [(nzPageIndex)]="formData.pageNum" [nzTotal]="formData.totalNum" (nzPageIndexChange)="loadEntities()"></nz-pagination>
+      </div>
+    </footer>
+    <!-- 分页 -->
+  </section>
+</section>

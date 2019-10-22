@@ -78,6 +78,8 @@ export class AddQuestionComponent implements OnInit {
       title: ['', [Validators.required]],
       type: ['', [Validators.required]]
     });
+
+    this.selectedValidateForm = this.validateDxtForm;
   }
 
   ngOnInit() {
@@ -116,14 +118,16 @@ export class AddQuestionComponent implements OnInit {
       this.selectedValidateForm.controls[key].markAsDirty();
       this.selectedValidateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.QUESTION.SAVE, value).then(resp => {
-      if (resp['code'] === 200) {
-        this.router.navigate([Urls.BUSINESS.PROJECT_GROUP.LIST]);
-        this.notification.success('成功', resp['msg']);
-      } else {
-        this.notification.error('失败', resp['msg']);
-      }
-    });
+    alert(123);
+    console.log(value);
+    // this.https.post(Urls.QUESTION.SAVE, value).then(resp => {
+    //   if (resp['code'] === 200) {
+    //     this.router.navigate([Urls.BUSINESS.PROJECT_GROUP.LIST]);
+    //     this.notification.success('成功', resp['msg']);
+    //   } else {
+    //     this.notification.error('失败', resp['msg']);
+    //   }
+    // });
   };
 
   /**

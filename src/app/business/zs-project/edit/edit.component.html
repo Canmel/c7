@@ -1,0 +1,79 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目名称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="name" placeholder="请输入项目名称...">
+          <nz-form-explain
+            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目编号</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="code" placeholder="请输入项目编号...">
+          <nz-form-explain
+            *ngIf="validateForm.get('code').dirty && validateForm.get('code').errors || validateForm.get('code').pending ">
+            <ng-container *ngIf="validateForm.get('code').hasError('required')">
+              项目编号不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>业务描述</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="business" placeholder="请输入业务描述...">
+          <nz-form-explain
+            *ngIf="validateForm.get('business').dirty && validateForm.get('business').errors">
+            <ng-container *ngIf="validateForm.get('business').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>负责人</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="manager" placeholder="请输入负责人...">
+          <nz-form-explain
+            *ngIf="validateForm.get('manager').dirty && validateForm.get('manager').errors">
+            <ng-container *ngIf="validateForm.get('manager').hasError('required')">
+              负责人不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目金额</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="amount" placeholder="请输入项目金额...">
+          <nz-form-explain
+            *ngIf="validateForm.get('amount').dirty && validateForm.get('amount').errors">
+            <ng-container *ngIf="validateForm.get('amount').hasError('required')">
+              项目金额不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" [routerLink]="Urls.BUSINESS.ZS_PROJECT.LIST">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>

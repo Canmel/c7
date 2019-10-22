@@ -24,6 +24,8 @@ import {ResourcesModule} from '../app/business/resources/resources.module';
 import {ProjectMonitorModule} from '../app/business/project-monitor/project-monitor.module';
 import {AssetsTypeModule} from '../app/business/assets-type/assets-type.module';
 import {DocumentModule} from '../app/business/document/document.module';
+import {ZsProjectModule} from '../app/business/zs-project/zs-project.module';
+import {ZsClueModule} from '../app/business/zs-clue/zs-clue.module';
 
 const routes: Routes = [
   {
@@ -101,6 +103,12 @@ const routes: Routes = [
       }, {
         path: 'document',
         loadChildren: () => DocumentModule
+      }, {
+        path: 'zs-project',
+        loadChildren: () => ZsProjectModule
+      }, {
+        path: 'zs-clue',
+        loadChildren: () => ZsClueModule
       }
     ]
   }
