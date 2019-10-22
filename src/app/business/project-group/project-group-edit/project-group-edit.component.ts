@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-project-group-edit',
@@ -37,6 +38,14 @@ export class ProjectGroupEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.put(Urls.QUESTIONNAIRE.UPDATE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.QUESTIONNAIRE.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    });
   };
 
   /**
@@ -62,6 +71,7 @@ export class ProjectGroupEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
+      id: ['', [Validators.required]],
       name: ['', [Validators.required]]
     });
   }
@@ -77,8 +87,12 @@ export class ProjectGroupEditComponent implements OnInit {
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: '项目组名称'
+    this.https.get(Urls.QUESTIONNAIRE.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        name: entity['name']
+      });
     });
   }
 

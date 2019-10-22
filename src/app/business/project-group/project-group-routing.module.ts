@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProjectGroupComponent} from './project-group.component';
 import {ProjectGroupAddComponent} from './project-group-add/project-group-add.component';
 import {ProjectGroupEditComponent} from './project-group-edit/project-group-edit.component';
+import {AddQuestionComponent} from './add-question/add-question.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'edit',
     component: ProjectGroupEditComponent
+  },
+  {
+    path: 'question',
+    component: AddQuestionComponent
   }
 ];
 

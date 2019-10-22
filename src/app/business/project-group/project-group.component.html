@@ -13,7 +13,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入项目组名称..." [(ngModel)]="formData.name"
+          <input type="text" class="input-sm form-control" placeholder="请输入问卷名称..." [(ngModel)]="formData.name"
                  (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
@@ -38,14 +38,22 @@
                   *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
                   *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+            <nz-tag [nzColor]="head.class"
+                    *ngIf="head.type=== 'muilti-text' && item[head.field.split('.')[0]]">{{
+              item[head.field.split('.')[0]][head.field.split('.')[1]]}}
+            </nz-tag>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.menuId})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
               <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
                 class="fa fa-trash-o text-danger-dk text-active"></i><i
                 class="fa fa-trash-o text-danger-dk text"></i></a>
+
+              <a nz-button nz-popover nzContent="添加问题" (click)="addQuestion({id: item.id})"><i
+                class="fa fa-plus-square text-primary-dk text-active"></i><i
+                class="fa fa-plus-square text-primary-dk text"></i></a>
             </div>
           </td>
         </tr>

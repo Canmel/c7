@@ -1,0 +1,224 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<input [ngModel]="selectedIndex">
+<nz-tabset
+  style="height:220px;"
+  [nzTabPosition]="'left'"
+  [(nzSelectedIndex)]="selectedIndex"
+  (nzSelectChange)="selectChange($event)"
+>
+  <nz-tab
+    [nzTitle]="'单选题'">
+    <form nz-form [formGroup]="validateDxtForm" (ngSubmit)="submitForm($event,validateDxtForm.value)"
+          data-validate="parsley">
+      <section class="panel panel-default" nz-row>
+        <div class="panel-body" nz-col nzSpan="18">
+          <input type="hidden" formControlName="type" [ngModel]="selectedIndex">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="4" nzRequired>题目</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input formControlName="title" placeholder="请输入题目...">
+              <nz-form-explain
+                *ngIf="validateDxtForm.get('title').dirty && validateDxtForm.get('title').errors">
+                <ng-container *ngIf="validateDxtForm.get('title').hasError('required')">
+                  题目不能为空！
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="4" nzRequired>选项</nz-form-label>
+            <nz-form-control [nzSpan]="10">
+              <input nz-input placeholder="请输入题目..." formControlName="options">
+            </nz-form-control>
+            <nz-form-control [nzSpan]="2">
+              <a nz-button nz-popover nzContent="添加" (click)="addOption()" style="width: 100%;"><i
+                class="fa fa-plus-circle text-success text-active"></i><i
+                class="fa fa-plus-circle text-success text"></i></a>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!validateDxtForm.valid">提交</button>
+              <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+              <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project_group">取消
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="6">
+          <div *ngFor="let item of savedOptions; let i = index;">
+            <span>{{i + 1}}:  {{ item }}</span>
+          </div>
+        </div>
+      </section>
+    </form>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'多选题'">
+    <form nz-form [formGroup]="validateDuoxtForm" (ngSubmit)="submitForm($event,validateDuoxtForm.value)"
+          data-validate="parsley">
+      <section class="panel panel-default">
+        <div class="panel-body">
+          <input type="hidden" formControlName="type" [ngModel]="selectedIndex">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>问卷名称</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input formControlName="title" placeholder="请输入问卷名称...">
+              <nz-form-explain
+                *ngIf="validateDuoxtForm.get('title').dirty && validateDuoxtForm.get('title').errors ">
+                <ng-container *ngIf="validateDuoxtForm.get('title').hasError('required')">
+                  问卷名称不能为空！
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!validateDuoxtForm.valid">提交</button>
+              <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+              <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project_group">取消
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </section>
+    </form>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'biao3'">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+      <section class="panel panel-default">
+        <div class="panel-body">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>问卷名称</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input formControlName="title" placeholder="请输入问卷名称...">
+              <nz-form-explain
+                *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors || validateForm.get('title').pending ">
+                <ng-container *ngIf="validateForm.get('title').hasError('required')">
+                  问卷名称不能为空！
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+              <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+              <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project_group">取消
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </section>
+    </form>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'biao4'">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+      <section class="panel panel-default">
+        <div class="panel-body">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>问卷名称</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input formControlName="title" placeholder="请输入问卷名称...">
+              <nz-form-explain
+                *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors || validateForm.get('title').pending ">
+                <ng-container *ngIf="validateForm.get('title').hasError('required')">
+                  问卷名称不能为空！
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+              <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+              <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project_group">取消
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </section>
+    </form>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'biao5'">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+      <section class="panel panel-default">
+        <div class="panel-body">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>问卷名称</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input formControlName="title" placeholder="请输入问卷名称...">
+              <nz-form-explain
+                *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors || validateForm.get('title').pending ">
+                <ng-container *ngIf="validateForm.get('title').hasError('required')">
+                  问卷名称不能为空！
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+              <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+              <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/project_group">取消
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </section>
+    </form>
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'biao6'">
+    cc6
+  </nz-tab>
+  <nz-tab
+    [nzTitle]="'biao7'">
+    cc7
+  </nz-tab>
+</nz-tabset>
+
+
+<!--table-->
+<div class="table-responsive">
+  <table class="table table-striped b-t b-light">
+    <thead>
+    <tr>
+      <th *ngFor="let item of listHeader" [ngStyle]="{'width': item.width}">{{item.title}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of entities; let i = index">
+      <td *ngFor="let head of listHeader">
+            <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+                  *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
+        <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}"
+              *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
+        <nz-tag [nzColor]="head.class"
+                *ngIf="head.type=== 'muilti-text' && item[head.field.split('.')[0]]">{{
+          item[head.field.split('.')[0]][head.field.split('.')[1]]}}
+        </nz-tag>
+        <div class="" *ngIf="head.field === 'option'">
+          <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
+            class="fa fa-edit text-success text-active"></i><i
+            class="fa fa-edit text-success text"></i></a>
+
+          <a nz-button nz-popover nzContent="删除" (click)="remove(item)"><i
+            class="fa fa-trash-o text-danger-dk text-active"></i><i
+            class="fa fa-trash-o text-danger-dk text"></i></a>
+
+          <a nz-button nz-popover nzContent="添加问题" (click)="addQuestion({id: item.id})"><i
+            class="fa fa-plus-square text-primary-dk text-active"></i><i
+            class="fa fa-plus-square text-primary-dk text"></i></a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--table-->

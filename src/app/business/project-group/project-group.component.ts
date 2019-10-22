@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-project-group',
@@ -16,7 +18,7 @@ export class ProjectGroupComponent implements OnInit {
    */
   crumbs = {
     title: '项目管理',
-    subTitle: '项目组维护'
+    subTitle: '问卷管理'
   };
 
   /**
@@ -34,9 +36,9 @@ export class ProjectGroupComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '项目组名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '备注', field: 'code', type: 'text'},
-    {title: '状态', field: 'status', type: 'text'},
+    {title: '问卷名称', field: 'name', type: 'text', class: 'text-success'},
+    {title: '状态', field: 'status.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
+    {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -47,6 +49,7 @@ export class ProjectGroupComponent implements OnInit {
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
+
   }
 
   ngOnInit() {
@@ -57,17 +60,11 @@ export class ProjectGroupComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
-
-    this.entities = [
-      {name: '城西项目组', code: 'NO2911112201', status: '正常'},
-      {name: '城东项目组', code: 'NO2911112201', status: '正常'},
-      {name: '城南项目组', code: 'NO2911112201', status: '正常'}
-    ];
+    this.https.get(Urls.QUESTIONNAIRE.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   /**
@@ -81,18 +78,17 @@ export class ProjectGroupComponent implements OnInit {
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.QUESTIONNAIRE.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')
@@ -105,5 +101,13 @@ export class ProjectGroupComponent implements OnInit {
    **/
   edit(param) {
     this.router.navigate([Urls.BUSINESS.PROJECT_GROUP.EDIT], {queryParams: param});
+  }
+
+  /**
+   * 添加问题
+   * @param param
+   */
+  addQuestion(param) {
+    this.router.navigate([Urls.BUSINESS.PROJECT_GROUP.QUESTION], {queryParams: param});
   }
 }

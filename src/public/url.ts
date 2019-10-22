@@ -17,6 +17,21 @@ export const Urls = {
     EDIT: `/oa/resource/`,
     DETAILS: `/oa/resource/`
   },
+  QUESTION: {
+    PAGEQUERY: `/oa/question`,
+    SAVE: `/oa/question`,
+    DELETE: `/oa/question/`,
+    EDIT: `/oa/question/`,
+    DETAILS: `/oa/question/`
+  },
+  QUESTIONNAIRE: {
+    PAGEQUERY: `/oa/questionnaire`,
+    SAVE: `/oa/questionnaire`,
+    DELETE: `/oa/questionnaire/`,
+    EDIT: `/oa/questionnaire/`,
+    DETAILS: `/oa/questionnaire/`,
+    UPDATE: `/oa/questionnaire`
+  },
   RESOURCE_TYPE: {
     PAGEQUERY: `/oa/resourceType`,
     SAVE: `/oa/resourceType`,
@@ -190,6 +205,11 @@ export const Urls = {
       ADD: `/app/assets-type/add`,
       EDIT: `/app/assets-type/edit`
     },
+    QUESTIONNAIRE: {
+      LIST: `/app/project_group`,
+      ADD: `/app/project_group/add`,
+      EDIT: `/app/project_group/edit`
+    },
     USERS: {
       LIST: `/app/users`,
       ADD: `/app/users/add`,
@@ -243,7 +263,8 @@ export const Urls = {
     PROJECT_GROUP: {
       LIST: `/app/project_group`,
       ADD: `/app/project_group/add`,
-      EDIT: `/app/project_group/edit`
+      EDIT: `/app/project_group/edit`,
+      QUESTION: `/app/project_group/question`
     },
     DEMO: {
       LIST: `/app/demo`,

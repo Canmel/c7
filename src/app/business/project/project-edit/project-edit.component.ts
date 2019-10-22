@@ -17,8 +17,8 @@ export class ProjectEditComponent implements OnInit {
    * 参数：
    **/
   crumbs: any = {
-    title: '调问管理',
-    subTitle: '新建调问'
+    title: '项目管理',
+    subTitle: '新建项目'
   };
 
   /**
