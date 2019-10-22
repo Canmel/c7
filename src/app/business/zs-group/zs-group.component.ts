@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {Urls} from '../../../public/url';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
-import {Properties} from '../../../public/properties';
+import {Urls} from '../../../public/url';
 
 @Component({
-  selector: 'app-zs-clue',
-  templateUrl: './zs-clue.component.html',
-  styleUrls: ['./zs-clue.component.css']
+  selector: 'app-zs-group',
+  templateUrl: './zs-group.component.html',
+  styleUrls: ['./zs-group.component.css']
 })
-export class ZsClueComponent implements OnInit {
+export class ZsGroupComponent implements OnInit {
 
   /**
    * 页头
    */
   crumbs = {
-    title: '项目管理',
-    subTitle: '项目线索'
+    title: 'demo标题',
+    subTitle: 'demo子标题'
   };
-
-  Urls = Urls;
 
   /**
    * 属性描述: 分页组建参数
@@ -37,9 +34,8 @@ export class ZsClueComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '线索名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '所属项目', field: 'project.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
-    {title: '线索信息', field: 'business', type: 'text'},
+    {title: '项目组名称', field: 'name', type: 'text', class: 'text-success'},
+    {title: '备注', field: 'remark', type: 'text'},
     {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
@@ -48,6 +44,8 @@ export class ZsClueComponent implements OnInit {
    * 表格数据
    */
   entities: Array<any> = [];
+
+  Urls = Urls;
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
@@ -61,11 +59,12 @@ export class ZsClueComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    this.https.get(Urls.ZS_CLUE.PAGEQUERY, this.formData).then(resp => {
+    this.https.get(Urls.ZS_GROUP.PAGEQUERY, this.formData).then(resp => {
       this.entities = resp['data']['list'];
       this.formData.pageNum = resp['data']['pageNum'];
       this.formData.totalNum = resp['data']['total'];
     });
+
   }
 
   /**
@@ -102,7 +101,7 @@ export class ZsClueComponent implements OnInit {
    * 参数：
    **/
   edit(param) {
-    this.router.navigate([Urls.BUSINESS.ZS_CLUE.EDIT], {queryParams: param});
+    this.router.navigate([Urls.BUSINESS.DEMO.EDIT], {queryParams: param});
   }
 
 }

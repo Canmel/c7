@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Urls} from '../../../../public/url';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-add',
@@ -11,21 +11,18 @@ import {NzNotificationService} from 'ng-zorro-antd';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-
   /**
    * 属性描述: 面包屑菜单路径
    * 参数：
    **/
-  crumbs = {
-    title: '项目管理',
-    subTitle: '项目线索'
+  crumbs: any = {
+    title: '菜单管理',
+    subTitle: '新建菜单'
   };
-
-  Urls = Urls;
 
   validateForm: FormGroup;
 
-  projects: [];
+  Urls = Urls;
 
   /**
    * 方法用途: 提交表单
@@ -37,16 +34,6 @@ export class AddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.post(Urls.ZS_CLUE.SAVE, value).then(resp => {
-      if (resp['code'] === 200) {
-        this.router.navigate([Urls.BUSINESS.ZS_CLUE.LIST]);
-        this.notification.success('成功', resp['msg']);
-      } else {
-        this.notification.error('失败', resp['msg']);
-      }
-    }, resp => {
-      console.log(resp);
-    });
   };
 
   /**
@@ -71,21 +58,11 @@ export class AddComponent implements OnInit {
    */
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]],
-      projectId: ['', [Validators.required]],
-      business: ['', [Validators.required]]
+      name: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
-    this.loadProjects();
   }
-
-  loadProjects() {
-    this.https.get(Urls.ZS_PROJECT.ALL).then(resp => {
-      this.projects = resp['data'];
-    });
-  }
-
 
 }

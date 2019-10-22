@@ -26,6 +26,7 @@ import {AssetsTypeModule} from '../app/business/assets-type/assets-type.module';
 import {DocumentModule} from '../app/business/document/document.module';
 import {ZsProjectModule} from '../app/business/zs-project/zs-project.module';
 import {ZsClueModule} from '../app/business/zs-clue/zs-clue.module';
+import {ZsGroupModule} from '../app/business/zs-group/zs-group.module';
 
 const routes: Routes = [
   {
@@ -109,6 +110,9 @@ const routes: Routes = [
       }, {
         path: 'zs-clue',
         loadChildren: () => ZsClueModule
+      }, {
+        path: 'zs-group',
+        loadChildren: () => ZsGroupModule
       }
     ]
   }
