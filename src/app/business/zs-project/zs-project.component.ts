@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-zs-project',
@@ -21,6 +22,10 @@ export class ZsProjectComponent implements OnInit {
 
   Urls = Urls;
 
+  isVisible = false;
+
+  projectDetail = {};
+
   /**
    * 属性描述: 分页组建参数
    * 参数：
@@ -35,12 +40,7 @@ export class ZsProjectComponent implements OnInit {
   /**
    * 表头
    */
-  listHeader = [
-    {title: '项目名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '项目编号', field: 'code', type: 'text'},
-    {title: '创建时间', field: 'createdAt', type: 'date'},
-    {title: '操作', field: 'option', type: 'opt', width: '20%'}
-  ];
+  listHeader = [];
 
   /**
    * 表格数据
@@ -49,6 +49,26 @@ export class ZsProjectComponent implements OnInit {
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
+    const _this = this;
+    this.listHeader = [
+      {
+        title: '项目名称', field: 'name', type: 'text', class: 'text-success', clickFn: function (item) {
+          _this.showDetails(item);
+        }
+      },
+      {title: '项目编号', field: 'code', type: 'text'},
+      {title: '所属项目', field: 'level.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
+      {title: '创建时间', field: 'createdAt', type: 'date'},
+      {title: '操作', field: 'option', type: 'opt', width: '20%'}
+    ];
+  }
+
+  showDetails(item) {
+    this.isVisible = true;
+    this.https.get(this.Urls.ZS_PROJECT.EDIT + item.id).then(
+      resp => {
+        this.projectDetail = resp['data'];
+      });
   }
 
   ngOnInit() {
@@ -101,6 +121,14 @@ export class ZsProjectComponent implements OnInit {
    **/
   edit(param) {
     this.router.navigate([Urls.BUSINESS.ZS_PROJECT.EDIT], {queryParams: param});
+  }
+
+  handleDetailOk() {
+    this.isVisible = true;
+  }
+
+  handleDetailCancel() {
+    this.isVisible = false;
   }
 
 }
