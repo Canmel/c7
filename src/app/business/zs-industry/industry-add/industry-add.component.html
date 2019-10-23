@@ -15,11 +15,12 @@
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
+
       <nz-form-item>
         <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
           <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
           <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
-          <button class="btn-default" nz-button routerLinkActive="active" routerLink="/app/industry">取消</button>
+          <button class="btn-default" nz-button routerLinkActive="active" [routerLink]="Urls.BUSINESS.ZS_INDUSTRY.LIST">取消</button>
         </nz-form-control>
       </nz-form-item>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
@@ -16,14 +16,16 @@ export class AddComponent implements OnInit {
    * 属性描述: 面包屑菜单路径
    * 参数：
    **/
-  crumbs: any = {
-    title: '菜单管理',
-    subTitle: '新建菜单'
+  crumbs = {
+    title: '项目管理',
+    subTitle: '招商项目'
   };
 
   Urls = Urls;
 
   validateForm: FormGroup;
+
+  projectLevels = [];
 
   /**
    * 方法用途: 提交表单
@@ -73,11 +75,20 @@ export class AddComponent implements OnInit {
       code: ['', [Validators.required]],
       amount: ['', [Validators.required]],
       business: ['', [Validators.required]],
-      manager: ['', [Validators.required]]
+      manager: ['', [Validators.required]],
+      level: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.loadProjectLevels();
+  }
+
+  loadProjectLevels() {
+    this.https.get(Urls.ZS_PROJECT.LEVELS).then(resp => {
+      console.log(resp['data']);
+      this.projectLevels = resp['data'];
+    });
   }
 
 

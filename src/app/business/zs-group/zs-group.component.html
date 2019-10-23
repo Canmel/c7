@@ -13,7 +13,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-4">
         <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="请输入demo名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
+          <input type="text" class="input-sm form-control" placeholder="请输入项目群组名称..." [(ngModel)]="formData.name" (keyup.enter)="loadEntities()">
           <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button" (click)="loadEntities()">搜索</button>
                       </span>
@@ -36,7 +36,7 @@
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.menuId})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 

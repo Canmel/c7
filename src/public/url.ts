@@ -20,7 +20,15 @@ export const Urls = {
     DELETE: `/oa/zsProject/`,
     EDIT: `/oa/zsProject/`,
     DETAILS: `/oa/zsProject/`,
-    ALL: `/oa/zsProject/all`
+    ALL: `/oa/zsProject/all`,
+    LEVELS: `/oa/zsProject/levels`
+  },
+  ZS_INDUSTRY: {
+    PAGEQUERY: `/oa/zsIndustry`,
+    SAVE: `/oa/zsIndustry`,
+    DELETE: `/oa/zsIndustry/`,
+    EDIT: `/oa/zsIndustry/`,
+    DETAILS: `/oa/zsIndustry/`
   },
   ZS_CLUE: {
     PAGEQUERY: `/oa/zsClue`,
@@ -332,6 +340,11 @@ export const Urls = {
       LIST: `/app/zs-group`,
       ADD: `/app/zs-group/add`,
       EDIT: `/app/zs-group/edit`
+    },
+    ZS_INDUSTRY: {
+      LIST: `/app/zs-industry`,
+      ADD: `/app/zs-industry/add`,
+      EDIT: `/app/zs-industry/edit`
     }
   }
 };

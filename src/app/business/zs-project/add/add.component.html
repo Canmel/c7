@@ -17,11 +17,26 @@
       </nz-form-item>
 
       <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>项目等级</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select formControlName="level" [nzPlaceHolder]="'选择项目等级...'">
+            <nz-option *ngFor="let option of projectLevels" [nzValue]="option.value" [nzLabel]="option.name"></nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('level').dirty && validateForm.get('level').errors">
+            <ng-container *ngIf="validateForm.get('level').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>项目编号</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
           <input nz-input formControlName="code" placeholder="请输入项目编号...">
           <nz-form-explain
-            *ngIf="validateForm.get('code').dirty && validateForm.get('code').errors || validateForm.get('code').pending ">
+            *ngIf="validateForm.get('code').dirty && validateForm.get('code').errors">
             <ng-container *ngIf="validateForm.get('code').hasError('required')">
               项目编号不能为空！
             </ng-container>

@@ -15,8 +15,8 @@ export class ZsGroupComponent implements OnInit {
    * 页头
    */
   crumbs = {
-    title: 'demo标题',
-    subTitle: 'demo子标题'
+    title: '项目管理',
+    subTitle: '项目群组'
   };
 
   /**
@@ -73,23 +73,22 @@ export class ZsGroupComponent implements OnInit {
    */
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['name1'] + '?',
+      nzTitle: '你确定要删除 ' + param['name'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.ZS_GROUP.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')
@@ -101,7 +100,7 @@ export class ZsGroupComponent implements OnInit {
    * 参数：
    **/
   edit(param) {
-    this.router.navigate([Urls.BUSINESS.DEMO.EDIT], {queryParams: param});
+    this.router.navigate([Urls.BUSINESS.ZS_GROUP.EDIT], {queryParams: param});
   }
 
 }

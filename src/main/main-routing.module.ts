@@ -19,7 +19,7 @@ import {DemoModule} from '../app/business/demo/demo.module';
 import {ProjectGroupModule} from '../app/business/project-group/project-group.module';
 import {StageModule} from '../app/business/stage/stage.module';
 import {MerchantModule} from '../app/business/merchant/merchant.module';
-import {IndustryModule} from '../app/business/industry/industry.module';
+import {IndustryModule} from '../app/business/zs-industry/industry.module';
 import {ResourcesModule} from '../app/business/resources/resources.module';
 import {ProjectMonitorModule} from '../app/business/project-monitor/project-monitor.module';
 import {AssetsTypeModule} from '../app/business/assets-type/assets-type.module';
@@ -90,7 +90,7 @@ const routes: Routes = [
         path: 'merchant',
         loadChildren: () => MerchantModule
       }, {
-        path: 'industry',
+        path: 'zs-industry',
         loadChildren: () => IndustryModule
       }, {
         path: 'resources',

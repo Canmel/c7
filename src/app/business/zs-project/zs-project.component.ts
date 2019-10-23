@@ -15,8 +15,8 @@ export class ZsProjectComponent implements OnInit {
    * 页头
    */
   crumbs = {
-    title: 'demo标题',
-    subTitle: 'demo子标题'
+    title: '项目管理',
+    subTitle: '招商项目'
   };
 
   Urls = Urls;

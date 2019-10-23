@@ -15,9 +15,9 @@ export class AddComponent implements OnInit {
    * 属性描述: 面包屑菜单路径
    * 参数：
    **/
-  crumbs: any = {
-    title: '菜单管理',
-    subTitle: '新建菜单'
+  crumbs = {
+    title: '项目管理',
+    subTitle: '项目群组'
   };
 
   validateForm: FormGroup;
@@ -34,6 +34,16 @@ export class AddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.post(Urls.ZS_GROUP.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.ZS_GROUP.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -58,7 +68,8 @@ export class AddComponent implements OnInit {
    */
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      remark: ['', []]
     });
   }
 

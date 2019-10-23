@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
-  selector: 'app-industry-edit',
-  templateUrl: './industry-edit.component.html',
-  styleUrls: ['./industry-edit.component.css']
+  selector: 'app-industry-add',
+  templateUrl: './industry-add.component.html',
+  styleUrls: ['./industry-add.component.css']
 })
-export class IndustryEditComponent implements OnInit {
+export class IndustryAddComponent implements OnInit {
 
   /**
    * 属性描述: 面包屑菜单路径
@@ -20,12 +21,9 @@ export class IndustryEditComponent implements OnInit {
     subTitle: '行业管理'
   };
 
-  /**
-   * 接收上层传来的主键
-   */
-  receiveId = 0;
-
   validateForm: FormGroup;
+
+  Urls = Urls;
 
   /**
    * 方法用途: 提交表单
@@ -37,6 +35,16 @@ export class IndustryEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.post(Urls.ZS_INDUSTRY.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.ZS_INDUSTRY.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -59,26 +67,13 @@ export class IndustryEditComponent implements OnInit {
    * @param https   网络请求
    * @param notification  提示工具
    */
-  constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
-              public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
+  constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      code: ['', []]
     });
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.receiveId = queryParams['id'];
-      this.loadEntity(queryParams['id']);
-    });
-  }
-
-  /**
-   * 通过主键加载当前实体类详细信息
-   */
-  loadEntity(id) {
-    this.validateForm.setValue({
-      name: '项目名称'
-    });
   }
 }

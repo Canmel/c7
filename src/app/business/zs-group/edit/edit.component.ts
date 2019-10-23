@@ -16,10 +16,11 @@ export class EditComponent implements OnInit {
    * 属性描述: 面包屑菜单路径
    * 参数：
    **/
-  crumbs: any = {
-    title: '菜单管理',
-    subTitle: '新建菜单'
+  crumbs = {
+    title: '项目管理',
+    subTitle: '项目群组'
   };
+
 
   /**
    * 接收上层传来的主键
@@ -40,6 +41,16 @@ export class EditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.put(Urls.ZS_GROUP.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.ZS_GROUP.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -65,7 +76,9 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      remark: ['', []]
     });
   }
 
@@ -80,8 +93,13 @@ export class EditComponent implements OnInit {
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: 'demo文本'
+    this.https.get(Urls.ZS_GROUP.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        name: entity['name'],
+        remark: entity['remark']
+      });
     });
   }
 }

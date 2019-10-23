@@ -3,16 +3,24 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
   <section class="panel panel-default">
     <div class="panel-body">
+      <input type="hidden" formControlName="id">
       <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>demo名称</nz-form-label>
+        <nz-form-label [nzSpan]="7" nzRequired>项目组名称</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="name" placeholder="请输入demo名称...">
+          <input nz-input formControlName="name" placeholder="请输入项目组名称...">
           <nz-form-explain
-            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
             <ng-container *ngIf="validateForm.get('name').hasError('required')">
-              demo名不能为空！
+              项目组名称不能为空！
             </ng-container>
           </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">备注</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="remark" placeholder="请输入备注...">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
@@ -36,7 +36,7 @@ export class IndustryComponent implements OnInit {
   listHeader = [
     {title: '行业名称', field: 'name', type: 'text', class: 'text-success'},
     {title: '行业编号', field: 'code', type: 'text'},
-    {title: '行业状态', field: 'status', type: 'text'},
+    {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
@@ -44,6 +44,8 @@ export class IndustryComponent implements OnInit {
    * 表格数据
    */
   entities: Array<any> = [];
+
+  Urls = Urls;
 
   constructor(public router: Router, public modalService: NzModalService, public https: HttpsUtils,
               public notification: NzNotificationService) {
@@ -57,17 +59,11 @@ export class IndustryComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
-
-    this.entities = [
-      {name: '机械制造', code: 'NO2911112201', status: '正常'},
-      {name: '餐饮服务', code: 'NO2911112201', status: '正常'},
-      {name: '组装制造', code: 'NO2911112201', status: '开始'}
-    ];
+    this.https.get(Urls.ZS_INDUSTRY.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   /**
@@ -81,18 +77,17 @@ export class IndustryComponent implements OnInit {
       nzOkText: '是',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.notification.success('成功', '删除成功');
-        // const _this = this;
-        // this.https.delete(Urls.MENUS.DELETE + param['menuId']).then(resp => {
-        //   if (resp['code'] === 200) {
-        //     _this.notification.success('成功', resp['msg']);
-        //   } else {
-        //     _this.notification.error('失败', resp['msg']);
-        //   }
-        //   _this.loadEntities();
-        // }, resp => {
-        //   console.log(resp);
-        // });
+        const _this = this;
+        this.https.delete(Urls.ZS_INDUSTRY.DELETE + param['id']).then(resp => {
+          if (resp['code'] === 200) {
+            _this.notification.success('成功', resp['msg']);
+          } else {
+            _this.notification.error('失败', resp['msg']);
+          }
+          _this.loadEntities();
+        }, resp => {
+          console.log(resp);
+        });
       },
       nzCancelText: '否',
       nzOnCancel: () => console.log('操作取消')
@@ -104,7 +99,7 @@ export class IndustryComponent implements OnInit {
    * 参数：
    **/
   edit(param) {
-    this.router.navigate([Urls.BUSINESS.INDUSTRY.EDIT], {queryParams: param});
+    this.router.navigate([Urls.BUSINESS.ZS_INDUSTRY.EDIT], {queryParams: param});
   }
 
 }

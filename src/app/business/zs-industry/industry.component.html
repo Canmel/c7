@@ -5,7 +5,7 @@
     <div class="row wrapper">
       <div class="col-sm-5 m-b-xs flex-left">
         <div class="btn-group" data-toggle="buttons">
-          <a routerLinkActive="active" routerLink="/app/industry/add" class="btn btn-sm btn-success">
+          <a routerLinkActive="active" [routerLink]="Urls.BUSINESS.ZS_INDUSTRY.ADD" class="btn btn-sm btn-success">
             <i class="fa fa-plus fa-fw m-r-xs"></i>新建
           </a>
         </div>
@@ -36,7 +36,7 @@
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'date'">{{item[head.field] | date:'y-MM-dd HH:mm:ss'}}</span>
             <span ngClass="{{head.class}}" [ngStyle]="{'width': item.width, cursor: 'pointer'}" *ngIf="head.type=== 'text'">{{item[head.field]}}</span>
             <div class="" *ngIf="head.field === 'option'">
-              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.menuId})"><i
+              <a nz-button nz-popover nzContent="编辑" (click)="edit({id: item.id})"><i
                 class="fa fa-edit text-success text-active"></i><i
                 class="fa fa-edit text-success text"></i></a>
 
