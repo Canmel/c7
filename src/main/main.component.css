@@ -24,3 +24,8 @@
     padding: 60px 15px 75px 15px;
   }
 }
+
+
+.ant-avatar-lg-string, .ant-avatar-sm-string, .ant-avatar-string {
+  position: unset;
+}

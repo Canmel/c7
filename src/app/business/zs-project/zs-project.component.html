@@ -73,47 +73,84 @@
 
 <nz-modal [(nzVisible)]="isVisible" [nzWidth]="600" nzTitle="详情" (nzOnCancel)="handleDetailCancel()"
           [nzCancelText]="null" (nzOnOk)="handleDetailOk()">
-  <form nz-form>
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">项目名称</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.name}}
-      </nz-form-control>
-    </nz-form-item>
+  <div style="width: 100%;height: 500px; overflow: overlay;">
+    <form nz-form>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">项目名称</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.name}}
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">项目等级</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.level ? projectDetail.level.name : ''}}
-      </nz-form-control>
-    </nz-form-item>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">项目等级</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.level ? projectDetail.level.name : ''}}
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">项目编号</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.code}}
-      </nz-form-control>
-    </nz-form-item>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">项目编号</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.code}}
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">业务描述</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.business}}
-      </nz-form-control>
-    </nz-form-item>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">业务描述</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.business}}
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">负责人</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.manager}}
-      </nz-form-control>
-    </nz-form-item>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">负责人</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.manager}}
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item style="margin: 0px;">
-      <nz-form-label [nzSpan]="7">项目金额</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        {{projectDetail.amount}}
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+      <nz-form-item style="margin: 0px;">
+        <nz-form-label [nzSpan]="7">项目金额</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{projectDetail.amount}}
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+    <nz-list [nzDataSource]="pComments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+      <ng-template #item let-item>
+        <nz-comment [nzAuthor]="item.creator.username" nzDatetime="{{item.createdAt | datetime}}">
+          <nz-avatar nz-comment-avatar [nzText]="item.creator.username"></nz-avatar>
+          <nz-comment-content>
+            <p>{{ item.comment }}</p>
+          </nz-comment-content>
+          <nz-comment-action>回复</nz-comment-action>
+        </nz-comment>
+      </ng-template>
+    </nz-list>
+
+    <form nz-form (submit)="handleCommentSubmit()" [formGroup]="validateForm">
+      <nz-comment>
+        <nz-avatar nz-comment-avatar style="color:#f56a00; background-color:#fde3cf;"
+                   [nzText]="usernameShort()"></nz-avatar>
+        <input nz-input type="hidden" formControlName="projectId"/>
+        <nz-comment-content>
+          <nz-form-item>
+            <textarea formControlName="comment" nz-input rows="4"></textarea>
+          </nz-form-item>
+          <nz-form-explain style="color: red;"
+            *ngIf="validateForm.get('comment').dirty && validateForm.get('comment').errors">
+            <ng-container *ngIf="validateForm.get('comment').hasError('required')">
+              不能提交一个空的评论！
+            </ng-container>
+          </nz-form-explain>
+          <nz-form-item>
+            <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!validateForm.controls['comment'].value">回复
+            </button>
+          </nz-form-item>
+        </nz-comment-content>
+      </nz-comment>
+    </form>
+  </div>
 </nz-modal>

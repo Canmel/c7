@@ -23,6 +23,10 @@ export const Urls = {
     ALL: `/oa/zsProject/all`,
     LEVELS: `/oa/zsProject/levels`
   },
+  ZS_COMMENTS: {
+    LIST: `/oa/zsComment/list`,
+    SAVE: `/oa/zsComment`
+  },
   ZS_INDUSTRY: {
     PAGEQUERY: `/oa/zsIndustry`,
     SAVE: `/oa/zsIndustry`,
