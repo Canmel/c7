@@ -19,7 +19,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>项目等级</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <nz-select formControlName="level" [nzPlaceHolder]="'选择项目等级...'">
+          <nz-select formControlName="level" nzShowSearch nzAllowClear nzPlaceHolder="选择项目等级..." [(ngModel)]="selectedLevel">
             <nz-option *ngFor="let option of projectLevels" [nzValue]="option.value" [nzLabel]="option.name"></nz-option>
           </nz-select>
           <nz-form-explain
@@ -60,7 +60,9 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>负责人</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="manager" placeholder="请输入负责人...">
+          <nz-select formControlName="manager" nzShowSearch nzAllowClear nzPlaceHolder="选择负责人..." [(ngModel)]="selectedValue">
+            <nz-option *ngFor="let option of allManager" [nzValue]="option.uid" [nzLabel]="option.username"></nz-option>
+          </nz-select>
           <nz-form-explain
             *ngIf="validateForm.get('manager').dirty && validateForm.get('manager').errors">
             <ng-container *ngIf="validateForm.get('manager').hasError('required')">

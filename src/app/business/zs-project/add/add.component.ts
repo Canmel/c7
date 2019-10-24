@@ -27,6 +27,10 @@ export class AddComponent implements OnInit {
 
   projectLevels = [];
 
+  selectedLevel;
+
+  allManager = [];
+
   /**
    * 方法用途: 提交表单
    * 参数:  事件
@@ -81,6 +85,7 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadProjectManager();
     this.loadProjectLevels();
   }
 
@@ -88,6 +93,15 @@ export class AddComponent implements OnInit {
     this.https.get(Urls.ZS_PROJECT.LEVELS).then(resp => {
       console.log(resp['data']);
       this.projectLevels = resp['data'];
+    });
+  }
+
+  /**
+   * 加载项目负责人
+   */
+  loadProjectManager() {
+    this.https.get(Urls.USERS.ALL).then(resp => {
+      this.allManager = resp['data'];
     });
   }
 
