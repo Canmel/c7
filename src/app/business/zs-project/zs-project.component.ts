@@ -40,6 +40,8 @@ export class ZsProjectComponent implements OnInit {
     name: ''  // 搜索项目名称
   };
 
+  selectedProjectId = 0;
+
   /**
    * 表头
    */
@@ -49,25 +51,6 @@ export class ZsProjectComponent implements OnInit {
    * 表格数据
    */
   entities: Array<any> = [];
-
-  commentData = [
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: '2019-10-10 10:11:23'
-    },
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: '2019-10-10 10:11:23'
-    }
-  ];
 
   submitting = false;
 
@@ -112,11 +95,18 @@ export class ZsProjectComponent implements OnInit {
           projectId: that.projectDetail['id'],
           comment: ''
         });
-        console.log(this.projectDetail['id']);
-        this.https.get(Urls.ZS_COMMENTS.LIST, {projectId: this.projectDetail['id']}).then(fulfilled => {
-          that.pComments = fulfilled['data'];
-        });
+        that.selectedProjectId = this.projectDetail['id'];
+        that.loadCommentsByProject();
       });
+  }
+
+  /**
+   * 通过项目ID查询评论
+   */
+  loadCommentsByProject() {
+    this.https.get(Urls.ZS_COMMENTS.LIST, {projectId: this.projectDetail['id']}).then(fulfilled => {
+      this.pComments = fulfilled['data'];
+    });
   }
 
   ngOnInit() {
@@ -140,7 +130,7 @@ export class ZsProjectComponent implements OnInit {
    */
   remove(param) {
     this.modalService.confirm({
-      nzTitle: '你确定要删除 ' + param['name1'] + '?',
+      nzTitle: '你确定要删除 ' + param['name'] + '?',
       nzContent: '<b style="color: red;">该操作不可撤销</b>',
       nzOkText: '是',
       nzOkType: 'danger',
@@ -182,7 +172,13 @@ export class ZsProjectComponent implements OnInit {
   handleCommentSubmit() {
     console.log(this.validateForm.value);
     this.https.post(Urls.ZS_COMMENTS.SAVE, this.validateForm.value).then(resp => {
-      console.log(resp);
+      if (resp['code'] === 200) {
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+      this.loadCommentsByProject();
+      this.validateForm.controls['comment'].reset();
     });
   }
 

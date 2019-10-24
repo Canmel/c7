@@ -1,47 +1,42 @@
 {
-  "/authserver": {
-    "target": "http://192.168.2.5:7070",
-    "secure": false,
-    "changeOrigin": true
-  },
   "/api": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/login": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/logout": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/css": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/images": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/js": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/system": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/bpm": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/auth": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/session": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/personInfo": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/oa": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   },
   "/acti": {
-    "target": "http://192.168.2.5:8080"
+    "target": "http://36.24.96.28:28080"
   }
 }
 
