@@ -48,7 +48,10 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>是否可售</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="saleable" placeholder="请输入是否可售...">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可售..." formControlName="saleable">
+            <nz-option [nzLabel]="'可售'" [nzValue]="1"></nz-option>
+            <nz-option [nzLabel]="'不可售'" [nzValue]="0"></nz-option>
+          </nz-select>
           <nz-form-explain
             *ngIf="validateForm.get('saleable').dirty && validateForm.get('saleable').errors">
             <ng-container *ngIf="validateForm.get('saleable').hasError('required')">

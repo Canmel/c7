@@ -37,9 +37,10 @@ export class ZsGroundComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: '线索名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '所属项目', field: 'project.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
-    {title: '线索信息', field: 'business', type: 'text'},
+    {title: '地块名称', field: 'areaName', type: 'text', class: 'text-success'},
+    {title: '所属区域', field: 'areaName', type: 'text'},
+    {title: '可售', field: 'rentable.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
+    {title: '可租', field: 'saleable.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
     {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
@@ -80,7 +81,7 @@ export class ZsGroundComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         const _this = this;
-        this.https.delete(Urls.ZS_CLUE.DELETE + param['id']).then(resp => {
+        this.https.delete(Urls.ZS_GROUND.DELETE + param['id']).then(resp => {
           if (resp['code'] === 200) {
             _this.notification.success('成功', resp['msg']);
           } else {
