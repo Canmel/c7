@@ -41,6 +41,13 @@ export const Urls = {
     EDIT: `/oa/zsClue/`,
     DETAILS: `/oa/zsClue/`
   },
+  ZS_GROUND: {
+    PAGEQUERY: `/oa/zsGround`,
+    SAVE: `/oa/zsGround`,
+    DELETE: `/oa/zsGround/`,
+    EDIT: `/oa/zsGround/`,
+    DETAILS: `/oa/zsGround/`
+  },
   DEFINITIONWORKFLOW: {
     PAGEQUERY: `/bpm/flow/defWorkflows`,
     DELETE: `/bpm/flow/defWorkflows/`
@@ -339,6 +346,11 @@ export const Urls = {
       LIST: `/app/zs-clue`,
       ADD: `/app/zs-clue/add`,
       EDIT: `/app/zs-clue/edit`
+    },
+    ZS_GROUND: {
+      LIST: `/app/zs-ground`,
+      ADD: `/app/zs-ground/add`,
+      EDIT: `/app/zs-ground/edit`
     },
     ZS_GROUP: {
       LIST: `/app/zs-group`,

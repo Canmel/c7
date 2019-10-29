@@ -1,0 +1,109 @@
+<app-crumbs [title]='crumbs.title' [subTitle]="crumbs.subTitle"></app-crumbs>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)" data-validate="parsley">
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>地块名称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="name" placeholder="请输入地块名称...">
+          <nz-form-explain
+            *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>所属区域</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="areaName" placeholder="请输入所属区域...">
+          <nz-form-explain
+            *ngIf="validateForm.get('areaName').dirty && validateForm.get('areaName').errors">
+            <ng-container *ngIf="validateForm.get('areaName').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>是否可租</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可租..." formControlName="rentable">
+            <nz-option [nzLabel]="'可租'" [nzValue]="1"></nz-option>
+            <nz-option [nzLabel]="'不可租'" [nzValue]="0"></nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('rentable').dirty && validateForm.get('rentable').errors">
+            <ng-container *ngIf="validateForm.get('rentable').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>是否可售</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="saleable" placeholder="请输入是否可售...">
+          <nz-form-explain
+            *ngIf="validateForm.get('saleable').dirty && validateForm.get('saleable').errors">
+            <ng-container *ngIf="validateForm.get('saleable').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>适合行业</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="industryId" placeholder="请输入适合行业...">
+          <nz-form-explain
+            *ngIf="validateForm.get('industryId').dirty && validateForm.get('industryId').errors">
+            <ng-container *ngIf="validateForm.get('industryId').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>周边情况</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="periphery" placeholder="请输入周边情况...">
+          <nz-form-explain
+            *ngIf="validateForm.get('periphery').dirty && validateForm.get('periphery').errors">
+            <ng-container *ngIf="validateForm.get('periphery').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>合作方式</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="cooperation" placeholder="请输入合作方式...">
+          <nz-form-explain
+            *ngIf="validateForm.get('cooperation').dirty && validateForm.get('cooperation').errors">
+            <ng-container *ngIf="validateForm.get('cooperation').hasError('required')">
+              项目名不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button class="btn-danger" nz-button (click)="resetForm($event)">重置</button>
+          <button class="btn-default" nz-button routerLinkActive="active" [routerLink]="Urls.BUSINESS.ZS_GROUND.LIST">取消</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </section>
+</form>
