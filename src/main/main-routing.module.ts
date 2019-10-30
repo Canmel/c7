@@ -88,7 +88,7 @@ const routes: Routes = [
         path: 'stage',
         loadChildren: () => StageModule
       }, {
-        path: 'merchant',
+        path: 'zs-merchant',
         loadChildren: () => MerchantModule
       }, {
         path: 'zs-industry',

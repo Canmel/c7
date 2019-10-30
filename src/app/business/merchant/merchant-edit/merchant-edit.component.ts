@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpsUtils} from '../../../utils/HttpsUtils.service';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {Urls} from '../../../../public/url';
 
 @Component({
   selector: 'app-merchant-edit',
@@ -24,6 +25,8 @@ export class MerchantEditComponent implements OnInit {
    * 接收上层传来的主键
    */
   receiveId = 0;
+
+  Urls = Urls;
 
   validateForm: FormGroup;
 
@@ -62,7 +65,17 @@ export class MerchantEditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               public activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      manager: ['', []],
+      addr: ['', []],
+      mainBusiness: ['', []],
+      intention: ['', []],
+      contacts: ['', []],
+      contactsPost: ['', []],
+      contactsPhone: ['', []],
+      source: ['', []],
+      attribute: ['', []]
     });
   }
 
@@ -77,8 +90,21 @@ export class MerchantEditComponent implements OnInit {
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: '客商名称'
+    this.https.get(Urls.ZS_MERCHANT.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        name: entity['name'],
+        manager: entity['manager'],
+        addr: entity['addr'],
+        mainBusiness: entity['mainBusiness'],
+        intention: entity['intention'],
+        contacts: entity['contacts'],
+        contactsPost: entity['contactsPost'],
+        contactsPhone: entity['contactsPhone'],
+        source: entity['source'],
+        attribute: entity['attribute']
+      });
     });
   }
 

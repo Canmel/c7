@@ -19,6 +19,8 @@ export class MerchantComponent implements OnInit {
     subTitle: '客商维护'
   };
 
+  Urls = Urls;
+
   /**
    * 属性描述: 分页组建参数
    * 参数：
@@ -59,17 +61,11 @@ export class MerchantComponent implements OnInit {
    * 加载列表
    */
   loadEntities() {
-    // this.https.get(Urls.MENUS.PAGEQUERY, this.formData).then(resp => {
-    //   this.entities = resp['data']['list'];
-    //   this.formData.pageNum = resp['data']['pageNum'];
-    //   this.formData.totalNum = resp['data']['total'];
-    // });
-
-    this.entities = [
-      {name: '阿里巴巴', code: 'NO2911112201', status: '正常'},
-      {name: '华为', code: 'NO2911112201', status: '正常'},
-      {name: '小米科技', code: 'NO2911112201', status: '开始'}
-    ];
+    this.https.get(Urls.ZS_MERCHANT.PAGEQUERY, this.formData).then(resp => {
+      this.entities = resp['data']['list'];
+      this.formData.pageNum = resp['data']['pageNum'];
+      this.formData.totalNum = resp['data']['total'];
+    });
   }
 
   /**

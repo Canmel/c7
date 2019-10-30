@@ -167,6 +167,13 @@ export const Urls = {
     TYPIES: `/oa/project/typies`,
     RELEASE: `/oa/project/release/`
   },
+  ZS_MERCHANT: {
+    PAGEQUERY: `/oa/zsMerchant`,
+    SAVE: `/oa/zsMerchant`,
+    DELETE: `/oa/zsMerchant/`,
+    EDIT: `/oa/zsMerchant/`,
+    UPDATE: `/oa/zsMerchant`
+  },
   TRAFFIC: {
     SAVE: `/oa/traffic`,
     DELETE: `/oa/traffic/`,
@@ -291,9 +298,9 @@ export const Urls = {
       EDIT: `/app/project/edit`
     },
     MERCHANT: {
-      LIST: `/app/merchant`,
-      ADD: `/app/merchant/add`,
-      EDIT: `/app/merchant/edit`
+      LIST: `/app/zs-merchant`,
+      ADD: `/app/zs-merchant/add`,
+      EDIT: `/app/zs-merchant/edit`
     },
     STAGE: {
       LIST: `/app/stage`,
