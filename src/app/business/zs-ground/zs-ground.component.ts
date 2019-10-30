@@ -41,6 +41,7 @@ export class ZsGroundComponent implements OnInit {
     {title: '所属区域', field: 'areaName', type: 'text'},
     {title: '可售', field: 'rentable.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
     {title: '可租', field: 'saleable.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
+    {title: '适合行业', field: 'industry.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
     {title: '创建时间', field: 'createdAt', type: 'date'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];

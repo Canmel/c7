@@ -32,7 +32,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>是否可租</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可租..." formControlName="rentable">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可租..." formControlName="rentable" [(ngModel)]="rentable">
             <nz-option [nzLabel]="'可租'" [nzValue]="1"></nz-option>
             <nz-option [nzLabel]="'不可租'" [nzValue]="0"></nz-option>
           </nz-select>
@@ -48,7 +48,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>是否可售</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可售..." formControlName="saleable">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="是否可售..." formControlName="saleable" [(ngModel)]="saleable">
             <nz-option [nzLabel]="'可售'" [nzValue]="1"></nz-option>
             <nz-option [nzLabel]="'不可售'" [nzValue]="0"></nz-option>
           </nz-select>
@@ -64,7 +64,9 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>适合行业</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="industryId" placeholder="请输入适合行业...">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="适合行业..." formControlName="industryId" [(ngModel)]="industry">
+            <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of industries"></nz-option>
+          </nz-select>
           <nz-form-explain
             *ngIf="validateForm.get('industryId').dirty && validateForm.get('industryId').errors">
             <ng-container *ngIf="validateForm.get('industryId').hasError('required')">

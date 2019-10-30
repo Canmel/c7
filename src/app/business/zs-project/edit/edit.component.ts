@@ -25,9 +25,21 @@ export class EditComponent implements OnInit {
 
   receiveId = 0;
 
+  industryType;
+
   validateForm: FormGroup;
 
   projectLevels = [];
+
+  projectTypies = [];
+
+  industryTypies = [];
+
+  allManager = [];
+
+  selectedUser;
+
+  type;
 
   /**
    * 方法用途: 提交表单
@@ -77,15 +89,22 @@ export class EditComponent implements OnInit {
       id: ['', [Validators.required]],
       name: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      amount: ['', [Validators.required]],
+      amount: ['', []],
+      place: ['', [Validators.required]],
       business: ['', [Validators.required]],
-      manager: ['', [Validators.required]],
-      level: ['', [Validators.required]]
+      managerId: ['', [Validators.required]],
+      level: ['', [Validators.required]],
+      areaSize: ['', []],
+      type: ['', [Validators.required]],
+      industryType: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
     this.loadProjectLevels();
+    this.loadProjectTypies();
+    this.loadIndustryTypies();
+    this.loadProjectManager();
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
       this.loadEntity(this.receiveId);
@@ -104,8 +123,12 @@ export class EditComponent implements OnInit {
         amount: entity['amount'],
         code: entity['code'],
         business: entity['business'],
-        manager: entity['manager'],
-        level: entity['level']['value']
+        managerId: entity['managerId'],
+        level: entity['level']['value'],
+        areaSize: entity['areaSize'],
+        type: entity['type'] ? entity['type']['value'] : '',
+        industryType: entity['industryType'] ? entity['industryType']['value'] : '',
+        place: entity['place']
       });
     });
   }
@@ -116,5 +139,25 @@ export class EditComponent implements OnInit {
     });
   }
 
+  loadProjectTypies() {
+    this.https.get(Urls.ZS_PROJECT.TYPIES).then(resp => {
+      this.projectTypies = resp['data'];
+    });
+  }
+
+  loadIndustryTypies() {
+    this.https.get(Urls.ZS_PROJECT.INDUSTRYTYPIES).then(resp => {
+      this.industryTypies = resp['data'];
+    });
+  }
+
+  /**
+   * 加载项目负责人
+   */
+  loadProjectManager() {
+    this.https.get(Urls.USERS.ALL).then(resp => {
+      this.allManager = resp['data'];
+    });
+  }
 
 }

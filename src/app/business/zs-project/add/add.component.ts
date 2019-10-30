@@ -27,9 +27,17 @@ export class AddComponent implements OnInit {
 
   projectLevels = [];
 
+  projectTypies = [];
+
   selectedLevel;
 
+  industryType;
+
+  industryTypies = [];
+
   allManager = [];
+
+  type;
 
   /**
    * 方法用途: 提交表单
@@ -77,16 +85,22 @@ export class AddComponent implements OnInit {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      amount: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      place: ['', [Validators.required]],
+      amount: ['', []],
       business: ['', [Validators.required]],
-      manager: ['', [Validators.required]],
-      level: ['', [Validators.required]]
+      managerId: ['', [Validators.required]],
+      level: ['', [Validators.required]],
+      industryType: ['', [Validators.required]],
+      areaSize: ['', []]
     });
   }
 
   ngOnInit() {
     this.loadProjectManager();
     this.loadProjectLevels();
+    this.loadProjectTypies();
+    this.loadIndustryTypies();
   }
 
   loadProjectLevels() {
@@ -102,6 +116,18 @@ export class AddComponent implements OnInit {
   loadProjectManager() {
     this.https.get(Urls.USERS.ALL).then(resp => {
       this.allManager = resp['data'];
+    });
+  }
+
+  loadProjectTypies() {
+    this.https.get(Urls.ZS_PROJECT.TYPIES).then(resp => {
+      this.projectTypies = resp['data'];
+    });
+  }
+
+  loadIndustryTypies() {
+    this.https.get(Urls.ZS_PROJECT.INDUSTRYTYPIES).then(resp => {
+      this.industryTypies = resp['data'];
     });
   }
 

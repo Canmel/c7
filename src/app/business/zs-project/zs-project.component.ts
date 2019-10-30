@@ -78,8 +78,9 @@ export class ZsProjectComponent implements OnInit {
           _this.showDetails(item);
         }
       },
-      {title: '项目编号', field: 'code', type: 'text'},
-      {title: '所属项目', field: 'level.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
+      {title: '项目类型', field: 'type.name', type: 'muilti-text'},
+      {title: '产业类型', field: 'industryType.name', type: 'muilti-text', class: Properties.STRING.COLOR.TYPE},
+      {title: '所属项目', field: 'level.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
       {title: '创建时间', field: 'createdAt', type: 'date'},
       {title: '操作', field: 'option', type: 'opt', width: '20%'}
     ];

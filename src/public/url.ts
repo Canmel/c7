@@ -21,7 +21,9 @@ export const Urls = {
     EDIT: `/oa/zsProject/`,
     DETAILS: `/oa/zsProject/`,
     ALL: `/oa/zsProject/all`,
-    LEVELS: `/oa/zsProject/levels`
+    LEVELS: `/oa/zsProject/levels`,
+    TYPIES: `/oa/zsProject/typies`,
+    INDUSTRYTYPIES: `/oa/zsProject/industryTypies`
   },
   ZS_COMMENTS: {
     LIST: `/oa/zsComment/list`,
@@ -32,7 +34,8 @@ export const Urls = {
     SAVE: `/oa/zsIndustry`,
     DELETE: `/oa/zsIndustry/`,
     EDIT: `/oa/zsIndustry/`,
-    DETAILS: `/oa/zsIndustry/`
+    DETAILS: `/oa/zsIndustry/`,
+    ALL: `/oa/zsIndustry/all`
   },
   ZS_CLUE: {
     PAGEQUERY: `/oa/zsClue`,

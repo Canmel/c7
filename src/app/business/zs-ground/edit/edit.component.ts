@@ -31,6 +31,14 @@ export class EditComponent implements OnInit {
 
   Urls = Urls;
 
+  industries = [];
+
+  rentable;
+
+  saleable;
+
+  industry;
+
   /**
    * 方法用途: 提交表单
    * 参数:  事件
@@ -89,6 +97,7 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.receiveId = queryParams['id'];
+      this.loadIndustries();
       this.loadEntity(queryParams['id']);
     });
   }
@@ -108,6 +117,12 @@ export class EditComponent implements OnInit {
         periphery: entity['periphery'],
         cooperation: entity['cooperation']
       });
+    });
+  }
+
+  loadIndustries() {
+    this.https.get(Urls.ZS_INDUSTRY.ALL).then(resp => {
+      this.industries = resp['data'];
     });
   }
 }

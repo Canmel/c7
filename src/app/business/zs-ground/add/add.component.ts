@@ -25,6 +25,14 @@ export class AddComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  industries = [];
+
+  rentable;
+
+  saleable;
+
+  industry;
+
   /**
    * 方法用途: 提交表单
    * 参数:  事件
@@ -80,6 +88,13 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadIndustries();
+  }
+
+  loadIndustries() {
+    this.https.get(Urls.ZS_INDUSTRY.ALL).then(resp => {
+      this.industries = resp['data'];
+    });
   }
 
 }

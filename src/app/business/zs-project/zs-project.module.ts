@@ -8,7 +8,7 @@ import {BailyTableModule} from '../../../public/baily-table/baily-table.module';
 import {PaginationModule} from '../../../public/pagination/pagination.module';
 import {ListModule} from '../../../public/list/list.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgZorroAntdModule, NzSelectModule} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NzInputNumberModule, NzSelectModule} from 'ng-zorro-antd';
 import {DatetimeModule} from '../../pipe/datetime.module';
 import {AddComponent} from './add/add.component';
 import {EditComponent} from './edit/edit.component';
@@ -28,6 +28,7 @@ import {NzCommentModule} from 'ng-zorro-antd/comment';
     ReactiveFormsModule,
     NgZorroAntdModule,
     DatetimeModule.forRoot(),
+    NzInputNumberModule,
     ZsProjectRoutingModule
   ]
 })

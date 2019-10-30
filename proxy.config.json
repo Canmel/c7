@@ -1,42 +1,42 @@
 {
   "/api": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/login": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/logout": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/css": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/images": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/js": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/system": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/bpm": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/auth": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/session": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/personInfo": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/oa": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   },
   "/acti": {
-    "target": "http://125.119.240.32:28080"
+    "target": "http://l27512n380.wicp.vip:36028"
   }
 }
 
