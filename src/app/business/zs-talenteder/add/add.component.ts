@@ -37,6 +37,14 @@ export class AddComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.post(Urls.ZS_TALENTEDER.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.TALENTEDER.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    });
   };
 
   /**
