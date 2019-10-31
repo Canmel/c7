@@ -28,6 +28,7 @@ import {ZsProjectModule} from '../app/business/zs-project/zs-project.module';
 import {ZsClueModule} from '../app/business/zs-clue/zs-clue.module';
 import {ZsGroupModule} from '../app/business/zs-group/zs-group.module';
 import {ZsGroundModule} from '../app/business/zs-ground/zs-ground.module';
+import {ZsTalentederModule} from '../app/business/zs-talenteder/zs-talenteder.module';
 
 const routes: Routes = [
   {
@@ -117,6 +118,9 @@ const routes: Routes = [
       }, {
         path: 'zs-ground',
         loadChildren: () => ZsGroundModule
+      }, {
+        path: 'zs-talenteder',
+        loadChildren: () => ZsTalentederModule
       }
     ]
   }

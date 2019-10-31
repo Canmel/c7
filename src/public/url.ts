@@ -174,6 +174,13 @@ export const Urls = {
     EDIT: `/oa/zsMerchant/`,
     UPDATE: `/oa/zsMerchant`
   },
+  ZS_TALENTEDER: {
+    PAGEQUERY: `/oa/zsTalenteder`,
+    SAVE: `/oa/zsTalenteder`,
+    DELETE: `/oa/zsTalenteder/`,
+    EDIT: `/oa/zsTalenteder/`,
+    UPDATE: `/oa/zsTalenteder`
+  },
   TRAFFIC: {
     SAVE: `/oa/traffic`,
     DELETE: `/oa/traffic/`,
@@ -322,6 +329,11 @@ export const Urls = {
       LIST: `/app/demo`,
       ADD: `/app/demo/add`,
       EDIT: `/app/demo/edit`
+    },
+    TALENTEDER: {
+      LIST: `/app/zs-talenteder`,
+      ADD: `/app/zs-talenteder/add`,
+      EDIT: `/app/zs-talenteder/edit`
     },
     FLOWS: {
       LIST: `/app/flows`,
