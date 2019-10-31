@@ -40,6 +40,14 @@ export class MerchantEditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.put(Urls.ZS_MERCHANT.UPDATE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.MERCHANT.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    });
   };
 
   /**

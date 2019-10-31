@@ -6,7 +6,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>客商名称</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="name" placeholder="请输入客商名称名称...">
+          <input nz-input formControlName="name" placeholder="请输入客商名称...">
           <nz-form-explain
             *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
             <ng-container *ngIf="validateForm.get('name').hasError('required')">
@@ -15,6 +15,124 @@
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">负责人</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="manager" placeholder="请输入负责人...">
+          <nz-form-explain
+            *ngIf="validateForm.get('manager').dirty && validateForm.get('manager').errors">
+            <ng-container *ngIf="validateForm.get('manager').hasError('required')">
+              客商名称不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">公司地址</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="addr" placeholder="请输入公司地址...">
+          <nz-form-explain
+            *ngIf="validateForm.get('addr').dirty && validateForm.get('addr').errors">
+            <ng-container *ngIf="validateForm.get('addr').hasError('required')">
+              公司地址不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">主营业务</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="mainBusiness" placeholder="请输入主营业务...">
+          <nz-form-explain
+            *ngIf="validateForm.get('mainBusiness').dirty && validateForm.get('mainBusiness').errors">
+            <ng-container *ngIf="validateForm.get('mainBusiness').hasError('required')">
+              主营业务不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">投资意向</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="intention" placeholder="请输入投资意向...">
+          <nz-form-explain
+            *ngIf="validateForm.get('intention').dirty && validateForm.get('intention').errors">
+            <ng-container *ngIf="validateForm.get('intention').hasError('required')">
+              投资意向不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">联系人</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="contacts" placeholder="请输入联系人...">
+          <nz-form-explain
+            *ngIf="validateForm.get('contacts').dirty && validateForm.get('contacts').errors">
+            <ng-container *ngIf="validateForm.get('contacts').hasError('required')">
+              联系人不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">联系人职务</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="contactsPost" placeholder="请输入联系人职务...">
+          <nz-form-explain
+            *ngIf="validateForm.get('contactsPost').dirty && validateForm.get('contactsPost').errors">
+            <ng-container *ngIf="validateForm.get('contactsPost').hasError('required')">
+              联系人职务不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">联系人职务</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="contactsPhone" placeholder="请输入联系人职务...">
+          <nz-form-explain
+            *ngIf="validateForm.get('contactsPhone').dirty && validateForm.get('contactsPhone').errors">
+            <ng-container *ngIf="validateForm.get('contactsPhone').hasError('required')">
+              联系人职务不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">来源地</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="source" placeholder="请输入来源地...">
+          <nz-form-explain
+            *ngIf="validateForm.get('source').dirty && validateForm.get('source').errors">
+            <ng-container *ngIf="validateForm.get('source').hasError('required')">
+              来源地不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">商会属性</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="attribute" placeholder="请输入商会属性...">
+          <nz-form-explain
+            *ngIf="validateForm.get('attribute').dirty && validateForm.get('attribute').errors">
+            <ng-container *ngIf="validateForm.get('attribute').hasError('required')">
+              商会属性不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
       <nz-form-item>
         <nz-form-control style="text-align: center;" [nzOffset]="7" [nzSpan]="12">
           <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>

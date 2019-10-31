@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-merchant',
@@ -37,8 +38,10 @@ export class MerchantComponent implements OnInit {
    */
   listHeader = [
     {title: '客商名称', field: 'name', type: 'text', class: 'text-success'},
-    {title: '编号', field: 'code', type: 'text'},
-    {title: '状态', field: 'status', type: 'text'},
+    {title: '负责人', field: 'manager', type: 'text'},
+    {title: '联系人', field: 'contacts', type: 'text'},
+    {title: '联系人电话', field: 'contactsPhone', type: 'text'},
+    {title: '状态', field: 'status.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 
