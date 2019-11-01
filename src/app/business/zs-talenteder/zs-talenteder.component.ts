@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {HttpsUtils} from '../../utils/HttpsUtils.service';
 import {Urls} from '../../../public/url';
+import {Properties} from '../../../public/properties';
 
 @Component({
   selector: 'app-zs-talenteder',
@@ -34,9 +35,9 @@ export class ZsTalentederComponent implements OnInit {
    * 表头
    */
   listHeader = [
-    {title: 'demo表头1', field: 'name1', type: 'text', class: 'text-success'},
-    {title: 'demo表头2', field: 'name2', type: 'text'},
-    {title: 'demo表头3', field: 'name3', type: 'text'},
+    {title: '姓名', field: 'name', type: 'text', class: 'text-success'},
+    {title: '联系方式', field: 'contactPhone', type: 'text'},
+    {title: '适合项目', field: 'project.name', type: 'muilti-text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}
   ];
 

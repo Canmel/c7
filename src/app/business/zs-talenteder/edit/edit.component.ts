@@ -42,6 +42,16 @@ export class EditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
+    this.https.put(Urls.ZS_TALENTEDER.SAVE, value).then(resp => {
+      if (resp['code'] === 200) {
+        this.router.navigate([Urls.BUSINESS.TALENTEDER.LIST]);
+        this.notification.success('成功', resp['msg']);
+      } else {
+        this.notification.error('失败', resp['msg']);
+      }
+    }, resp => {
+      console.log(resp);
+    });
   };
 
   /**
@@ -68,7 +78,12 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils,
               private activatedRoute: ActivatedRoute, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required]]
+      id: ['', []],
+      name: ['', [Validators.required]],
+      contactPhone: ['', [Validators.required, Validators.pattern('^(13[0-9]|15[012356789]|17[03678]|18[0-9]|14[57])[0-9]{8}$'),
+        Validators.maxLength(11)]],
+      remark: ['', [Validators.required]],
+      projectId: ['', [Validators.required]]
     });
   }
 
@@ -84,8 +99,15 @@ export class EditComponent implements OnInit {
    * 通过主键加载当前实体类详细信息
    */
   loadEntity(id) {
-    this.validateForm.setValue({
-      name: 'demo文本'
+    this.https.get(Urls.ZS_TALENTEDER.EDIT + id).then(resp => {
+      const entity = resp['data'];
+      this.validateForm.setValue({
+        id: entity['id'],
+        name: entity['name'],
+        contactPhone: entity['contactPhone'],
+        remark: entity['remark'],
+        projectId: entity['projectId']
+      });
     });
   }
 

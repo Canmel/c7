@@ -70,7 +70,8 @@ export class AddComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
-      contactPhone: ['', [Validators.required]],
+      contactPhone: ['', [Validators.required, Validators.pattern('^(13[0-9]|15[012356789]|17[03678]|18[0-9]|14[57])[0-9]{8}$'),
+        Validators.maxLength(11)]],
       remark: ['', [Validators.required]],
       projectId: ['', [Validators.required]]
     });

@@ -25,6 +25,12 @@
             <ng-container *ngIf="validateForm.get('contactPhone').hasError('required')">
               联系电话不能为空！
             </ng-container>
+            <ng-container *ngIf="validateForm.get('contactPhone').hasError('pattern')">
+              联系电话格式不正确！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('contactPhone').hasError('maxlength')">
+              联系电话为11位！
+            </ng-container>
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
