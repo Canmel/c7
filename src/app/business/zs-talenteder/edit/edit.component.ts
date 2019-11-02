@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.https.put(Urls.ZS_TALENTEDER.SAVE, value).then(resp => {
+    this.https.put(Urls.ZS_TALENTEDER.UPDATE, value).then(resp => {
       if (resp['code'] === 200) {
         this.router.navigate([Urls.BUSINESS.TALENTEDER.LIST]);
         this.notification.success('成功', resp['msg']);
@@ -80,6 +80,7 @@ export class EditComponent implements OnInit {
     this.validateForm = this.fb.group({
       id: ['', []],
       name: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
       contactPhone: ['', [Validators.required, Validators.pattern('^(13[0-9]|15[012356789]|17[03678]|18[0-9]|14[57])[0-9]{8}$'),
         Validators.maxLength(11)]],
       remark: ['', [Validators.required]],
@@ -104,6 +105,7 @@ export class EditComponent implements OnInit {
       this.validateForm.setValue({
         id: entity['id'],
         name: entity['name'],
+        gender: entity['gender'] ? entity['gender']['value'] : '',
         contactPhone: entity['contactPhone'],
         remark: entity['remark'],
         projectId: entity['projectId']

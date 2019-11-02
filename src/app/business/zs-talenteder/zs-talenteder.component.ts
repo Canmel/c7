@@ -16,8 +16,8 @@ export class ZsTalentederComponent implements OnInit {
    * 页头
    */
   crumbs = {
-    title: 'demo标题',
-    subTitle: 'demo子标题'
+    title: '人才管理',
+    subTitle: '推荐人才'
   };
 
   /**
@@ -36,6 +36,7 @@ export class ZsTalentederComponent implements OnInit {
    */
   listHeader = [
     {title: '姓名', field: 'name', type: 'text', class: 'text-success'},
+    {title: '性别', field: 'gender.name', type: 'muilti-text', class: Properties.STRING.COLOR.STATUS},
     {title: '联系方式', field: 'contactPhone', type: 'text'},
     {title: '适合项目', field: 'project.name', type: 'muilti-text'},
     {title: '操作', field: 'option', type: 'opt', width: '20%'}

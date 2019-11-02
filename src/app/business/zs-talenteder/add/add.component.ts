@@ -27,6 +27,8 @@ export class AddComponent implements OnInit {
 
   Urls = Urls;
 
+  selectGender;
+
   /**
    * 方法用途: 提交表单
    * 参数:  事件
@@ -70,6 +72,7 @@ export class AddComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public https: HttpsUtils, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
       contactPhone: ['', [Validators.required, Validators.pattern('^(13[0-9]|15[012356789]|17[03678]|18[0-9]|14[57])[0-9]{8}$'),
         Validators.maxLength(11)]],
       remark: ['', [Validators.required]],

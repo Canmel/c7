@@ -17,6 +17,22 @@
       </nz-form-item>
 
       <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>性别</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择被推荐人性别..." formControlName="gender" [ngModel]="selectGender">
+            <nz-option [nzLabel]="'男'" [nzValue]="1"></nz-option>
+            <nz-option [nzLabel]="'女'" [nzValue]="0"></nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateForm.get('gender').dirty && validateForm.get('gender').errors">
+            <ng-container *ngIf="validateForm.get('gender').hasError('required')">
+              被推荐人性别不能为空！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>联系电话</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
           <input nz-input formControlName="contactPhone" placeholder="请输入联系电话...">
