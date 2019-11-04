@@ -43,7 +43,7 @@ export class MerchantAddComponent implements OnInit {
         this.notification.error('失败', resp['msg']);
       }
     });
-  };
+  }
 
   /**
    * 方法用途: 重置表单
