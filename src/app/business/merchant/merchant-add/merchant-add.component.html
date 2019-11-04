@@ -95,13 +95,13 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="7">联系人职务</nz-form-label>
+        <nz-form-label [nzSpan]="7">联系人电话</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input formControlName="contactsPhone" placeholder="请输入联系人职务...">
+          <input nz-input formControlName="contactsPhone" placeholder="请输入联系人电话...">
           <nz-form-explain
             *ngIf="validateForm.get('contactsPhone').dirty && validateForm.get('contactsPhone').errors">
             <ng-container *ngIf="validateForm.get('contactsPhone').hasError('required')">
-              联系人职务不能为空！
+              联系人电话不能为空！
             </ng-container>
           </nz-form-explain>
         </nz-form-control>
