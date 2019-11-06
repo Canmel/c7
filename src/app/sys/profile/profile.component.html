@@ -5,9 +5,66 @@
       <section class="scrollable">
         <div class="wrapper">
           <div class="text-center m-b m-t">
-            <a href="#" class="thumb-lg">
-              <nz-avatar [nzText]="userDetails.username || '未登录'" [nzSize]="'large'" style="background-color: #234e2b;"></nz-avatar>
-            </a>
+            <!--<a href="#" class="thumb-lg">-->
+              <!--<nz-avatar [nzText]="userDetails.username || '未登录'" [nzSize]="'large'" style="background-color: #234e2b;"></nz-avatar>-->
+              <div class="wrap">
+                <a class="t"></a>
+                <div class="my_box" (click)="boxClickHandler()">
+                  <form id="uploadForm">
+                    <input class="jide" name="imgsrc" type="hidden" value="" />
+                    <img [src]="userAvatar()" class="my_pic"/>
+                  </form>
+                </div>
+                <div class="pic_box" id="pic_box">
+                  <div class="header">
+                    <p>设置头像</p>
+                    <span class="close" (click)="picBoxClickHandler()">x</span>
+                  </div>
+                  <span class="xiantiao"></span>
+                  <ul>
+                    <li><img src="assets/img/avatar/0.png"/></li>
+                    <li><img src="assets/img/avatar/1.png"/></li>
+                    <li><img src="assets/img/avatar/3.png"/></li>
+                    <li><img src="assets/img/avatar/4.png"/></li>
+                    <li><img src="assets/img/avatar/5.png"/></li>
+                    <li><img src="assets/img/avatar/6.png"/></li>
+                    <li><img src="assets/img/avatar/7.png"/></li>
+                    <li><img src="assets/img/avatar/0.png"/></li>
+                    <li><img src="assets/img/avatar/1.png"/></li>
+                    <li><img src="assets/img/avatar/3.png"/></li>
+                    <li><img src="assets/img/avatar/4.png"/></li>
+                    <li><img src="assets/img/avatar/5.png"/></li>
+                    <li><img src="assets/img/avatar/6.png"/></li>
+                    <li><img src="assets/img/avatar/7.png"/></li>
+                    <li><img src="assets/img/avatar/0.png"/></li>
+                    <li><img src="assets/img/avatar/1.png"/></li>
+                    <li><img src="assets/img/avatar/3.png"/></li>
+                    <li><img src="assets/img/avatar/4.png"/></li>
+                    <li><img src="assets/img/avatar/5.png"/></li>
+                    <li><img src="assets/img/avatar/6.png"/></li>
+                    <li><img src="assets/img/avatar/7.png"/></li>
+                    <li><img src="assets/img/avatar/0.png"/></li>
+                    <li><img src="assets/img/avatar/1.png"/></li>
+                    <li><img src="assets/img/avatar/3.png"/></li>
+                    <li><img src="assets/img/avatar/4.png"/></li>
+                    <li><img src="assets/img/avatar/5.png"/></li>
+                    <li><img src="assets/img/avatar/6.png"/></li>
+                    <li><img src="assets/img/avatar/7.png"/></li>
+                    <li><img src="assets/img/avatar/0.png"/></li>
+                    <li><img src="assets/img/avatar/1.png"/></li>
+                    <li><img src="assets/img/avatar/3.png"/></li>
+                    <li><img src="assets/img/avatar/4.png"/></li>
+                    <li><img src="assets/img/avatar/5.png"/></li>
+                    <li><img src="assets/img/avatar/6.png"/></li>
+                    <li><img src="assets/img/avatar/7.png"/></li>
+                  </ul>
+                  <div class="bt_box">
+                    <a class="gb" href="javascript:" (click)="picBoxClickHandler()">关闭</a>
+                    <a class="queren" href="javascript:" (click)="querenClickHandler()">保存头像</a>
+                  </div>
+                </div>
+              </div>
+            <!--</a>-->
             <div>
               <div class="h3 m-t-xs m-b-xs">{{userDetails.username || '未登录'}}</div>
               <small class="text-muted"><i class="fa fa-map-marker"></i>{{userDetails.address || '未知'}}</small>

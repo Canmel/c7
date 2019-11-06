@@ -1,0 +1,124 @@
+body{
+  padding:0;
+  margin:0;
+}
+*{
+  text-decoration: none;
+}
+.my_box{
+  width:75px;
+  height:75px;
+  overflow: hidden;
+  border-radius:15px;
+  border:1px solid #ccc;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  transition: .6s;
+  cursor: pointer;
+}
+.my_box:hover{
+  animation:my_box 0.5s forwards;
+  transition: .5s;
+}
+@keyframes my_box{
+  form{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+.my_box img{
+  width:100%;
+}
+.xiantiao{
+  display: block;
+  width:86%;
+  height:1px;
+  border-bottom: 1px solid #ccc;
+  margin:0 auto;
+}
+
+.pic_box{
+  width:609px;
+  min-height:673px;
+  height:auto;
+  border-radius:8px;
+  background: #fff;
+  border:1px solid #ccc;
+  position: fixed;
+  z-index: 99;
+  top:-1000px;
+  left:0;
+  right:0;
+  margin:0 auto;
+}
+.header{
+  height:45px;
+  text-align: center;
+}
+.close{
+  color:#000;
+  font-size: 21px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .2;
+  position:absolute;
+  right:8px;
+  top:2px;
+  cursor: pointer;
+}
+.pic_box ul{
+  padding: 0;
+  margin:0;
+  width:96%;
+  height:511px;
+  margin:10px auto;
+}
+.pic_box ul li{
+  display: block;
+  list-style: none;
+  width:61px;
+  height:61px;
+  float: left;
+  border-radius: 15%;
+  border:1px solid #ccc;
+  margin:5px 5px;
+  transition: .6s;
+  cursor: pointer;
+  overflow: hidden;
+}
+.pic_box ul li:hover{
+  transform: scale(1.15);
+  transition: .5s;
+}
+.pic_box ul li img{
+  width:100%;
+}
+.bt_box{
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.bt_box .gb{
+  display:inline-block;
+  width:120px;
+  height:35px;
+  border-radius: 8px;
+  background:#f3f3f3;
+  color:#444;
+  line-height: 35px;
+}
+.bt_box .queren{
+  display: inline-block;
+  width:120px;
+  height:35px;
+  border-radius: 8px;
+  background:#4B8BF5;
+  color:#fff;
+  line-height: 35px;
+}

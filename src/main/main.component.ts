@@ -32,6 +32,8 @@ export class MainComponent implements OnInit {
         this.cookieService.set(SystemProperties.session.authenticated, resp['authenticated']);
         sessionStorage.setItem('authentication', JSON.stringify(resp['principal']));
         this.authentication = resp['principal'];
+
+        sessionStorage.setItem('sysUser', JSON.stringify(this.authentication['sysUser']));
       });
     }
 

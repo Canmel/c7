@@ -76,5 +76,13 @@ export class HeaderComponent extends MainComponent implements OnInit {
     return this.authentication ? this.authentication.username.substring(0, 3) : '';
   }
 
+  userAvatar() {
+    const user = JSON.parse(sessionStorage.getItem('sysUser'));
+    if (user && user['avatar']) {
+      return user['avatar'];
+    }
+    return 'assets/img/avatar/1.png';
+  }
+
 
 }
