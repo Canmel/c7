@@ -22,41 +22,7 @@
                   </div>
                   <span class="xiantiao"></span>
                   <ul>
-                    <li><img src="assets/img/avatar/0.png"/></li>
-                    <li><img src="assets/img/avatar/1.png"/></li>
-                    <li><img src="assets/img/avatar/3.png"/></li>
-                    <li><img src="assets/img/avatar/4.png"/></li>
-                    <li><img src="assets/img/avatar/5.png"/></li>
-                    <li><img src="assets/img/avatar/6.png"/></li>
-                    <li><img src="assets/img/avatar/7.png"/></li>
-                    <li><img src="assets/img/avatar/0.png"/></li>
-                    <li><img src="assets/img/avatar/1.png"/></li>
-                    <li><img src="assets/img/avatar/3.png"/></li>
-                    <li><img src="assets/img/avatar/4.png"/></li>
-                    <li><img src="assets/img/avatar/5.png"/></li>
-                    <li><img src="assets/img/avatar/6.png"/></li>
-                    <li><img src="assets/img/avatar/7.png"/></li>
-                    <li><img src="assets/img/avatar/0.png"/></li>
-                    <li><img src="assets/img/avatar/1.png"/></li>
-                    <li><img src="assets/img/avatar/3.png"/></li>
-                    <li><img src="assets/img/avatar/4.png"/></li>
-                    <li><img src="assets/img/avatar/5.png"/></li>
-                    <li><img src="assets/img/avatar/6.png"/></li>
-                    <li><img src="assets/img/avatar/7.png"/></li>
-                    <li><img src="assets/img/avatar/0.png"/></li>
-                    <li><img src="assets/img/avatar/1.png"/></li>
-                    <li><img src="assets/img/avatar/3.png"/></li>
-                    <li><img src="assets/img/avatar/4.png"/></li>
-                    <li><img src="assets/img/avatar/5.png"/></li>
-                    <li><img src="assets/img/avatar/6.png"/></li>
-                    <li><img src="assets/img/avatar/7.png"/></li>
-                    <li><img src="assets/img/avatar/0.png"/></li>
-                    <li><img src="assets/img/avatar/1.png"/></li>
-                    <li><img src="assets/img/avatar/3.png"/></li>
-                    <li><img src="assets/img/avatar/4.png"/></li>
-                    <li><img src="assets/img/avatar/5.png"/></li>
-                    <li><img src="assets/img/avatar/6.png"/></li>
-                    <li><img src="assets/img/avatar/7.png"/></li>
+                    <li *ngFor="let item of imageIndex"><img (click)="imageClick($event)" [src]="'assets/img/avatar/'+ item +'.png'"/></li>
                   </ul>
                   <div class="bt_box">
                     <a class="gb" href="javascript:" (click)="picBoxClickHandler()">关闭</a>
