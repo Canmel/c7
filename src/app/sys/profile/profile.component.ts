@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   initImageIndex() {
-    for ( let i = 1; i <= 35; i++) {
+    for ( let i = 1; i <= 48; i++) {
       this.imageIndex.push(i);
     }
     console.log(this.imageIndex);
