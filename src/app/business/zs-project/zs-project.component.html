@@ -72,7 +72,7 @@
 </section>
 
 <nz-modal [(nzVisible)]="isVisible" [nzWidth]="600" nzTitle="详情" (nzOnCancel)="handleDetailCancel()"
-          [nzCancelText]="null" (nzOnOk)="handleDetailOk()">
+          [nzCancelText]="null" [nzOkText]="null" (nzOnOk)="handleDetailOk()">
   <div style="width: 100%;height: 500px; overflow: overlay;">
     <form nz-form>
       <div style="width: 50%; display: inline-block;">
@@ -173,7 +173,7 @@
     <nz-list [nzDataSource]="pComments" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
       <ng-template #item let-item>
         <nz-comment [nzAuthor]="item.creator.username" nzDatetime="{{item.createdAt | datetime}}">
-          <nz-avatar nz-comment-avatar [nzText]="item.creator.username"></nz-avatar>
+          <nz-avatar nz-comment-avatar [nzSrc]="item.creator.avatar" ></nz-avatar>
           <nz-comment-content>
             <p>{{ item.comment }}</p>
           </nz-comment-content>
