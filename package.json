@@ -26,7 +26,7 @@
     "camunda-bpmn-moddle": "^3.1.1",
     "core-js": "^2.6.10",
     "essence-ng2-print": "^1.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-zorro-antd": "^7.5.1",
     "ng2-drag-drop": "^3.0.2",
     "ngx-cookie-service": "^2.2.0",
